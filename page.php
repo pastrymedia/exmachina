@@ -11,5 +11,5 @@
  * @link    http://www.machinathemes.com/
  */
 
-//* Initialize ExMachina
+//* This file handles pages, but only exists for the sake of child theme forward compatibility.
 exmachina();

@@ -11,5 +11,7 @@
  * @link    http://www.machinathemes.com/
  */
 
-//* Initialize ExMachina
+//* Template Name: Blog
+
+//* The blog page loop logic is located in lib/structure/loops.php
 exmachina();
