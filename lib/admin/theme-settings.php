@@ -78,13 +78,9 @@ class ExMachina_Admin_Settings extends ExMachina_Admin_Boxes {
 		$default_settings = apply_filters(
 			'exmachina_theme_settings_defaults',
 			array(
-				'update'                    => 1,
-				'update_email'              => 0,
-				'update_email_address'      => '',
 				'blog_title'                => 'text',
 				'style_selection'           => '',
 				'site_layout'               => exmachina_get_default_layout(),
-				'superfish'                 => 0,
 				'nav_extras'                => '',
 				'nav_extras_twitter_id'     => '',
 				'nav_extras_twitter_text'   => __( 'Follow me on Twitter', 'exmachina' ),
@@ -152,13 +148,10 @@ class ExMachina_Admin_Settings extends ExMachina_Admin_Boxes {
 				'comments_posts',
 				'comments_pages',
 				'content_archive_thumbnail',
-				'superfish',
 				'redirect_feed',
 				'redirect_comments_feed',
 				'trackbacks_posts',
 				'trackbacks_pages',
-				'update',
-				'update_email',
 			)
 		);
 
@@ -201,7 +194,6 @@ class ExMachina_Admin_Settings extends ExMachina_Admin_Boxes {
 			'requires_unfiltered_html',
 			$this->settings_field,
 			array(
-				'update_email_address',
 				'header_scripts',
 				'footer_scripts',
 			)
@@ -230,13 +222,6 @@ class ExMachina_Admin_Settings extends ExMachina_Admin_Boxes {
 		$theme_settings_help =
 			'<h3>' . __( 'Theme Settings', 'exmachina' ) . '</h3>' .
 			'<p>'  . __( 'Your Theme Settings provides control over how the theme works. You will be able to control a lot of common and even advanced features from this menu. Some child themes may add additional menu items to this list, including the ability to select different color schemes or set theme specific features such as a slider. Each of the boxes can be collapsed by clicking the box header and expanded by doing the same. They can also be dragged into any order you desire or even hidden by clicking on "Screen Options" in the top right of the screen and "unchecking" the boxes you do not want to see. Below you\'ll find the items common to every child theme...', 'exmachina' ) . '</p>';
-
-		$information_help =
-			'<h3>' . __( 'Information', 'exmachina' ) . '</h3>' .
-			'<p>'  . __( 'The information box allows you to see the current ExMachina theme information and display if desired.', 'exmachina' ) . '</p>' .
-			'<p>'  . __( 'Normally, this should be unchecked. You can also set to enable automatic updates.', 'exmachina' ) . '</p>' .
-			'<p>'  . __( 'This does not mean the updates happen automatically without your permission; it will just notify you that an update is available. You must select it to perform the update.', 'exmachina' ) . '</p>' .
-			'<p>'  . __( 'If you provide an email address and select to notify that email address when the update is available, your site will email you when the update can be performed.No, updates only affect files being updated.', 'exmachina' ) . '</p>';
 
 		$feeds_help =
 			'<h3>' . __( 'Custom Feeds', 'exmachina' ) . '</h3>' .
@@ -323,11 +308,6 @@ class ExMachina_Admin_Settings extends ExMachina_Admin_Boxes {
 			'content' => $theme_settings_help,
 		) );
 		$screen->add_help_tab( array(
-			'id'      => $this->pagehook . '-information',
-			'title'   => __( 'Information', 'exmachina' ),
-			'content' => $information_help,
-		) );
-		$screen->add_help_tab( array(
 			'id'      => $this->pagehook . '-feeds',
 			'title'   => __( 'Custom Feeds', 'exmachina' ),
 			'content' => $feeds_help,
@@ -397,7 +377,6 @@ class ExMachina_Admin_Settings extends ExMachina_Admin_Boxes {
  	 *
  	 * @since 1.0.0
  	 *
- 	 * @see \ExMachina_Admin_Settings::info_box()          Callback for Information box.
  	 * @see \ExMachina_Admin_Settings::style_box()         Callback for Color Style box (if supported).
  	 * @see \ExMachina_Admin_Settings::feeds_box()         Callback for Custom Feeds box.
  	 * @see \ExMachina_Admin_Settings::layout_box()        Callback for Default Layout box.
@@ -413,8 +392,6 @@ class ExMachina_Admin_Settings extends ExMachina_Admin_Boxes {
 	function metaboxes() {
 
 		add_action( 'exmachina_admin_before_metaboxes', array( $this, 'hidden_fields' ) );
-
-		add_meta_box( 'exmachina-theme-settings-version', __( 'Information', 'exmachina' ), array( $this, 'info_box' ), $this->pagehook, 'main', 'high' );
 
 		if ( current_theme_supports( 'exmachina-style-selector' ) )
 			add_meta_box( 'exmachina-theme-settings-style-selector', __( 'Color Style', 'exmachina' ), array( $this, 'style_box' ), $this->pagehook, 'main' );
@@ -461,48 +438,6 @@ class ExMachina_Admin_Settings extends ExMachina_Admin_Boxes {
 
 		printf( '<input type="hidden" name="%s" value="%s" />', $this->get_field_name( 'theme_version' ), esc_attr( $this->get_field_value( 'theme_version' ) ) );
 		printf( '<input type="hidden" name="%s" value="%s" />', $this->get_field_name( 'db_version' ), esc_attr( $this->get_field_value( 'db_version' ) ) );
-
-	}
-
-	/**
-	 * Callback for Theme Settings Information meta box.
-	 *
-	 * If exmachina-auto-updates is not supported, some of the fields will not display.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @uses PARENT_THEME_RELEASE_DATE         Date of current release of ExMachina Framework.
-	 * @uses \ExMachina_Admin::get_field_id()    Construct field ID.
-	 * @uses \ExMachina_Admin::get_field_name()  Construct field name.
-	 * @uses \ExMachina_Admin::get_field_value() Retrieve value of key under $this->settings_field.
-	 *
-	 * @see \ExMachina_Admin_Settings::metaboxes() Register meta boxes on the Theme Settings page.
-	 */
-	function info_box() {
-
-		?>
-		<p><strong><?php _e( 'Version:', 'exmachina' ); ?></strong> <?php echo $this->get_field_value( 'theme_version' ); ?> &#x000B7; <strong><?php _e( 'Released:', 'exmachina' ); ?></strong> <?php echo PARENT_THEME_RELEASE_DATE; ?></p>
-
-		<?php if ( current_theme_supports( 'exmachina-auto-updates' ) ) : ?>
-		<p><span class="description"><?php sprintf( __( 'This can be helpful for diagnosing problems with your theme when seeking assistance in the <a href="%s" target="_blank">support forums</a>.', 'exmachina' ), 'http://www.machinathemes.com/support/' ); ?></span></p>
-
-		<p>
-			<label for="<?php echo $this->get_field_id( 'update' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'update' ); ?>" id="<?php echo $this->get_field_id( 'update' ); ?>" value="1"<?php checked( $this->get_field_value( 'update' ) ) . disabled( is_super_admin(), 0 ); ?> />
-			<?php _e( 'Enable Automatic Updates', 'exmachina' ); ?></label>
-		</p>
-
-		<div id="exmachina_update_notification_setting">
-			<p>
-				<label for="<?php echo $this->get_field_id( 'update_email' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'update_email' ); ?>" id="<?php echo $this->get_field_id( 'update_email' ); ?>" value="1"<?php checked( $this->get_field_value( 'update_email' ) ) . disabled( is_super_admin(), 0 ); ?> />
-				<?php _e( 'Notify', 'exmachina' ); ?></label>
-				<input type="text" name="<?php echo $this->get_field_name( 'update_email_address' ); ?>" id="<?php echo $this->get_field_id( 'update_email_address' ); ?>" value="<?php echo esc_attr( $this->get_field_value( 'update_email_address' ) ); ?>" size="30"<?php disabled( 0, is_super_admin() ); ?> />
-				<label for="<?php echo $this->get_field_id( 'update_email_address' ); ?>"><?php _e( 'when updates are available', 'exmachina' ); ?></label>
-			</p>
-
-			<p><span class="description"><?php _e( 'If you provide an email address above, you will be notified via email when a new version of ExMachina is available.', 'exmachina' ); ?></span></p>
-		</div>
-		<?php
-		endif;
 
 	}
 
@@ -627,16 +562,6 @@ class ExMachina_Admin_Settings extends ExMachina_Admin_Boxes {
 	 * @see \ExMachina_Admin_Settings::metaboxes() Register meta boxes on the Theme Settings page.
 	 */
 	function nav_box() {
-
-		if ( ! exmachina_html5() ) : ?>
-
-		<p>
-			<input type = "checkbox" name="<?php echo $this->get_field_name( 'superfish' ); ?>" id="<?php echo $this->get_field_id( 'superfish' ); ?>" value="1"<?php checked( $this->get_field_value( 'superfish' ) ); ?> />
-			<label for="<?php echo $this->get_field_id( 'superfish' ); ?>"><?php _e( 'Load Superfish Script?', 'exmachina' ); ?></label>
-		</p>
-
-		<?php
-		endif;
 
 		if ( exmachina_nav_menu_supported( 'primary' ) ) : ?>
 

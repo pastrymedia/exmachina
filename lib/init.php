@@ -48,8 +48,6 @@ function exmachina_theme_support() {
 	add_theme_support( 'exmachina-admin-menu' );
 	add_theme_support( 'exmachina-seo-settings-menu' );
 	add_theme_support( 'exmachina-import-export-menu' );
-	add_theme_support( 'exmachina-readme-menu' );
-	add_theme_support( 'exmachina-auto-updates' );
 	add_theme_support( 'exmachina-breadcrumbs' );
 
 	//* Maybe add support for ExMachina menus
@@ -114,7 +112,6 @@ function exmachina_constants() {
 	define( 'EXMACHINA_FUNCTIONS_DIR', EXMACHINA_LIB_DIR . '/functions' );
 	define( 'EXMACHINA_SHORTCODES_DIR', EXMACHINA_LIB_DIR . '/shortcodes' );
 	define( 'EXMACHINA_STRUCTURE_DIR', EXMACHINA_LIB_DIR . '/structure' );
-	define( 'EXMACHINA_TOOLS_DIR', EXMACHINA_LIB_DIR . '/tools' );
 	define( 'EXMACHINA_WIDGETS_DIR', EXMACHINA_LIB_DIR . '/widgets' );
 
 	//* Define URL Location Constants
@@ -171,7 +168,6 @@ function exmachina_load_framework() {
 	require_once( EXMACHINA_CLASSES_DIR . '/sanitization.php' );
 
 	//* Load Functions
-	require_once( EXMACHINA_FUNCTIONS_DIR . '/upgrade.php' );
 	require_once( EXMACHINA_FUNCTIONS_DIR . '/compat.php' );
 	require_once( EXMACHINA_FUNCTIONS_DIR . '/general.php' );
 	require_once( EXMACHINA_FUNCTIONS_DIR . '/options.php' );

@@ -24,9 +24,7 @@ function exmachina_register_scripts() {
 
 	$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-	wp_register_script( 'superfish', EXMACHINA_JS_URL . "/menu/superfish$suffix.js", array( 'jquery' ), '1.7.4', true );
-	wp_register_script( 'superfish-args', apply_filters( 'exmachina_superfish_args_url', EXMACHINA_JS_URL . "/menu/superfish.args$suffix.js" ), array( 'superfish' ), PARENT_THEME_VERSION, true );
-	wp_register_script( 'superfish-compat', EXMACHINA_JS_URL . "/menu/superfish.compat$suffix.js", array( 'jquery' ), PARENT_THEME_VERSION, true );
+
 
 }
 
@@ -34,9 +32,6 @@ add_action( 'wp_enqueue_scripts', 'exmachina_load_scripts' );
 /**
  * Enqueue the scripts used on the front-end of the site.
  *
- * Includes comment-reply, superfish and the superfish arguments.
- *
- * Applies the `exmachina_superfish_enabled`, and `exmachina_superfish_args_uri`. filter.
  *
  * @since 0.2.0
  *
@@ -49,17 +44,6 @@ function exmachina_load_scripts() {
 	if ( is_singular() && get_option( 'thread_comments' ) && comments_open() )
 		wp_enqueue_script( 'comment-reply' );
 
-	//* If superfish is enabled
-	if ( exmachina_superfish_enabled() ) {
-
-		wp_enqueue_script( 'superfish' );
-		wp_enqueue_script( 'superfish-args' );
-
-		//* Load compatibility script if not running HTML5
-		if ( ! exmachina_html5() )
-			wp_enqueue_script( 'superfish-compat' );
-
-	}
 
 }
 
@@ -102,13 +86,6 @@ add_action( 'admin_enqueue_scripts', 'exmachina_load_admin_scripts' );
  */
 function exmachina_load_admin_scripts( $hook_suffix ) {
 
-	//* Only add thickbox/preview if there is an update to ExMachina available
-	if ( exmachina_update_check() ) {
-		add_thickbox();
-		wp_enqueue_script( 'theme-preview' );
-		exmachina_load_admin_js();
-	}
-
 	//* If we're on a ExMachina admin screen
 	if ( exmachina_is_menu_page( 'exmachina' ) || exmachina_is_menu_page( 'seo-settings' ) || exmachina_is_menu_page( 'design-settings' ) )
 		exmachina_load_admin_js();
@@ -142,7 +119,6 @@ function exmachina_load_admin_js() {
 	$strings = array(
 		'categoryChecklistToggle' => __( 'Select / Deselect All', 'exmachina' ),
 		'saveAlert'               => __('The changes you made will be lost if you navigate away from this page.', 'exmachina'),
-		'confirmUpgrade'          => __( 'Updating ExMachina will overwrite the current installed version of ExMachina. Are you sure you want to update?. "Cancel" to stop, "OK" to update.', 'exmachina' ),
 		'confirmReset'            => __( 'Are you sure you want to reset?', 'exmachina' ),
 	);
 
@@ -150,7 +126,6 @@ function exmachina_load_admin_js() {
 
 	$toggles = array(
 		// Checkboxes - when checked, show extra settings
-		'update'                    => array( '#exmachina-settings\\[update\\]', '#exmachina_update_notification_setting', '_checked' ),
 		'content_archive_thumbnail' => array( '#exmachina-settings\\[content_archive_thumbnail\\]', '#exmachina_image_size', '_checked' ),
 		// Checkboxed - when unchecked, show extra settings
 		'semantic_headings'         => array( '#exmachina-seo-settings\\[semantic_headings\\]', '#exmachina_seo_h1_wrap', '_unchecked' ),

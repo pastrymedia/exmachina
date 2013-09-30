@@ -4,11 +4,8 @@ Beta theme is a responsive, SEO Friendly, HTML5 WordPress parent theme. It is de
 
 == Roadmap ==
 -------------
-#### Version 0.2.0 - Framework Cleanup
-+ Remove upgrade functions
-+ Remove SEO functions
-+ Remove deprecated functions
-+ Remove superfish menu option
+
+
 
 == Todo ==
 ----------
@@ -16,6 +13,10 @@ Beta theme is a responsive, SEO Friendly, HTML5 WordPress parent theme. It is de
 == Changelog ==
 ---------------
 #### Version 0.2.0 - Framework Cleanup
+[x] Removed upgrade functions
+[x] Removed deprecated functions
+[x] Removed superfish functions
+[x] Removed language file clutter
 
 #### Version 0.1.0 - Added Framework Files
 [&] Initial Release

@@ -955,7 +955,6 @@ function exmachina_seo_site_description() {
  * @since 1.9.0
  *
  * @uses exmachina_html5() Check for HTML5 support.
- * @uses exmachina_superfish_enabled() Check for superfish support.
  *
  * @param  array $args Header menu args.
  *
@@ -965,7 +964,6 @@ function exmachina_header_menu_args( $args ) {
 
 	$args['container']   = exmachina_html5() ? '' : 'div';
 	$args['menu_class'] .= ' exmachina-nav-menu';
-	$args['menu_class'] .= exmachina_superfish_enabled() ? ' js-superfish' : '';
 
 	return $args;
 

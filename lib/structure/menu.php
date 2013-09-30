@@ -64,8 +64,6 @@ function exmachina_do_nav() {
 	if ( has_nav_menu( 'primary' ) ) {
 
 		$class = 'menu exmachina-nav-menu menu-primary';
-		if ( exmachina_superfish_enabled() )
-			$class .= ' js-superfish';
 
 		$args = array(
 			'theme_location' => 'primary',
@@ -126,8 +124,6 @@ function exmachina_do_subnav() {
 	if ( has_nav_menu( 'secondary' ) ) {
 
 		$class = 'menu exmachina-nav-menu menu-secondary';
-		if ( exmachina_superfish_enabled() )
-			$class .= ' js-superfish';
 
 		$args = array(
 			'theme_location' => 'secondary',
