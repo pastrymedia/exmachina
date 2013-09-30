@@ -4,6 +4,12 @@ Beta theme is a responsive, SEO Friendly, HTML5 WordPress parent theme. It is de
 
 == Roadmap ==
 -------------
++ Add hooks menu
++ include custom footer
++ include meta edits
++ include 404 page
++ include breadcrumbs meta
++ include comments meta
 
 
 
