@@ -132,6 +132,7 @@ function exmachina_constants() {
 	//* Define Settings Field Constants (for DB storage)
 	define( 'EXMACHINA_SETTINGS_FIELD', apply_filters( 'exmachina_settings_field', 'exmachina-settings' ) );
 	define( 'EXMACHINA_SEO_SETTINGS_FIELD', apply_filters( 'exmachina_seo_settings_field', 'exmachina-seo-settings' ) );
+	define( 'EXMACHINA_HOOK_SETTINGS_FIELD', apply_filters( 'exmachina_hook_settings_field', 'exmachina-hook-settings' ) );
 	define( 'EXMACHINA_CPT_ARCHIVE_SETTINGS_FIELD_PREFIX', apply_filters( 'exmachina_cpt_archive_settings_field_prefix', 'exmachina-cpt-archive-settings-' ) );
 
 }
@@ -171,6 +172,7 @@ function exmachina_load_framework() {
 	require_once( EXMACHINA_FUNCTIONS_DIR . '/compat.php' );
 	require_once( EXMACHINA_FUNCTIONS_DIR . '/general.php' );
 	require_once( EXMACHINA_FUNCTIONS_DIR . '/options.php' );
+	require_once( EXMACHINA_FUNCTIONS_DIR . '/hooks.php' );
 	require_once( EXMACHINA_FUNCTIONS_DIR . '/image.php' );
 	require_once( EXMACHINA_FUNCTIONS_DIR . '/markup.php' );
 	require_if_theme_supports( 'exmachina-breadcrumbs', EXMACHINA_FUNCTIONS_DIR . '/breadcrumb.php' );
@@ -203,6 +205,7 @@ function exmachina_load_framework() {
 	if ( is_admin() ) :
 	require_once( EXMACHINA_ADMIN_DIR . '/menu.php' );
 	require_once( EXMACHINA_ADMIN_DIR . '/theme-settings.php' );
+	require_once( EXMACHINA_ADMIN_DIR . '/hook-settings.php' );
 	require_once( EXMACHINA_ADMIN_DIR . '/seo-settings.php' );
 	require_once( EXMACHINA_ADMIN_DIR . '/cpt-archive-settings.php' );
 	require_once( EXMACHINA_ADMIN_DIR . '/import-export.php' );
