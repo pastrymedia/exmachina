@@ -109,6 +109,7 @@ class ExMachina_Admin_Settings extends ExMachina_Admin_Boxes {
 				'blog_cat_num'              => 10,
 				'header_scripts'            => '',
 				'footer_scripts'            => '',
+				'footer_insert' 						=> 'Copyright &copy; ' . date( 'Y' ) . ' All Rights Reserved',
 				'theme_version'             => PARENT_THEME_VERSION,
 				'db_version'                => PARENT_DB_VERSION,
 			)
@@ -187,6 +188,7 @@ class ExMachina_Admin_Settings extends ExMachina_Admin_Boxes {
 			$this->settings_field,
 			array(
 				'nav_extras_twitter_text',
+				'footer_insert',
 			)
 		);
 
@@ -414,6 +416,8 @@ class ExMachina_Admin_Settings extends ExMachina_Admin_Boxes {
 
 		if ( current_user_can( 'unfiltered_html' ) )
 			add_meta_box( 'exmachina-theme-settings-scripts', __( 'Header and Footer Scripts', 'exmachina' ), array( $this, 'scripts_box' ), $this->pagehook, 'main' );
+
+		add_meta_box('exmachina-theme-settings-footer', 'Footer Settings', array( $this, 'footer_box' ), $this->pagehook, 'main' );
 
 		do_action( 'exmachina_theme_settings_metaboxes', $this->pagehook );
 
@@ -863,5 +867,17 @@ class ExMachina_Admin_Settings extends ExMachina_Admin_Boxes {
 		<?php
 
 	}
+
+	/**
+	 * Footer Metabox
+	 * @since 1.0.0
+	 */
+	function footer_box() {
+
+	echo '<p><strong>Footer:</strong></p>';
+	wp_editor( $this->get_field_value( 'footer_insert' ), $this->get_field_id( 'footer_insert' ), array( 'textarea_rows' => 5 ) );
+
+	}
+
 
 }

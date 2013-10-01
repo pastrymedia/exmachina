@@ -333,3 +333,30 @@ function exmachina_plugin_install_link( $plugin_slug = '', $text = '' ) {
 	return sprintf( '<a href="%s" class="thickbox" title="%s">%s</a>', esc_url( $url ), esc_attr( $title_text ), esc_html( $text ) );
 
 }
+
+// Don't update theme
+add_filter( 'http_request_args', 'exmachina_dont_update_theme', 5, 2 );
+/**
+ * Don't Update Theme
+ * @since 1.0.0
+ *
+ * If there is a theme in the repo with the same name,
+ * this prevents WP from prompting an update.
+ *
+ * @author Mark Jaquith
+ * @link http://markjaquith.wordpress.com/2009/12/14/excluding-your-plugin-or-theme-from-update-checks/
+ *
+ * @param array $r, request arguments
+ * @param string $url, request url
+ * @return array request arguments
+ */
+
+function exmachina_dont_update_theme( $r, $url ) {
+	if ( 0 !== strpos( $url, 'http://api.wordpress.org/themes/update-check' ) )
+		return $r; // Not a theme update request. Bail immediately.
+	$themes = unserialize( $r['body']['themes'] );
+	unset( $themes[ get_option( 'template' ) ] );
+	unset( $themes[ get_option( 'stylesheet' ) ] );
+	$r['body']['themes'] = serialize( $themes );
+	return $r;
+}

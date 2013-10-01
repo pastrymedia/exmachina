@@ -23,6 +23,8 @@ add_filter( 'user_contactmethods', 'exmachina_user_contactmethods' );
  */
 function exmachina_user_contactmethods( array $contactmethods ) {
 
+	$contactmethods['facebook'] = __( 'Facebook', 'exmachina' );
+	$contactmethods['twitter'] = __( 'Twitter', 'exmachina' );
 	$contactmethods['googleplus'] = __( 'Google+', 'exmachina' );
 
 	return $contactmethods;

@@ -58,19 +58,19 @@ function exmachina_footer_widget_areas() {
 	}
 
 	if ( $inside ) {
-	
+
 		$output .= exmachina_markup( array(
 			'html5'   => '<div %s>',
 			'xhtml'   => '<div id="footer-widgets" class="footer-widgets">',
 			'context' => 'footer-widgets',
 		) );
-	
+
 		$output .= exmachina_structural_wrap( 'footer-widgets', 'open', 0 );
-		
+
 		$output .= $inside;
-		
+
 		$output .= exmachina_structural_wrap( 'footer-widgets', 'close', 0 );
-		
+
 		$output .= '</div>';
 
 	}
@@ -141,23 +141,14 @@ add_action( 'exmachina_footer', 'exmachina_do_footer' );
 function exmachina_do_footer() {
 
 	//* Build the text strings. Includes shortcodes
-	$backtotop_text = '[footer_backtotop]';
-	$creds_text     = sprintf( '[footer_copyright before="%s "] &#x000B7; [footer_childtheme_link before="" after=" %s"] [footer_exmachina_link url="http://www.machinathemes.com/" before=""] &#x000B7; [footer_wordpress_link] &#x000B7; [footer_loginout]', __( 'Copyright', 'exmachina' ), __( 'on', 'exmachina' ) );
+	$creds_text     = wpautop( exmachina_get_option( 'footer_insert' ) );
 
 	//* Filter the text strings
-	$backtotop_text = apply_filters( 'exmachina_footer_backtotop_text', $backtotop_text );
 	$creds_text     = apply_filters( 'exmachina_footer_creds_text', $creds_text );
 
-	$backtotop = $backtotop_text ? sprintf( '<div class="gototop"><p>%s</p></div>', $backtotop_text ) : '';
-	$creds     = $creds_text ? sprintf( '<div class="creds"><p>%s</p></div>', $creds_text ) : '';
+	$output = '<p>' . $creds_text . '</p>';
 
-	$output = $backtotop . $creds;
-
-	//* Only use credits if HTML5
-	if ( exmachina_html5() )
-		$output = '<p>' . $creds_text . '</p>';
-
-	echo apply_filters( 'exmachina_footer_output', $output, $backtotop_text, $creds_text );
+	echo apply_filters( 'exmachina_footer_output', $output, $creds_text );
 
 }
 
