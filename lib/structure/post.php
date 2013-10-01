@@ -31,16 +31,16 @@ function exmachina_reset_loops() {
 	add_action( 'exmachina_entry_header', 'exmachina_entry_header_markup_close', 15 );
 	add_action( 'exmachina_entry_header', 'exmachina_do_post_title' );
 	add_action( 'exmachina_entry_header', 'exmachina_post_info', 12 );
-	
+
 	add_action( 'exmachina_entry_content', 'exmachina_do_post_image', 8 );
 	add_action( 'exmachina_entry_content', 'exmachina_do_post_content' );
 	add_action( 'exmachina_entry_content', 'exmachina_do_post_content_nav', 12 );
 	add_action( 'exmachina_entry_content', 'exmachina_do_post_permalink', 14 );
-	
+
 	add_action( 'exmachina_entry_footer', 'exmachina_entry_footer_markup_open', 5 );
 	add_action( 'exmachina_entry_footer', 'exmachina_entry_footer_markup_close', 15 );
 	add_action( 'exmachina_entry_footer', 'exmachina_post_meta' );
-	
+
 	add_action( 'exmachina_after_entry', 'exmachina_do_author_box_single', 8 );
 	add_action( 'exmachina_after_entry', 'exmachina_get_comments_template' );
 
@@ -244,7 +244,7 @@ function exmachina_post_info() {
 	if ( 'page' === get_post_type( $post->ID ) )
 		return;
 
-	$post_info = apply_filters( 'exmachina_post_info', '[post_date] ' . __( 'by', 'exmachina' ) . ' [post_author_posts_link] [post_comments] [post_edit]' );
+	$post_info = apply_filters( 'exmachina_post_info', exmachina_get_option( 'post_info' ) );
 
 	exmachina_markup( array(
 		'html5' => sprintf( '<p class="entry-meta">%s</p>', $post_info ),
@@ -445,7 +445,7 @@ function exmachina_post_meta() {
 	if ( 'page' === get_post_type( $post->ID ) )
 		return;
 
-	$post_meta = apply_filters( 'exmachina_post_meta', '[post_categories] [post_tags]' );
+	$post_meta = apply_filters( 'exmachina_post_meta', exmachina_get_option( 'post_meta' ) );
 
 	exmachina_markup( array(
 		'html5' => sprintf( '<p class="entry-meta">%s</p>', $post_meta ),

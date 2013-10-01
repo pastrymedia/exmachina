@@ -104,6 +104,8 @@ class ExMachina_Admin_Settings extends ExMachina_Admin_Boxes {
 				'content_archive_thumbnail' => 0,
 				'image_size'                => '',
 				'posts_nav'                 => 'prev-next',
+				'post_info'                 => '[post_date] ' . __( 'by', 'exmachina' ) . ' [post_author_posts_link] [post_comments] [post_edit]',
+				'post_meta'                 => '[post_categories] [post_tags]',
 				'blog_cat'                  => '',
 				'blog_cat_exclude'          => '',
 				'blog_cat_num'              => 10,
@@ -399,6 +401,7 @@ class ExMachina_Admin_Settings extends ExMachina_Admin_Boxes {
 			add_meta_box( 'exmachina-theme-settings-style-selector', __( 'Color Style', 'exmachina' ), array( $this, 'style_box' ), $this->pagehook, 'main' );
 
 		add_meta_box( 'exmachina-theme-settings-feeds', __( 'Custom Feeds', 'exmachina' ), array( $this, 'feeds_box' ), $this->pagehook, 'main' );
+		add_meta_box( 'exmachina-theme-settings-post-edit', __( 'Post Edits', 'exmachina' ), array( $this, 'post_edit_box' ), $this->pagehook, 'main' );
 		add_meta_box( 'exmachina-theme-settings-layout', __( 'Default Layout', 'exmachina' ), array( $this, 'layout_box' ), $this->pagehook, 'main' );
 
 		if ( ! current_theme_supports( 'exmachina-custom-header' ) && ! current_theme_supports( 'custom-header' ) )
@@ -632,6 +635,37 @@ class ExMachina_Admin_Settings extends ExMachina_Admin_Boxes {
 
 			<label for="<?php echo $this->get_field_id( 'redirect_comments_feed' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'redirect_comments_feed' ); ?>" id="<?php echo $this->get_field_id( 'redirect_comments_feed' ); ?>" value="1"<?php checked( $this->get_field_value( 'redirect_comments__feed' ) ); ?> />
 			<?php _e( 'Redirect Feed?', 'exmachina' ); ?></label>
+		</p>
+
+		<p><span class="description"><?php printf( __( 'If your custom feed(s) are not handled by Feedburner, we do not recommend that you use the redirect options.', 'exmachina' ) ); ?></span></p>
+		<?php
+
+	}
+
+	/**
+	 * Callback for Theme Settings Post Edit meta box.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @uses \ExMachina_Admin::get_field_id()    Construct field ID.
+	 * @uses \ExMachina_Admin::get_field_name()  Construct field name.
+	 * @uses \ExMachina_Admin::get_field_value() Retrieve value of key under $this->settings_field.
+	 *
+	 * @see \ExMachina_Admin_Settings::metaboxes() Register meta boxes on the Theme Settings page.
+	 */
+	function post_edit_box() {
+
+		?>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'post_info' ); ?>"><?php _e( 'Post Info:', 'exmachina' ); ?></label><br />
+			<input type="text" name="<?php echo $this->get_field_name( 'post_info' ); ?>" id="<?php echo $this->get_field_id( 'post_info' ); ?>" value="<?php echo esc_attr( $this->get_field_value( 'post_info' ) ); ?>" size="50" />
+
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id( 'post_meta' ); ?>"><?php _e( 'Post Meta:', 'exmachina' ); ?></label><br />
+			<input type="text" name="<?php echo $this->get_field_name( 'post_meta' ); ?>" id="<?php echo $this->get_field_id( 'post_meta' ); ?>" value="<?php echo esc_attr( $this->get_field_value( 'post_meta' ) ); ?>" size="50" />
+
 		</p>
 
 		<p><span class="description"><?php printf( __( 'If your custom feed(s) are not handled by Feedburner, we do not recommend that you use the redirect options.', 'exmachina' ) ); ?></span></p>
