@@ -72,3 +72,33 @@ function exmachina_do_breadcrumbs() {
 	}
 
 }
+
+add_filter( 'exmachina_breadcrumb_args', 'gsb_breadcrumb_args' );
+/**
+ * Changes the Breadcrumb arguments based on the Plugin Options
+ *
+ * @since 0.1
+ * @version 0.1
+ * @param array $args
+ * @return array
+ */
+function gsb_breadcrumb_args( $args ) {
+    $args['home']                    = exmachina_get_content_option('breadcrumb_home');
+    $args['sep']                     = exmachina_get_content_option('breadcrumb_sep');
+    $args['list_sep']                = exmachina_get_content_option('breadcrumb_list_sep'); // 1.5 and later
+    $args['prefix']                  = exmachina_get_content_option('breadcrumb_prefix');
+    $args['suffix']                  = exmachina_get_content_option('breadcrumb_suffix');
+    $args['heirarchial_attachments'] = exmachina_get_content_option('breadcrumb_heirarchial_attachments'); // 1.5 and later
+    $args['heirarchial_categories']  = exmachina_get_content_option('breadcrumb_heirarchial_categories'); // 1.5 and later
+    $args['display']                 = exmachina_get_content_option('breadcrumb_display');
+    $args['labels']['prefix']        = exmachina_get_content_option('breadcrumb_label_prefix');
+    $args['labels']['author']        = exmachina_get_content_option('breadcrumb_author');
+    $args['labels']['category']      = exmachina_get_content_option('breadcrumb_category'); // 1.6 and later
+    $args['labels']['tag']           = exmachina_get_content_option('breadcrumb_tag');
+    $args['labels']['date']          = exmachina_get_content_option('breadcrumb_date');
+    $args['labels']['search']        = exmachina_get_content_option('breadcrumb_search');
+    $args['labels']['tax']           = exmachina_get_content_option('breadcrumb_tax');
+    $args['labels']['404']           = exmachina_get_content_option('breadcrumb_404'); // 1.5 and later
+
+    return $args;
+}
