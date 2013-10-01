@@ -133,6 +133,8 @@ function exmachina_constants() {
 	define( 'EXMACHINA_SETTINGS_FIELD', apply_filters( 'exmachina_settings_field', 'exmachina-settings' ) );
 	define( 'EXMACHINA_SEO_SETTINGS_FIELD', apply_filters( 'exmachina_seo_settings_field', 'exmachina-seo-settings' ) );
 	define( 'EXMACHINA_HOOK_SETTINGS_FIELD', apply_filters( 'exmachina_hook_settings_field', 'exmachina-hook-settings' ) );
+	define( 'EXMACHINA_CONTENT_SETTINGS_FIELD', apply_filters( 'exmachina_content_settings_field', 'exmachina-content-settings' ) );
+	define( 'EXMACHINA_DESIGN_SETTINGS_FIELD', apply_filters( 'exmachina_design_settings_field', 'exmachina-design-settings' ) );
 	define( 'EXMACHINA_CPT_ARCHIVE_SETTINGS_FIELD_PREFIX', apply_filters( 'exmachina_cpt_archive_settings_field_prefix', 'exmachina-cpt-archive-settings-' ) );
 
 }
@@ -188,6 +190,7 @@ function exmachina_load_framework() {
 	//* Load Shortcodes
 	require_once( EXMACHINA_SHORTCODES_DIR . '/post.php' );
 	require_once( EXMACHINA_SHORTCODES_DIR . '/footer.php' );
+	require_once( EXMACHINA_SHORTCODES_DIR . '/general.php' );
 
 	//* Load Structure
 	require_once( EXMACHINA_STRUCTURE_DIR . '/header.php' );
@@ -206,6 +209,7 @@ function exmachina_load_framework() {
 	require_once( EXMACHINA_ADMIN_DIR . '/menu.php' );
 	require_once( EXMACHINA_ADMIN_DIR . '/theme-settings.php' );
 	require_once( EXMACHINA_ADMIN_DIR . '/hook-settings.php' );
+	require_once( EXMACHINA_ADMIN_DIR . '/content-settings.php' );
 	require_once( EXMACHINA_ADMIN_DIR . '/seo-settings.php' );
 	require_once( EXMACHINA_ADMIN_DIR . '/cpt-archive-settings.php' );
 	require_once( EXMACHINA_ADMIN_DIR . '/import-export.php' );

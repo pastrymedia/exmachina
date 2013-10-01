@@ -586,6 +586,9 @@ add_action( 'exmachina_admin_menu', 'exmachina_add_hooks_settings_menu' );
  */
 function exmachina_add_hooks_settings_menu() {
 
-	new ExMachina_Admin_Hook_Settings;
+	global $exmachina_admin_hook_settings;
+
+	$exmachina_admin_hook_settings = new ExMachina_Admin_Hook_Settings;
+
 
 }

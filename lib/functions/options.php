@@ -134,6 +134,78 @@ function exmachina_seo_option( $key, $use_cache = true ) {
 }
 
 /**
+ * Return content options from the SEO options database.
+ *
+ * @since 0.1.3
+ *
+ * @uses exmachina_get_option() Return option from the options table and cache result.
+ * @uses EXMACHINA_CONTENT_SETTINGS_FIELD
+ *
+ * @param string  $key       Option name.
+ * @param boolean $use_cache Optional. Whether to use the ExMachina cache value or not. Defaults to true.
+ *
+ * @return mixed The value of this $key in the database.
+ */
+function exmachina_get_content_option( $key, $use_cache = true ) {
+
+	return exmachina_get_option( $key, EXMACHINA_CONTENT_SETTINGS_FIELD, $use_cache );
+
+}
+
+/**
+ * Echo an content option from the SEO options database.
+ *
+ * @since 0.1.3
+ *
+ * @uses exmachina_option() Echo option from the options table and cache result.
+ * @uses EXMACHINA_CONTENT_SETTINGS_FIELD
+ *
+ * @param string  $key       Option name.
+ * @param boolean $use_cache Optional. Whether to use the ExMachina cache value or not. Defaults to true.
+ */
+function exmachina_content_option( $key, $use_cache = true ) {
+
+	exmachina_option( $key, EXMACHINA_CONTENT_SETTINGS_FIELD, $use_cache );
+
+}
+
+/**
+ * Return design options from the SEO options database.
+ *
+ * @since 0.1.3
+ *
+ * @uses exmachina_get_option() Return option from the options table and cache result.
+ * @uses EXMACHINA_DESIGN_SETTINGS_FIELD
+ *
+ * @param string  $key       Option name.
+ * @param boolean $use_cache Optional. Whether to use the ExMachina cache value or not. Defaults to true.
+ *
+ * @return mixed The value of this $key in the database.
+ */
+function exmachina_get_design_option( $key, $use_cache = true ) {
+
+	return exmachina_get_option( $key, EXMACHINA_DESIGN_SETTINGS_FIELD, $use_cache );
+
+}
+
+/**
+ * Echo an design option from the SEO options database.
+ *
+ * @since 0.1.3
+ *
+ * @uses exmachina_option() Echo option from the options table and cache result.
+ * @uses EXMACHINA_DESIGN_SETTINGS_FIELD
+ *
+ * @param string  $key       Option name.
+ * @param boolean $use_cache Optional. Whether to use the ExMachina cache value or not. Defaults to true.
+ */
+function exmachina_design_option( $key, $use_cache = true ) {
+
+	exmachina_option( $key, EXMACHINA_DESIGN_SETTINGS_FIELD, $use_cache );
+
+}
+
+/**
  * Return a CPT Archive setting value from the options table.
  *
  * @since 2.0.0
