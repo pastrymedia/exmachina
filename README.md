@@ -4,7 +4,19 @@ Beta theme is a responsive, SEO Friendly, HTML5 WordPress parent theme. It is de
 
 == Roadmap ==
 -------------
-
++ Cleanup frontend files
++ Cleanup frontend stylesheets
++ Cleanup structure files
++ Cleanup functions files
++ Cleanup widgets files
++ Cleanup shortcodes files
++ Cleanup extensions files
++ Cleanup javascript files
++ Cleanup stylsheets files
++ Cleanup admin files
++ Cleanup plugins files
++ Cleanup classes files
++ Cleanup engine
 
 
 == Todo ==
