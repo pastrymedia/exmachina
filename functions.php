@@ -1,26 +1,34 @@
 <?php
-/*
- WARNING: This file is part of the core ExMachina Framework. DO NOT edit
- this file under any circumstances. Please do all modifications
- in the form of a child theme.
- */
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
 
 /**
- * This file calls the init.php file, but only
- * if the child theme hasn't called it first.
+ * <[TEMPLATE NAME]> WordPress Theme
+ * Main Theme Functions
  *
- * This method allows the child theme to load
- * the framework so it can use the framework
- * components immediately.
+ * @todo create init function
+ * @todo create setup function
+ * @todo remove create_custom_php dependency
  *
- * This file is a core ExMachina file and should not be edited.
+ * functions.php
+ * @link http://codex.wordpress.org/Functions_File_Explained
  *
- * @category ExMachina
- * @package  Templates
- * @author   Machina Themes
- * @license  GPL-2.0+
- * @link     http://machinathemes.com/themes/exmachina
+ * The functions file is used to initialize everything in the theme. It controls
+ * how the theme is loaded and sets up the supported features, default actions,
+ * and default filters. If making customizations, users should create a child
+ * theme and make changes to its functions.php file (not this one).
+ *
+ * @package     <[TEMPLATE NAME]>
+ * @subpackage  Functions
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright(c) 2012-2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com/<[theme-name]>
  */
+###############################################################################
+# begin functions
+###############################################################################
 
 require_once( dirname( __FILE__ ) . '/lib/init.php' );
 

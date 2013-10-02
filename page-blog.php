@@ -4,13 +4,13 @@
 if ( !defined('ABSPATH')) exit;
 
 /**
- * Single Post Display
- * single.php
+ * Blog Page Template
+ * page-blog.php
  *
- * @todo bring back markup
+ * @todo bring in actual markup
  *
- * Template file used to render a single post page.
- * @link http://codex.wordpress.org/Theme_Development#Single_Post_.28single.php.29
+ * Template for displaying the blog page loop.
+ * @link http://codex.wordpress.org/Page_Templates
  *
  * @package <[THEME NAME]>
  * @subpackage Templates
@@ -19,5 +19,7 @@ if ( !defined('ABSPATH')) exit;
  * @license http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
  * @link http://www.machinathemes.com/themes/<[theme-name]>
  */
+
+//* Template Name: Blog
 
 exmachina();
