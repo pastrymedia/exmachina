@@ -123,6 +123,7 @@ function exmachina_constants() {
 	define( 'EXMACHINA_JS_DIR', EXMACHINA_LIB_DIR . '/js' );
 	define( 'EXMACHINA_CSS_DIR', EXMACHINA_LIB_DIR . '/css' );
 	define( 'EXMACHINA_CLASSES_DIR', EXMACHINA_LIB_DIR . '/classes' );
+	define( 'EXMACHINA_EXTENSIONS_DIR', EXMACHINA_LIB_DIR . '/extensions' );
 	define( 'EXMACHINA_FUNCTIONS_DIR', EXMACHINA_LIB_DIR . '/functions' );
 	define( 'EXMACHINA_SHORTCODES_DIR', EXMACHINA_LIB_DIR . '/shortcodes' );
 	define( 'EXMACHINA_STRUCTURE_DIR', EXMACHINA_LIB_DIR . '/structure' );
@@ -220,6 +221,8 @@ function exmachina_load_framework() {
 	require_once( EXMACHINA_STRUCTURE_DIR . '/search.php' );
 	require_once( EXMACHINA_STRUCTURE_DIR . '/custom.php' );
 	require_once( EXMACHINA_STRUCTURE_DIR . '/stylesheets.php' );
+
+	require_once( EXMACHINA_EXTENSIONS_DIR . '/microdata-manager.php' );
 
 	//* Load Admin
 	if ( is_admin() ) :
