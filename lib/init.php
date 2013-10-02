@@ -224,6 +224,7 @@ function exmachina_load_framework() {
 	require_once( EXMACHINA_STRUCTURE_DIR . '/stylesheets.php' );
 
 	require_once( EXMACHINA_EXTENSIONS_DIR . '/microdata-manager.php' );
+	require_once( EXMACHINA_EXTENSIONS_DIR . '/custom-menus.php' );
 
 	require_once( EXMACHINA_PLUGINS_DIR . '/custom-sidebars/plugin.php' );
 
