@@ -50,6 +50,8 @@ function exmachina_theme_support() {
 	add_theme_support( 'exmachina-import-export-menu' );
 	add_theme_support( 'exmachina-breadcrumbs' );
 
+
+
 	//* Maybe add support for ExMachina menus
 	if ( ! current_theme_supports( 'exmachina-menus' ) )
 		add_theme_support( 'exmachina-menus', array(
@@ -67,6 +69,10 @@ function exmachina_theme_support() {
 		add_theme_support( 'exmachina-responsive-viewport' );
 		add_theme_support( 'exmachina-footer-widgets', 3 );
 	}
+
+
+
+add_theme_support( 'exmachina-design-settings' );
 
 	/**
  * Custom background.
@@ -189,6 +195,7 @@ function exmachina_load_framework() {
 	require_once( EXMACHINA_FUNCTIONS_DIR . '/menu.php' );
 	require_once( EXMACHINA_FUNCTIONS_DIR . '/layout.php' );
 	require_once( EXMACHINA_FUNCTIONS_DIR . '/formatting.php' );
+	require_once( EXMACHINA_FUNCTIONS_DIR . '/design-settings.php' );
 	require_once( EXMACHINA_FUNCTIONS_DIR . '/seo.php' );
 	require_once( EXMACHINA_FUNCTIONS_DIR . '/widgetize.php' );
 	require_once( EXMACHINA_FUNCTIONS_DIR . '/feed.php' );
@@ -211,6 +218,8 @@ function exmachina_load_framework() {
 	require_once( EXMACHINA_STRUCTURE_DIR . '/sidebar.php' );
 	require_once( EXMACHINA_STRUCTURE_DIR . '/archive.php' );
 	require_once( EXMACHINA_STRUCTURE_DIR . '/search.php' );
+	require_once( EXMACHINA_STRUCTURE_DIR . '/custom.php' );
+	require_once( EXMACHINA_STRUCTURE_DIR . '/stylesheets.php' );
 
 	//* Load Admin
 	if ( is_admin() ) :
@@ -219,6 +228,8 @@ function exmachina_load_framework() {
 	require_once( EXMACHINA_ADMIN_DIR . '/hook-settings.php' );
 	require_once( EXMACHINA_ADMIN_DIR . '/content-settings.php' );
 	require_once( EXMACHINA_ADMIN_DIR . '/seo-settings.php' );
+	require_once( EXMACHINA_ADMIN_DIR . '/custom-code.php' );
+	require_once( EXMACHINA_ADMIN_DIR . '/design-settings.php' );
 	require_once( EXMACHINA_ADMIN_DIR . '/cpt-archive-settings.php' );
 	require_once( EXMACHINA_ADMIN_DIR . '/import-export.php' );
 	require_once( EXMACHINA_ADMIN_DIR . '/inpost-metaboxes.php' );
