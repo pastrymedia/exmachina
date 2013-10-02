@@ -42,6 +42,7 @@ function exmachina_reset_loops() {
 	add_action( 'exmachina_entry_footer', 'exmachina_post_meta' );
 
 	add_action( 'exmachina_after_entry', 'exmachina_do_author_box_single', 8 );
+	add_action( 'exmachina_after_entry', 'exmachina_after_entry_widget_area', 9 );
 	add_action( 'exmachina_after_entry', 'exmachina_get_comments_template' );
 
 	//* Pre-HTML5 hooks
@@ -530,6 +531,25 @@ function exmachina_author_box( $context = '', $echo = true ) {
 		echo $output;
 	else
 		return $output;
+
+}
+
+add_action( 'exmachina_after_entry', 'exmachina_after_entry_widget_area', 9 );
+/**
+ * After post widget area.
+ *
+ * Output widget area after the post content.
+ *
+ * @uses exmachina_widget_area()
+ *
+ * @since 1.5.0
+ */
+function exmachina_after_entry_widget_area() {
+
+	if ( ! is_singular( 'post' ) )
+		return;
+
+	exmachina_widget_area( 'after-post' );
 
 }
 

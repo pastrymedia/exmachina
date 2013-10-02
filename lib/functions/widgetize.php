@@ -129,6 +129,15 @@ function exmachina_register_default_widget_areas() {
 		)
 	);
 
+	exmachina_register_sidebar(
+		array(
+			'id'               => 'after-post',
+			'name'             => __( 'After Post', 'exmachina' ),
+			'description'      => __( 'This is the after post section.', 'exmachina' ),
+			'_exmachina_builtin' => true,
+		)
+	);
+
 }
 
 add_action( 'after_setup_theme', 'exmachina_register_footer_widget_areas' );

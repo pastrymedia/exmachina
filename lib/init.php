@@ -68,6 +68,14 @@ function exmachina_theme_support() {
 		add_theme_support( 'exmachina-footer-widgets', 3 );
 	}
 
+	/**
+ * Custom background.
+ *
+ * Enable the WordPress custom background function.
+ *
+ */
+add_theme_support( 'custom-background' );
+
 }
 
 add_action( 'exmachina_init', 'exmachina_post_type_support' );
