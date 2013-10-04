@@ -209,10 +209,6 @@ class ExMachina_Admin_Import_Export extends ExMachina_Admin_Basic {
 				'label'          => __( 'Theme Settings', 'exmachina' ),
 				'settings-field' => EXMACHINA_SETTINGS_FIELD,
 			),
-			'design' => array(
-				'label' => __( 'Design Settings', 'exmachina' ),
-				'settings-field' => EXMACHINA_DESIGN_SETTINGS_FIELD,
-			),
 			'content' => array(
 				'label' => __( 'Content Settings', 'exmachina' ),
 				'settings-field' => EXMACHINA_CONTENT_SETTINGS_FIELD,

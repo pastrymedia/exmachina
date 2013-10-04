@@ -31,6 +31,3 @@ if ( !defined('ABSPATH')) exit;
 ###############################################################################
 
 require_once( dirname( __FILE__ ) . '/lib/init.php' );
-
-exmachina_design_create_custom_php();
-add_theme_support( 'exmachina-custom-header', array( 'width' => exmachina_get_option( 'header_image_width', EXMACHINA_DESIGN_SETTINGS_FIELD ), 'height' => exmachina_get_option( 'header_image_height', EXMACHINA_DESIGN_SETTINGS_FIELD ) ) );
