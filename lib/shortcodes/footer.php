@@ -25,7 +25,7 @@ add_shortcode( 'footer_backtotop', 'exmachina_footer_backtotop_shortcode' );
  *
  * Output passes through 'exmachina_footer_backtotop_shortcode' filter before returning.
  *
- * @since 1.1.0
+ * @since 0.5.0
  *
  * @param array|string $atts Shortcode attributes. Empty string if no attributes.
  * @return string Shortcode output
@@ -65,7 +65,7 @@ add_shortcode( 'footer_copyright', 'exmachina_footer_copyright_shortcode' );
  *
  * Output passes through 'exmachina_footer_copyright_shortcode' filter before returning.
  *
- * @since 1.1.0
+ * @since 0.5.0
  *
  * @param array|string $atts Shortcode attributes. Empty string if no attributes.
  * @return string Shortcode output
@@ -101,7 +101,7 @@ add_shortcode( 'footer_childtheme_link', 'exmachina_footer_childtheme_link_short
  *
  * Output passes through 'exmachina_footer_childtheme_link_shortcode' filter before returning.
  *
- * @since 1.1.0
+ * @since 0.5.0
  *
  * @param array|string $atts Shortcode attributes. Empty string if no attributes.
  * @return string|null Returns early on failure, otherwise returns shortcode output
@@ -133,7 +133,7 @@ add_shortcode( 'footer_exmachina_link', 'exmachina_footer_exmachina_link_shortco
  *
  * Output passes through 'exmachina_footer_exmachina_link_shortcode' filter before returning.
  *
- * @since 1.1.0
+ * @since 0.5.0
  *
  * @param array|string $atts Shortcode attributes. Empty string if no attributes.
  * @return string Shortcode output
@@ -163,7 +163,7 @@ add_shortcode( 'footer_machinathemes_link', 'exmachina_footer_machinathemes_link
  *
  * Output passes through 'exmachina_footer_machinathemes_link_shortcode' filter before returning.
  *
- * @since 1.2.0
+ * @since 0.5.0
  *
  * @param array|string $atts Shortcode attributes. Empty string if no attributes.
  * @return string Shortcode output
@@ -192,7 +192,7 @@ add_shortcode( 'footer_wordpress_link', 'exmachina_footer_wordpress_link_shortco
  *
  * Output passes through 'exmachina_footer_wordpress_link_shortcode' filter before returning.
  *
- * @since 1.1.0
+ * @since 0.5.0
  *
  * @param array|string $atts Shortcode attributes. Empty string if no attributes.
  * @return string Shortcode output
@@ -222,7 +222,7 @@ add_shortcode( 'footer_loginout', 'exmachina_footer_loginout_shortcode' );
  *
  * Output passes through 'exmachina_footer_loginout_shortcode' filter before returning.
  *
- * @since 1.1.0
+ * @since 0.5.0
  *
  * @param array|string $atts Shortcode attributes. Empty string if no attributes.
  * @return string Shortcode output

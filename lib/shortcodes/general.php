@@ -16,7 +16,7 @@ add_shortcode( '404_search', 'exmachina_404_search_shortcode' );
 /**
    * Search Shortcode
    *
-   * @since 1.1
+   * @since 0.5.0
    */
   function exmachina_404_search_shortcode() {
     return '<div class="exmachina-404-search">' . get_search_form( false ) . '</div>';

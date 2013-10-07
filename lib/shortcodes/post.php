@@ -23,7 +23,7 @@ add_shortcode( 'post_date', 'exmachina_post_date_shortcode' );
  *
  * Output passes through 'exmachina_post_date_shortcode' filter before returning.
  *
- * @since 1.1.0
+ * @since 0.5.0
  *
  * @param array|string $atts Shortcode attributes. Empty string if no attributes.
  * @return string Shortcode output
@@ -62,7 +62,7 @@ add_shortcode( 'post_time', 'exmachina_post_time_shortcode' );
  *
  * Output passes through 'exmachina_post_time_shortcode' filter before returning.
  *
- * @since 1.1.0
+ * @since 0.5.0
  *
  * @param array|string $atts Shortcode attributes. Empty string if no attributes.
  * @return string Shortcode output
@@ -97,7 +97,7 @@ add_shortcode( 'post_author', 'exmachina_post_author_shortcode' );
  *
  * Output passes through 'exmachina_post_author_shortcode' filter before returning.
  *
- * @since 1.1.0
+ * @since 0.5.0
  *
  * @param array|string $atts Shortcode attributes. Empty string if no attributes.
  * @return string Shortcode output
@@ -137,7 +137,7 @@ add_shortcode( 'post_author_link', 'exmachina_post_author_link_shortcode' );
  *
  * Output passes through 'exmachina_post_author_link_shortcode' filter before returning.
  *
- * @since 1.1.0
+ * @since 0.5.0
  *
  * @param array|string $atts Shortcode attributes. Empty string if no attributes.
  * @return string Shortcode output
@@ -185,7 +185,7 @@ add_shortcode( 'post_author_posts_link', 'exmachina_post_author_posts_link_short
  *
  * Output passes through 'exmachina_post_author_posts_link_shortcode' filter before returning.
  *
- * @since 1.1.0
+ * @since 0.5.0
  *
  * @param array|string $atts Shortcode attributes. Empty string if no attributes.
  * @return string Shortcode output
@@ -233,7 +233,7 @@ add_shortcode( 'post_comments', 'exmachina_post_comments_shortcode' );
  *
  * Output passes through 'exmachina_post_comments_shortcode' filter before returning.
  *
- * @since 1.1.0
+ * @since 0.5.0
  *
  * @param array|string $atts Shortcode attributes. Empty string if no attributes.
  * @return string Shortcode output
@@ -281,7 +281,7 @@ add_shortcode( 'post_tags', 'exmachina_post_tags_shortcode' );
  *
  * Output passes through 'exmachina_post_tags_shortcode' filter before returning.
  *
- * @since 1.1.0
+ * @since 0.5.0
  *
  * @param array|string $atts Shortcode attributes. Empty string if no attributes.
  * @return string Shortcode output
@@ -321,7 +321,7 @@ add_shortcode( 'post_categories', 'exmachina_post_categories_shortcode' );
  *
  * Output passes through 'exmachina_post_categories_shortcode' filter before returning.
  *
- * @since 1.1.0
+ * @since 0.5.0
  *
  * @param array|string $atts Shortcode attributes. Empty string if no attributes.
  * @return string Shortcode output
@@ -359,7 +359,7 @@ add_shortcode( 'post_terms', 'exmachina_post_terms_shortcode' );
  *
  * Output passes through 'exmachina_post_terms_shortcode' filter before returning.
  *
- * @since 1.6.0
+ * @since 0.5.0
  *
  * @global stdClass $post Post object
  *
@@ -407,7 +407,7 @@ add_shortcode( 'post_edit', 'exmachina_post_edit_shortcode' );
  *
  * Output passes through 'exmachina_post_edit_shortcode' filter before returning.
  *
- * @since 1.1.0
+ * @since 0.5.0
  *
  * @param array|string $atts Shortcode attributes. Empty string if no attributes.
  * @return string Shortcode output
