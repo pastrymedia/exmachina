@@ -421,7 +421,7 @@ class ExMachina_Admin_Theme_Settings extends ExMachina_Admin_Metaboxes {
 		if ( ! current_theme_supports( 'exmachina-custom-header' ) && ! current_theme_supports( 'custom-header' ) )
 			add_meta_box( 'exmachina-theme-settings-header', __( 'Header', 'exmachina' ), array( $this, 'header_box' ), $this->pagehook, 'normal' );
 
-		if ( current_theme_supports( 'exmachina-menus' ) )
+		if ( current_theme_supports( 'exmachina-core-menus' ) )
 			add_meta_box( 'exmachina-theme-settings-nav', __( 'Navigation', 'exmachina' ), array( $this, 'nav_box' ), $this->pagehook, 'normal' );
 
 		if ( current_theme_supports( 'exmachina-breadcrumbs' ) )

@@ -71,30 +71,33 @@ function exmachina_get_image_id( $index = 0 ) {
 /**
  * Get Image
  *
- * Return an image pulled from the media gallery.
+ * Returns an image pulled from the media gallery.
  *
  * Supported $args keys are:
+ * - format   - string, default is 'html'
+ * - size     - string, default is 'full'
+ * - num      - integer, default is 0
+ * - attr     - string, default is ''
+ * - fallback - mixed, default is 'first-attached'
  *
- *  - format   - string, default is 'html'
- *  - size     - string, default is 'full'
- *  - num      - integer, default is 0
- *  - attr     - string, default is ''
- *  - fallback - mixed, default is 'first-attached'
+ * @todo add prefixed filter
  *
- * Applies `exmachina_get_image_default_args`, `exmachina_pre_get_image` and `exmachina_get_image` filters.
+ * @link http://codex.wordpress.org/Function_Reference/wp_parse_args
+ * @link http://codex.wordpress.org/Function_Reference/has_post_thumbnail
+ * @link http://codex.wordpress.org/Function_Reference/get_post_thumbnail_id
+ * @link http://codex.wordpress.org/Function_Reference/wp_get_attachment_image
+ * @link http://codex.wordpress.org/Function_Reference/wp_get_attachment_image_src
+ * @link http://codex.wordpress.org/Function_Reference/home_url
  *
- * @todo inline comment
- * @todo docblock comment
- * @todo compare against omega/beta
+ * @uses exmachina_get_prefix()   Gets the theme prefix.
+ * @uses exmachina_get_image_id() Gets the image ID from the post.
  *
- * @uses exmachina_get_image_id() Pull an attachment ID from a post, if one exists.
- *
- * @since 0.5.0
+ * @since 1.0.6
  * @access public
  *
- * @global object       $post WP_Post post object.
- * @param  array|string $args Optional. Image query arguments. Default is empty array.
- * @return string|bool        Return image element HTML, URL of image, or false.
+ * @global object $post The WP_Post post object.
+ * @param  array  $args Optional. Image query arguments.
+ * @return string       Returns img element HTML.
  */
 function exmachina_get_image( $args = array() ) {
   global $post;
@@ -162,22 +165,23 @@ function exmachina_get_image( $args = array() ) {
 } // end function exmachina_get_image()
 
 /**
- * Echo an image pulled from the media gallery.
+ * Echo Image
+ *
+ * Echoes an image pulled from media gallery.
  *
  * Supported $args keys are:
+ * - format - string, default is 'html', may be 'url'
+ * - size   - string, default is 'full'
+ * - num    - integer, default is 0
+ * - attr   - string, default is ''
  *
- *  - format - string, default is 'html', may be 'url'
- *  - size   - string, default is 'full'
- *  - num    - integer, default is 0
- *  - attr   - string, default is ''
+ * @uses exmachina_get_image() Gets the image from the media gallery.
  *
- * @since 0.1.0
+ * @since 1.0.6
+ * @access public
  *
- * @uses exmachina_get_image() Return an image pulled from the media gallery.
- *
- * @param array|string $args Optional. Image query arguments. Default is empty array.
- *
- * @return false Returns false if URL is empty.
+ * @param  array  $args Optional. Image query arguments.
+ * @return string       Returns the image HTML or URL.
  */
 function exmachina_image( $args = array() ) {
 
@@ -193,18 +197,14 @@ function exmachina_image( $args = array() ) {
 /**
  * Get Additional Image Sizes
  *
- * Return registered image sizes. Return a two-dimensional array of just the
+ * Returns registered image sizes. Returns a two-dimensional array of just the
  * additionally registered image sizes, with width, height and crop sub-keys.
  *
- * @todo compare against omega/beta
- * @todo inline comment
- * @todo docblock comment
- *
- * @since 0.5.0
+ * @since 1.0.6
  * @access public
  *
- * @global array $_wp_additional_image_sizes  Additionally registered image sizes.
- * @return array                              Two-dimensional, with width, height and crop sub-keys.
+ * @global array $_wp_additional_image_sizes Additionally registered image sizes.
+ * @return array                             Returns array of image sizes.
  */
 function exmachina_get_additional_image_sizes() {
   global $_wp_additional_image_sizes;
@@ -219,21 +219,21 @@ function exmachina_get_additional_image_sizes() {
 /**
  * Get Image Sizes
  *
- * Return all registered image sizes arrays, including the standard sizes. Return
- * a two-dimensional array of standard and additionally registered image sizes,
- * with width, height and crop sub-keys. Here, the standard sizes have their
- * sub-keys populated by pulling from the options saved in the database.
+ * Returns all registered image sizes arrays, including the standard sizes.
+ * Returns a two-dimensional array of standard and additionally registered
+ * image sizes, with width, height and crop sub-keys.
  *
- * @todo compare against omega/beta
- * @todo inline comment
- * @todo docblock comment
+ * Here, the standard sizes have their sub-keys populated by pulling from the
+ * options saved in the database.
  *
- * @uses exmachina_get_additional_image_sizes() Return registered image sizes.
+ * @link http://codex.wordpress.org/Function_Reference/get_option
  *
- * @since 0.5.0
+ * @uses exmachina_get_additional_image_sizes() Gets image size array.
+ *
+ * @since 1.0.6
  * @access public
  *
- * @return array Two-dimensional, with width, height and crop sub-keys.
+ * @return array Returns array of image sizes.
  */
 function exmachina_get_image_sizes() {
 

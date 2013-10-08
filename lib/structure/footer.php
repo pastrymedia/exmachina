@@ -174,7 +174,7 @@ function exmachina_footer_markup_close() {
  * filters.
  *
  * @todo maybe add conditional so output doesn't generate if empty
- * @todo look at hybrid footer function for ideas
+ * @todo create default footer function based n hybrid
  * @todo split out paragraph tags
  *
  * @uses exmachina_get_option() [description]

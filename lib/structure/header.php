@@ -1301,3 +1301,58 @@ function exmachina_document_title() {
   echo apply_atomic( 'document_title', esc_attr( $doctitle ) );
 
 } // end function exmachina_document_title()
+
+add_action( 'wp_head', 'exmachina_html5_ie_fix' );
+/**
+ * Load the html5 shiv for IE8 and below. Can't enqueue with IE conditionals.
+ *
+ * @todo move to proper order
+ * @todo conditional so if google fails, local loads?
+ *
+ * @since 0.5.0
+ *
+ * @uses exmachina_html5() Check for HTML5 support.
+ *
+ * @return Return early if HTML5 not supported.
+ *
+ */
+function exmachina_html5_ie_fix() {
+
+  if ( ! exmachina_html5() )
+    return;
+
+  echo '<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->' . "\n";
+
+} // end function exmachina_html5_ie_fix()
+
+/* Header actions. */
+//add_action( exmachina_get_prefix() . '_header', 'exmachina_header_branding' );
+/**
+ * Dynamic element to wrap the site title and site description.
+ *
+ * @todo work against original header
+ */
+function exmachina_header_branding() {
+
+  echo '<div class="title-area">';
+
+  /* Get the site title.  If it's not empty, wrap it with the appropriate HTML. */
+  if ( $title = get_bloginfo( 'name' ) ) {
+    if ( $logo = get_theme_mod( 'custom_logo' ) )
+      $title = sprintf( '<h1 class="site-title"><a href="%1$s" title="%2$s" rel="home"><span><img src="%3$s"/></span></a></h1>', home_url(), esc_attr( $title ), $logo );
+    else
+      $title = sprintf( '<h1 class="site-title"><a href="%1$s" title="%2$s" rel="home"><span>%3$s</span></a></h1>', home_url(), esc_attr( $title ), $title );
+  }
+
+  /* Display the site title and apply filters for developers to overwrite. */
+  echo apply_atomic( 'site_title', $title );
+
+  /* Get the site description.  If it's not empty, wrap it with the appropriate HTML. */
+  if ( $desc = get_bloginfo( 'description' ) )
+    $desc = sprintf( '<h2 class="site-description"><span>%1$s</span></h2>', $desc );
+
+  /* Display the site description and apply filters for developers to overwrite. */
+  echo apply_atomic( 'site_description', $desc );
+
+  echo '</div>';
+}

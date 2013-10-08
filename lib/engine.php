@@ -550,14 +550,8 @@ class ExMachina {
     /* Load the feed functions. */
     require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'feed.php' );
 
-    /* Load the feed functions. */
-    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'shortcodes.php' );
 
-    /* Load the scripts functions. */
-    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'load-scripts.php' );
 
-    /* Load the styles functions. */
-    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'load-styles.php' );
 
     /* Load the breadcrumb functionality if breadcrumbs are supported. */
     require_if_theme_supports( 'exmachina-breadcrumbs', trailingslashit( EXMACHINA_FUNCTIONS ) . 'breadcrumb.php' );
@@ -570,13 +564,13 @@ class ExMachina {
     //require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'comments.php' );
 
     /* Load media-related functions. */
-    //require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'media.php' );
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'media.php' );
 
     /* Load the metadata functions. */
-    //require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'meta.php' );
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'meta.php' );
 
     /* Load the template functions. */
-    //require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'template.php' );
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'template.php' );
 
     /* Load the utility functions. */
     //require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'utility.php' );
@@ -591,7 +585,7 @@ class ExMachina {
     //require_if_theme_supports( 'exmachina-core-menus', trailingslashit( EXMACHINA_FUNCTIONS ) . 'menus.php' );
 
     /* Load the shortcodes if supported. */
-    //require_if_theme_supports( 'exmachina-core-shortcodes', trailingslashit( EXMACHINA_FUNCTIONS ) . 'shortcodes.php' );
+    require_if_theme_supports( 'exmachina-core-shortcodes', trailingslashit( EXMACHINA_FUNCTIONS ) . 'shortcodes.php' );
 
     /* Load the sidebars if supported. */
     //require_if_theme_supports( 'exmachina-core-sidebars', trailingslashit( EXMACHINA_FUNCTIONS ) . 'sidebars.php' );
@@ -600,19 +594,19 @@ class ExMachina {
     require_if_theme_supports( 'exmachina-core-widgets', trailingslashit( EXMACHINA_FUNCTIONS ) . 'widgets.php' );
 
     /* Load the template hierarchy if supported. */
-    //require_if_theme_supports( 'exmachina-core-template-hierarchy', trailingslashit( EXMACHINA_FUNCTIONS ) . 'template-hierarchy.php' );
+    require_if_theme_supports( 'exmachina-core-template-hierarchy', trailingslashit( EXMACHINA_FUNCTIONS ) . 'template-hierarchy.php' );
 
     /* Load the styles if supported. */
-    //require_if_theme_supports( 'exmachina-core-styles', trailingslashit( EXMACHINA_FUNCTIONS ) . 'styles.php' );
+    require_if_theme_supports( 'exmachina-core-styles', trailingslashit( EXMACHINA_FUNCTIONS ) . 'styles.php' );
 
     /* Load the scripts if supported. */
-    //require_if_theme_supports( 'exmachina-core-scripts', trailingslashit( EXMACHINA_FUNCTIONS ) . 'scripts.php' );
+    require_if_theme_supports( 'exmachina-core-scripts', trailingslashit( EXMACHINA_FUNCTIONS ) . 'scripts.php' );
 
     /* Load the media grabber script if supported. */
     //require_if_theme_supports( 'exmachina-core-media-grabber', trailingslashit( EXMACHINA_CLASSES ) . 'media-grabber.php' );
 
     /* Load the post format functionality if post formats are supported. */
-    //require_if_theme_supports( 'post-formats', trailingslashit( EXMACHINA_FUNCTIONS ) . 'post-formats.php' );
+    require_if_theme_supports( 'post-formats', trailingslashit( EXMACHINA_FUNCTIONS ) . 'post-formats.php' );
 
     /* Load the deprecated functions if supported. */
     require_if_theme_supports( 'exmachina-core-deprecated', trailingslashit( EXMACHINA_FUNCTIONS ) . 'deprecated.php' );

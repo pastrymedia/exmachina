@@ -56,6 +56,13 @@ add_filter( 'comment_author_says_text', 'exmachina_custom_comment_author_says_te
 add_filter( 'exmachina_comment_awaiting_moderation', 'exmachina_custom_comment_awaiting_moderation' );
 add_filter( 'exmachina_comment_form_args', 'exmachina_custom_comment_form_args' );
 
+// add disqus compatibility
+// @todo test against discus
+  if (function_exists('dsq_comments_template')) {
+    remove_filter( 'comments_template', 'dsq_comments_template' );
+    add_filter( 'comments_template', 'dsq_comments_template', 12 ); // You can use any priority higher than '10'
+  }
+
 /**
  * Comments Template Output
  *

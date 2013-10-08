@@ -1,8 +1,11 @@
+/*! ExMachina Admin CSS v1.0.0 | (c) 2013, Machina Themes | http://machinathemes.com/ */
+
 /**
  * ExMachina Admin CSS
  *
  * @package     ExMachina
- * @subpackage  Assets
+ * @subpackage  Admin Assets
+ * @version     1.0.0
  * @copyright   Copyright (c) 2013, Machina Themes
  */
 
@@ -179,6 +182,11 @@ table.postbox-table thead tr td.postbox-header p {
 textarea.wp-editor-area {
   border: 0 none;
 }
+
+textarea.wp-editor-area:focus {
+  background: #fff;
+}
+
 
 /* Textarea */
 textarea.vertical-resize {
@@ -452,9 +460,8 @@ ul.checkbox-list.horizontal li {
 /* Alert Close
 --------------------------------------------*/
 .exmachina-metaboxes .uk-alert-close {
-  margin: 0.3em 0;
+  margin: 0.6em 0;
   padding: 2px;
-  float: right;
 }
 
 /* Description List
@@ -589,3 +596,4 @@ hr.div {
   float: right;
   min-width: 66px;
   }
+

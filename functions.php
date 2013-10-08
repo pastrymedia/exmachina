@@ -53,6 +53,10 @@ function beta_theme_setup() {
   $prefix = exmachina_get_prefix();
 
   /* Add theme support for core framework features. */
+  add_theme_support( 'exmachina-core-menus', array( 'primary', 'secondary') );
+  add_theme_support( 'exmachina-core-scripts', array( 'comment-reply' ) );
+  add_theme_support( 'exmachina-core-styles', array( '25px', 'gallery', 'parent', 'style' ) );
   add_theme_support( 'exmachina-core-widgets', array( 'featured-page', 'featured-post', 'user-profile') );
+  add_theme_support( 'exmachina-core-shortcodes' );
 
 } // end function beta_theme_setup()

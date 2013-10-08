@@ -226,6 +226,10 @@ function exmachina_design_option( $key, $use_cache = true ) {
 
 } // end function exmachina_design_option()
 
+/*-------------------------------------------------------------------------*/
+/* === Custom Post Type Archive Settings Functions === */
+/*-------------------------------------------------------------------------*/
+
 /**
  * Return a CPT Archive setting value from the options table.
  *
@@ -265,6 +269,10 @@ function exmachina_cpt_option( $key, $post_type_name, $use_cache = true ) {
   echo exmachina_get_cpt_option( $key, $post_type_name, $use_cache );
 
 } // end function exmachina_cpt_option
+
+/*-------------------------------------------------------------------------*/
+/* === Custom Field Functions === */
+/*-------------------------------------------------------------------------*/
 
 /**
  * Echo data from a post or page custom field.
@@ -373,6 +381,10 @@ function exmachina_save_custom_fields( array $data, $nonce_action, $nonce_name, 
 
 } // end function exmachina_save_custom_fields()
 
+/*-------------------------------------------------------------------------*/
+/* === Term Filter Functions === */
+/*-------------------------------------------------------------------------*/
+
 add_filter( 'get_term', 'exmachina_get_term_filter', 10, 2 );
 /**
  * Merge term meta data into options table.
@@ -441,6 +453,10 @@ function exmachina_get_terms_filter( array $terms, $taxonomy ) {
 
 } // end function exmachina_get_terms_filter()
 
+/*-------------------------------------------------------------------------*/
+/* === Update Settings Functions === */
+/*-------------------------------------------------------------------------*/
+
 /**
  * Takes an array of new settings, merges them with the old settings, and pushes them into the database.
  *
@@ -458,6 +474,10 @@ function _exmachina_update_settings( $new = '', $setting = EXMACHINA_SETTINGS_FI
   update_option( $setting, wp_parse_args( $new, get_option( $setting ) ) );
 
 } // end function _exmachina_update_settings()
+
+/*-------------------------------------------------------------------------*/
+/* === Field Helper Functions === */
+/*-------------------------------------------------------------------------*/
 
 /**
  * Get Field Name
