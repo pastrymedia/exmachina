@@ -29,31 +29,31 @@ if ( !defined('ABSPATH')) exit;
 ###############################################################################
 
 /**
- * Return option from the options table and cache result.
+ * Get Option
  *
- * Applies `exmachina_pre_get_option_$key` and `exmachina_options` filters.
+ * Returns an option from the options table and caches the result. Applies the
+ * 'exmachina_pre_get_option_$key' filter to allow child themes to short-circuit
+ * the function and 'exmachina_options' filter to override a specific option.
  *
- * Values pulled from the database are cached on each request, so a second request for the same value won't cause a
- * second DB interaction.
+ * Values pulled from the database are cached on each request, so a second request
+ * for the same value won't cause a second DB interaction.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/get_option
  *
  * @since 0.5.0
  *
- * @uses EXMACHINA_SETTINGS_FIELD
- *
- * @param string  $key        Option name.
- * @param string  $setting    Optional. Settings field name. Eventually defaults to `EXMACHINA_SETTINGS_FIELD` if not
- *                            passed as an argument.
- * @param boolean $use_cache  Optional. Whether to use the ExMachina cache value or not. Default is true.
- *
- * @return mixed The value of this $key in the database.
+ * @param  string  $key       The option name.
+ * @param  string  $setting   Optional. The settings field name.
+ * @param  boolean $use_cache Optional. Whether to use the cache value.
+ * @return mixed              The value of $key in the database.
  */
 function exmachina_get_option( $key, $setting = null, $use_cache = true ) {
 
 
-  //* The default is set here, so it doesn't have to be repeated in the function arguments for exmachina_option() too.
+  /* Defines the default settings field so it doesn't need to be repeated. */
   $setting = $setting ? $setting : EXMACHINA_SETTINGS_FIELD;
 
-  //* If we need to bypass the cache
+  /* Bypasses the cache if needed. */
   if ( ! $use_cache ) {
     $options = get_option( $setting );
 
@@ -61,55 +61,59 @@ function exmachina_get_option( $key, $setting = null, $use_cache = true ) {
       return '';
 
     return is_array( $options[$key] ) ? stripslashes_deep( $options[$key] ) : stripslashes( wp_kses_decode_entities( $options[$key] ) );
-  }
+  } // end if (!$use_cache)
 
-  //* Setup caches
+  /* Setup the caches. */
   static $settings_cache = array();
   static $options_cache  = array();
 
-  //* Allow child theme to short-circuit this function
+  /* Allow child themes to short-circuit this function. */
   $pre = apply_filters( 'exmachina_pre_get_option_' . $key, null, $setting );
   if ( null !== $pre )
     return $pre;
 
-  //* Check options cache
+  /* Check the options cache. */
   if ( isset( $options_cache[$setting][$key] ) )
-    //* Option has been cached
+    /* Option has been cached. */
     return $options_cache[$setting][$key];
 
-  //* Check settings cache
+  /* Check the settings cache. */
   if ( isset( $settings_cache[$setting] ) )
-    //* Setting has been cached
+    /* Setting has been cached. */
     $options = apply_filters( 'exmachina_options', $settings_cache[$setting], $setting );
   else
-    //* Set value and cache setting
+    /* Set value and cache setting. */
     $options = $settings_cache[$setting] = apply_filters( 'exmachina_options', get_option( $setting ), $setting );
 
-  //* Check for non-existent option
+  /* Check for non-existent option. */
   if ( ! is_array( $options ) || ! array_key_exists( $key, (array) $options ) )
-    //* Cache non-existent option
+    /* Cache non-existent option. */
     $options_cache[$setting][$key] = '';
   else
-    //* Option has not been previously been cached, so cache now
+    /* Option has not been previously been cached, so cache now. */
     $options_cache[$setting][$key] = is_array( $options[$key] ) ? stripslashes_deep( $options[$key] ) : stripslashes( wp_kses_decode_entities( $options[$key] ) );
 
+  /* Return the $options_cache. */
   return $options_cache[$setting][$key];
 
 } // end function exmachina_get_option()
 
 /**
- * Echo options from the options database.
+ * Echo Option
+ *
+ * Echoes out options from the options table.
+ *
+ * @uses exmachina_get_option() Returns option from the database and cache result.
  *
  * @since 0.5.0
  *
- * @uses exmachina_get_option() Return option from the options table and cache result.
- *
- * @param string  $key       Option name.
- * @param string  $setting   Optional. Settings field name. Eventually defaults to EXMACHINA_SETINGS_FIELD.
- * @param boolean $use_cache Optional. Whether to use the ExMachina cache value or not. Default is true.
+ * @param  string  $key       The option name.
+ * @param  string  $setting   Optional. The settings field name.
+ * @param  boolean $use_cache Optional. Whether to use the cache value.
  */
 function exmachina_option( $key, $setting = null, $use_cache = true ) {
 
+  /* Echo out the option value from exmachina_get_option(). */
   echo exmachina_get_option( $key, $setting, $use_cache );
 
 } // end function exmachina_option()
@@ -454,3 +458,66 @@ function _exmachina_update_settings( $new = '', $setting = EXMACHINA_SETTINGS_FI
   update_option( $setting, wp_parse_args( $new, get_option( $setting ) ) );
 
 } // end function _exmachina_update_settings()
+
+/**
+ * Get Field Name
+ *
+ * Creates a settings field name attribute for use on the theme settings pages.
+ * This is a helper function for use with the WordPress settings API.
+ *
+ * @since 0.5.0
+ *
+ * @param  string $name    Field name base.
+ * @param  string $setting Optional. The settings field name.
+ * @return string          Full field name.
+ */
+function exmachina_get_field_name( $name, $setting = null ) {
+
+  /* Defines the default settings field so it doesn't need to be repeated. */
+  $setting = $setting ? $setting : EXMACHINA_SETTINGS_FIELD;
+
+  return sprintf( '%s[%s]', $setting, $name );
+
+} // end function exmachina_get_field_name()
+
+/**
+ * Get Field ID
+ *
+ * Creates a settings field id attribute for use on the theme settings pages.
+ * This is a helper function for use with the WordPress settings API.
+ *
+ * @since 0.5.0
+ *
+ * @param  string $id      Field id base.
+ * @param  string $setting Optional. The settings field name.
+ * @return string          Full field id.
+ */
+function exmachina_get_field_id( $id, $setting = null ) {
+
+  /* Defines the default settings field so it doesn't need to be repeated. */
+  $setting = $setting ? $setting : EXMACHINA_SETTINGS_FIELD;
+
+  return sprintf( '%s[%s]', $setting, $id );
+} // end function exmachina_get_field_id()
+
+/**
+ * Get Field Value
+ *
+ * Creates a settings field value attribute for use on the theme settings pages.
+ * This is a helper function for use with the WordPress settings API.
+ *
+ * @uses exmachina_get_option() Returns an option from the options table.
+ *
+ * @since 0.5.0
+ *
+ * @param  string $key     Field key.
+ * @param  string $setting Optional. The settings field name.
+ * @return string          Full field value.
+ */
+function exmachina_get_field_value( $key, $setting = null ) {
+
+  /* Defines the default settings field so it doesn't need to be repeated. */
+  $setting = $setting ? $setting : EXMACHINA_SETTINGS_FIELD;
+
+  return exmachina_get_option( $key, $setting );
+} // end function exmachina_get_field_value()
