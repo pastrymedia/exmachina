@@ -54,7 +54,7 @@ class ExMachina_Simple_Sidebars_Admin extends ExMachina_Admin_Basic {
 	 * @since 1.0.0
 	 *
 	 */
-	public function admin() {
+	public function settings_page() {
 
 		$_sidebars = get_option( $this->settings_field );
 

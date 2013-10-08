@@ -11,7 +11,7 @@
  *
  * @since 1.5.0
  */
-class ExMachina_Admin_Design_Settings extends ExMachina_Admin_Boxes {
+class ExMachina_Admin_Design_Settings extends ExMachina_Admin_Metaboxes {
 
 	/**
 	 * Create an admin menu item and settings page.
@@ -340,9 +340,9 @@ class ExMachina_Admin_Design_Settings extends ExMachina_Admin_Boxes {
 	 * @since 1.5.0
 	 *
 	 */
-	function scripts() {
+	function settings_page_enqueue_scripts() {
 
-		parent::scripts();
+		parent::settings_page_enqueue_scripts();
 
 		wp_enqueue_script( 'farbtastic' );
 		wp_enqueue_script( 'exmachina-design-admin', EXMACHINA_JS_URL .'/admin-design.js', array( 'farbtastic' ), PARENT_THEME_VERSION, true );
@@ -393,35 +393,35 @@ class ExMachina_Admin_Design_Settings extends ExMachina_Admin_Boxes {
  	 * @since 1.5.0
  	 *
  	 */
-	function metaboxes() {
+	function settings_page_load_metaboxes() {
 
 		/** Hidden form fields */
 		add_action( 'exmachina_admin_before_metaboxes', array( $this, 'hidden_fields' ) );
 
-		add_meta_box( 'exmachina-design-settings-global', __( 'Global Styles', 'exmachina' ), array( $this, 'global_styles' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-global-links', __( 'Global Links', 'exmachina' ), array( $this, 'global_links' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-wrap', __( 'Wrap (content area)', 'exmachina' ), array( $this, 'wrap' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-header', __( 'Header', 'exmachina' ), array( $this, 'header' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-header-title', __( 'Header Title', 'exmachina' ), array( $this, 'header_title' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-header-tagline', __( 'Header Tagline', 'exmachina' ), array( $this, 'header_tagline' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-primary-nav', __( 'Primary Navigation', 'exmachina' ), array( $this, 'primary_nav' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-secondary-nav', __( 'Secondary Navigation', 'exmachina' ), array( $this, 'secondary_nav' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-breadcrumb', __( 'Breadcrumb Navigation', 'exmachina' ), array( $this, 'breadcrumb' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-post-info', __( 'Post Info (before post)', 'exmachina' ), array( $this, 'post_info' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-post-meta', __( 'Post Meta (after post)', 'exmachina' ), array( $this, 'post_meta' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-blockquotes', __( 'Blockquotes', 'exmachina' ), array( $this, 'blockquotes' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-notice', __( 'Notice Box', 'exmachina' ), array( $this, 'notice_box' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-headline', __( 'Headlines', 'exmachina' ), array( $this, 'headline' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-headline-links', __( 'Post Title Links', 'exmachina' ), array( $this, 'headline_links' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-sidebar-headline', __( 'Sidebar Widget Headline', 'exmachina' ), array( $this, 'sidebar_headline' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-sidebar-text', __( 'Sidebar Text', 'exmachina' ), array( $this, 'sidebar_text' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-footer-widget', __( 'Footer Widget Area', 'exmachina' ), array( $this, 'footer_widget' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-footer-headline', __( 'Footer Widget Headline', 'exmachina' ), array( $this, 'footer_headline' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-footer-widget-links', __( 'Footer Widget Links', 'exmachina' ), array( $this, 'footer_widget_links' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-footer', __( 'Footer', 'exmachina' ), array( $this, 'footer' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-input', __( 'Input Boxes', 'exmachina' ), array( $this, 'input_box' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-buttons', __( 'Submit Buttons', 'exmachina' ), array( $this, 'buttons' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-settings-general', __( 'General Settings', 'exmachina' ), array( $this, 'general' ), $this->pagehook, 'main' );
+		add_meta_box( 'exmachina-design-settings-global', __( 'Global Styles', 'exmachina' ), array( $this, 'global_styles' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-global-links', __( 'Global Links', 'exmachina' ), array( $this, 'global_links' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-wrap', __( 'Wrap (content area)', 'exmachina' ), array( $this, 'wrap' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-header', __( 'Header', 'exmachina' ), array( $this, 'header' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-header-title', __( 'Header Title', 'exmachina' ), array( $this, 'header_title' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-header-tagline', __( 'Header Tagline', 'exmachina' ), array( $this, 'header_tagline' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-primary-nav', __( 'Primary Navigation', 'exmachina' ), array( $this, 'primary_nav' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-secondary-nav', __( 'Secondary Navigation', 'exmachina' ), array( $this, 'secondary_nav' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-breadcrumb', __( 'Breadcrumb Navigation', 'exmachina' ), array( $this, 'breadcrumb' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-post-info', __( 'Post Info (before post)', 'exmachina' ), array( $this, 'post_info' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-post-meta', __( 'Post Meta (after post)', 'exmachina' ), array( $this, 'post_meta' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-blockquotes', __( 'Blockquotes', 'exmachina' ), array( $this, 'blockquotes' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-notice', __( 'Notice Box', 'exmachina' ), array( $this, 'notice_box' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-headline', __( 'Headlines', 'exmachina' ), array( $this, 'headline' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-headline-links', __( 'Post Title Links', 'exmachina' ), array( $this, 'headline_links' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-sidebar-headline', __( 'Sidebar Widget Headline', 'exmachina' ), array( $this, 'sidebar_headline' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-sidebar-text', __( 'Sidebar Text', 'exmachina' ), array( $this, 'sidebar_text' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-footer-widget', __( 'Footer Widget Area', 'exmachina' ), array( $this, 'footer_widget' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-footer-headline', __( 'Footer Widget Headline', 'exmachina' ), array( $this, 'footer_headline' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-footer-widget-links', __( 'Footer Widget Links', 'exmachina' ), array( $this, 'footer_widget_links' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-footer', __( 'Footer', 'exmachina' ), array( $this, 'footer' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-input', __( 'Input Boxes', 'exmachina' ), array( $this, 'input_box' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-buttons', __( 'Submit Buttons', 'exmachina' ), array( $this, 'buttons' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-settings-general', __( 'General Settings', 'exmachina' ), array( $this, 'general' ), $this->pagehook, 'normal' );
 
 	}
 

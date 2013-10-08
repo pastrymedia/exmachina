@@ -1,8 +1,30 @@
 <?php
-/**
- * This file handles the creation of the Hooks admin menu.
- */
 
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
+/**
+ * ExMachina WordPress Theme Framework Engine
+ * Content Settings
+ *
+ * content-settings.php
+ *
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
+ *
+ * <[DESCRIPTION GOES HERE]>
+ *
+ * @package     ExMachina
+ * @subpackage  Functions
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
+ */
+###############################################################################
+# Begin functions
+###############################################################################
 
 /**
  * Registers a new admin page, providing content and corresponding menu item
@@ -10,7 +32,7 @@
  *
  * @since 1.8.0
  */
-class ExMachina_Admin_Content_Settings extends ExMachina_Admin_Boxes {
+class ExMachina_Admin_Content_Settings extends ExMachina_Admin_Metaboxes {
 
 	/**
 	 * Create an admin menu item and settings page.
@@ -149,10 +171,10 @@ class ExMachina_Admin_Content_Settings extends ExMachina_Admin_Boxes {
 	 * @since 1.8.0
 	 *
 	 */
-	function scripts() {
+	function settings_page_enqueue_scripts() {
 
 		//* Load parent scripts as well as ExMachina admin scripts */
-		parent::scripts();
+		parent::settings_page_enqueue_scripts();
 		exmachina_load_admin_js();
 
 	}
@@ -163,11 +185,11 @@ class ExMachina_Admin_Content_Settings extends ExMachina_Admin_Boxes {
  	 * @since 1.8.0
  	 *
  	 */
-	function metaboxes() {
+	function settings_page_load_metaboxes() {
 
-		add_meta_box('exmachina-content-settings-breadcrumbs', __( 'Breadcrumb Settings', 'exmachina' ), array( $this, 'breadcrumb_box' ), $this->pagehook, 'main' );
-		add_meta_box('exmachina-content-settings-comments', __( 'Comment Settings', 'exmachina' ), array( $this, 'comment_box' ), $this->pagehook, 'main' );
-		add_meta_box('exmachina-content-settings-404', __( '404 Page', 'exmachina' ), array( $this, 'custom_404_box' ), $this->pagehook, 'main' );
+		add_meta_box('exmachina-content-settings-breadcrumbs', __( 'Breadcrumb Settings', 'exmachina' ), array( $this, 'breadcrumb_box' ), $this->pagehook, 'normal' );
+		add_meta_box('exmachina-content-settings-comments', __( 'Comment Settings', 'exmachina' ), array( $this, 'comment_box' ), $this->pagehook, 'normal' );
+		add_meta_box('exmachina-content-settings-404', __( '404 Page', 'exmachina' ), array( $this, 'custom_404_box' ), $this->pagehook, 'normal' );
 
 
 	}

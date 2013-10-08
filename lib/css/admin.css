@@ -36,33 +36,33 @@ hr.div {
 
 /* ExMachina metabox styles ----------- */
 
-.exmachina-metaboxes {
+/*.exmachina-metaboxes {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	padding-bottom: 20px;
 	width: 690px;
-}
+}*/
 
 .exmachina-metaboxes h2 {
 	float: left;
 }
 
-.exmachina-metaboxes .top-buttons {
+/*.exmachina-metaboxes .top-buttons {
 	float: right;
-}
+}*/
 
-.exmachina-metaboxes .top-buttons input {
+/*.exmachina-metaboxes .top-buttons input {
 	margin-left: 10px;
-}
+}*/
 
-.exmachina-metaboxes .bottom-buttons {
+/*.exmachina-metaboxes .bottom-buttons {
 	text-align: right;
-}
+}*/
 
-.exmachina-metaboxes .bottom-buttons input {
+/*.exmachina-metaboxes .bottom-buttons input {
 	margin-left: 10px;
-}
+}*/
 
 .exmachina-metaboxes .metabox-holder {
 	clear: both;

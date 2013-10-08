@@ -11,7 +11,7 @@
  *
  * @since 1.5.0
  */
-class ExMachina_Admin_Custom_Code extends ExMachina_Admin_Boxes {
+class ExMachina_Admin_Custom_Code extends ExMachina_Admin_Metaboxes {
 
 	/**
 	 * Create an admin menu item and settings page.
@@ -59,10 +59,10 @@ class ExMachina_Admin_Custom_Code extends ExMachina_Admin_Boxes {
 	 * @since 1.5.0
 	 *
 	 */
-	function scripts() {
+	function settings_page_enqueue_scripts() {
 
 		/** Load parent scripts as well as ExMachina admin scripts */
-		parent::scripts();
+		parent::settings_page_enqueue_scripts();
 		exmachina_load_admin_js();
 
 	}
@@ -150,10 +150,10 @@ class ExMachina_Admin_Custom_Code extends ExMachina_Admin_Boxes {
  	 * @since 1.5.0
  	 *
  	 */
-	function metaboxes() {
+	function settings_page_load_metaboxes() {
 
-		add_meta_box( 'exmachina-design-custom-css', __( 'Custom CSS', 'exmachina' ), array( $this, 'custom_css' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-design-custom-php', __( 'Custom Functions', 'exmachina' ), array( $this, 'custom_PHP' ), $this->pagehook, 'main' );
+		add_meta_box( 'exmachina-design-custom-css', __( 'Custom CSS', 'exmachina' ), array( $this, 'custom_css' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-design-custom-php', __( 'Custom Functions', 'exmachina' ), array( $this, 'custom_PHP' ), $this->pagehook, 'normal' );
 
 	}
 

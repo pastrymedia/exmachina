@@ -1,7 +1,30 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
- * This file handles the creation of the Hooks admin menu.
+ * ExMachina WordPress Theme Framework Engine
+ * Hook Settings
+ *
+ * hook-settings.php
+ *
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
+ *
+ * <[DESCRIPTION GOES HERE]>
+ *
+ * @package     ExMachina
+ * @subpackage  Admin Functions
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
  */
+###############################################################################
+# Begin functions
+###############################################################################
 
 
 /**
@@ -10,7 +33,7 @@
  *
  * @since 1.8.0
  */
-class ExMachina_Admin_Hook_Settings extends ExMachina_Admin_Boxes {
+class ExMachina_Admin_Hook_Settings extends ExMachina_Admin_Metaboxes {
 
 	/**
 	 * Create an admin menu item and settings page.
@@ -161,10 +184,10 @@ class ExMachina_Admin_Hook_Settings extends ExMachina_Admin_Boxes {
 	 * @since 1.8.0
 	 *
 	 */
-	function scripts() {
+	function settings_page_enqueue_scripts() {
 
 		//* Load parent scripts as well as ExMachina admin scripts */
-		parent::scripts();
+		parent::settings_page_enqueue_scripts();
 		exmachina_load_admin_js();
 
 	}
@@ -175,25 +198,25 @@ class ExMachina_Admin_Hook_Settings extends ExMachina_Admin_Boxes {
  	 * @since 1.8.0
  	 *
  	 */
-	function metaboxes() {
+	function settings_page_load_metaboxes() {
 
-		add_meta_box( 'exmachina-hook-settings-wp-hooks', __( 'WordPress Hooks', 'exmachina' ), array( $this, 'wp_hooks_box' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-hook-settings-document-hooks', __( 'Document Hooks', 'exmachina' ), array( $this, 'document_hooks_box' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-hook-settings-header-hooks', __( 'Header Hooks', 'exmachina' ), array( $this, 'header_hooks_box' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-hook-settings-content-hooks', __( 'Content Hooks', 'exmachina' ), array( $this, 'content_hooks_box' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-hook-settings-loop-hooks', __( 'Loop Hooks', 'exmachina' ), array( $this, 'loop_hooks_box' ), $this->pagehook, 'main' );
+		add_meta_box( 'exmachina-hook-settings-wp-hooks', __( 'WordPress Hooks', 'exmachina' ), array( $this, 'wp_hooks_box' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-hook-settings-document-hooks', __( 'Document Hooks', 'exmachina' ), array( $this, 'document_hooks_box' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-hook-settings-header-hooks', __( 'Header Hooks', 'exmachina' ), array( $this, 'header_hooks_box' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-hook-settings-content-hooks', __( 'Content Hooks', 'exmachina' ), array( $this, 'content_hooks_box' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-hook-settings-loop-hooks', __( 'Loop Hooks', 'exmachina' ), array( $this, 'loop_hooks_box' ), $this->pagehook, 'normal' );
 
 		if ( current_theme_supports( 'html5' ) )
-			add_meta_box( 'exmachina-hook-settings-entry-hooks', __( 'Entry Hooks', 'exmachina' ), array( $this, 'html5_entry_hooks_box' ), $this->pagehook, 'main' );
+			add_meta_box( 'exmachina-hook-settings-entry-hooks', __( 'Entry Hooks', 'exmachina' ), array( $this, 'html5_entry_hooks_box' ), $this->pagehook, 'normal' );
 		else
-			add_meta_box( 'exmachina-hook-settings-post-hooks', __( 'Post/Page Hooks', 'exmachina' ), array( $this, 'post_hooks_box' ), $this->pagehook, 'main' );
+			add_meta_box( 'exmachina-hook-settings-post-hooks', __( 'Post/Page Hooks', 'exmachina' ), array( $this, 'post_hooks_box' ), $this->pagehook, 'normal' );
 
-		add_meta_box( 'exmachina-hook-settings-comment-list-hooks', __( 'Comment List Hooks', 'exmachina' ), array( $this, 'comment_list_hooks_box' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-hook-settings-ping-list-hooks', __( 'Ping List Hooks', 'exmachina' ), array( $this, 'ping_list_hooks_box' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-hook-settings-comment-hooks', __( 'Single Comment Hooks', 'exmachina' ), array( $this, 'comment_hooks_box' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-hook-settings-comment-form-hooks', __( 'Comment Form Hooks', 'exmachina' ), array( $this, 'comment_form_hooks_box' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-hook-settings-sidebar-hooks', __( 'Sidebar Hooks', 'exmachina' ), array( $this, 'sidebar_hooks_box' ), $this->pagehook, 'main' );
-		add_meta_box( 'exmachina-hook-settings-footer-hooks', __( 'Footer Hooks', 'exmachina' ), array( $this, 'footer_hooks_box' ), $this->pagehook, 'main' );
+		add_meta_box( 'exmachina-hook-settings-comment-list-hooks', __( 'Comment List Hooks', 'exmachina' ), array( $this, 'comment_list_hooks_box' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-hook-settings-ping-list-hooks', __( 'Ping List Hooks', 'exmachina' ), array( $this, 'ping_list_hooks_box' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-hook-settings-comment-hooks', __( 'Single Comment Hooks', 'exmachina' ), array( $this, 'comment_hooks_box' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-hook-settings-comment-form-hooks', __( 'Comment Form Hooks', 'exmachina' ), array( $this, 'comment_form_hooks_box' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-hook-settings-sidebar-hooks', __( 'Sidebar Hooks', 'exmachina' ), array( $this, 'sidebar_hooks_box' ), $this->pagehook, 'normal' );
+		add_meta_box( 'exmachina-hook-settings-footer-hooks', __( 'Footer Hooks', 'exmachina' ), array( $this, 'footer_hooks_box' ), $this->pagehook, 'normal' );
 
 	}
 
