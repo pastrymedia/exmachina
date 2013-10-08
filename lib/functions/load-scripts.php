@@ -32,7 +32,7 @@ add_action( 'wp_enqueue_scripts', 'exmachina_register_scripts' );
  *
  * @since 0.5.0
  *
- * @uses EXMACHINA_JS_URL
+ * @uses EXMACHINA_JS
  * @uses PARENT_THEME_VERSION
  */
 function exmachina_register_scripts() {
@@ -120,13 +120,13 @@ function exmachina_load_admin_scripts( $hook_suffix ) {
  *
  * @since 0.5.0
  *
- * @uses EXMACHINA_JS_URL
+ * @uses EXMACHINA_JS
  * @uses PARENT_THEME_VERSION
  */
 function exmachina_load_admin_js() {
 
 	$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-	wp_enqueue_script( 'exmachina_admin_js', EXMACHINA_JS_URL . "/admin$suffix.js", array( 'jquery' ), PARENT_THEME_VERSION, true );
+	wp_enqueue_script( 'exmachina_admin_js', EXMACHINA_JS . "/admin$suffix.js", array( 'jquery' ), PARENT_THEME_VERSION, true );
 
 	$strings = array(
 		'categoryChecklistToggle' => __( 'Select / Deselect All', 'exmachina' ),

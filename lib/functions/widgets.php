@@ -27,9 +27,9 @@ if ( !defined('ABSPATH')) exit;
 ###############################################################################
 
 //* Include widget class files
-require_once( EXMACHINA_WIDGETS_DIR . '/user-profile-widget.php' );
-require_once( EXMACHINA_WIDGETS_DIR . '/featured-post-widget.php' );
-require_once( EXMACHINA_WIDGETS_DIR . '/featured-page-widget.php' );
+require_once( EXMACHINA_WIDGETS . '/user-profile-widget.php' );
+require_once( EXMACHINA_WIDGETS . '/featured-post-widget.php' );
+require_once( EXMACHINA_WIDGETS . '/featured-page-widget.php' );
 
 add_action( 'widgets_init', 'exmachina_load_widgets' );
 /**

@@ -768,7 +768,7 @@ function exmachina_design_create_stylesheets() {
   exmachina_design_make_stylesheet_path_writable();
 
   $css_prefix = '/* ' . __( 'This file is auto-generated from the style.css, the settings page and custom.css. Any direct edits here will be lost if the settings page is saved', 'exmachina' ) .' */'."\n";
-  $css = file_get_contents( CHILD_DIR . '/style.css' );
+  $css = file_get_contents( CHILD_THEME_DIR . '/style.css' );
   $css .= exmachina_design_prepare_settings_stylesheet();
 //    if ( file_exists(exmachina_design_get_custom_stylesheet_path() ) ) {
   if ( exmachina_design_is_custom_stylesheet_used() ) {

@@ -153,36 +153,13 @@ class ExMachina {
     define( 'EXMACHINA_DIR', trailingslashit( THEME_DIR ) . basename( dirname( __FILE__ ) ) );
     define( 'EXMACHINA_URI', trailingslashit( THEME_URI ) . basename( dirname( __FILE__ ) ) );
 
-    //* Define Directory Location Constants
-  define( 'PARENT_DIR', get_template_directory() );
-  define( 'CHILD_DIR', get_stylesheet_directory() );
-  define( 'EXMACHINA_IMAGES_DIR', PARENT_DIR . '/images' );
-  define( 'EXMACHINA_LIB_DIR', PARENT_DIR . '/lib' );
-  //define( 'EXMACHINA_ADMIN_DIR', EXMACHINA_LIB_DIR . '/admin' );
-  define( 'EXMACHINA_JS_DIR', EXMACHINA_LIB_DIR . '/js' );
-  define( 'EXMACHINA_CSS_DIR', EXMACHINA_LIB_DIR . '/css' );
-  define( 'EXMACHINA_CLASSES_DIR', EXMACHINA_LIB_DIR . '/classes' );
-  define( 'EXMACHINA_EXTENSIONS_DIR', EXMACHINA_LIB_DIR . '/extensions' );
-  define( 'EXMACHINA_FRAMEWORK_DIR', EXMACHINA_LIB_DIR . '/framework' );
-  define( 'EXMACHINA_FUNCTIONS_DIR', EXMACHINA_LIB_DIR . '/functions' );
-  define( 'EXMACHINA_PLUGINS_DIR', EXMACHINA_LIB_DIR . '/plugins' );
-  define( 'EXMACHINA_SHORTCODES_DIR', EXMACHINA_LIB_DIR . '/shortcodes' );
-  define( 'EXMACHINA_STRUCTURE_DIR', EXMACHINA_LIB_DIR . '/structure' );
-  define( 'EXMACHINA_WIDGETS_DIR', EXMACHINA_LIB_DIR . '/widgets' );
 
-  //* Define URL Location Constants
-  define( 'PARENT_URL', get_template_directory_uri() );
-  define( 'CHILD_URL', get_stylesheet_directory_uri() );
-  define( 'EXMACHINA_IMAGES_URL', PARENT_URL . '/images' );
-  define( 'EXMACHINA_LIB_URL', PARENT_URL . '/lib' );
-  //define( 'EXMACHINA_ADMIN_URL', EXMACHINA_LIB_URL . '/admin' );
-  define( 'EXMACHINA_JS_URL', EXMACHINA_LIB_URL . '/js' );
-  //define( 'EXMACHINA_CLASSES_URL', EXMACHINA_LIB_URL . '/classes' );
-  define( 'EXMACHINA_CSS_URL', EXMACHINA_LIB_URL . '/css' );
-  //define( 'EXMACHINA_FUNCTIONS_URL', EXMACHINA_LIB_URL . '/functions' );
-  define( 'EXMACHINA_SHORTCODES_URL', EXMACHINA_LIB_URL . '/shortcodes' );
-  //define( 'EXMACHINA_STRUCTURE_URL', EXMACHINA_LIB_URL . '/structure' );
-  //define( 'EXMACHINA_WIDGETS_URL', EXMACHINA_LIB_URL . '/widgets' );
+
+
+    //* Define URL Location Constants
+    define( 'PARENT_URL', get_template_directory_uri() );
+    define( 'CHILD_URL', get_stylesheet_directory_uri() );
+
 
     /* Define the framework directory location constants. */
     define( 'EXMACHINA_ADMIN', trailingslashit( EXMACHINA_DIR ) . 'admin' );
@@ -255,6 +232,9 @@ class ExMachina {
     /* Load the core framework functions. */
     require_once( trailingslashit( EXMACHINA_FRAMEWORK ) . 'core.php' );
 
+    /* Load the core framework. */
+    require_once( trailingslashit( EXMACHINA_FRAMEWORK ) . 'framework.php' );
+
     /* Load the context-based functions. */
     require_once( trailingslashit( EXMACHINA_FRAMEWORK ) . 'context.php' );
 
@@ -281,11 +261,11 @@ class ExMachina {
     /* Define Settings Field Constants (for DB storage). */
     define( 'EXMACHINA_SETTINGS_FIELD', apply_filters( "{$prefix}_theme_settings_field", "{$prefix}-theme-settings" ) );
     define( 'EXMACHINA_SEO_SETTINGS_FIELD', apply_filters( "{$prefix}_seo_settings_field", "{$prefix}-seo-settings" ) );
-    define( 'EXMACHINA_CPT_SETTINGS_FIELD', apply_filters( "{$prefix}_cpt_settings_field", "{$prefix}-cpt-settings" ) );
     define( 'EXMACHINA_HOOK_SETTINGS_FIELD', apply_filters( "{$prefix}_hook_settings_field", "{$prefix}-hook-settings" ) );
     define( 'EXMACHINA_DESIGN_SETTINGS_FIELD', apply_filters( "{$prefix}_design_settings_field", "{$prefix}-design-settings" ) );
     define( 'EXMACHINA_CONTENT_SETTINGS_FIELD', apply_filters( "{$prefix}_content_settings_field", "{$prefix}-content-settings" ) );
-    define( 'EXMACHINA_CPT_ARCHIVE_SETTINGS_FIELD_PREFIX', apply_filters( 'exmachina_cpt_archive_settings_field_prefix', 'exmachina-cpt-archive-settings-' ) );
+    define( 'EXMACHINA_CPT_ARCHIVE_SETTINGS_FIELD_PREFIX', apply_filters( "{$prefix}_cpt_archive_settings_field_prefix", "{$prefix}-cpt-archive-settings-" ) );
+
 
   } // end function exmachina_settings_fields()
 
@@ -400,18 +380,27 @@ class ExMachina {
     add_theme_support( 'html5' );
 
     add_theme_support( 'menus' );
-  add_theme_support( 'post-thumbnails' );
-  add_theme_support( 'automatic-feed-links' );
-  add_theme_support( 'exmachina-inpost-layouts' );
-  add_theme_support( 'exmachina-archive-layouts' );
-  add_theme_support( 'exmachina-admin-menu' );
-  add_theme_support( 'exmachina-seo-settings-menu' );
-  add_theme_support( 'exmachina-import-export-menu' );
-  add_theme_support( 'exmachina-breadcrumbs' );
-  add_theme_support( 'exmachina-design-settings' );
-  add_theme_support( 'custom-background' );
+    add_theme_support( 'post-thumbnails' );
+    add_theme_support( 'automatic-feed-links' );
+    add_theme_support( 'exmachina-inpost-layouts' );
+    add_theme_support( 'exmachina-archive-layouts' );
+    add_theme_support( 'exmachina-admin-menu' );
+    add_theme_support( 'exmachina-seo-settings-menu' );
+    add_theme_support( 'exmachina-import-export-menu' );
+    add_theme_support( 'exmachina-breadcrumbs' );
+    add_theme_support( 'exmachina-design-settings' );
+    add_theme_support( 'custom-background' );
+
+    add_theme_support( 'exmachina-core-theme-settings' );
+    add_theme_support( 'exmachina-core-content-settings' );
+    add_theme_support( 'exmachina-core-hook-settings' );
+    add_theme_support( 'exmachina-core-seo-settings' );
+    add_theme_support( 'exmachina-core-import-export-settings' );
+    add_theme_support( 'exmachina-cpt-archive-settings' );
 
 
+    add_theme_support( 'microdata-manager' );
+    add_theme_support( 'custom-menus' );
 
   //* Maybe add support for ExMachina menus
   if ( ! current_theme_supports( 'exmachina-menus' ) )
@@ -467,7 +456,7 @@ class ExMachina {
   function exmachina_post_type_support() {
 
     add_post_type_support( 'post', array( 'exmachina-seo', 'exmachina-scripts', 'exmachina-layouts' ) );
-  add_post_type_support( 'page', array( 'exmachina-seo', 'exmachina-scripts', 'exmachina-layouts' ) );
+    add_post_type_support( 'page', array( 'exmachina-seo', 'exmachina-scripts', 'exmachina-layouts' ) );
 
   } // end function exmachina_post_type_support()
 
@@ -493,10 +482,12 @@ class ExMachina {
       return;
 
     /* Load the admin builder class. */
-    //require_once( trailingslashit( EXMACHINA_CLASSES ) . 'admin.class.php' );
+    require_once( trailingslashit( EXMACHINA_CLASSES ) . 'admin.php' );
 
     /* Load the settings sanitization class. */
-    //require_once( trailingslashit( EXMACHINA_CLASSES ) . 'sanitize.class.php' );
+    require_once( trailingslashit( EXMACHINA_CLASSES ) . 'sanitization.php' );
+
+    require_if_theme_supports( 'exmachina-breadcrumbs', EXMACHINA_CLASSES . '/breadcrumb.php' );
 
   } // end function exmachina_load_classes()
 
@@ -523,82 +514,61 @@ class ExMachina {
     if ( defined( 'EXMACHINA_LOAD_FRAMEWORK' ) && EXMACHINA_LOAD_FRAMEWORK === false )
       return;
 
-    //* Load Framework
-  require_once( EXMACHINA_LIB_DIR . '/framework.php' );
+    /* Load the compatibility functions. */
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'compat.php' );
 
-  require_once( EXMACHINA_FRAMEWORK_DIR . '/core.php' );
-  require_once( EXMACHINA_FRAMEWORK_DIR . '/context.php' );
-  require_once( EXMACHINA_FRAMEWORK_DIR . '/i18n.php' );
+    /* Load the general functions. */
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'general.php' );
 
-  //* Load Classes
-  require_once( EXMACHINA_CLASSES_DIR . '/admin.php' );
-  require_if_theme_supports( 'exmachina-breadcrumbs', EXMACHINA_CLASSES_DIR . '/breadcrumb.php' );
-  require_once( EXMACHINA_CLASSES_DIR . '/sanitization.php' );
+    /* Load the options functions. */
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'options.php' );
 
-  //* Load Functions
-  require_once( EXMACHINA_FUNCTIONS_DIR . '/compat.php' );
-  require_once( EXMACHINA_FUNCTIONS_DIR . '/general.php' );
-  require_once( EXMACHINA_FUNCTIONS_DIR . '/options.php' );
-  require_once( EXMACHINA_FUNCTIONS_DIR . '/hooks.php' );
-  require_once( EXMACHINA_FUNCTIONS_DIR . '/image.php' );
-  require_once( EXMACHINA_FUNCTIONS_DIR . '/markup.php' );
-  require_if_theme_supports( 'exmachina-breadcrumbs', EXMACHINA_FUNCTIONS_DIR . '/breadcrumb.php' );
-  require_once( EXMACHINA_FUNCTIONS_DIR . '/menu.php' );
-  require_once( EXMACHINA_FUNCTIONS_DIR . '/layout.php' );
-  require_once( EXMACHINA_FUNCTIONS_DIR . '/formatting.php' );
-  require_once( EXMACHINA_FUNCTIONS_DIR . '/seo.php' );
-  require_once( EXMACHINA_FUNCTIONS_DIR . '/widgetize.php' );
-  require_once( EXMACHINA_FUNCTIONS_DIR . '/feed.php' );
-  if ( apply_filters( 'exmachina_load_deprecated', true ) )
-    require_once( EXMACHINA_FUNCTIONS_DIR . '/deprecated.php' );
+    /* Load the hooks functions. */
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'hooks.php' );
 
-  //* Load Shortcodes
-  require_once( EXMACHINA_SHORTCODES_DIR . '/post.php' );
-  require_once( EXMACHINA_SHORTCODES_DIR . '/footer.php' );
-  require_once( EXMACHINA_SHORTCODES_DIR . '/general.php' );
+    /* Load the image functions. */
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'image.php' );
 
-  //* Load Structure
-  require_once( EXMACHINA_STRUCTURE_DIR . '/header.php' );
-  require_once( EXMACHINA_STRUCTURE_DIR . '/footer.php' );
-  require_once( EXMACHINA_STRUCTURE_DIR . '/menu.php' );
-  require_once( EXMACHINA_STRUCTURE_DIR . '/layout.php' );
-  require_once( EXMACHINA_STRUCTURE_DIR . '/post.php' );
-  require_once( EXMACHINA_STRUCTURE_DIR . '/loops.php' );
-  require_once( EXMACHINA_STRUCTURE_DIR . '/comments.php' );
-  require_once( EXMACHINA_STRUCTURE_DIR . '/sidebar.php' );
-  require_once( EXMACHINA_STRUCTURE_DIR . '/archive.php' );
-  require_once( EXMACHINA_STRUCTURE_DIR . '/search.php' );
+    /* Load the markup functions. */
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'markup.php' );
 
-  require_once( EXMACHINA_EXTENSIONS_DIR . '/microdata-manager.php' );
-  require_once( EXMACHINA_EXTENSIONS_DIR . '/custom-menus.php' );
+    /* Load the menu functions. */
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'menu.php' );
 
-  require_once( EXMACHINA_PLUGINS_DIR . '/custom-sidebars/plugin.php' );
+    /* Load the layout functions. */
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'layout.php' );
 
-  //* Load Admin
-  if ( is_admin() ) :
-  require_once( EXMACHINA_ADMIN_FUNCTIONS . '/menu.php' );
-  require_once( EXMACHINA_ADMIN_FUNCTIONS . '/admin.php' );
-  require_once( EXMACHINA_ADMIN_SETTINGS . '/theme-settings.php' );
-  require_once( EXMACHINA_ADMIN_SETTINGS . '/hook-settings.php' );
-  require_once( EXMACHINA_ADMIN_SETTINGS . '/content-settings.php' );
-  require_once( EXMACHINA_ADMIN_SETTINGS . '/seo-settings.php' );
-  require_once( EXMACHINA_ADMIN_SETTINGS . '/cpt-archive-settings.php' );
-  require_once( EXMACHINA_ADMIN_SETTINGS . '/import-export.php' );
-  require_once( EXMACHINA_ADMIN_FUNCTIONS . '/inpost-metaboxes.php' );
-  //require_once( EXMACHINA_ADMIN_OPTIONS . '/theme-metabox-about.php' );
-  require_once( EXMACHINA_ADMIN_OPTIONS . '/theme-metabox-help.php' );
-  endif;
-  require_once( EXMACHINA_ADMIN_FUNCTIONS . '/term-meta.php' );
-  require_once( EXMACHINA_ADMIN_FUNCTIONS . '/user-meta.php' );
+    /* Load the formatting functions. */
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'formatting.php' );
 
-  //* Load Javascript
-  require_once( EXMACHINA_JS_DIR . '/load-scripts.php' );
+    /* Load the seo functions. */
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'seo.php' );
 
-  //* Load CSS
-  require_once( EXMACHINA_CSS_DIR . '/load-styles.php' );
+    /* Load the widgetize functions. */
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'widgetize.php' );
 
-  //* Load Widgets
-  require_once( EXMACHINA_WIDGETS_DIR . '/widgets.php' );
+    /* Load the feed functions. */
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'feed.php' );
+
+    /* Load the feed functions. */
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'shortcodes.php' );
+
+    /* Load the widgets functions. */
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'widgets.php' );
+
+    /* Load the scripts functions. */
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'load-scripts.php' );
+
+    /* Load the styles functions. */
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'load-styles.php' );
+
+    /* Load the feed functions. (@todo Change to theme support) */
+    if ( apply_filters( 'exmachina_load_deprecated', true ) )
+      require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'deprecated.php' );
+
+    /* Load the breadcrumb functionality if breadcrumbs are supported. */
+    require_if_theme_supports( 'exmachina-breadcrumbs', trailingslashit( EXMACHINA_FUNCTIONS ) . 'breadcrumb.php' );
+
 
   global $_exmachina_formatting_allowedtags;
   $_exmachina_formatting_allowedtags = exmachina_formatting_allowedtags();
@@ -682,34 +652,34 @@ class ExMachina {
       return;
 
     /* Load the archive structure template. */
-    //require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'archive.php' );
+    require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'archive.php' );
 
     /* Load the comments structure template. */
-    //require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'comments.php' );
+    require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'comments.php' );
 
     /* Load the footer structure template. */
-    //require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'footer.php' );
+    require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'footer.php' );
 
     /* Load the header structure template. */
-    //require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'header.php' );
+    require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'header.php' );
 
     /* Load the layout structure template. */
-    //require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'layout.php' );
+    require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'layout.php' );
 
     /* Load the loops structure template. */
-    //require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'loops.php' );
+    require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'loops.php' );
 
     /* Load the menu structure template. */
-    //require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'menu.php' );
+    require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'menu.php' );
 
     /* Load the post structure template. */
-    //require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'post.php' );
+    require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'post.php' );
 
     /* Load the search structure template. */
-    //require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'search.php' );
+    require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'search.php' );
 
     /* Load the sidebar structure template. */
-    //require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'sidebar.php' );
+    require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'sidebar.php' );
 
   } // end function exmachina_load_structure()
 
@@ -742,6 +712,14 @@ class ExMachina {
     /* Short circuits the framework if 'EXMACHINA_LOAD_EXTENSIONS' is defined as false. */
     if ( defined( 'EXMACHINA_LOAD_EXTENSIONS' ) && EXMACHINA_LOAD_EXTENSIONS === false )
       return;
+
+    require_once( EXMACHINA_PLUGINS . '/custom-sidebars/plugin.php' );
+
+    /* Load the Microdata extension if supported. */
+    require_if_theme_supports( 'microdata-manager', trailingslashit( EXMACHINA_EXTENSIONS ) . 'microdata-manager.php' );
+
+    /* Load the Custom Menu extension if supported. */
+    require_if_theme_supports( 'custom-menus', trailingslashit( EXMACHINA_EXTENSIONS ) . 'custom-menus.php' );
 
     /* Load the Breadcrumb Trail extension if supported. */
     //require_if_theme_supports( 'breadcrumb-trail', trailingslashit( EXMACHINA_EXTENSIONS ) . 'breadcrumb-trail.php' );
@@ -828,12 +806,32 @@ class ExMachina {
     if ( is_admin() ) {
 
       /* Load the main admin file. */
-      //require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'admin.php' );
+      require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'admin.php' );
+      require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'menu.php' );
+      require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'inpost-metaboxes.php' );
 
       /* Load the theme settings feature if supported. */
-      //require_if_theme_supports( 'exmachina-core-theme-settings', trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'theme-settings.php' );
+      require_if_theme_supports( 'exmachina-core-theme-settings', trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'theme-settings.php' );
+
+      /* Load the hook settings feature if supported. */
+      require_if_theme_supports( 'exmachina-core-content-settings', trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'content-settings.php' );
+
+      /* Load the hook settings feature if supported. */
+      require_if_theme_supports( 'exmachina-core-hook-settings', trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'hook-settings.php' );
+
+      /* Load the theme settings feature if supported. */
+      require_if_theme_supports( 'exmachina-core-seo-settings', trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'seo-settings.php' );
+
+      /* Load the theme settings feature if supported. */
+      require_if_theme_supports( 'exmachina-core-import-export-settings', trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'import-export.php' );
+
+      /* Load the theme settings feature if supported. */
+      require_if_theme_supports( 'exmachina-cpt-archive-settings', trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'cpt-archive-settings.php' );
 
     } // end if (is_admin())
+
+    require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'term-meta.php' );
+    require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'user-meta.php' );
 
   } // end function exmachina_load_admin()
 

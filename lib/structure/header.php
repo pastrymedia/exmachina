@@ -619,13 +619,13 @@ function exmachina_load_favicon() {
 
   if ( $pre !== false )
     $favicon = $pre;
-  elseif ( file_exists( CHILD_DIR . '/images/favicon.ico' ) )
+  elseif ( file_exists( CHILD_THEME_DIR . '/images/favicon.ico' ) )
     $favicon = CHILD_URL . '/images/favicon.ico';
-  elseif ( file_exists( CHILD_DIR . '/images/favicon.gif' ) )
+  elseif ( file_exists( CHILD_THEME_DIR . '/images/favicon.gif' ) )
     $favicon = CHILD_URL . '/images/favicon.gif';
-  elseif ( file_exists( CHILD_DIR . '/images/favicon.png' ) )
+  elseif ( file_exists( CHILD_THEME_DIR . '/images/favicon.png' ) )
     $favicon = CHILD_URL . '/images/favicon.png';
-  elseif ( file_exists( CHILD_DIR . '/images/favicon.jpg' ) )
+  elseif ( file_exists( CHILD_THEME_DIR . '/images/favicon.jpg' ) )
     $favicon = CHILD_URL . '/images/favicon.jpg';
   else
     $favicon = PARENT_URL . '/images/favicon.ico';

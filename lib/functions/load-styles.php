@@ -80,13 +80,13 @@ add_action( 'admin_print_styles', 'exmachina_load_admin_styles' );
  * @since 0.5.0
  * @access public
  *
- * @uses EXMACHINA_CSS_URL
+ * @uses EXMACHINA_CSS
  * @uses PARENT_THEME_VERSION
  */
 function exmachina_load_admin_styles() {
 
 	$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-	wp_enqueue_style( 'exmachina_admin_css', EXMACHINA_CSS_URL . "/admin$suffix.css", array(), PARENT_THEME_VERSION );
+	wp_enqueue_style( 'exmachina_admin_css', EXMACHINA_CSS . "/admin$suffix.css", array(), PARENT_THEME_VERSION );
 
 } // end function exmachina_load_admin_styles()

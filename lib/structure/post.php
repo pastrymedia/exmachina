@@ -204,11 +204,11 @@ function exmachina_do_post_format_image() {
   $post_format = get_post_format();
 
   //* If post format is set, look for post format image
-  if ( $post_format && file_exists( sprintf( '%s/images/post-formats/%s.png', CHILD_DIR, $post_format ) ) )
+  if ( $post_format && file_exists( sprintf( '%s/images/post-formats/%s.png', CHILD_THEME_DIR, $post_format ) ) )
     printf( '<a href="%s" title="%s" rel="bookmark"><img src="%s" class="post-format-image" alt="%s" /></a>', get_permalink(), the_title_attribute( 'echo=0' ), sprintf( '%s/images/post-formats/%s.png', CHILD_URL, $post_format ), $post_format );
 
   //* Else, look for the default post format image
-  elseif ( file_exists( sprintf( '%s/images/post-formats/default.png', CHILD_DIR ) ) )
+  elseif ( file_exists( sprintf( '%s/images/post-formats/default.png', CHILD_THEME_DIR ) ) )
     printf( '<a href="%s" title="%s" rel="bookmark"><img src="%s/images/post-formats/default.png" class="post-format-image" alt="%s" /></a>', get_permalink(), the_title_attribute( 'echo=0' ), CHILD_URL, 'post' );
 
 } // end function exmachina_do_post_format_image()

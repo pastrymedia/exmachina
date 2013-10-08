@@ -345,7 +345,7 @@ class ExMachina_Admin_Design_Settings extends ExMachina_Admin_Metaboxes {
 		parent::settings_page_enqueue_scripts();
 
 		wp_enqueue_script( 'farbtastic' );
-		wp_enqueue_script( 'exmachina-design-admin', EXMACHINA_JS_URL .'/admin-design.js', array( 'farbtastic' ), PARENT_THEME_VERSION, true );
+		wp_enqueue_script( 'exmachina-design-admin', EXMACHINA_JS .'/admin-design.js', array( 'farbtastic' ), PARENT_THEME_VERSION, true );
 		wp_localize_script( 'exmachina-design-admin', 'exmachina', array(
 			'pageHook'      => $this->pagehook,
 			'firstTime'     => ! is_array( get_user_option( 'closedpostboxes_' . $this->pagehook ) ),
