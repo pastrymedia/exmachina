@@ -28,7 +28,7 @@ class ExMachina_Simple_Sidebars_Admin extends ExMachina_Admin_Basic {
 
 		$menu_ops = array(
 			'submenu' => array(
-				'parent_slug' => 'exmachina',
+				'parent_slug' => 'theme-settings',
 				'page_title'  => __( 'ExMachina - Simple Sidebars', 'ss' ),
 				'menu_title'  => __( 'Simple Sidebars', 'ss' )
 			)

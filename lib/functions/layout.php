@@ -47,7 +47,6 @@ add_action( 'exmachina_init', 'exmachina_create_initial_layouts', 0 );
  * @todo add layout extras
  *
  * @uses exmachina_register_layout() Register a layout in ExMachina.
- * @uses EXMACHINA_ADMIN_IMAGES_URL  URL path to admin images.
  *
  * @since 0.5.0
  * @access public
@@ -57,7 +56,7 @@ add_action( 'exmachina_init', 'exmachina_create_initial_layouts', 0 );
 function exmachina_create_initial_layouts() {
 
   //* Common path to default layout images
-  $url = EXMACHINA_ADMIN_IMAGES_URL . '/layouts/';
+  $url = EXMACHINA_ADMIN_IMAGES . '/layouts/';
 
   $layouts = apply_filters( 'exmachina_initial_layouts', array(
     'content-sidebar' => array(
@@ -132,7 +131,7 @@ function exmachina_register_layout( $id = '', $args = array() ) {
 
   $defaults = array(
     'label' => __( 'No Label Selected', 'exmachina' ),
-    'img'   => EXMACHINA_ADMIN_IMAGES_URL . '/layouts/none.gif',
+    'img'   => EXMACHINA_ADMIN_IMAGES . '/layouts/none.gif',
     'type'  => 'site',
   );
 

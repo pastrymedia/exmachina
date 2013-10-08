@@ -106,6 +106,8 @@ add_action( 'exmachina_init', 'exmachina_constants' );
  */
 function exmachina_constants() {
 
+	define( 'EXMACHINA_VERSION', '2.0.1' );
+
 	//* Define Theme Info Constants
 	define( 'PARENT_THEME_NAME', 'ExMachina' );
 	define( 'PARENT_THEME_VERSION', '2.0.1' );
@@ -120,11 +122,11 @@ function exmachina_constants() {
 	define( 'EXMACHINA_IMAGES_DIR', PARENT_DIR . '/images' );
 	define( 'EXMACHINA_LIB_DIR', PARENT_DIR . '/lib' );
 	define( 'EXMACHINA_ADMIN_DIR', EXMACHINA_LIB_DIR . '/admin' );
-	define( 'EXMACHINA_ADMIN_IMAGES_DIR', EXMACHINA_LIB_DIR . '/admin/images' );
 	define( 'EXMACHINA_JS_DIR', EXMACHINA_LIB_DIR . '/js' );
 	define( 'EXMACHINA_CSS_DIR', EXMACHINA_LIB_DIR . '/css' );
 	define( 'EXMACHINA_CLASSES_DIR', EXMACHINA_LIB_DIR . '/classes' );
 	define( 'EXMACHINA_EXTENSIONS_DIR', EXMACHINA_LIB_DIR . '/extensions' );
+	define( 'EXMACHINA_FRAMEWORK_DIR', EXMACHINA_LIB_DIR . '/framework' );
 	define( 'EXMACHINA_FUNCTIONS_DIR', EXMACHINA_LIB_DIR . '/functions' );
 	define( 'EXMACHINA_PLUGINS_DIR', EXMACHINA_LIB_DIR . '/plugins' );
 	define( 'EXMACHINA_SHORTCODES_DIR', EXMACHINA_LIB_DIR . '/shortcodes' );
@@ -137,7 +139,6 @@ function exmachina_constants() {
 	define( 'EXMACHINA_IMAGES_URL', PARENT_URL . '/images' );
 	define( 'EXMACHINA_LIB_URL', PARENT_URL . '/lib' );
 	define( 'EXMACHINA_ADMIN_URL', EXMACHINA_LIB_URL . '/admin' );
-	define( 'EXMACHINA_ADMIN_IMAGES_URL', EXMACHINA_LIB_URL . '/admin/images' );
 	define( 'EXMACHINA_JS_URL', EXMACHINA_LIB_URL . '/js' );
 	define( 'EXMACHINA_CLASSES_URL', EXMACHINA_LIB_URL . '/classes' );
 	define( 'EXMACHINA_CSS_URL', EXMACHINA_LIB_URL . '/css' );
@@ -145,6 +146,24 @@ function exmachina_constants() {
 	define( 'EXMACHINA_SHORTCODES_URL', EXMACHINA_LIB_URL . '/shortcodes' );
 	define( 'EXMACHINA_STRUCTURE_URL', EXMACHINA_LIB_URL . '/structure' );
 	define( 'EXMACHINA_WIDGETS_URL', EXMACHINA_LIB_URL . '/widgets' );
+
+	//* Define Admin Directory Location Constants
+	define( 'EXMACHINA_ADMIN_ASSETS', EXMACHINA_ADMIN_DIR . '/assets' );
+	define( 'EXMACHINA_ADMIN_FUNCTIONS', EXMACHINA_ADMIN_DIR . '/functions' );
+	define( 'EXMACHINA_ADMIN_OPTIONS', EXMACHINA_ADMIN_DIR . '/options' );
+	define( 'EXMACHINA_ADMIN_SETTINGS', EXMACHINA_ADMIN_DIR . '/settings' );
+
+	//* Define Admin URL Location Constants
+	define( 'EXMACHINA_ADMIN_ASSETS_URL', EXMACHINA_ADMIN_URL . '/assets' );
+	define( 'EXMACHINA_ADMIN_FUNCTIONS_URL', EXMACHINA_ADMIN_URL . '/functions' );
+	define( 'EXMACHINA_ADMIN_OPTIONS_URL', EXMACHINA_ADMIN_URL . '/options' );
+	define( 'EXMACHINA_ADMIN_SETTINGS_URL', EXMACHINA_ADMIN_URL . '/settings' );
+
+	//* Define Admin Assets URL Location Constants
+	define( 'EXMACHINA_ADMIN_CSS', EXMACHINA_ADMIN_ASSETS_URL . '/css' );
+	define( 'EXMACHINA_ADMIN_JS', EXMACHINA_ADMIN_ASSETS_URL . '/js' );
+	define( 'EXMACHINA_ADMIN_IMAGES', EXMACHINA_ADMIN_ASSETS_URL . '/images' );
+	define( 'EXMACHINA_ADMIN_VENDOR', EXMACHINA_ADMIN_ASSETS_URL . '/vendor' );
 
 	//* Define Settings Field Constants (for DB storage)
 	define( 'EXMACHINA_SETTINGS_FIELD', apply_filters( 'exmachina_settings_field', 'exmachina-settings' ) );
@@ -181,6 +200,10 @@ function exmachina_load_framework() {
 
 	//* Load Framework
 	require_once( EXMACHINA_LIB_DIR . '/framework.php' );
+
+	require_once( EXMACHINA_FRAMEWORK_DIR . '/core.php' );
+	require_once( EXMACHINA_FRAMEWORK_DIR . '/context.php' );
+	require_once( EXMACHINA_FRAMEWORK_DIR . '/i18n.php' );
 
 	//* Load Classes
 	require_once( EXMACHINA_CLASSES_DIR . '/admin.php' );
@@ -228,17 +251,20 @@ function exmachina_load_framework() {
 
 	//* Load Admin
 	if ( is_admin() ) :
-	require_once( EXMACHINA_ADMIN_DIR . '/menu.php' );
-	require_once( EXMACHINA_ADMIN_DIR . '/theme-settings.php' );
-	require_once( EXMACHINA_ADMIN_DIR . '/hook-settings.php' );
-	require_once( EXMACHINA_ADMIN_DIR . '/content-settings.php' );
-	require_once( EXMACHINA_ADMIN_DIR . '/seo-settings.php' );
-	require_once( EXMACHINA_ADMIN_DIR . '/cpt-archive-settings.php' );
-	require_once( EXMACHINA_ADMIN_DIR . '/import-export.php' );
-	require_once( EXMACHINA_ADMIN_DIR . '/inpost-metaboxes.php' );
+	require_once( EXMACHINA_ADMIN_FUNCTIONS . '/menu.php' );
+	require_once( EXMACHINA_ADMIN_FUNCTIONS . '/admin.php' );
+	require_once( EXMACHINA_ADMIN_SETTINGS . '/theme-settings.php' );
+	require_once( EXMACHINA_ADMIN_SETTINGS . '/hook-settings.php' );
+	require_once( EXMACHINA_ADMIN_SETTINGS . '/content-settings.php' );
+	require_once( EXMACHINA_ADMIN_SETTINGS . '/seo-settings.php' );
+	require_once( EXMACHINA_ADMIN_SETTINGS . '/cpt-archive-settings.php' );
+	require_once( EXMACHINA_ADMIN_SETTINGS . '/import-export.php' );
+	require_once( EXMACHINA_ADMIN_FUNCTIONS . '/inpost-metaboxes.php' );
+	//require_once( EXMACHINA_ADMIN_OPTIONS . '/theme-metabox-about.php' );
+	require_once( EXMACHINA_ADMIN_OPTIONS . '/theme-metabox-help.php' );
 	endif;
-	require_once( EXMACHINA_ADMIN_DIR . '/term-meta.php' );
-	require_once( EXMACHINA_ADMIN_DIR . '/user-meta.php' );
+	require_once( EXMACHINA_ADMIN_FUNCTIONS . '/term-meta.php' );
+	require_once( EXMACHINA_ADMIN_FUNCTIONS . '/user-meta.php' );
 
 	//* Load Javascript
 	require_once( EXMACHINA_JS_DIR . '/load-scripts.php' );

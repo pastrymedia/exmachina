@@ -27,7 +27,7 @@ class ExMachina_Admin_Custom_Code extends ExMachina_Admin_Metaboxes {
 
 		$menu_ops = array(
 			'submenu' => array(
-				'parent_slug' => 'exmachina',
+				'parent_slug' => 'theme-settings',
 				'page_title'  => __( 'Custom Code', 'exmachina' ),
 				'menu_title'  => __( 'Custom Code', 'exmachina' ),
 				'capability'  => 'unfiltered_html',

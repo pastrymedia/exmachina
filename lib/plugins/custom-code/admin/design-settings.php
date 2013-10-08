@@ -27,7 +27,7 @@ class ExMachina_Admin_Design_Settings extends ExMachina_Admin_Metaboxes {
 
 		$menu_ops = array(
 			'submenu' => array(
-				'parent_slug' => 'exmachina',
+				'parent_slug' => 'theme-settings',
 				'page_title'  => __( 'Design Settings', 'exmachina' ),
 				'menu_title'  => __( 'Design Settings', 'exmachina' ),
 			),
