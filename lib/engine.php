@@ -553,18 +553,11 @@ class ExMachina {
     /* Load the feed functions. */
     require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'shortcodes.php' );
 
-    /* Load the widgets functions. */
-    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'widgets.php' );
-
     /* Load the scripts functions. */
     require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'load-scripts.php' );
 
     /* Load the styles functions. */
     require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'load-styles.php' );
-
-    /* Load the feed functions. (@todo Change to theme support) */
-    if ( apply_filters( 'exmachina_load_deprecated', true ) )
-      require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'deprecated.php' );
 
     /* Load the breadcrumb functionality if breadcrumbs are supported. */
     require_if_theme_supports( 'exmachina-breadcrumbs', trailingslashit( EXMACHINA_FUNCTIONS ) . 'breadcrumb.php' );
@@ -604,7 +597,7 @@ class ExMachina {
     //require_if_theme_supports( 'exmachina-core-sidebars', trailingslashit( EXMACHINA_FUNCTIONS ) . 'sidebars.php' );
 
     /* Load the widgets if supported. */
-    //require_if_theme_supports( 'exmachina-core-widgets', trailingslashit( EXMACHINA_FUNCTIONS ) . 'widgets.php' );
+    require_if_theme_supports( 'exmachina-core-widgets', trailingslashit( EXMACHINA_FUNCTIONS ) . 'widgets.php' );
 
     /* Load the template hierarchy if supported. */
     //require_if_theme_supports( 'exmachina-core-template-hierarchy', trailingslashit( EXMACHINA_FUNCTIONS ) . 'template-hierarchy.php' );
@@ -622,7 +615,7 @@ class ExMachina {
     //require_if_theme_supports( 'post-formats', trailingslashit( EXMACHINA_FUNCTIONS ) . 'post-formats.php' );
 
     /* Load the deprecated functions if supported. */
-    //require_if_theme_supports( 'exmachina-core-deprecated', trailingslashit( EXMACHINA_FUNCTIONS ) . 'deprecated.php' );
+    require_if_theme_supports( 'exmachina-core-deprecated', trailingslashit( EXMACHINA_FUNCTIONS ) . 'deprecated.php' );
 
   } // end function exmachina_load_framework()
 

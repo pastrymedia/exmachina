@@ -14,7 +14,7 @@ if ( !defined('ABSPATH')) exit;
  * modifications in the form of a child theme.
  *
  * The core functions for the ExMachina framework. Functions located here define
- * the global ExMachina prefix, contextual atomic functions and the content width.
+ * the global ExMachina prefix, contextual atomic functions, and the content width.
  *
  * @package     ExMachina
  * @subpackage  Framework
@@ -28,23 +28,24 @@ if ( !defined('ABSPATH')) exit;
 ###############################################################################
 
 /**
- * Get ExMachina Prefix
+ * Get Theme Prefix
  *
- * Defines the theme prefix. This allows infinte changes to the theme based on
- * the theme directory.
+ * Defines the theme prefix. This allows infinite changes to the theme. Based on
+ * the template directory.
  *
+ * @link http://codex.wordpress.org/Function_Reference/sanitize_key
  * @link http://codex.wordpress.org/Function_Reference/get_template
  *
- * @since  0.1.0
+ * @since 0.1.1
  * @access public
  *
- * @global object $exmachina          The global ExMachina object.
- * @return string $exmachina->prefix  The prefix of the theme.
+ * @global object   $exmachina          The global ExMachina object.
+ * @return string   $exmachina->prefix  The prefix of the theme.
  */
 function exmachina_get_prefix() {
   global $exmachina;
 
-  /* If the global prefix isn't set, define it. */
+  /* If the global prefix isn't set, define it. Plugin/theme authors may also define a custom prefix. */
   if ( empty( $exmachina->prefix ) )
     $exmachina->prefix = sanitize_key( apply_filters( 'exmachina_prefix', get_template() ) );
 
@@ -59,19 +60,20 @@ function exmachina_get_prefix() {
  * context-based content without having to know how to use WordPress conditional
  * tags.
  *
- * @uses exmachina_get_prefix() Gets the theme prefix.
- * @uses exmachina_get_context() Gets the context of the current page.
+ * @link http://codex.wordpress.org/Function_Reference/do_action_ref_array
  *
- * @since 0.1.0
+ * @uses exmachina_get_prefix()   Gets the theme prefix.
+ * @uses exmachina_get_context()  Gets the context of the current page.
+ *
+ * @since 0.1.1
  * @access public
  *
- * @param  string $tag Defines the base hook (Usually the location).
- * @param  mixed  $arg Optional. Additional arguments passed to the function.
- * @return void        Returns false if tag is empty.
+ * @param  string $tag   Defines the base hook (Usually the location).
+ * @param  mixed  $arg   Optional. Additional arguments passed to the function.
+ * @return void          Returns false if tag is empty.
  */
 function do_atomic( $tag = '', $arg = '' ) {
 
-  /* Short-circuit if tag is empty. */
   if ( empty( $tag ) )
     return false;
 
@@ -98,19 +100,20 @@ function do_atomic( $tag = '', $arg = '' ) {
  * context-based content without having to know how to use WordPress conditional
  * tags.
  *
- * @uses exmachina_get_prefix() Gets the theme prefix.
- * @uses exmachina_get_context() Gets the context of the current page.
+ * @link http://codex.wordpress.org/Function_Reference/apply_filters_ref_array
  *
- * @since 0.1.0
+ * @uses exmachina_get_prefix()   Gets the theme prefix.
+ * @uses exmachina_get_context()  Gets the context of the current page.
+ *
+ * @since 0.1.1
  * @access public
  *
  * @param  string $tag   Defines the base hook (Usually the location).
  * @param  mixed  $value The value to filter.
- * @return mixed  $value The value after it has been filtered.
+ * @return mixed         The value after it has been filtered.
  */
 function apply_atomic( $tag = '', $value = '' ) {
 
-  /* Short-circuit is $tag is empty. */
   if ( empty( $tag ) )
     return false;
 
@@ -136,17 +139,19 @@ function apply_atomic( $tag = '', $value = '' ) {
 /**
  * Atomic Shortcodes
  *
- * Wraps the output of apply_atomic() is a call to do_shortcode(). This allows
+ * Wraps the output of apply_atomic() in a callback to do_shortcode(). This allows
  * for context-aware functionality alongside shortcodes.
  *
- * @link http://codex.wordpress.org/Function_Reference/do_shortcode
+ * @link  http://codex.wordpress.org/Function_Reference/do_shortcode
  *
- * @since 0.1.0
+ * @uses apply_atomic() Applies the contextual filter.
+ *
+ * @since 0.1.1
  * @access public
  *
  * @param  string $tag   Defines the base hook (Usually the location).
  * @param  mixed  $value The value to filter.
- * @return mixed  $value The value after it has been filtered.
+ * @return mixed         The value after it has been filtered.
  */
 function apply_atomic_shortcode( $tag = '', $value = '' ) {
   return do_shortcode( apply_atomic( $tag, $value ) );
@@ -159,17 +164,16 @@ function apply_atomic_shortcode( $tag = '', $value = '' ) {
  * The theme can save multiple things in a transient to help speed up page load
  * times. The default transient is set to 12 hours or 43,000 seconds.
  *
- * @link http://codex.wordpress.org/Transients_API
+ * @link  http://codex.wordpress.org/Transients_API
  *
- * @uses exmachina_get_prefix Gets the theme prefix.
+ * @uses exmachina_get_prefix()  Gets the theme prefix.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @return int The transient expiration time in seconds (60 * 60 * 12).
  */
 function exmachina_get_transient_expiration() {
-
   return apply_filters( exmachina_get_prefix() . '_transient_expiration', 43200 );
 
 } // end function exmachina_get_transient_expiration()
@@ -183,7 +187,7 @@ function exmachina_get_transient_expiration() {
  *
  * @uses exmachina_get_prefix() Gets the theme prefix.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @param  string $tag     The base hook (Usually the location).
@@ -191,7 +195,6 @@ function exmachina_get_transient_expiration() {
  * @return string          Returns the properly formatted hook.
  */
 function exmachina_format_hook( $tag, $context = '' ) {
-
   return exmachina_get_prefix() . ( ( !empty( $context ) ) ? "_{$context}" : "" ). "_{$tag}";
 
 } // end function exmachina_format_hook()
@@ -202,21 +205,19 @@ function exmachina_format_hook( $tag, $context = '' ) {
  * Function for setting the content width of a theme. This does not check if a
  * content width has been set, it simply overwrites with any value set.
  *
- * @link http://codex.wordpress.org/Content_Width
+ * @link  http://codex.wordpress.org/Content_Width
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @global int $content_width The width for the theme's content area.
- * @param  int $width         Numeric value of width
+ * @param  int $width         Numeric value of the theme width.
  * @return void
  */
 function exmachina_set_content_width( $width = '' ) {
   global $content_width;
 
-  /* Set the content width to an absolute integer. */
   $content_width = absint( $width );
-
 } // end function exmachina_set_content_width()
 
 /**
@@ -224,21 +225,16 @@ function exmachina_set_content_width( $width = '' ) {
  *
  * Function for getting the theme's content width.
  *
- * @link http://codex.wordpress.org/Content_Width
+ * @link  http://codex.wordpress.org/Content_Width
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @global int $content_width The width for the theme's content area.
- * @return int $content_width
+ * @return int $content_width Numeric value of the theme's width.
  */
 function exmachina_get_content_width() {
   global $content_width;
 
-  /* Returns the $content_width. */
   return $content_width;
-
 } // end function exmachina_get_content_width()
-
-
-

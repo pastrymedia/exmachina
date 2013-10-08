@@ -5,7 +5,7 @@ if ( !defined('ABSPATH')) exit;
 
 /**
  * ExMachina WordPress Theme Framework Engine
- * Core Internationalization Functions
+ * Internationalization Functions
  *
  * i18n.php
  *
@@ -50,7 +50,7 @@ add_filter( 'ngettext_with_context', 'exmachina_extensions_ngettext_with_context
  * given domain.  The purpose of this function is to simply check if the translation
  * files are loaded.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access private
  *
  * @global $exmachina The global ExMachina object.
@@ -62,7 +62,7 @@ function exmachina_is_textdomain_loaded( $domain ) {
 
   return ( isset( $exmachina->textdomain_loaded[ $domain ] ) && true === $exmachina->textdomain_loaded[ $domain ] ) ? true : false;
 
-} // end function exmachina_is_text_domain_loaded()
+} // end function exmachina_is_textdomain_loaded()
 
 /**
  * Load Framework Textdomain
@@ -78,7 +78,7 @@ function exmachina_is_textdomain_loaded( $domain ) {
  *
  * @uses EXMACHINA_LANGUAGES Path to the framework '/languages' folder.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access private
  *
  * @param  string $domain The framework's textdomain.
@@ -111,9 +111,7 @@ function exmachina_load_framework_textdomain( $domain ) {
  *
  * @uses exmachina_get_prefix() Gets the theme prefix.
  *
- * @todo Might need to be replaced with exmachina_get_textdomain() to avoid conflicts
- *
- * @since 0.1.0
+ * @since 0.1.1
  * @access private
  *
  * @global object $exmachina             The global ExMachina object.
@@ -125,11 +123,7 @@ function exmachina_get_parent_textdomain() {
   /* If the global textdomain isn't set, define it. Plugin/theme authors may also define a custom textdomain. */
   if ( empty( $exmachina->parent_textdomain ) ) {
 
-    $theme = wp_get_theme( get_template() );
-
-    $textdomain = $theme->get( 'TextDomain' ) ? $theme->get( 'TextDomain' ) : get_template();
-
-    $exmachina->parent_textdomain = sanitize_key( apply_filters( exmachina_get_prefix() . '_parent_textdomain', $textdomain ) );
+    $exmachina->parent_textdomain = sanitize_key( apply_filters( exmachina_get_prefix() . '_parent_textdomain', get_template() ) );
   }
 
   /* Return the expected textdomain of the parent theme. */
@@ -148,9 +142,7 @@ function exmachina_get_parent_textdomain() {
  *
  * @uses exmachina_get_prefix() Gets the theme prefix.
  *
- * @todo Might need to be replaced with exmachina_get_textdomain() to avoid conflicts
- *
- * @since 0.1.0
+ * @since 0.1.1
  * @access private
  *
  * @global object $exmachina                    The global ExMachina object.
@@ -166,11 +158,7 @@ function exmachina_get_child_textdomain() {
   /* If the global textdomain isn't set, define it. Plugin/theme authors may also define a custom textdomain. */
   if ( empty( $exmachina->child_textdomain ) ) {
 
-    $theme = wp_get_theme();
-
-    $textdomain = $theme->get( 'TextDomain' ) ? $theme->get( 'TextDomain' ) : get_stylesheet();
-
-    $exmachina->child_textdomain = sanitize_key( apply_filters( exmachina_get_prefix() . '_child_textdomain', $textdomain ) );
+    $exmachina->child_textdomain = sanitize_key( apply_filters( exmachina_get_prefix() . '_child_textdomain', get_stylesheet() ) );
   }
 
   /* Return the expected textdomain of the child theme. */
@@ -192,7 +180,7 @@ function exmachina_get_child_textdomain() {
  * @uses exmachina_get_parent_textdomain() Returns the parent textdomain.
  * @uses exmachina_get_child_textdomain()  Returns the child textdomain.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access private
  *
  * @param  string $mofile File name of the .mo file.
@@ -224,7 +212,7 @@ function exmachina_load_textdomain_mofile( $mofile, $domain ) {
  * Helper function for allowing the theme to translate the text strings for
  * both ExMachina Core and the available framework extensions.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @param  string $domain  The textdomain to be translated.
@@ -246,7 +234,7 @@ function exmachina_translate( $domain, $text, $context = null ) {
  * Helper function for allowing the theme to translate the plural text strings
  * for both ExMachina Core and the available framework extensions.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @param  string $domain  The textdomain to be translated.
@@ -274,7 +262,7 @@ function exmachina_translate_plural( $domain, $single, $plural, $number, $contex
  * @uses exmachina_get_parent_textdomain() Gets the parent textdomain.
  * @uses exmachina_translate()             Translation helper function.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @param  string $translated The translated text.
@@ -302,7 +290,7 @@ function exmachina_gettext( $translated, $text, $domain ) {
  * @uses exmachina_get_parent_textdomain() Gets the parent textdomain.
  * @uses exmachina_translate()             Translation helper function.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @param  string $translated The translated text.
@@ -330,7 +318,7 @@ function exmachina_gettext_with_context( $translated, $text, $context, $domain )
  * @uses exmachina_get_parent_textdomain() Gets the parent textdomain.
  * @uses exmachina_translate_plural()      Plural Translation helper function.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @param  string $translated The translated text.
@@ -360,7 +348,7 @@ function exmachina_ngettext( $translated, $single, $plural, $number, $domain ) {
  * @uses exmachina_get_parent_textdomain() Gets the parent textdomain.
  * @uses exmachina_translate_plural()      Plural Translation helper function.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @param  string $translated The translated text.
@@ -393,7 +381,7 @@ function exmachina_ngettext_with_context( $translated, $single, $plural, $number
  *
  * @todo Make sure to include additional extensions and/or create extension list function.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @param  string $translated The translated text.
@@ -403,7 +391,7 @@ function exmachina_ngettext_with_context( $translated, $single, $plural, $number
  */
 function exmachina_extensions_gettext( $translated, $text, $domain ) {
 
-  $extensions = array( 'breadcrumb-trail', 'custom-field-series', 'post-stylesheets', 'theme-fonts', 'theme-layouts' );
+  $extensions = array( 'breadcrumb-trail', 'custom-field-series', 'featured-header', 'post-stylesheets', 'theme-fonts', 'theme-layouts' );
 
   /* Check if the current textdomain matches one of the framework extensions. */
   if ( in_array( $domain, $extensions ) && current_theme_supports( $domain ) ) {
@@ -418,6 +406,7 @@ function exmachina_extensions_gettext( $translated, $text, $domain ) {
   }
 
   return $translated;
+
 } // end function exmachina_extensions_gettext()
 
 /**
@@ -431,7 +420,7 @@ function exmachina_extensions_gettext( $translated, $text, $domain ) {
  *
  * @todo Make sure to include additional extensions and/or create extension list function.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @param  string $translated The translated text.
@@ -442,7 +431,7 @@ function exmachina_extensions_gettext( $translated, $text, $domain ) {
  */
 function exmachina_extensions_gettext_with_context( $translated, $text, $context, $domain ) {
 
-  $extensions = array( 'breadcrumb-trail', 'custom-field-series', 'post-stylesheets', 'theme-fonts', 'theme-layouts' );
+  $extensions = array( 'breadcrumb-trail', 'custom-field-series', 'featured-header', 'post-stylesheets', 'theme-fonts', 'theme-layouts' );
 
   /* Check if the current textdomain matches one of the framework extensions. */
   if ( in_array( $domain, $extensions ) && current_theme_supports( $domain ) ) {
@@ -471,7 +460,7 @@ function exmachina_extensions_gettext_with_context( $translated, $text, $context
  *
  * @todo Make sure to include additional extensions and/or create extension list function.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @param  string $translated The translated text.
@@ -483,7 +472,7 @@ function exmachina_extensions_gettext_with_context( $translated, $text, $context
  */
 function exmachina_extensions_ngettext( $translated, $single, $plural, $number, $domain ) {
 
-  $extensions = array( 'breadcrumb-trail', 'custom-field-series', 'post-stylesheets', 'theme-fonts', 'theme-layouts' );
+  $extensions = array( 'breadcrumb-trail', 'custom-field-series', 'featured-header', 'post-stylesheets', 'theme-fonts', 'theme-layouts' );
 
   /* Check if the current textdomain matches one of the framework extensions. */
   if ( in_array( $domain, $extensions ) && current_theme_supports( $domain ) ) {
@@ -512,7 +501,7 @@ function exmachina_extensions_ngettext( $translated, $single, $plural, $number, 
  *
  * @todo Make sure to include additional extensions and/or create extension list function.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @param  string $translated The translated text.
@@ -525,7 +514,7 @@ function exmachina_extensions_ngettext( $translated, $single, $plural, $number, 
  */
 function exmachina_extensions_ngettext_with_context( $translated, $single, $plural, $number, $context, $domain ) {
 
-  $extensions = array( 'breadcrumb-trail', 'custom-field-series', 'post-stylesheets', 'theme-fonts', 'theme-layouts' );
+  $extensions = array( 'breadcrumb-trail', 'custom-field-series', 'featured-header', 'post-stylesheets', 'theme-fonts', 'theme-layouts' );
 
   /* Check if the current textdomain matches one of the framework extensions. */
   if ( in_array( $domain, $extensions ) && current_theme_supports( $domain ) ) {
@@ -542,5 +531,3 @@ function exmachina_extensions_ngettext_with_context( $translated, $single, $plur
   return $translated;
 
 } // end function exmachina_extensions_ngettext_with_context()
-
-

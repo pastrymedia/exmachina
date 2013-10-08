@@ -38,9 +38,15 @@ if ( !defined('ABSPATH')) exit;
  * contexts based on what page a visitor is currently viewing on the site.
  *
  * @link http://codex.wordpress.org/Function_Reference/get_queried_object
+ * @link http://codex.wordpress.org/Function_Reference/get_post_type_object
+ * @link http://codex.wordpress.org/Function_Reference/get_query_var
+ * @link http://codex.wordpress.org/Function_Reference/sanitize_html_class
+ * @link http://codex.wordpress.org/Function_Reference/get_the_author_meta
  * @link http://codex.wordpress.org/Conditional_Tags
  *
- * @since 0.1.0
+ * @todo Add page template context - https://github.com/pmarkun/stagium/blob/master/functions/admin-hooks.php#L180
+ *
+ * @since 0.1.1
  * @access public
  *
  * @global object $wp_query           The current page query object.
@@ -153,7 +159,7 @@ function exmachina_get_context() {
  * @uses exmachina_get_body_class() Returns the contextual body class.
  * @uses apply_atomic()             Applies the contextual atomic filters.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @return void
@@ -182,7 +188,7 @@ function exmachina_body_attributes() {
  * @uses exmachina_get_body_class() Returns the contextual body class.
  * @uses apply_atomic()             Applies the contextual atomic filters.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @param  string|array $class Additional classes for more control.
@@ -203,9 +209,30 @@ function exmachina_body_class( $class = '' ) {
  *
  * Returns the classes for the <body> element depending on the page context.
  *
+ * @link http://codex.wordpress.org/Function_Reference/get_bloginfo
+ * @link http://codex.wordpress.org/Function_Reference/get_locale
+ * @link http://codex.wordpress.org/Function_Reference/is_child_theme
+ * @link http://codex.wordpress.org/Function_Reference/is_multisite
+ * @link http://codex.wordpress.org/Function_Reference/get_current_blog_id
+ * @link http://codex.wordpress.org/Function_Reference/get_option
+ * @link http://codex.wordpress.org/Function_Reference/is_user_logged_in
+ * @link http://codex.wordpress.org/Function_Reference/is_admin_bar_showing
+ * @link http://codex.wordpress.org/Function_Reference/get_background_image
+ * @link http://codex.wordpress.org/Function_Reference/get_background_color
+ * @link http://codex.wordpress.org/Function_Reference/get_header_image
+ * @link http://codex.wordpress.org/Function_Reference/is_singular
+ * @link http://codex.wordpress.org/Function_Reference/get_queried_object
+ * @link http://codex.wordpress.org/Function_Reference/get_post_meta
+ * @link http://codex.wordpress.org/Function_Reference/current_theme_supports
+ * @link http://codex.wordpress.org/Function_Reference/post_type_supports
+ * @link http://codex.wordpress.org/Function_Reference/get_post_format
+ * @link http://codex.wordpress.org/Function_Reference/is_wp_error
+ * @link http://codex.wordpress.org/Function_Reference/is_attachment
+ * @link http://codex.wordpress.org/Function_Reference/get_post_mime_type
+ *
  * @uses exmachina_get_context() Main contextual function.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @global object       $wp_query The current page query object.
@@ -298,9 +325,9 @@ function exmachina_get_body_class( $class = '' ) {
  * @link http://codex.wordpress.org/Function_Reference/get_the_ID
  *
  * @uses exmachina_get_post_class() Returns the contextual post class.
- * @uses apply_atomic               Applies the contextual atomic filters.
+ * @uses apply_atomic()             Applies the contextual atomic filters.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  * @return void
  */
@@ -327,9 +354,9 @@ function exmachina_post_attributes() {
  * Outputs the class for the post wrapper.
  *
  * @uses exmachina_get_post_class() Returns the contextual post class.
- * @uses apply_atomic               Applies the contextual atomic filters.
+ * @uses apply_atomic()             Applies the contextual atomic filters.
  *
- * @since  0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @param  string|array $class   Additional classes for more control.
@@ -353,9 +380,9 @@ function exmachina_post_class( $class = '', $post_id = null ) {
  * given the class of 'hentry'. Posts are given category, tag, and author
  * classes. Alternate post classes of odd, even, and alt are added.
  *
- * @todo Check against other post class functions
+ * @todo Add WP codex function references to exmachina_get_post_class()
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @param  string|array $class   Additional classes for more control.
@@ -431,7 +458,6 @@ function exmachina_get_post_class( $class = '', $post_id = null ) {
 
   /* Apply the filters for WP's 'post_class'. */
   return array_unique( apply_filters( 'post_class', $classes, $class, $post_id ) );
-
 } // end function exmachina_get_post_class()
 
 /**
@@ -442,9 +468,9 @@ function exmachina_get_post_class( $class = '', $post_id = null ) {
  * @link http://codex.wordpress.org/Function_Reference/get_comment_ID
  *
  * @uses exmachina_get_comment_class() Returns the contextual comment class.
- * @uses apply_atomic                  Applies the contextual atomic filters.
+ * @uses apply_atomic()                Applies the contextual atomic filters.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @return void
@@ -473,7 +499,7 @@ function exmachina_comment_attributes() {
  *
  * @uses exmachina_get_comment_class() Returns the contextual comment class.
  *
- * @since 0.1.0
+ * @since 0.1.1
  * @access public
  *
  * @global object       $exmachina  The global ExMachina object.
@@ -496,7 +522,9 @@ function exmachina_comment_class( $class = '' ) {
  * Sets a class for each comment. Sets alt, odd/even, and author/user classes.
  * Adds author, user, and reader classes.
  *
- * @since 0.1.0
+ * @todo Add WP codex function references to exmachina_get_comment_class()
+ *
+ * @since 0.1.1
  * @access public
  *
  * @global object       $comment  The current comment's DB object.
@@ -555,118 +583,3 @@ function exmachina_get_comment_class( $class = '' ) {
 
 } // end function exmachina_get_comment_class()
 
-/**
- * Contextual Document Title
- *
- * Function for handling what the browser/search engine title should be.
- * Attempts to handle every possible situation WordPress throws at it for
- * the best optimization.
- *
- * @link http://codex.wordpress.org/Conditional_Tags
- *
- * @uses apply_atomic() Applies contextual atomic filters.
- *
- * @todo Check against other document_title functions
- *
- * @since 0.1.0
- * @access public
- *
- * @global object $wp_query The current page query object.
- * @return void
- */
-function exmachina_document_title() {
-  global $wp_query;
-
-  /* Set up some default variables. */
-  $doctitle = '';
-  $separator = ':';
-
-  /* If viewing the front page and posts page of the site. */
-  if ( is_front_page() && is_home() )
-    $doctitle = get_bloginfo( 'name' ) . $separator . ' ' . get_bloginfo( 'description' );
-
-  /* If viewing the posts page or a singular post. */
-  elseif ( is_home() || is_singular() ) {
-
-    $doctitle = get_post_meta( get_queried_object_id(), 'Title', true );
-
-    if ( empty( $doctitle ) && is_front_page() )
-      $doctitle = get_bloginfo( 'name' ) . $separator . ' ' . get_bloginfo( 'description' );
-
-    elseif ( empty( $doctitle ) )
-      $doctitle = single_post_title( '', false );
-  }
-
-  /* If viewing any type of archive page. */
-  elseif ( is_archive() ) {
-
-    /* If viewing a taxonomy term archive. */
-    if ( is_category() || is_tag() || is_tax() ) {
-      $doctitle = single_term_title( '', false );
-    }
-
-    /* If viewing a post type archive. */
-    elseif ( is_post_type_archive() ) {
-      $doctitle = post_type_archive_title( '', false );
-    }
-
-    /* If viewing an author/user archive. */
-    elseif ( is_author() ) {
-      $doctitle = get_user_meta( get_query_var( 'author' ), 'Title', true );
-
-      if ( empty( $doctitle ) )
-        $doctitle = get_the_author_meta( 'display_name', get_query_var( 'author' ) );
-    }
-
-    /* If viewing a date-/time-based archive. */
-    elseif ( is_date () ) {
-      if ( get_query_var( 'minute' ) && get_query_var( 'hour' ) )
-        $doctitle = sprintf( __( 'Archive for %s', 'exmachina-core' ), get_the_time( __( 'g:i a', 'exmachina-core' ) ) );
-
-      elseif ( get_query_var( 'minute' ) )
-        $doctitle = sprintf( __( 'Archive for minute %s', 'exmachina-core' ), get_the_time( __( 'i', 'exmachina-core' ) ) );
-
-      elseif ( get_query_var( 'hour' ) )
-        $doctitle = sprintf( __( 'Archive for %s', 'exmachina-core' ), get_the_time( __( 'g a', 'exmachina-core' ) ) );
-
-      elseif ( is_day() )
-        $doctitle = sprintf( __( 'Archive for %s', 'exmachina-core' ), get_the_time( __( 'F jS, Y', 'exmachina-core' ) ) );
-
-      elseif ( get_query_var( 'w' ) )
-        $doctitle = sprintf( __( 'Archive for week %s of %s', 'exmachina-core' ), get_the_time( __( 'W', 'exmachina-core' ) ), get_the_time( __( 'Y', 'exmachina-core' ) ) );
-
-      elseif ( is_month() )
-        $doctitle = sprintf( __( 'Archive for %s', 'exmachina-core' ), single_month_title( ' ', false) );
-
-      elseif ( is_year() )
-        $doctitle = sprintf( __( 'Archive for %s', 'exmachina-core' ), get_the_time( __( 'Y', 'exmachina-core' ) ) );
-    }
-
-    /* For any other archives. */
-    else {
-      $doctitle = __( 'Archives', 'exmachina-core' );
-    }
-  }
-
-  /* If viewing a search results page. */
-  elseif ( is_search() )
-    $doctitle = sprintf( __( 'Search results for "%s"', 'exmachina-core' ), esc_attr( get_search_query() ) );
-
-  /* If viewing a 404 not found page. */
-  elseif ( is_404() )
-    $doctitle = __( '404 Not Found', 'exmachina-core' );
-
-  /* If the current page is a paged page. */
-  if ( ( ( $page = $wp_query->get( 'paged' ) ) || ( $page = $wp_query->get( 'page' ) ) ) && $page > 1 )
-    $doctitle = sprintf( __( '%1$s Page %2$s', 'exmachina-core' ), $doctitle . $separator, number_format_i18n( $page ) );
-
-  /* Apply the wp_title filters so we're compatible with plugins. */
-  $doctitle = apply_filters( 'wp_title', strip_tags( $doctitle ), $separator, '' );
-
-  /* Trim separator + space from beginning and end in case a plugin adds it. */
-  $doctitle = trim( $doctitle, "{$separator} " );
-
-  /* Print the title to the screen. */
-  echo apply_atomic( 'document_title', esc_attr( $doctitle ) );
-
-} // end function exmachina_document_title()
