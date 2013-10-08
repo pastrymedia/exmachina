@@ -30,4 +30,8 @@ if ( !defined('ABSPATH')) exit;
 # begin functions
 ###############################################################################
 
-require_once( dirname( __FILE__ ) . '/lib/init.php' );
+//require_once( dirname( __FILE__ ) . '/lib/init.php' );
+
+/* Load the core theme framework. */
+require ( trailingslashit( get_template_directory() ) . 'lib/engine.php' );
+new ExMachina();

@@ -26,7 +26,7 @@ if ( !defined('ABSPATH')) exit;
 # Begin functions
 ###############################################################################
 
-add_action( 'exmachina_init', 'exmachina_create_initial_layouts', 0 );
+add_action( 'exmachina_setup', 'exmachina_create_initial_layouts', 0 );
 /**
  * Create Initial Layouts
  *

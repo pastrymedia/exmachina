@@ -85,7 +85,7 @@ class ExMachina_Admin_Custom_Code extends ExMachina_Admin_Metaboxes {
 			return false;
 
 		/** Don't load custom.php when trying to save custom.php */
-		remove_action( 'after_setup_theme', 'exmachina_design_do_custom_php' );
+		remove_action( 'exmachina_setup', 'exmachina_design_do_custom_php' );
 
 		if ( exmachina_design_make_stylesheet_path_writable() ) {
 

@@ -82,7 +82,7 @@ function exmachina_register_sidebar( $args ) {
 
 } // end function exmachina_register_sidebar()
 
-add_action( 'after_setup_theme', '_exmachina_builtin_sidebar_params' );
+add_action( 'exmachina_setup', '_exmachina_builtin_sidebar_params' );
 /**
  * Alters the widget area params array for HTML5 compatibility.
  *
@@ -158,7 +158,7 @@ function exmachina_register_default_widget_areas() {
 
 } // end function exmachina_register_default_widget_areas()
 
-add_action( 'after_setup_theme', 'exmachina_register_footer_widget_areas' );
+add_action( 'exmachina_setup', 'exmachina_register_footer_widget_areas' );
 /**
  * Register footer widget areas based on the number of widget areas the user wishes to create with `add_theme_support()`.
  *

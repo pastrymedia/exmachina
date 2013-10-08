@@ -26,7 +26,7 @@ if ( !defined('ABSPATH')) exit;
 # Begin functions
 ###############################################################################
 
-add_action( 'after_setup_theme', 'exmachina_add_admin_menu' );
+add_action( 'exmachina_setup', 'exmachina_add_admin_menu' );
 /**
  * Add ExMachina top-level item in admin menu.
  *

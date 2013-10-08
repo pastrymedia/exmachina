@@ -97,7 +97,7 @@ function exmachina_seo_disabled() {
 
 } // end function exmachina_seo_disabled()
 
-add_action( 'after_setup_theme', 'exmachina_seo_compatibility_check', 5 );
+add_action( 'exmachina_setup', 'exmachina_seo_compatibility_check', 5 );
 /**
  * SEO Compatibility Check
  *

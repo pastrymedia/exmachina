@@ -21,7 +21,7 @@ define( 'SS_PLUGIN_DIR', dirname( __FILE__ ) );
 
 
 
-add_action( 'exmachina_init', 'ss_exmachina_init', 12 );
+add_action( 'exmachina_setup', 'ss_exmachina_init', 12 );
 /**
  * Plugin initialization.
  *

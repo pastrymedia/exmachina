@@ -56,7 +56,7 @@ add_filter( 'exmachina_header_scripts', 'do_shortcode' );
 add_action( 'wp_head', 'exmachina_header_scripts' );
 
 /* Activates the Custom Header feature. */
-add_action( 'after_setup_theme', 'exmachina_custom_header' );
+add_action( 'exmachina_setup', 'exmachina_custom_header' );
 add_action( 'wp_head', 'exmachina_custom_header_style' );
 
 /* Adds header markup to header hook. */

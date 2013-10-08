@@ -31,7 +31,7 @@ if ( !defined('ABSPATH')) exit;
 ###############################################################################
 
 /* Register the custom menus. */
-add_action( 'after_setup_theme', 'exmachina_register_nav_menus' );
+add_action( 'exmachina_setup', 'exmachina_register_nav_menus' );
 
 /* Hook the menus to front-end output. */
 add_action( 'exmachina_after_header', 'exmachina_do_nav' );
