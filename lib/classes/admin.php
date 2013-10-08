@@ -33,17 +33,17 @@ if ( !defined('ABSPATH')) exit;
  * metaboxes). This class is extended by subclasses that define specific types
  * of admin pages.
  *
- * @since 0.5.0
+ * @since 1.5.1
  */
 abstract class ExMachina_Admin {
 
-	/**
+  /**
    * Admin Class Public Variables
    *
    * Defines the public variables that will be used throughout the class and the
    * extended subclasses.
    *
-   * @since 0.2.0
+   * @since 1.5.1
    *
    * @var string  $pagehook         Name of the page hook when it is registered.
    * @var string  $page_id          ID of the admin menu and settings page.
@@ -59,11 +59,13 @@ abstract class ExMachina_Admin {
   public $menu_ops;         // Associative array of configuration options for the admin menu(s).
   public $page_ops;         // Associative array of configuration options for the settings page.
 
-	/**
+  /**
    * Admin Page Creator
    *
    * Call this method in a subclass constructor to create an admin menu and
    * settings page.
+   *
+   * @link http://codex.wordpress.org/Function_Reference/wp_parse_args
    *
    * @uses maybe_add_main_menu()     Possibly create a new top level admin menu.
    * @uses maybe_add_first_submenu() Possibly create the first submenu item.
@@ -74,7 +76,8 @@ abstract class ExMachina_Admin {
    * @uses settings_init()           Initialize the settings page.
    * @uses save()                    Save method.
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
    *
    * @param  string $page_id          ID of the admin menu and settings page.
    * @param  array  $menu_ops         Optional. Config options for admin menu(s). Default is empty array.
@@ -95,11 +98,11 @@ abstract class ExMachina_Admin {
     /* Set the $page_ops defaults. */
     $page_ops_defaults = array(
       'screen_icon'       => 'options-general',
-      'save_button_text'  => __( 'Save Settings', 'exmachina' ),
-      'reset_button_text' => __( 'Reset Settings', 'exmachina' ),
-      'saved_notice_text' => __( 'Settings saved.', 'exmachina' ),
-      'reset_notice_text' => __( 'Settings reset.', 'exmachina' ),
-      'error_notice_text' => __( 'Error saving settings.', 'exmachina' ),
+      'save_button_text'  => __( 'Save Settings', 'exmachina-core' ),
+      'reset_button_text' => __( 'Reset Settings', 'exmachina-core' ),
+      'saved_notice_text' => __( 'Settings saved.', 'exmachina-core' ),
+      'reset_notice_text' => __( 'Settings reset.', 'exmachina-core' ),
+      'error_notice_text' => __( 'Error saving settings.', 'exmachina-core' ),
     );
 
     /* Parse the $page_ops arguments. */
@@ -131,16 +134,20 @@ abstract class ExMachina_Admin {
 
   } // end function create()
 
-	/**
+  /**
    * Maybe Add Main Menu
    *
    * Possibly create a new top-level admin menu (with or without separator).
    *
-   * @see http://codex.wordpress.org/Function_Reference/add_menu_page
+   * @link http://codex.wordpress.org/Function_Reference/add_menu_page
+   * @link http://codex.wordpress.org/Function_Reference/wp_parse_args
    *
    * @uses settings_page() Settings page callback function.
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
+   *
+   * @return void
    */
   public function maybe_add_main_menu() {
 
@@ -177,17 +184,21 @@ abstract class ExMachina_Admin {
 
   } // end function maybe_add_main_menu()
 
-	/**
+  /**
    * Maybe Add First Submenu
    *
    * Possibly create the first submneu item. This method takes the gueswork out
    * of creating a submenu of the top-level menu item.
    *
-   * @see http://codex.wordpress.org/Function_Reference/add_submenu_page
+   * @link http://codex.wordpress.org/Function_Reference/add_submenu_page
+   * @link http://codex.wordpress.org/Function_Reference/wp_parse_args
    *
    * @uses settings_page() Settings page callback function.
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
+   *
+   * @return void
    */
   public function maybe_add_first_submenu() {
 
@@ -208,16 +219,20 @@ abstract class ExMachina_Admin {
 
   } // end function maybe_add_first_submenu()
 
-	/**
+  /**
    * Maybe Add Submenu
    *
    * Possibly create a submneu item.
    *
-   * @see http://codex.wordpress.org/Function_Reference/add_submenu_page
+   * @link http://codex.wordpress.org/Function_Reference/add_submenu_page
+   * @link http://codex.wordpress.org/Function_Reference/wp_parse_args
    *
    * @uses settings_page() Settings page callback function.
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
+   *
+   * @return void
    */
   public function maybe_add_submenu() {
 
@@ -239,16 +254,19 @@ abstract class ExMachina_Admin {
 
   } // end function maybe_add_submenu()
 
-	/**
+  /**
    * Maybe Add Theme Page
    *
    * Possibly create a theme page.
    *
-   * @see http://codex.wordpress.org/Function_Reference/add_theme_page
+   * @link http://codex.wordpress.org/Function_Reference/add_theme_page
+   * @link http://codex.wordpress.org/Function_Reference/wp_parse_args
    *
    * @uses settings_page() Admin page callback method.
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
+   *
    * @return void
    */
   public function maybe_add_theme_submenu() {
@@ -270,20 +288,21 @@ abstract class ExMachina_Admin {
 
   } // end function maybe_add_theme_submenu()
 
-	/**
+  /**
    * Register Settings
    *
    * Registers the database settings for storage.
    *
-   * @see http://codex.wordpress.org/Function_Reference/register_setting
-   * @see http://codex.wordpress.org/Function_Reference/add_option
-   * @see http://codex.wordpress.org/Function_Reference/update_option
+   * @link http://codex.wordpress.org/Function_Reference/register_setting
+   * @link http://codex.wordpress.org/Function_Reference/add_option
+   * @link http://codex.wordpress.org/Function_Reference/update_option
    *
    * @uses exmachina_is_menu_page()   Conditional menu page check.
    * @uses exmachina_get_option()     Retrives the option from the settings field.
    * @uses exmachina_admin_redirect() Admin page redirect.
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
    *
    * @return null Return early if not on the correct admin page.
    */
@@ -312,17 +331,18 @@ abstract class ExMachina_Admin {
 
   } // end function register_settings()
 
-	/**
+  /**
    * Settings Page Notices
    *
    * Display notices on the save or reset of settings.
    *
-   * @see http://codex.wordpress.org/Function_Reference/settings_errors
-   * @see http://codex.wordpress.org/Function_Reference/add_settings_error
+   * @link http://codex.wordpress.org/Function_Reference/settings_errors
+   * @link http://codex.wordpress.org/Function_Reference/add_settings_error
    *
    * @uses exmachina_is_menu_page() Conditional menu page check.
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
    *
    * @return null Return early if not on the correct admin page.
    */
@@ -334,28 +354,26 @@ abstract class ExMachina_Admin {
 
     /* Display the save settings notice. */
     if ( isset( $_REQUEST['settings-updated'] ) && 'true' === $_REQUEST['settings-updated'] )
-      //echo '<div id="message" class="updated"><p><strong>' . $this->page_ops['saved_notice_text'] . '</strong></p></div>';
       add_settings_error( $this->pagehook . '-notices', 'exmachina-settings-updated', $this->page_ops['saved_notice_text'], 'updated fade in' );
 
     /* Display the reset settings notice. */
     elseif ( isset( $_REQUEST['reset'] ) && 'true' === $_REQUEST['reset'] )
-      //echo '<div id="message" class="updated"><p><strong>' . $this->page_ops['reset_notice_text'] . '</strong></p></div>';
       add_settings_error( $this->pagehook . '-notices', 'exmachina-settings-reset', $this->page_ops['reset_notice_text'], 'updated' );
 
     /* Display the error settings notice. */
     elseif ( isset( $_REQUEST['error'] ) && 'true' === $_REQUEST['error'] )
-      //echo '<div id="message" class="updated"><p><strong>' . $this->page_ops['error_notice_text'] . '</strong></p></div>';
       add_settings_error( $this->pagehook . '-notices', 'exmachina-settings-error', $this->page_ops['error_notice_text'], 'error' );
 
   } // end function notices()
 
-	/**
+  /**
    * Save Method
    *
    * Override this method to modify the form data (for validation, sanitization,
    * etc.) before it gets saved.
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
    *
    * @param  string $newvalue New value.
    * @param  string $oldvalue Old value.
@@ -367,32 +385,35 @@ abstract class ExMachina_Admin {
 
   } // end function save()
 
-	/**
+  /**
    * Settings Page Init
    *
    * Initialize the settings page. This method must be re-defined in an extended
    * subclass to hook in the required components of the page.
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
    */
-	abstract public function settings_init();
+  abstract public function settings_init();
 
-	/**
+  /**
    * Settings Page Output
    *
    * Outputs the main admin page. This method must be re-defined in an extended
    * subclass to output the main admin page content.
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
    */
-	abstract public function settings_page();
+  abstract public function settings_page();
 
-	/**
+  /**
    * Get Field Name
    *
    * Helper function that constructs name attributes for use in the form fields.
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
    *
    * @param  string $name Field name base.
    * @return string       Full field name.
@@ -403,12 +424,13 @@ abstract class ExMachina_Admin {
 
   } // end function get_field_name()
 
-	/**
+  /**
    * Get Field ID
    *
    * Helper function that constructs id attributes for use in the form fields.
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
    *
    * @param  string $id Field id base.
    * @return string     Full field id.
@@ -419,7 +441,7 @@ abstract class ExMachina_Admin {
 
   } // end function get_field_id()
 
-	/**
+  /**
    * Get Field Value
    *
    * Helper function that returns a setting value from this form's setting
@@ -427,7 +449,8 @@ abstract class ExMachina_Admin {
    *
    * @uses exmachina_get_option() Returns the option from the options table.
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
    *
    * @param  string $key Field key.
    * @return string      Full field value.
@@ -449,7 +472,7 @@ abstract class ExMachina_Admin {
  * This class must be extended when creating a basic admin page and the admin()
  * method must be redefined.
  *
- * @since 0.2.0
+ * @since 1.5.1
  */
 abstract class ExMachina_Admin_Basic extends ExMachina_Admin {
 
@@ -460,7 +483,10 @@ abstract class ExMachina_Admin_Basic extends ExMachina_Admin {
    * method can be redefined within the page-specific implementation class
    * if something needs to hook into 'admin_init'.
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
+   *
+   * @return void
    */
   public function settings_init() {
 
@@ -480,16 +506,21 @@ abstract class ExMachina_Admin_Basic extends ExMachina_Admin {
  * This class must be extended when creating an admin page with a form, and the
  * settings_form() method must be defined in the subclass.
  *
- * @since 0.2.0
+ * @since 1.5.1
  */
 abstract class ExMachina_Admin_Form extends ExMachina_Admin {
 
-	/**
+  /**
    * Form Admin Settings Init
    *
    * Initialize the settings page by hooking the form method into the page.
    *
-   * @since 0.2.0
+   * @uses settings_form() Generates the settings page output.
+   *
+   * @since 1.5.1
+   * @access public
+   *
+   * @return void
    */
   public function settings_init() {
 
@@ -502,17 +533,7 @@ abstract class ExMachina_Admin_Form extends ExMachina_Admin {
 
   } // end function settings_init()
 
-	/**
-   * Settings Form Output
-   *
-   * Outputs the settings page form elements. Must be overriden in a subclass
-   * to work properly.
-   *
-   * @since 0.2.0
-   */
-  abstract public function settings_form();
-
-	/**
+  /**
    * Admin Form Settings Page Output
    *
    * Use this as the settings admin callback to create an admin page. Includes
@@ -522,16 +543,21 @@ abstract class ExMachina_Admin_Form extends ExMachina_Admin {
    * form. Can be overridden in a child class to achieve complete control over
    * the settings page output.
    *
-   * @see http://codex.wordpress.org/Function_Reference/settings_fields
-   * @see http://codex.wordpress.org/Function_Reference/screen_icon
-   * @see http://codex.wordpress.org/Function_Reference/submit_button
+   * @link http://codex.wordpress.org/Function_Reference/settings_fields
+   * @link http://codex.wordpress.org/Function_Reference/screen_icon
+   * @link http://codex.wordpress.org/Function_Reference/esc_html
+   * @link http://codex.wordpress.org/Function_Reference/get_admin_page_title
+   * @link http://codex.wordpress.org/Function_Reference/submit_button
    *
    * @uses get_field_name() Gets the field name from the settings field.
    *
    * @todo possibly abstract top-buttons and bottom-buttons to action hook
    * @todo maybe add settings_errors()
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
+   *
+   * @return void
    */
   public function settings_page() {
 
@@ -575,12 +601,23 @@ abstract class ExMachina_Admin_Form extends ExMachina_Admin {
 
     <?php
 
-  } // end function settings_page()
+  } // end function admin()
+
+  /**
+   * Settings Form Output
+   *
+   * Outputs the settings page form elements. Must be overriden in a subclass
+   * to work properly.
+   *
+   * @since 1.5.1
+   * @access public
+   */
+  abstract public function settings_form();
 
 } // end class ExMachina_Admin_Form
 
 /**
- * ExMachina Admin Metaboxes
+ * Metaboxes Admin Class
  *
  * Abstract subclass of ExMachina_Admin which adds support for registering and
  * displaying metaboxes.
@@ -588,11 +625,11 @@ abstract class ExMachina_Admin_Form extends ExMachina_Admin {
  * This class must be extended when creating an admin page with metaboxes, and
  * the settings_metaboxes()  method must be defined in the subclass.
  *
- * @since 0.2.0
+ * @since 1.5.1
  */
 abstract class ExMachina_Admin_Metaboxes extends ExMachina_Admin {
 
-	/**
+  /**
    * Admin Metaboxes Settings Init
    *
    * Satisfies the abstract requirements of ExMachina_Admin.
@@ -601,7 +638,9 @@ abstract class ExMachina_Admin_Metaboxes extends ExMachina_Admin {
    * to create the theme settings page, then use that as a launchpad for specific
    * actions that need to be tied to the settings page.
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
+   *
    * @return void
    */
   public function settings_init() {
@@ -626,15 +665,18 @@ abstract class ExMachina_Admin_Metaboxes extends ExMachina_Admin {
     /* Load help tabs if 'help' method exists. */
     if ( method_exists( $this, 'settings_page_help' ) )
       add_action( 'load-' . $this->pagehook, array( $this, 'settings_page_help' ) );
+
   } // end function settings_init()
 
-	/**
+  /**
    * Register the Metaboxes
    *
    * Abstract function to load metaboxes on the theme settings page. Must be
    * overridden in a subclass, or obviously, it won't work.
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
+   *
    * @return void
    */
   abstract public function settings_page_load_metaboxes();
@@ -646,12 +688,17 @@ abstract class ExMachina_Admin_Metaboxes extends ExMachina_Admin {
    * Displays the theme settings page markup and calls do_meta_boxes() to allow
    * additional settings metaboxes to be added to the page.
    *
-   * @see http://codex.wordpress.org/Function_Reference/screen_icon
-   * @see http://codex.wordpress.org/Function_Reference/settings_errors
-   * @see http://codex.wordpress.org/Function_Reference/wp_nonce_field
-   * @see http://codex.wordpress.org/Function_Reference/settings_fields
+   * @link http://codex.wordpress.org/Function_Reference/screen_icon
+   * @link http://codex.wordpress.org/Function_Reference/esc_html
+   * @link http://codex.wordpress.org/Function_Reference/get_admin_page_title
+   * @link http://codex.wordpress.org/Function_Reference/esc_html_e
+   * @link http://codex.wordpress.org/Function_Reference/settings_errors
+   * @link http://codex.wordpress.org/Function_Reference/wp_nonce_field
+   * @link http://codex.wordpress.org/Function_Reference/settings_fields
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
+   *
    * @return void
    */
   public function settings_page() {
@@ -701,28 +748,33 @@ abstract class ExMachina_Admin_Metaboxes extends ExMachina_Admin {
    * layout in the WordPress admin. This hook provides an easy way for themes to
    * load and execute metabox code only on the theme settings page in the admin.
    *
-   * @since 0.2.0
+   * @todo remove this function.
+   *
+   * @since 1.5.1
+   * @access public
+   *
    * @return void
    */
   public function settings_page_add_metaboxes() {
 
     /* Trigger the 'add_meta_boxes' action hook. */
     do_action( 'add_meta_boxes', $this->pagehook );
+
   } // end function settings_page_add_metaboxes()
 
-	/**
+  /**
    * Enqueue Settings Page Scripts
    *
    * Loads the JavaScript files required for managing the metaboxes on the theme
    * settings page.
    *
-   * @see http://codex.wordpress.org/Function_Reference/wp_enqueue_script
+   * @link http://codex.wordpress.org/Function_Reference/wp_enqueue_script
    *
    * @uses exmachina_is_menu_page() Admin page conditional check.
    *
-   * @todo actually enqueue admin page JS
+   * @since 1.5.1
+   * @access public
    *
-   * @since 0.2.0
    * @return void
    */
   public function settings_page_enqueue_scripts() {
@@ -750,14 +802,17 @@ abstract class ExMachina_Admin_Metaboxes extends ExMachina_Admin {
     /* Enqueue select2 JavaScript if on an admin settings screen. */
     wp_enqueue_script( 'exmachina-select-js' );
 
-    /* Enqueue admin JavaScript if on an admin settings screen. */
+    /* Enqueue bootstrap JavaScript if on an admin settings screen. */
     wp_enqueue_script( 'exmachina-bootstrap-admin-js' );
 
-    /* Enqueue admin JavaScript if on an admin settings screen. */
+    /* Enqueue typography JavaScript if on an admin settings screen. */
     wp_enqueue_script( 'exmachina-core-admin-typography-js' );
 
-    /* Enqueue admin JavaScript if on an admin settings screen. */
+    /* Enqueue admin setup JavaScript if on an admin settings screen. */
     wp_enqueue_script( 'exmachina-core-admin-setup-js' );
+
+    /* Enqueue admin JavaScript if on an admin settings screen. */
+    wp_enqueue_script( 'exmachina-core-admin-js' );
 
   } // end function settings_enqueue_scripts()
 
@@ -767,13 +822,13 @@ abstract class ExMachina_Admin_Metaboxes extends ExMachina_Admin {
    * Loads the required stylesheets for displaying the theme settings page in
    * the WordPress admin.
    *
-   * @see http://codex.wordpress.org/Function_Reference/wp_enqueue_style
+   * @link http://codex.wordpress.org/Function_Reference/wp_enqueue_style
    *
    * @uses exmachina_is_menu_page() Admin page conditional check.
    *
-   * @todo actually enqueue admin page css
+   * @since 1.5.1
+   * @access public
    *
-   * @since 0.2.0
    * @return void
    */
   public function settings_page_enqueue_styles() {
@@ -782,10 +837,11 @@ abstract class ExMachina_Admin_Metaboxes extends ExMachina_Admin {
     if ( ! exmachina_is_menu_page( $this->page_id ) )
       return;
 
+    /* Enqueue WordPress color picker style. */
     wp_enqueue_style( 'wp-color-picker' );
 
     /* Enqueue normalize stylesheet if on an admin settings screen. */
-    wp_enqueue_style( 'exmachina-core-admin-normalize-css' );
+    wp_enqueue_style( 'exmachina-core-admin-reset-css' );
 
     /* Enqueue uikit stylesheet if on an admin settings screen. */
     wp_enqueue_style( 'exmachina-uikit-admin-css' );
@@ -817,10 +873,12 @@ abstract class ExMachina_Admin_Metaboxes extends ExMachina_Admin {
    * other contexts. The overwritten method must contain div elements with
    * classes of metabox-holder and postbox-container.
    *
-   * @see http://codex.wordpress.org/Dashboard_Widgets_API
-   * @see http://codex.wordpress.org/Function_Reference/do_meta_boxes
+   * @link http://codex.wordpress.org/Dashboard_Widgets_API
+   * @link http://codex.wordpress.org/Function_Reference/do_meta_boxes
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
+   *
    * @global object $wp_meta_boxes
    * @return void
    */
@@ -857,7 +915,7 @@ abstract class ExMachina_Admin_Metaboxes extends ExMachina_Admin {
    *
    * Echo out the submit and reset buttons along with the wrapping markup.
    *
-   * @see http://codex.wordpress.org/Function_Reference/submit_button
+   * @link http://codex.wordpress.org/Function_Reference/submit_button
    *
    * @uses get_field_name() Retrieves the 'reset' field name.
    *
@@ -865,7 +923,9 @@ abstract class ExMachina_Admin_Metaboxes extends ExMachina_Admin {
    * @todo setup clear button
    * @todo add reset confirmation JS
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
+   *
    * @return void
    */
   public function settings_page_do_toolbar() {
@@ -874,6 +934,7 @@ abstract class ExMachina_Admin_Metaboxes extends ExMachina_Admin {
         <h3>
           <?php submit_button( $this->page_ops['save_button_text'], 'primary update-button pull-right', 'submit', false, array( 'id' => '' ) ); ?>
           <?php submit_button( $this->page_ops['reset_button_text'], 'secondary reset-button exmachina-js-confirm-reset', $this->get_field_name( 'reset' ), false, array( 'id' => '' ) ); ?>
+          <input type="submit" class="reset-button button-secondary" name="reset" value="<?php esc_attr_e( 'Restore Defaults', 'exmachina-core' ); ?>" onclick="return confirm( '<?php print esc_js( __( 'Click OK to reset. Any theme settings will be lost!', 'exmachina-core' ) ); ?>' );" />
 
         </h3>
       </div><!-- .settings-toolbar -->
@@ -886,7 +947,9 @@ abstract class ExMachina_Admin_Metaboxes extends ExMachina_Admin {
    * Loads the JavaScript required for toggling the metaboxes on the theme
    * settings page.
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
+   *
    * @return void
    */
   public function settings_page_footer_scripts() { ?>
@@ -900,15 +963,4 @@ abstract class ExMachina_Admin_Metaboxes extends ExMachina_Admin {
     </script><?php
   } // end function settings_page_footer_scripts()
 
-
-
-
-
-
-
-
 } // end class ExMachina_Admin_Metaboxes
-
-
-
-do_action( 'exmachina_admin_init' );

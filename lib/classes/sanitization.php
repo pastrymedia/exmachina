@@ -13,7 +13,9 @@ if ( !defined('ABSPATH')) exit;
  * this file under any circumstances. Bad things will happen. Please do all
  * modifications in the form of a child theme.
  *
- * <DESCRIPTION GOES HERE>
+ * This class sanitizes settings before being saved to the database. The filter
+ * methods should cover most sanitization needs, however, developers may add
+ * additional filters using the add_filter() method.
  *
  * @package     ExMachina
  * @subpackage  Classes
@@ -31,7 +33,7 @@ if ( !defined('ABSPATH')) exit;
  *
  * Ensures that saved values are of the expected type.
  *
- * @since 0.2.0
+ * @since 1.5.1
  */
 class ExMachina_Settings_Sanitizer {
 
@@ -40,7 +42,7 @@ class ExMachina_Settings_Sanitizer {
    *
    * Holds an instance of self methods that can be accessed staticaly.
    *
-   * @since 0.2.0
+   * @since 1.5.1
    * @var ExMachina_Settings_Sanitizer
    */
   static $instance;
@@ -50,7 +52,7 @@ class ExMachina_Settings_Sanitizer {
    *
    * Holds a list of all the options as an array.
    *
-   * @since 0.2.0
+   * @since 1.5.1
    * @var array
    */
   var $options = array();
@@ -62,7 +64,7 @@ class ExMachina_Settings_Sanitizer {
    *
    * @link http://codex.wordpress.org/Function_Reference/do_action_ref_array
    *
-   * @since 0.2.0
+   * @since 1.5.1
    */
   function __construct() {
 
@@ -82,7 +84,8 @@ class ExMachina_Settings_Sanitizer {
    *
    * @uses ExMachina_Settings_Sanitizer::sanitize() The sanitizer value callback.
    *
-   * @since 0.2.0
+   * @since 1.5.1
+   * @access public
    *
    * @param  string         $filter     Sanitization filter type.
    * @param  string         $option     Option key.
@@ -118,7 +121,7 @@ class ExMachina_Settings_Sanitizer {
    *
    * @uses ExMachina_Settings_Sanitizer::get_available_filters() Array of known sanitization filter types.
    *
-   * @since 0.2.0
+   * @since 1.5.1
    *
    * @param  string $filter    Sanitization filter type.
    * @param  string $new_value New value.
@@ -153,7 +156,7 @@ class ExMachina_Settings_Sanitizer {
    * @uses safe_html()                Removes all unsafe HTML tags.
    * @uses requires_unfiltered_html() Returns unfiltered HTML (if allowed).
    *
-   * @since 0.2.0
+   * @since 1.5.1
    *
    * @return array Array of sanitization types and corresponding callback functions.
    */
@@ -184,7 +187,7 @@ class ExMachina_Settings_Sanitizer {
    *
    * @uses ExMachina_Settings_Sanitizer::do_filter() Passes the value through the sanitization filter.
    *
-   * @since 0.2.0
+   * @since 1.5.1
    *
    * @param  mixed  $new_value New value.
    * @param  string $option    Option name.
@@ -214,7 +217,9 @@ class ExMachina_Settings_Sanitizer {
 
   } // end function sanitize()
 
-  /* Begin the filter methods. */
+  /*-------------------------------------------------------------------------*/
+  /* Begin the sanitization filter methods. */
+  /*-------------------------------------------------------------------------*/
 
   /**
    * One Zero Filter
@@ -222,7 +227,7 @@ class ExMachina_Settings_Sanitizer {
    * Returns a 1 or a 0 for checkboxes and all truthy/falsey values. Uses
    * double casting to cast to a boolean, then to an integer.
    *
-   * @since 0.2.0
+   * @since 1.5.1
    *
    * @param  mixed   $new_value New value.
    * @return integer            Returns a 1 or 0.
@@ -240,7 +245,7 @@ class ExMachina_Settings_Sanitizer {
    *
    * @link http://codex.wordpress.org/Function_Reference/absint
    *
-   * @since 0.2.0
+   * @since 1.5.1
    *
    * @param  mixed    $new_value  New value.
    * @return integer              Returns a positive integer.
@@ -258,7 +263,7 @@ class ExMachina_Settings_Sanitizer {
    *
    * @link http://codex.wordpress.org/Function_Reference/esc_url_raw
    *
-   * @since 0.2.0
+   * @since 1.5.1
    *
    * @param  string $new_value New value.
    * @return string            Returns a safe URL string.
@@ -274,7 +279,7 @@ class ExMachina_Settings_Sanitizer {
    *
    * Removes HTML tags from a string via the strip_tags() function.
    *
-   * @since 0.2.0
+   * @since 1.5.1
    *
    * @param  string $new_value New value.
    * @return string            Returns a string stripped of HTML tags.
@@ -292,7 +297,7 @@ class ExMachina_Settings_Sanitizer {
    *
    * Removes unsafe HTML tags via the wp_kses_post() filter.
    *
-   * @since 0.2.0
+   * @since 1.5.1
    *
    * @param  string $new_value New value.
    * @return string            Returns a string stripped of unsafe HTML tags.
@@ -311,7 +316,7 @@ class ExMachina_Settings_Sanitizer {
    *
    * @link http://codex.wordpress.org/Function_Reference/current_user_can
    *
-   * @since 0.2.0
+   * @since 1.5.1
    *
    * @param  string $new_value New value.
    * @param  string $old_value Old value.
@@ -338,7 +343,7 @@ class ExMachina_Settings_Sanitizer {
  *
  * @uses ExMachina_Settings_Sanitizer::add_filter() Adds the sanitization filter to an option.
  *
- * @since 0.2.0
+ * @since 1.5.1
  *
  * @param  string       $filter     The filter type to use.
  * @param  string       $option     The option name to filter.
@@ -357,7 +362,7 @@ add_action( 'admin_init', 'exmachina_settings_sanitizer_init' );
  *
  * Initializes the settings sanitization class.
  *
- * @since 0.2.0
+ * @since 1.5.1
  */
 function exmachina_settings_sanitizer_init() {
 
