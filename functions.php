@@ -30,8 +30,29 @@ if ( !defined('ABSPATH')) exit;
 # begin functions
 ###############################################################################
 
-//require_once( dirname( __FILE__ ) . '/lib/init.php' );
-
 /* Load the core theme framework. */
 require ( trailingslashit( get_template_directory() ) . 'lib/engine.php' );
 new ExMachina();
+
+/* Do theme setup on the 'after_setup_theme' hook. */
+add_action( 'after_setup_theme', 'beta_theme_setup' );
+
+/**
+ * Theme Setup Function
+ *
+ * This function adds support for theme features and defines the default theme
+ * actions and filters.
+ *
+ * @since 0.1.0
+ * @access public
+ * @return void
+ */
+function beta_theme_setup() {
+
+  /* Get action/filter hook prefix. */
+  $prefix = exmachina_get_prefix();
+
+  /* Add theme support for core framework features. */
+  add_theme_support( 'exmachina-core-widgets', array( 'featured-page', 'featured-post', 'user-profile') );
+
+} // end function beta_theme_setup()
