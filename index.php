@@ -7,8 +7,6 @@ if ( !defined('ABSPATH')) exit;
  * Index Template
  * index.php
  *
- * @todo bring in actual markup
- *
  * The main template file
  * @link http://codex.wordpress.org/Theme_Development#Index_.28index.php.29
  *
@@ -19,6 +17,3 @@ if ( !defined('ABSPATH')) exit;
  * @license http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
  * @link http://www.machinathemes.com/themes/<[theme-name]>
  */
-
-/* Initialize ExMachina. */
-exmachina();

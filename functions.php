@@ -7,10 +7,6 @@ if ( !defined('ABSPATH')) exit;
  * <[TEMPLATE NAME]> WordPress Theme
  * Main Theme Functions
  *
- * @todo create init function
- * @todo create setup function
- * @todo remove create_custom_php dependency
- *
  * functions.php
  * @link http://codex.wordpress.org/Functions_File_Explained
  *
@@ -31,11 +27,11 @@ if ( !defined('ABSPATH')) exit;
 ###############################################################################
 
 /* Load the core theme framework. */
-require ( trailingslashit( get_template_directory() ) . 'lib/engine.php' );
-new ExMachina();
+//require ( trailingslashit( get_template_directory() ) . 'lib/engine.php' );
+//new ExMachina();
 
 /* Do theme setup on the 'after_setup_theme' hook. */
-add_action( 'after_setup_theme', 'beta_theme_setup' );
+//add_action( 'after_setup_theme', 'beta_theme_setup' );
 
 /**
  * Theme Setup Function
@@ -43,7 +39,7 @@ add_action( 'after_setup_theme', 'beta_theme_setup' );
  * This function adds support for theme features and defines the default theme
  * actions and filters.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @access public
  * @return void
  */
@@ -53,10 +49,5 @@ function beta_theme_setup() {
   $prefix = exmachina_get_prefix();
 
   /* Add theme support for core framework features. */
-  add_theme_support( 'exmachina-core-menus', array( 'primary', 'secondary') );
-  add_theme_support( 'exmachina-core-scripts', array( 'comment-reply' ) );
-  add_theme_support( 'exmachina-core-styles', array( '25px', 'gallery', 'parent', 'style' ) );
-  add_theme_support( 'exmachina-core-widgets', array( 'featured-page', 'featured-post', 'user-profile') );
-  add_theme_support( 'exmachina-core-shortcodes' );
 
 } // end function beta_theme_setup()
