@@ -1,0 +1,28 @@
+<[Theme Name]> WordPress Theme
+==============================
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et mi ac sem
+ultrices sollicitudin. Proin justo lectus, hendrerit sit amet convallis sed,
+dictum ac neque. Nullam a interdum diam, vel tristique metus. Pellentesque
+venenatis sem ac molestie blandit. Morbi pulvinar accumsan sodales.
+
+For more information, please visit:
+
+http://www.machinathemes.com
+
+////////////////////////////////////////////////////////////////////////////////////
+CHANGE LOG & HISTORY
+////////////////////////////////////////////////////////////////////////////////////
+
+YYYY.MM.DD - Initial Release
+
+////////////////////////////////////////////////////////////////////////////////////
+CHANGE LOG LEGEND
+////////////////////////////////////////////////////////////////////////////////////
+
+[+] = Added
+[*] = Changed
+[^] = Moved
+[=] = No Changes
+[x] = Deleted
+[!] = Bugs

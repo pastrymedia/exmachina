@@ -27,11 +27,11 @@ if ( !defined('ABSPATH')) exit;
 ###############################################################################
 
 /* Load the core theme framework. */
-//require ( trailingslashit( get_template_directory() ) . 'lib/engine.php' );
-//new ExMachina();
+require ( trailingslashit( get_template_directory() ) . 'library/engine.php' );
+new ExMachina();
 
 /* Do theme setup on the 'after_setup_theme' hook. */
-//add_action( 'after_setup_theme', 'beta_theme_setup' );
+add_action( 'after_setup_theme', 'optimus_theme_setup' );
 
 /**
  * Theme Setup Function
@@ -43,11 +43,11 @@ if ( !defined('ABSPATH')) exit;
  * @access public
  * @return void
  */
-function beta_theme_setup() {
+function optimus_theme_setup() {
 
   /* Get action/filter hook prefix. */
   $prefix = exmachina_get_prefix();
 
   /* Add theme support for core framework features. */
 
-} // end function beta_theme_setup()
+} // end function optimus_theme_setup()
