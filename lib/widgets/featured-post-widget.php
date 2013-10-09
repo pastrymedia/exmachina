@@ -105,7 +105,6 @@ class ExMachina_Featured_Post extends WP_Widget {
    *
    * Outputs the content of the widget.
    *
-   * @todo remvoe html5 dependency
    * @todo update exmachina markup
    * @todo inline comment
    *
@@ -194,26 +193,23 @@ class ExMachina_Featured_Post extends WP_Widget {
       }
 
       if ( $instance['show_title'] )
-        echo exmachina_html5() ? '<header class="entry-header">' : '';
+        echo '<header class="entry-header">';
 
         if ( ! empty( $instance['show_title'] ) ) {
 
-          if ( exmachina_html5() )
             printf( '<h2 class="entry-title"><a href="%s" title="%s">%s</a></h2>', get_permalink(), the_title_attribute( 'echo=0' ), get_the_title() );
-          else
-            printf( '<h2><a href="%s" title="%s">%s</a></h2>', get_permalink(), the_title_attribute( 'echo=0' ), get_the_title() );
 
         }
 
         if ( ! empty( $instance['show_byline'] ) && ! empty( $instance['post_info'] ) )
-          printf( exmachina_html5() ? '<p class="entry-meta">%s</p>' : '<p class="byline post-info">%s</p>', do_shortcode( $instance['post_info'] ) );
+          printf( '<p class="entry-meta">%s</p>', do_shortcode( $instance['post_info'] ) );
 
       if ( $instance['show_title'] )
-        echo exmachina_html5() ? '</header>' : '';
+        echo '</header>';
 
       if ( ! empty( $instance['show_content'] ) ) {
 
-        echo exmachina_html5() ? '<div class="entry-content">' : '';
+        echo '<div class="entry-content">';
 
         if ( 'excerpt' == $instance['show_content'] ) {
           the_excerpt();
@@ -234,7 +230,7 @@ class ExMachina_Featured_Post extends WP_Widget {
 
         }
 
-        echo exmachina_html5() ? '</div>' : '';
+        echo '</div>';
 
       }
 

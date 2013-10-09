@@ -111,18 +111,6 @@ class ExMachina_Admin_Hook_Settings extends ExMachina_Admin_Metaboxes {
 			'exmachina_entry_footer' => array( 'content' => '', 'php' => 0, 'shortcodes' => 0 ),
 			'exmachina_after_entry' => array( 'content' => '', 'php' => 0, 'shortcodes' => 0 ),
 
-			//* xHTML Entry Hooks
-			'exmachina_before_post' => array( 'content' => '', 'php' => 0, 'shortcodes' => 0 ),
-			'exmachina_after_post' => array( 'content' => '', 'php' => 0, 'shortcodes' => 0 ),
-
-			'exmachina_before_post_title' => array( 'content' => '', 'php' => 0, 'shortcodes' => 0 ),
-			'exmachina_post_title' => array( 'content' => '', 'php' => 0, 'shortcodes' => 0 ),
-			'exmachina_after_post_title' => array( 'content' => '', 'php' => 0, 'shortcodes' => 0 ),
-
-			'exmachina_before_post_content' => array( 'content' => '', 'php' => 0, 'shortcodes' => 0 ),
-			'exmachina_post_content' => array( 'content' => '', 'php' => 0, 'shortcodes' => 0 ),
-			'exmachina_after_post_content' => array( 'content' => '', 'php' => 0, 'shortcodes' => 0 ),
-
 			//* Comment Hooks
 			'exmachina_before_comments' => array( 'content' => '', 'php' => 0, 'shortcodes' => 0 ),
 			'exmachina_comments' => array( 'content' => '', 'php' => 0, 'shortcodes' => 0 ),
@@ -206,10 +194,7 @@ class ExMachina_Admin_Hook_Settings extends ExMachina_Admin_Metaboxes {
 		add_meta_box( 'exmachina-hook-settings-content-hooks', __( 'Content Hooks', 'exmachina' ), array( $this, 'content_hooks_box' ), $this->pagehook, 'normal' );
 		add_meta_box( 'exmachina-hook-settings-loop-hooks', __( 'Loop Hooks', 'exmachina' ), array( $this, 'loop_hooks_box' ), $this->pagehook, 'normal' );
 
-		if ( current_theme_supports( 'html5' ) )
 			add_meta_box( 'exmachina-hook-settings-entry-hooks', __( 'Entry Hooks', 'exmachina' ), array( $this, 'html5_entry_hooks_box' ), $this->pagehook, 'normal' );
-		else
-			add_meta_box( 'exmachina-hook-settings-post-hooks', __( 'Post/Page Hooks', 'exmachina' ), array( $this, 'post_hooks_box' ), $this->pagehook, 'normal' );
 
 		add_meta_box( 'exmachina-hook-settings-comment-list-hooks', __( 'Comment List Hooks', 'exmachina' ), array( $this, 'comment_list_hooks_box' ), $this->pagehook, 'normal' );
 		add_meta_box( 'exmachina-hook-settings-ping-list-hooks', __( 'Ping List Hooks', 'exmachina' ), array( $this, 'ping_list_hooks_box' ), $this->pagehook, 'normal' );
@@ -376,56 +361,6 @@ class ExMachina_Admin_Hook_Settings extends ExMachina_Admin_Metaboxes {
 
 	}
 
-	function post_hooks_box() {
-
-		exmachina_hooks_form_generate( array(
-			'hook' => 'exmachina_before_post',
-			'desc' => __( 'This hook executes before each post in all loop blocks (outside the <code>post_class()</code> div).', 'exmachina' )
-		) );
-
-		exmachina_hooks_form_generate( array(
-			'hook' => 'exmachina_after_post',
-			'desc' => __( 'This hook executes after each post in all loop blocks (outside the <code>post_class()</code> div).', 'exmachina' ),
-			'unhook' => array( 'exmachina_do_author_box' )
-		) );
-
-		exmachina_hooks_form_generate( array(
-			'hook' => 'exmachina_before_post_title',
-			'desc' => __( 'This hook executes immediately before each post/page title within the loop.', 'exmachina' )
-		) );
-
-		exmachina_hooks_form_generate( array(
-			'hook' => 'exmachina_post_title',
-			'desc' => __( 'This hook outputs the post/page title.', 'exmachina' ),
-			'unhook' => array( 'exmachina_do_post_title' )
-		) );
-
-		exmachina_hooks_form_generate( array(
-			'hook' => 'exmachina_after_post_title',
-			'desc' => __( 'This hook executes immediately after each post/page title within the loop.', 'exmachina' )
-		) );
-
-		exmachina_hooks_form_generate( array(
-			'hook' => 'exmachina_before_post_content',
-			'desc' => __( 'This hook executes immediately before the <code>exmachina_post_content</code> hook for each post/page within the loop.', 'exmachina' ),
-			'unhook' => array( 'exmachina_post_info' )
-		) );
-
-		exmachina_hooks_form_generate( array(
-			'hook' => 'exmachina_post_content',
-			'desc' => __( 'This hook outputs the content of the post/page, by default.', 'exmachina' ),
-			'unhook' => array( 'exmachina_do_post_image', 'exmachina_do_post_content' )
-		) );
-
-		exmachina_hooks_form_generate( array(
-			'hook' => 'exmachina_after_post_content',
-			'desc' => __( 'This hook executes immediately after the <code>exmachina_post_content</code> hook for each post/page within the loop.', 'exmachina' ),
-			'unhook' => array( 'exmachina_post_meta' )
-		) );
-
-		submit_button( __( 'Save Changes', 'exmachina' ), 'primary' );
-
-	}
 
 	function comment_list_hooks_box() {
 

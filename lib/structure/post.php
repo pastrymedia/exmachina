@@ -114,9 +114,8 @@ add_action( 'exmachina_after_endwhile', 'exmachina_posts_nav' );
 /**
  * Entry Post Class
  *
- * Add `entry` post class, remove `hentry` post class if HTML5.
+ * Add `entry` post class, remove `hentry` post class.
  *
- * @todo remove HTML5 conditional
  * @todo inline comment
  * @todo docblock comment
  *
@@ -131,8 +130,7 @@ function exmachina_entry_post_class( $classes ) {
   //* Add "entry" to the post class array
   $classes[] = 'entry';
 
-  //* Remove "hentry" from post class array, if HTML5
-  if ( exmachina_html5() )
+  //* Remove "hentry" from post class array
     $classes = array_diff( $classes, array( 'hentry' ) );
 
   return $classes;
@@ -264,8 +262,6 @@ function exmachina_entry_header_markup_close() {
  * applied on the echoed markup.
  *
  * @todo inline comment
- * @todo remove html5 conditonals
- * @todo remove xhtml from markup
  * @todo compare on hybrid title function
  *
  * @link http://codex.wordpress.org/Function_Reference/get_the_title
@@ -273,7 +269,6 @@ function exmachina_entry_header_markup_close() {
  * @link http://codex.wordpress.org/Function_Reference/the_title_attribute
  * @link http://codex.wordpress.org/Function_Reference/is_singular
  *
- * @uses exmachina_html5()          Check for HTML5 support.
  * @uses exmachina_get_SEO_option() Get SEO setting value.
  * @uses exmachina_markup()         Contextual markup.
  *
@@ -297,7 +292,7 @@ function exmachina_do_post_title() {
   $wrap = is_singular() ? 'h1' : 'h2';
 
   //* Also, if HTML5 with semantic headings, wrap in H1
-  $wrap = exmachina_html5() && exmachina_get_seo_option( 'semantic_headings' ) ? 'h1' : $wrap;
+  $wrap = exmachina_get_seo_option( 'semantic_headings' ) ? 'h1' : $wrap;
 
   //* Build the output
   $output = exmachina_markup( array(
@@ -306,7 +301,7 @@ function exmachina_do_post_title() {
     'echo'    => false,
   ) );
 
-  $output .= exmachina_html5() ? "{$title}</{$wrap}>" : '';
+  $output .= "{$title}</{$wrap}>";
 
   echo apply_filters( 'exmachina_post_title_output', "$output \n" );
 
@@ -455,14 +450,11 @@ function exmachina_do_post_content() {
  * Display page links for paginated posts (i.e. includes the <!--nextpage-->
  * Quicktag one or more times).
  *
- * @todo remove xhtml markup
- * @todo remove html5 conditional
  * @todo inline comment
  *
  * @link http://codex.wordpress.org/Function_Reference/wp_link_pages
  *
  * @uses exmachina_markup() Contextual markup.
- * @uses exmachina_html5()  Check for HTML5 support.
  *
  * @since 0.5.0
  * @access public
@@ -477,7 +469,7 @@ function exmachina_do_post_content_nav() {
         'context' => 'entry-pagination',
         'echo'    => false,
       ) ) . __( 'Pages:', 'exmachina' ),
-    'after'  => exmachina_html5() ? '</div>' : '</p>',
+    'after'  => '</div>',
   ) );
 
 } // end function exmachina_do_post_content_nav()
@@ -659,7 +651,6 @@ function exmachina_do_author_box_single() {
  * @link http://codex.wordpress.org/Function_Reference/get_the_author_meta
  * @link http://codex.wordpress.org/Function_Reference/get_the_author
  *
- * @uses exmachina_html5() Check for HTML5 support.
  * @uses exmachina_attr()  Contextual attributes.
  *
  * @since 0.5.0
@@ -679,7 +670,6 @@ function exmachina_author_box( $context = '', $echo = true ) {
   $description   = wpautop( get_the_author_meta( 'description' ) );
 
   //* The author box markup, contextual
-  if ( exmachina_html5() ) {
 
     $title = apply_filters( 'exmachina_author_box_title', sprintf( '%s <span itemprop="name">%s</span>', __( 'About', 'exmachina' ), get_the_author() ), $context );
 
@@ -688,14 +678,8 @@ function exmachina_author_box( $context = '', $echo = true ) {
     $pattern .= '<div class="author-box-content" itemprop="description">%s</div>';
     $pattern .= '</section>';
 
-  }
-  else {
 
-    $title = apply_filters( 'exmachina_author_box_title', sprintf( '<strong>%s %s</strong>', __( 'About', 'exmachina' ), get_the_author() ), $context );
 
-    $pattern = 'single' === $context ? '<div class="author-box"><div>%s %s<br />%s</div></div>' : '<div class="author-box">%s<h1>%s</h1><div>%s</div></div>';
-
-  }
 
   $output = apply_filters( 'exmachina_author_box', sprintf( $pattern, $gravatar, $title, $description ), $context, $pattern, $gravatar, $title, $description );
 

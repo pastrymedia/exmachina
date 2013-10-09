@@ -86,15 +86,11 @@ add_action( 'exmachina_setup', '_exmachina_builtin_sidebar_params' );
  *
  * @since 0.5.0
  *
- * @uses exmachina_html5() Check if HTML5 is supported.
  * @global $wp_registered_sidebars
  */
 function _exmachina_builtin_sidebar_params() {
 
   global $wp_registered_sidebars;
-
-  if ( ! exmachina_html5() )
-    return;
 
   foreach ( $wp_registered_sidebars as $id => $params ) {
 
@@ -221,8 +217,8 @@ function exmachina_widget_area( $id, $args = array() ) {
   $args = wp_parse_args(
     $args,
     array(
-      'before'              => exmachina_html5() ? '<aside class="widget-area">' : '<div class="widget-area">',
-      'after'               => exmachina_html5() ? '</aside>' : '</div>',
+      'before'              => '<aside class="widget-area">',
+      'after'               => '</aside>',
       'default'             => '',
       'show_inactive'       => 0,
       'before_sidebar_hook' => 'exmachina_before_' . $id . '_widget_area',

@@ -7,9 +7,6 @@ if ( !defined('ABSPATH')) exit;
  * Sidebar (Alt)  Template
  * sidebar-alt.php
  *
- * @todo remove xhtml tag
- * @todo replace html5 with just html tag
- *
  * The alt sidebar widget area template.
  * @link http://codex.wordpress.org/Customizing_Your_Sidebar
  *

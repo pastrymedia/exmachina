@@ -30,14 +30,12 @@ add_filter( 'get_search_form', 'exmachina_search_form' );
 /**
  * Search Form Markup
  *
- * Replace the default search form with a ExMachina-specific form. The exact
- * output depends on whether the child theme supports HTML5 or not.
+ * Replace the default search form with a ExMachina-specific form.
  *
  * Applies the `exmachina_search_text`, `exmachina_search_button_text`,
  * `exmachina_search_form_label` and `exmachina_search_form` filters.
  *
  * @todo inline comment
- * @todo remove html5 conditional
  * @todo compare against hybrid search
  * @todo google search possibility (???)
  *
@@ -46,8 +44,6 @@ add_filter( 'get_search_form', 'exmachina_search_form' );
  * @link http://codex.wordpress.org/Function_Reference/esc_attr
  * @link http://codex.wordpress.org/Function_Reference/esc_html
  * @link http://codex.wordpress.org/Function_Reference/home_url
- *
- * @uses exmachina_html5() Check for HTML5 support.
  *
  * @since 0.5.0
  * @access public
@@ -65,10 +61,7 @@ function exmachina_search_form() {
   //* Empty label, by default. Filterable.
   $label = apply_filters( 'exmachina_search_form_label', '' );
 
-  if ( exmachina_html5() )
-    $form = sprintf( '<form method="get" class="search-form" action="%s" role="search">%s<input type="search" name="s" placeholder="%s" /><input type="submit" value="%s" /></form>', home_url( '/' ), esc_html( $label ), esc_attr( $search_text ), esc_attr( $button_text ) );
-  else
-    $form = sprintf( '<form method="get" class="searchform search-form" action="%s" role="search" >%s<input type="text" value="%s" name="s" class="s search-input" onfocus="%s" onblur="%s" /><input type="submit" class="searchsubmit search-submit" value="%s" /></form>', home_url( '/' ), esc_html( $label ), esc_attr( $search_text ), esc_attr( $onfocus ), esc_attr( $onblur ), esc_attr( $button_text ) );
+  $form = sprintf( '<form method="get" class="search-form" action="%s" role="search">%s<input type="search" name="s" placeholder="%s" /><input type="submit" value="%s" /></form>', home_url( '/' ), esc_html( $label ), esc_attr( $search_text ), esc_attr( $button_text ) );
 
   return apply_filters( 'exmachina_search_form', $form, $search_text, $button_text, $label );
 

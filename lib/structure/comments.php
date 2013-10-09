@@ -427,8 +427,6 @@ function exmachina_do_comment_form() {
  * @link http://codex.wordpress.org/Function_Reference/wp_parse_args
  * @link http://codex.wordpress.org/Function_Reference/get_the_ID
  *
- * @uses exmachina_html5() [description]
- *
  * @since 0.5.0
  * @access public
  *
@@ -439,7 +437,6 @@ function exmachina_do_comment_form() {
 function exmachina_comment_form_args( array $defaults ) {
 
   //* Use WordPress default HTML5 comment form if themes supports HTML5
-  if ( exmachina_html5() )
     return $defaults;
 
   global $user_identity;

@@ -9,7 +9,6 @@ if ( !defined('ABSPATH')) exit;
  *
  * @todo bring in actual markup
  * @todo check against structural wrap
- * @todo replace html5 tag with just html
  *
  * Template file used to display the theme header
  * @link http://codex.wordpress.org/Designing_Headers

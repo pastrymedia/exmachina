@@ -1051,7 +1051,6 @@ function exmachina_do_header() {
  * `exmachina_seo_title` filter before echoing.
  *
  * @todo compare with hybrid site title function
- * @todo remove html5 conditional
  *
  * @link http://codex.wordpress.org/Conditional_Tags
  * @link http://codex.wordpress.org/Function_Reference/get_bloginfo
@@ -1076,11 +1075,11 @@ function exmachina_seo_site_title() {
   $wrap = is_home() && ! exmachina_get_seo_option( 'home_h1_on' ) ? 'h1' : $wrap;
 
   /* And finally, $wrap in h1 if semantic headings enabled. */
-  $wrap = exmachina_html5() && exmachina_get_seo_option( 'semantic_headings' ) ? 'h1' : $wrap;
+  $wrap = exmachina_get_seo_option( 'semantic_headings' ) ? 'h1' : $wrap;
 
   /* Build the title. */
-  $title  = exmachina_html5() ? sprintf( "<{$wrap} %s>", exmachina_attr( 'site-title' ) ) : sprintf( '<%s id="title">%s</%s>', $wrap, $inside, $wrap );
-  $title .= exmachina_html5() ? "{$inside}</{$wrap}>" : '';
+  $title  = sprintf( "<{$wrap} %s>", exmachina_attr( 'site-title' ) );
+  $title .= "{$inside}</{$wrap}>";
 
   //* Echo (filtered)
   echo apply_filters( 'exmachina_seo_title', $title, $inside, $wrap );
@@ -1095,7 +1094,6 @@ function exmachina_seo_site_title() {
  * the `exmachina_seo_description` filter before echoing.
  *
  * @todo compare with hybrid site description function
- * @todo remove html5 conditional
  *
  * @link http://codex.wordpress.org/Conditional_Tags
  * @link http://codex.wordpress.org/Function_Reference/get_bloginfo
@@ -1117,11 +1115,11 @@ function exmachina_seo_site_description() {
   $wrap = is_home() && 'description' === exmachina_get_seo_option( 'home_h1_on' ) ? 'h1' : 'p';
 
   /* And finally, $wrap in h2 if semantic headings enabled. */
-  $wrap = exmachina_html5() && exmachina_get_seo_option( 'semantic_headings' ) ? 'h2' : $wrap;
+  $wrap = exmachina_get_seo_option( 'semantic_headings' ) ? 'h2' : $wrap;
 
   /* Build the description. */
-  $description  = exmachina_html5() ? sprintf( "<{$wrap} %s>", exmachina_attr( 'site-description' ) ) : sprintf( '<%s id="description">%s</%s>', $wrap, $inside, $wrap );
-  $description .= exmachina_html5() ? "{$inside}</{$wrap}>" : '';
+  $description  = sprintf( "<{$wrap} %s>", exmachina_attr( 'site-description' ) );
+  $description .= "{$inside}</{$wrap}>";
 
   /* Output (filtered). */
   $output = $inside ? apply_filters( 'exmachina_seo_description', $description, $inside, $wrap ) : '';
@@ -1160,7 +1158,6 @@ function exmachina_header_menu_args( $args ) {
  *
  * Wrap the header navigation menu in its own nav tags with markup API.
  *
- * @todo remove html5 conditional
  * @todo maybe this function can be removed entirely(???)
  *
  * @uses exmachina_attr() [description]
@@ -1172,9 +1169,6 @@ function exmachina_header_menu_args( $args ) {
  * @return string       Modified menu output.
  */
 function exmachina_header_menu_wrap( $menu ) {
-
-  if ( ! exmachina_html5() )
-    return $menu;
 
   /* Return the menu markup. */
   return sprintf( '<nav %s>', exmachina_attr( 'nav-header' ) ) . $menu . '</nav>';
@@ -1297,28 +1291,22 @@ function exmachina_document_title() {
 
 } // end function exmachina_document_title()
 
-add_action( 'wp_head', 'exmachina_html5_ie_fix' );
+add_action( 'wp_head', 'exmachina_ie_fix' );
 /**
  * Load the html5 shiv for IE8 and below. Can't enqueue with IE conditionals.
  *
  * @todo move to proper order
  * @todo conditional so if google fails, local loads?
+ * @todo change function name
  *
  * @since 0.5.0
  *
- * @uses exmachina_html5() Check for HTML5 support.
- *
- * @return Return early if HTML5 not supported.
- *
  */
-function exmachina_html5_ie_fix() {
-
-  if ( ! exmachina_html5() )
-    return;
+function exmachina_ie_fix() {
 
   echo '<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->' . "\n";
 
-} // end function exmachina_html5_ie_fix()
+} // end function exmachina_ie_fix()
 
 /* Header actions. */
 //add_action( exmachina_get_prefix() . '_header', 'exmachina_header_branding' );
