@@ -173,8 +173,7 @@ class ExMachina_Featured_Post extends WP_Widget {
       $_exmachina_displayed_ids[] = get_the_ID();
 
       exmachina_markup( array(
-        'html5'   => '<article %s>',
-        'xhtml'   => sprintf( '<div class="%s">', implode( ' ', get_post_class() ) ),
+        'html'   => '<article %s>',
         'context' => 'entry',
       ) );
 
@@ -240,8 +239,7 @@ class ExMachina_Featured_Post extends WP_Widget {
       }
 
       exmachina_markup( array(
-        'html5' => '</article>',
-        'xhtml' => '</div>',
+        'html' => '</article>',
       ) );
 
     endwhile; endif;

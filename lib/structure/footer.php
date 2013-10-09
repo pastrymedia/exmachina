@@ -96,8 +96,7 @@ function exmachina_footer_widget_areas() {
   if ( $inside ) {
 
     $output .= exmachina_markup( array(
-      'html5'   => '<div %s>',
-      'xhtml'   => '<div id="footer-widgets" class="footer-widgets">',
+      'html'   => '<div %s>',
       'context' => 'footer-widgets',
     ) );
 
@@ -133,8 +132,7 @@ function exmachina_footer_widget_areas() {
 function exmachina_footer_markup_open() {
 
   exmachina_markup( array(
-    'html5'   => '<footer %s>',
-    'xhtml'   => '<div id="footer" class="footer">',
+    'html'   => '<footer %s>',
     'context' => 'site-footer',
   ) );
   exmachina_structural_wrap( 'footer', 'open' );
@@ -160,8 +158,7 @@ function exmachina_footer_markup_close() {
 
   exmachina_structural_wrap( 'footer', 'close' );
   exmachina_markup( array(
-    'html5'   => '</footer>',
-    'xhtml'   => '</div>',
+    'html'   => '</footer>',
   ) );
 
 } // end function exmachina_footer_markup_close()

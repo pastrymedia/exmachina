@@ -25,23 +25,20 @@ function exmachina() {
 
 	do_action( 'exmachina_before_content_sidebar_wrap' );
 	exmachina_markup( array(
-		'html5'   => '<div %s>',
-		'xhtml'   => '<div id="content-sidebar-wrap">',
+		'html'   => '<div %s>',
 		'context' => 'content-sidebar-wrap',
 	) );
 
 		do_action( 'exmachina_before_content' );
 		exmachina_markup( array(
-			'html5'   => '<main %s>',
-			'xhtml'   => '<div id="content" class="hfeed">',
+			'html'   => '<main %s>',
 			'context' => 'content',
 		) );
 			do_action( 'exmachina_before_loop' );
 			do_action( 'exmachina_loop' );
 			do_action( 'exmachina_after_loop' );
 		exmachina_markup( array(
-			'html5' => '</main>', //* end .content
-			'xhtml' => '</div>', //* end #content
+			'html' => '</main>', //* end .content
 		) );
 		do_action( 'exmachina_after_content' );
 

@@ -142,8 +142,7 @@ function exmachina_do_comments() {
   if ( have_comments() && ! empty( $wp_query->comments_by_type['comment'] ) ) {
 
     exmachina_markup( array(
-      'html5'   => '<div %s>',
-      'xhtml'   => '<div id="comments">',
+      'html'   => '<div %s>',
       'context' => 'entry-comments',
     ) );
 
@@ -159,8 +158,7 @@ function exmachina_do_comments() {
     if ( $prev_link || $next_link ) {
 
       exmachina_markup( array(
-        'html5'   => '<div %s>',
-        'xhtml'   => '<div class="navigation">',
+        'html'   => '<div %s>',
         'context' => 'comments-pagination',
       ) );
 
@@ -221,8 +219,7 @@ function exmachina_do_pings() {
   if ( have_comments() && !empty( $wp_query->comments_by_type['pings'] ) ) {
 
     exmachina_markup( array(
-      'html5'   => '<div %s>',
-      'xhtml'   => '<div id="pings">',
+      'html'   => '<div %s>',
       'context' => 'entry-pings',
     ) );
 

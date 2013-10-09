@@ -61,13 +61,11 @@ function exmachina_register_sidebar( $args ) {
     'exmachina_register_sidebar_defaults',
     array(
       'before_widget' => exmachina_markup( array(
-        'html5' => '<section id="%1$s" class="widget %2$s"><div class="widget-wrap">',
-        'xhtml' => '<div id="%1$s" class="widget %2$s"><div class="widget-wrap">',
+        'html' => '<section id="%1$s" class="widget %2$s"><div class="widget-wrap">',
         'echo'  => false,
       ) ),
       'after_widget'  => exmachina_markup( array(
-        'html5' => '</div></section>' . "\n",
-        'xhtml' => '</div></div>' . "\n",
+        'html' => '</div></section>' . "\n",
         'echo'  => false
       ) ),
       'before_title'  => '<h4 class="widget-title widgettitle">',

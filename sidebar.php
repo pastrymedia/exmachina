@@ -23,8 +23,7 @@ if ( !defined('ABSPATH')) exit;
 
 /* Output primary sidebar structure. */
 exmachina_markup( array(
-  'html5'   => '<aside %s>',
-  'xhtml'   => '<div id="sidebar" class="sidebar widget-area">',
+  'html'   => '<aside %s>',
   'context' => 'sidebar-primary',
 ) );
 
@@ -33,6 +32,5 @@ do_action( 'exmachina_sidebar' );
 do_action( 'exmachina_after_sidebar_widget_area' );
 
 exmachina_markup( array(
-  'html5' => '</aside>', //* end .sidebar-primary
-  'xhtml' => '</div>', //* end #sidebar
+  'html' => '</aside>', //* end .sidebar-primary
 ) );

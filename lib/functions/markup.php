@@ -47,7 +47,6 @@ if ( !defined('ABSPATH')) exit;
  *
  * @since 0.5.0
  *
- * @uses exmachina_html5() Check for HTML5 support.
  * @uses exmachina_attr()  Contextual attributes.
  *
  * @param array $args Array of arguments.
@@ -57,8 +56,7 @@ if ( !defined('ABSPATH')) exit;
 function exmachina_markup( $args = array() ) {
 
   $defaults = array(
-    'html5'   => '',
-    'xhtml'   => '',
+    'html'   => '',
     'context' => '',
     'echo'    => true,
   );
@@ -70,16 +68,12 @@ function exmachina_markup( $args = array() ) {
   if ( false !== $pre )
     return $pre;
 
-  if ( ! $args['html5'] || ! $args['xhtml'] )
+  if ( ! $args['html'] )
     return '';
 
-  //* If HTML5, return HTML5 tag. Maybe add attributes. Else XHTML.
-  if ( exmachina_html5() ) {
-    $tag = $args['context'] ? sprintf( $args['html5'], exmachina_attr( $args['context'] ) ) : $args['html5'];
-  }
-  else {
-    $tag = $args['xhtml'];
-  }
+
+  $tag = $args['context'] ? sprintf( $args['html'], exmachina_attr( $args['context'] ) ) : $args['html'];
+
 
   //* Contextual filter
   $tag = $args['context'] ? apply_filters( 'exmachina_markup_' . $args['context'] . '_output', $tag, $args ) : $tag;

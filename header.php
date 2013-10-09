@@ -31,15 +31,13 @@ wp_head(); //* we need this for plugins
 </head>
 <?php
 exmachina_markup( array(
-  'html5'   => '<body %s>',
-  'xhtml'   => sprintf( '<body class="%s">', implode( ' ', get_body_class() ) ),
+  'html'   => '<body %s>',
   'context' => 'body',
 ) );
 do_action( 'exmachina_before' );
 
 exmachina_markup( array(
-  'html5'   => '<div %s>',
-  'xhtml'   => '<div id="wrap">',
+  'html'   => '<div %s>',
   'context' => 'site-container',
 ) );
 
@@ -48,8 +46,7 @@ do_action( 'exmachina_header' );
 do_action( 'exmachina_after_header' );
 
 exmachina_markup( array(
-  'html5'   => '<div %s>',
-  'xhtml'   => '<div id="inner">',
+  'html'   => '<div %s>',
   'context' => 'site-inner',
 ) );
 exmachina_structural_wrap( 'site-inner' );

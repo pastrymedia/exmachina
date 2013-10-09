@@ -301,8 +301,7 @@ function exmachina_do_post_title() {
 
   //* Build the output
   $output = exmachina_markup( array(
-    'html5'   => "<{$wrap} %s>",
-    'xhtml'   => sprintf( '<%s class="entry-title">%s</%s>', $wrap, $title, $wrap ),
+    'html'   => "<{$wrap} %s>",
     'context' => 'entry-title',
     'echo'    => false,
   ) );
@@ -346,8 +345,7 @@ function exmachina_post_info() {
   $post_info = apply_filters( 'exmachina_post_info', exmachina_get_option( 'post_info' ) );
 
   exmachina_markup( array(
-    'html5' => sprintf( '<p class="entry-meta">%s</p>', $post_info ),
-    'xhtml' => sprintf( '<div class="post-info">%s</div>', $post_info ),
+    'html' => sprintf( '<p class="entry-meta">%s</p>', $post_info ),
   ) );
 
 } // end function exmachina_post_info()
@@ -475,8 +473,7 @@ function exmachina_do_post_content_nav() {
 
   wp_link_pages( array(
     'before' => exmachina_markup( array(
-        'html5'   => '<div %s>',
-        'xhtml'   => '<p class="pages">',
+        'html'   => '<div %s>',
         'context' => 'entry-pagination',
         'echo'    => false,
       ) ) . __( 'Pages:', 'exmachina' ),
@@ -609,8 +606,7 @@ function exmachina_post_meta() {
   $post_meta = apply_filters( 'exmachina_post_meta', exmachina_get_option( 'post_meta' ) );
 
   exmachina_markup( array(
-    'html5' => sprintf( '<p class="entry-meta">%s</p>', $post_meta ),
-    'xhtml' => sprintf( '<div class="post-meta">%s</div>', $post_meta ),
+    'html' => sprintf( '<p class="entry-meta">%s</p>', $post_meta ),
   ) );
 
 } // end function exmachina_post_meta()
@@ -794,8 +790,7 @@ function exmachina_prev_next_posts_nav() {
   $next = $next_link ? '<div class="pagination-next alignright">' . $next_link . '</div>' : '';
 
   $nav = exmachina_markup( array(
-    'html5'   => '<div %s>',
-    'xhtml'   => '<div class="navigation">',
+    'html'   => '<div %s>',
     'context' => 'archive-pagination',
     'echo'    => false,
   ) );
@@ -867,8 +862,7 @@ function exmachina_numeric_posts_nav() {
   }
 
   exmachina_markup( array(
-    'html5'   => '<div %s>',
-    'xhtml'   => '<div class="navigation">',
+    'html'   => '<div %s>',
     'context' => 'archive-pagination',
   ) );
 
@@ -941,8 +935,7 @@ function exmachina_prev_next_post_nav() {
     return;
 
   exmachina_markup( array(
-    'html5'   => '<div %s>',
-    'xhtml'   => '<div class="navigation">',
+    'html'   => '<div %s>',
     'context' => 'adjacent-entry-pagination',
   ) );
 
