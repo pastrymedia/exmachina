@@ -419,6 +419,12 @@ class ExMachina {
     if ( defined( 'EXMACHINA_LOAD_CLASSES' ) && EXMACHINA_LOAD_CLASSES === false )
       return;
 
+    /* Load the admin builder class. */
+    require_once( trailingslashit( EXMACHINA_CLASSES ) . 'admin.php' );
+
+    /* Load the settings sanitization class. */
+    require_once( trailingslashit( EXMACHINA_CLASSES ) . 'sanitization.php' );
+
   } // end function exmachina_load_classes()
 
   /**
@@ -443,6 +449,12 @@ class ExMachina {
     /* Short circuits the framework if 'EXMACHINA_LOAD_FRAMEWORK' is defined as false. */
     if ( defined( 'EXMACHINA_LOAD_FRAMEWORK' ) && EXMACHINA_LOAD_FRAMEWORK === false )
       return;
+
+    /* Load the general functions. */
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'general.php' );
+
+    /* Load the options functions. */
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'options.php' );
 
   } // end function exmachina_load_framework()
 
@@ -532,6 +544,12 @@ class ExMachina {
 
     /* Check if in the WordPress admin. */
     if ( is_admin() ) {
+
+      /* Load the admin scripts file. */
+      require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'admin-scripts.php' );
+
+      /* Load the theme settings file. */
+      require_once( trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'theme-settings.php' );
 
     } // end if (is_admin())
 
