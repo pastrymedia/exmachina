@@ -550,6 +550,10 @@ class ExMachina {
 
       /* Load the theme settings file. */
       require_once( trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'theme-settings.php' );
+      require_once( trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'design-settings.php' );
+      require_once( trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'content-settings.php' );
+      require_once( trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'seo-settings.php' );
+      require_once( trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'hook-settings.php' );
 
     } // end if (is_admin())
 

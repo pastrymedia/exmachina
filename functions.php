@@ -49,5 +49,6 @@ function optimus_theme_setup() {
   $prefix = exmachina_get_prefix();
 
   /* Add theme support for core framework features. */
+  add_theme_support( 'exmachina-core-theme-settings', array( 'updates', 'style', 'feeds', 'menus', 'edits', 'blogpage', 'brand', 'breadcrumbs', 'layout', 'archives', 'comments', 'scripts', 'footer', 'about', 'help' ) );
 
 } // end function optimus_theme_setup()
