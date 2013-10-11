@@ -456,6 +456,9 @@ class ExMachina {
     /* Load the options functions. */
     require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'options.php' );
 
+    /* Load the hooks functions. */
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'hooks.php' );
+
   } // end function exmachina_load_framework()
 
   /**

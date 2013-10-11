@@ -815,3 +815,12 @@ hr.div {
 #design-settings form {
     margin: 1em 0;
 }
+
+.uk-table th.no-border, .uk-table td.no-border {
+  border-bottom: none;
+}
+
+table.postbox-table tbody tr td.save-cell {
+  background: #eeeeee;
+  border-top: #dddddd solid 1px;
+}
