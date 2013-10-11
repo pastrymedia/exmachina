@@ -227,7 +227,7 @@ function exmachina_admin_enqueue_scripts( $hook_suffix ) {
   global $post;
 
   /* Enqueue the admin JavaScripts on the admin menu screens. */
-  if ( exmachina_is_menu_page( 'theme-settings' ) || exmachina_is_menu_page( 'seo-settings' ) || exmachina_is_menu_page( 'design-settings' ) ) {
+  if ( exmachina_is_menu_page( 'theme-settings' ) || exmachina_is_menu_page( 'seo-settings' ) || exmachina_is_menu_page( 'design-settings' ) || exmachina_is_menu_page( 'import-export' ) ) {
 
     /* Enqueue uikit JavaScript if on an admin settings screen. */
     wp_enqueue_script( 'exmachina-uikit-admin-js' );
@@ -346,7 +346,7 @@ function exmachina_admin_register_styles() {
 function exmachina_admin_enqueue_styles( $hook_suffix ) {
 
   /* Enqueue the admin stylesheets on the admin menu screens. */
-  if ( exmachina_is_menu_page( 'theme-settings' ) || exmachina_is_menu_page( 'seo-settings' ) || exmachina_is_menu_page( 'design-settings' ) ) {
+  if ( exmachina_is_menu_page( 'theme-settings' ) || exmachina_is_menu_page( 'seo-settings' ) || exmachina_is_menu_page( 'design-settings' ) || exmachina_is_menu_page( 'import-export' ) ) {
 
     /* Enqueue normalize stylesheet if on an admin settings screen. */
     wp_enqueue_style( 'exmachina-core-admin-reset-css' );
