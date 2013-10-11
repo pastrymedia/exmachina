@@ -37,6 +37,7 @@ if ( !defined('ABSPATH')) exit;
  * @link http://codex.wordpress.org/Function_Reference/wp_redirect
  *
  * @since 1.0.0
+ * @access public
  *
  * @param  string $page       Menu slug.
  * @param  array  $query_args Optional. Associative array of query string arguments.
@@ -73,6 +74,7 @@ function exmachina_admin_redirect( $page, array $query_args = array() ) {
  * Check to see that the theme is targetting a specific admin page.
  *
  * @since 1.0.0
+ * @access public
  *
  * @global string   $page_hook  Page hook of the current page.
  * @param  string   $pagehook   Page hook string to check.
@@ -104,6 +106,9 @@ function exmachina_is_menu_page( $pagehook = '' ) {
  * tabs using get_current_screen()->add_help_tab().
  *
  * @todo move this function
+ * @todo inline comment
+ * @todo docblock comment
+ * @todo organize markup
  *
  * @since 1.0.0
  * @access public
@@ -166,16 +171,16 @@ function exmachina_get_help_sidebar() {
 
 } // end function exmachina_get_help_sidebar()
 
+/*-------------------------------------------------------------------------*/
+/* == Formatting Functions */
+/*-------------------------------------------------------------------------*/
+
 /**
  * Code Markup
  *
  * Mark up content with code tags. Escapes all HTML, so `<` gets changed to
  * `&lt;` and displays correctly. Used almost exclusively within labels and
- * text in user interfaces added by ExMachina.
- *
- * @todo inline comment
- * @todo docblock comment
- * @todo move this function
+ * text in user interfaces.
  *
  * @since 1.0.0
  * @access public
@@ -185,6 +190,445 @@ function exmachina_get_help_sidebar() {
  */
 function exmachina_code( $content ) {
 
+  /* Returns code markup. */
   return '<code>' . esc_html( $content ) . '</code>';
 
 } // end function exmachina_code()
+
+/*-------------------------------------------------------------------------*/
+/* == Author Box Functions */
+/*-------------------------------------------------------------------------*/
+
+/**
+ * Enable Author Box
+ *
+ * Enable the author box for all users.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/wp_parse_args
+ * @link http://codex.wordpress.org/Function_Reference/add_filter
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @param array $args Optional. Args for enabling author box. Default is empty array.
+ */
+function exmachina_enable_author_box( $args = array() ) {
+
+  /* Parse the author box arguments. */
+  $args = wp_parse_args( $args, array( 'type' => 'single' ) );
+
+  /* If single, return true on 'get_the_author_exmachina_author_box_single'. */
+  if ( 'single' === $args['type'] )
+    add_filter( 'get_the_author_exmachina_author_box_single', '__return_true' );
+
+  /* If archive, return true on 'get_the_author_exmachina_author_box_archive'. */
+  elseif ( 'archive' === $args['type'] )
+    add_filter( 'get_the_author_exmachina_author_box_archive', '__return_true' );
+
+} // end function exmachina_enable_author_box()
+
+/*-------------------------------------------------------------------------*/
+/* == Redirect Functions */
+/*-------------------------------------------------------------------------*/
+
+/* Adds the custom field redirect to the template_redirect hook. */
+add_action( 'template_redirect', 'exmachina_custom_field_redirect' );
+
+/**
+ * Custom Field Redirect
+ *
+ * Redirects based on a single post/page custom field. To use this function,
+ * set a custom field key to "redirect" and provide a URL in the custom field
+ * value. This function will perform a 301 redirect to the provided URL.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/is_singular
+ * @link http://codex.wordpress.org/Function_Reference/wp_redirect
+ * @link http://codex.wordpress.org/Function_Reference/esc_url_raw
+ *
+ * @uses exmachina_get_custom_field() [description]
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @return null Returns early is not singular.
+ */
+function exmachina_custom_field_redirect() {
+
+  /* Return early if not on singular post/page. */
+  if ( ! is_singular() )
+    return;
+
+  /* If custom field key 'redirect' exists. */
+  if ( $url = exmachina_get_custom_field( 'redirect' ) ) {
+
+    /* 301 redirect to the provided URL. */
+    wp_redirect( esc_url_raw( $url ), 301 );
+    exit;
+
+  } // end IF statement
+
+} // end function exmachina_custom_field_redirect()
+
+/*-------------------------------------------------------------------------*/
+/* == Plugin Functions */
+/*-------------------------------------------------------------------------*/
+
+/**
+ * Detect Plugin
+ *
+ * Detect active plugin by constant, class or function existence. This
+ * function is useful for checking if functionality is being replaced by a
+ * plugin and for name space collisions.
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @param  array $plugins Array of constants, classes and / or functions to check.
+ * @return boolean        True if plugin exists.
+ */
+function exmachina_detect_plugin( array $plugins ) {
+
+  /* Check for classes. */
+  if ( isset( $plugins['classes'] ) ) {
+    foreach ( $plugins['classes'] as $name ) {
+      if ( class_exists( $name ) )
+        return true;
+    } // end foreach loop
+  } // end IF statement
+
+  /* Check for functions. */
+  if ( isset( $plugins['functions'] ) ) {
+    foreach ( $plugins['functions'] as $name ) {
+      if ( function_exists( $name ) )
+        return true;
+    } // end foreach loop
+  } // end IF statement
+
+  //* Check for constants. */
+  if ( isset( $plugins['constants'] ) ) {
+    foreach ( $plugins['constants'] as $name ) {
+      if ( defined( $name ) )
+        return true;
+    } // end foreach loop
+  } // end IF statement
+
+  /* No class, function or constant found to exist. */
+  return false;
+
+} // end function exmachina_detect_plugin()
+
+/**
+ * Plugin Install Link
+ *
+ * Build links to install plugins. Checks against the network admin (for multisite
+ * installations), and builds the appropiate thickbox plugin install link.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/is_main_site
+ * @link http://codex.wordpress.org/Function_Reference/network_admin_url
+ * @link http://codex.wordpress.org/Function_Reference/admin_url
+ * @link http://codex.wordpress.org/Function_Reference/esc_url
+ * @link http://codex.wordpress.org/Function_Reference/esc_attr
+ * @link http://codex.wordpress.org/Function_Reference/esc_html
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @param  string $plugin_slug Plugin slug.
+ * @param  string $text        Plugin name.
+ * @return string              HTML markup for links.
+ */
+function exmachina_plugin_install_link( $plugin_slug = '', $text = '' ) {
+
+  /* Builds plugin install link for multisite installations. */
+  if ( is_main_site() ) {
+    $url = network_admin_url( 'plugin-install.php?tab=plugin-information&plugin=' . $plugin_slug . '&TB_iframe=true&width=600&height=550' );
+  }
+  /* Builds regular install link. */
+  else {
+    $url = admin_url( 'plugin-install.php?tab=plugin-information&plugin=' . $plugin_slug . '&TB_iframe=true&width=600&height=550' );
+  }
+
+  /* Builds the install link title text. */
+  $title_text = sprintf( __( 'Install %s', 'exmachina-core' ), $text );
+
+  /* Returns the link string. */
+  return sprintf( '<a href="%s" class="thickbox" title="%s">%s</a>', esc_url( $url ), esc_attr( $title_text ), esc_html( $text ) );
+
+} // end function exmachina_plugin_install_link()
+
+/*-------------------------------------------------------------------------*/
+/* == Theme Support Functions */
+/*-------------------------------------------------------------------------*/
+
+/**
+ * Get Theme Support Arguments
+ *
+ * Return a specific value from the associative array passed as the second argument
+ * to `add_theme_support()`.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/get_theme_support
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @param string $feature The theme feature.
+ * @param string $arg     The theme feature argument.
+ * @param string $default Fallback if value is blank or doesn't exist.
+ *
+ * @return mixed Return $default if theme doesn't support $feature, or $arg key doesn't exist.
+ */
+function exmachina_get_theme_support_arg( $feature, $arg, $default = '' ) {
+
+  /* Get the theme-supported feature. */
+  $support = get_theme_support( $feature );
+
+  /* Returns $default if doesn't exist. */
+  if ( ! $support || ! isset( $support[0] ) || ! array_key_exists( $arg, (array) $support[0] ) )
+    return $default;
+
+  /* Otherwise, returns the argument. */
+  return $support[0][ $arg ];
+
+} // end function exmachina_get_theme_support_arg()
+
+/*-------------------------------------------------------------------------*/
+/* == Custom Post Type Functions */
+/*-------------------------------------------------------------------------*/
+
+/**
+ * Get Global Post Type Name
+ *
+ * Get the `post_type` from the global `$post` if supplied value is empty.
+ *
+ * @link http://codex.wordpress.org/Class_Reference/WP_Post
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @global object $post           WP_Post post object.
+ * @param  string $post_type_name Post type name.
+ * @return string
+ */
+function exmachina_get_global_post_type_name( $post_type_name = '' ) {
+
+  /* If isn't post type name, fetch it from the post. */
+  if ( ! $post_type_name ) {
+
+    /* Get the post object. */
+    global $post;
+
+    /* Set the post type name. */
+    $post_type_name = $post->post_type;
+
+  } // end IF statement
+
+  /* Return the post type name. */
+  return $post_type_name;
+
+} // end function exmachina_get_global_post_type_name()
+
+/**
+ * Get CPT Archive Types
+ *
+ * Get list of custom post type objects which need an archive settings page.
+ * Archive settings pages are added for CPTs that are:
+ *
+ * - are public,
+ * - are set to show the UI,
+ * - are set to show in the admin menu,
+ * - have an archive enabled,
+ * - not one of the built-in types,
+ * - support "exmachina-cpt-archive-settings".
+ *
+ * This last item means that if you're using an archive template and don't want
+ * ExMachina interfering with it with these archive settings, then don't add the
+ * support. This support check is handled in exmachina_has_post_type_archive_support().
+ *
+ * Applies the `exmachina_cpt_archives_args` filter, to change the conditions for
+ * which post types are deemed valid.
+ *
+ * The results are held in a static variable, since they won't change over the
+ * course of a request.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/get_post_types
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @return array
+ */
+function exmachina_get_cpt_archive_types() {
+
+  /* Set the statice variable. */
+  static $exmachina_cpt_archive_types;
+
+  /* If the variable is already set, return. */
+  if ( $exmachina_cpt_archive_types )
+    return $exmachina_cpt_archive_types;
+
+  /* Set the post tye args array. Filterable via 'exmachina_cpt_archives_args'. */
+  $args = apply_filters(
+    'exmachina_cpt_archives_args',
+    array(
+      'public'       => true,
+      'show_ui'      => true,
+      'show_in_menu' => true,
+      'has_archive'  => true,
+      '_builtin'     => false,
+    )
+  );
+
+  /* Get the post type objects with matching arguments. */
+  $exmachina_cpt_archive_types = get_post_types( $args, 'objects' );
+
+  /* Return the custom post type array. */
+  return $exmachina_cpt_archive_types;
+
+} // end function exmachina_get_cpt_archive_types()
+
+/**
+ * CPT Archives Types Names
+ *
+ * Get list of custom post type names which need an archive settings page.
+ *
+ * @uses exmachina_get_cpt_archive_types() Array of custom post types which
+ *                                         need archive pages.
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @return array Custom post type names.
+ */
+function exmachina_get_cpt_archive_types_names() {
+
+  /* Set the post types names array. */
+  $post_type_names = array();
+
+  /* Loop the custom post types that need archive pages. */
+  foreach ( exmachina_get_cpt_archive_types() as $post_type )
+    $post_type_names[] = $post_type->name;
+
+  /* Return the array of post types. */
+  return $post_type_names;
+
+} // end function exmachina_get_cpt_archive_types_names()
+
+/**
+ * Has Post Type Archive Support
+ *
+ * Check if a post type supports an archive setting page.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/post_type_supports
+ *
+ * @uses exmachina_get_global_post_type_name()   Get the `post_type` from the global `$post` if supplied value is empty.
+ * @uses exmachina_get_cpt_archive_types_names() Get list of custom post type names which need an archive settings page.
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @param  string $post_type_name Post type name.
+ * @return bool                   True if custom post type name has support, false otherwise.
+ */
+function exmachina_has_post_type_archive_support( $post_type_name = '' ) {
+
+  /* Get the post types which can use archive support. */
+  $post_type_name = exmachina_get_global_post_type_name( $post_type_name );
+
+  /* Return true if the post type can use archive support, and if theme support allows it. */
+  return in_array( $post_type_name, exmachina_get_cpt_archive_types_names() ) &&
+    post_type_supports( $post_type_name, 'exmachina-cpt-archives-settings' );
+
+} // end function exmachina_has_post_type_archive_support()
+
+/*-------------------------------------------------------------------------*/
+/* == Conditional Functions */
+/*-------------------------------------------------------------------------*/
+
+/**
+ * HTML5 Conditional
+ *
+ * Determine if HTML5 is activated by the child theme.
+ *
+ * @link https://codex.wordpress.org/Semantic_Markup
+ * @link https://codex.wordpress.org/current_theme_supports
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @return bool True if HTML5, false otherwise.
+ */
+function exmachina_html5() {
+
+  return current_theme_supports( 'html5' );
+
+} // end function exmachina_html5()
+
+/**
+ * Customizer Conditional
+ *
+ * Check whether we are currently viewing the site via the WordPress Customizer.
+ *
+ * @todo inline comment
+ * @todo docblock comment
+ *
+ * @link https://codex.wordpress.org/Theme_Customization_API
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @global object  $wp_customize Customizer API object.
+ * @return boolean               Return true if on Customizer, false otherwise.
+ */
+function exmachina_is_customizer() {
+  global $wp_customize;
+
+  /* if $wp_customize is set, return true. */
+  if ( isset( $wp_customize ) )
+    return true;
+
+  /* Otherwise, false. */
+  return false;
+
+} // end function exmachina_is_customizer()
+
+/*-------------------------------------------------------------------------*/
+/* == Theme Update Functions */
+/*-------------------------------------------------------------------------*/
+
+/* Adds the don't update theme to the http_request_args hook. */
+add_filter( 'http_request_args', 'exmachina_dont_update_theme', 5, 2 );
+/**
+ * Don't Update Theme
+ *
+ * If there is a theme in the WordPress repo with the same name, this prevents
+ * WordPress from prompting an update.
+ *
+ * @since 1.0.0
+ * @access private
+ *
+ * @param  array  $r   Request arguments
+ * @param  string $url Request url
+ * @return array       Request arguments
+ */
+
+function exmachina_dont_update_theme( $r, $url ) {
+
+  /* If not a theme update request, bail immediately. */
+  if ( 0 !== strpos( $url, 'http://api.wordpress.org/themes/update-check' ) )
+    return $r;
+
+  /* Unserialize the update request. */
+  $themes = unserialize( $r['body']['themes'] );
+
+  /* Remove as a template (parent theme) update. */
+  unset( $themes[ get_option( 'template' ) ] );
+
+  /* Remove as a stylesheet (child theme) update. */
+  unset( $themes[ get_option( 'stylesheet' ) ] );
+
+  /* Re-serialize the update request. */
+  $r['body']['themes'] = serialize( $themes );
+
+  /* Return the request args. */
+  return $r;
+} // end function exmachina_dont_update_theme()
