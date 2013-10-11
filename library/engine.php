@@ -264,10 +264,10 @@ class ExMachina {
 
     /* Define Settings Field Constants (for DB storage). */
     define( 'EXMACHINA_SETTINGS_FIELD', apply_filters( "{$prefix}_theme_settings_field", "{$prefix}-theme-settings" ) );
-    define( 'EXMACHINA_SEO_SETTINGS_FIELD', apply_filters( "{$prefix}_seo_settings_field", "{$prefix}-seo-settings" ) );
-    define( 'EXMACHINA_HOOK_SETTINGS_FIELD', apply_filters( "{$prefix}_hook_settings_field", "{$prefix}-hook-settings" ) );
     define( 'EXMACHINA_DESIGN_SETTINGS_FIELD', apply_filters( "{$prefix}_design_settings_field", "{$prefix}-design-settings" ) );
     define( 'EXMACHINA_CONTENT_SETTINGS_FIELD', apply_filters( "{$prefix}_content_settings_field", "{$prefix}-content-settings" ) );
+    define( 'EXMACHINA_SEO_SETTINGS_FIELD', apply_filters( "{$prefix}_seo_settings_field", "{$prefix}-seo-settings" ) );
+    define( 'EXMACHINA_HOOK_SETTINGS_FIELD', apply_filters( "{$prefix}_hook_settings_field", "{$prefix}-hook-settings" ) );
     define( 'EXMACHINA_CPT_ARCHIVE_SETTINGS_FIELD_PREFIX', apply_filters( "{$prefix}_cpt_archive_settings_field_prefix", "{$prefix}-cpt-archive-settings-" ) );
 
   } // end function exmachina_settings_fields()

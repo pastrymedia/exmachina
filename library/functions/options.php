@@ -36,11 +36,15 @@ if ( !defined('ABSPATH')) exit;
  * Values pulled from the database are cached on each request, so a second request
  * for the same value won't cause a second DB interaction.
  *
+ * @link http://codex.wordpress.org/Options_API
  * @link http://codex.wordpress.org/Function_Reference/get_option
  * @link http://codex.wordpress.org/Function_Reference/stripslashes_deep
  * @link http://codex.wordpress.org/Function_Reference/wp_kses_decode_entities
  *
+ * @uses EXMACHINA_SETTINGS_FIELD [description]
+ *
  * @since 1.0.0
+ * @access public
  *
  * @param  string  $key       The option name.
  * @param  string  $setting   Optional. The settings field name.
@@ -117,3 +121,510 @@ function exmachina_option( $key, $setting = null, $use_cache = true ) {
   echo exmachina_get_option( $key, $setting, $use_cache );
 
 } // end function exmachina_option()
+
+/*-------------------------------------------------------------------------*/
+/* === Design Settings Options === */
+/*-------------------------------------------------------------------------*/
+
+/**
+ * Get Design Option
+ *
+ * Return design options from the design options database.
+ *
+ * @uses EXMACHINA_DESIGN_SETTINGS_FIELD
+ * @uses exmachina_get_option() Return option from the options table and cache result.
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @param  string  $key       Option name.
+ * @param  boolean $use_cache Optional. Whether to use the cache value or not. Defaults to true.
+ * @return mixed              The value of this $key in the database.
+ */
+function exmachina_get_design_option( $key, $use_cache = true ) {
+
+  return exmachina_get_option( $key, EXMACHINA_DESIGN_SETTINGS_FIELD, $use_cache );
+
+} // end function exmachina_get_design_option()
+
+/**
+ * Echo Design Option
+ *
+ * Echo an design option from the design options database.
+ *
+ * @uses EXMACHINA_DESIGN_SETTINGS_FIELD
+ * @uses exmachina_option() Echo option from the options table and cache result.
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @param string  $key       Option name.
+ * @param boolean $use_cache Optional. Whether to use the cache value or not. Defaults to true.
+ */
+function exmachina_design_option( $key, $use_cache = true ) {
+
+  exmachina_option( $key, EXMACHINA_DESIGN_SETTINGS_FIELD, $use_cache );
+
+} // end function exmachina_design_option()
+
+/*-------------------------------------------------------------------------*/
+/* === Content Settings Options === */
+/*-------------------------------------------------------------------------*/
+
+/**
+ * Get Content Option
+ *
+ * Return content options from the content options database.
+ *
+ * @uses EXMACHINA_CONTENT_SETTINGS_FIELD
+ * @uses exmachina_get_option() Return option from the options table and cache result.
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @param  string  $key       Option name.
+ * @param  boolean $use_cache Optional. Whether to use the cache value or not. Defaults to true.
+ * @return mixed              The value of this $key in the database.
+ */
+function exmachina_get_content_option( $key, $use_cache = true ) {
+
+  return exmachina_get_option( $key, EXMACHINA_CONTENT_SETTINGS_FIELD, $use_cache );
+
+} // end function exmachina_get_content_option()
+
+/**
+ * Echo Content Option
+ *
+ * Echo an content option from the content options database.
+ *
+ * @uses EXMACHINA_CONTENT_SETTINGS_FIELD
+ * @uses exmachina_option() Echo option from the options table and cache result.
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @param string  $key       Option name.
+ * @param boolean $use_cache Optional. Whether to use the cache value or not. Defaults to true.
+ */
+function exmachina_content_option( $key, $use_cache = true ) {
+
+  exmachina_option( $key, EXMACHINA_CONTENT_SETTINGS_FIELD, $use_cache );
+
+} // end function exmachina_content_option()
+
+/*-------------------------------------------------------------------------*/
+/* === SEO Settings Options === */
+/*-------------------------------------------------------------------------*/
+
+/**
+ * Get SEO Option
+ *
+ * Return SEO options from the SEO options database.
+ *
+ * @uses EXMACHINA_SEO_SETTINGS_FIELD
+ * @uses exmachina_get_option() Return option from the options table and cache result.
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @param  string  $key       Option name.
+ * @param  boolean $use_cache Optional. Whether to use the cache value or not. Defaults to true.
+ * @return mixed              The value of this $key in the database.
+ */
+function exmachina_get_seo_option( $key, $use_cache = true ) {
+
+  return exmachina_get_option( $key, EXMACHINA_SEO_SETTINGS_FIELD, $use_cache );
+
+} // end function exmachina_get_seo_option()
+
+/**
+ * Echo SEO Option
+ *
+ * Echo an SEO option from the SEO options database.
+ *
+ * @uses EXMACHINA_SEO_SETTINGS_FIELD
+ * @uses exmachina_option() Echo option from the options table and cache result.
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @param string  $key       Option name.
+ * @param boolean $use_cache Optional. Whether to use the ExMachina cache value or not. Defaults to true.
+ */
+function exmachina_seo_option( $key, $use_cache = true ) {
+
+  exmachina_option( $key, EXMACHINA_SEO_SETTINGS_FIELD, $use_cache );
+
+} // end function exmachina_seo_option()
+
+/*-------------------------------------------------------------------------*/
+/* === Custom Post Type Archive Options === */
+/*-------------------------------------------------------------------------*/
+
+/**
+ * Get CPT Archive Option
+ *
+ * Return a custom post type archive setting value from the options table.
+ *
+ * @uses EXMACHINA_CPT_ARCHIVE_SETTINGS_FIELD_PREFIX
+ * @uses exmachina_get_global_post_type_name()       Get the `post_type` from the global `$post` if supplied value is empty.
+ * @uses exmachina_get_option()                      Return option from the options table and cache result.
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @param string $key            Option name.
+ * @param string $post_type_name Post type name.
+ * @param bool   $use_cache      Optional. Whether to use the cache value or not. Defaults to true.
+ * @return mixed                 The option value.
+ */
+function exmachina_get_cpt_option( $key, $post_type_name = '', $use_cache = true ) {
+
+  /* Get the custom post type name. */
+  $post_type_name = exmachina_get_global_post_type_name( $post_type_name );
+
+  /* Get the option from the options table. */
+  return exmachina_get_option( $key, EXMACHINA_CPT_ARCHIVE_SETTINGS_FIELD_PREFIX . $post_type_name, $use_cache );
+
+} // end function exmachina_get_cpt_option()
+
+/**
+ * Echo CPT Archive Option
+ *
+ * Echo a custom post type archive option from the options table.
+ *
+ * @uses exmachina_get_cpt_option() Return a CPT Archive setting value from the options table.
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @param string $key            Option name.
+ * @param string $post_type_name Post type name.
+ * @param bool   $use_cache      Optional. Whether to use the ExMachina cache value or not. Defaults to true.
+ */
+function exmachina_cpt_option( $key, $post_type_name, $use_cache = true ) {
+
+  /* Echo the option. */
+  echo exmachina_get_cpt_option( $key, $post_type_name, $use_cache );
+
+} // end function exmachina_cpt_option
+
+/*-------------------------------------------------------------------------*/
+/* === Custom Field Functions === */
+/*-------------------------------------------------------------------------*/
+
+/**
+ * Custom Field
+ *
+ * Echo data from a post or page custom field and echo only the first value of
+ * custom field. Passes in a `printf()` pattern as the second parameter and have
+ * that wrap around the value, if the value is not falsy.
+ *
+ * @link http://codex.wordpress.org/Custom_Fields
+ *
+ * @uses exmachina_get_custom_field() Return custom field post meta data.
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @param string $field          Custom field key.
+ * @param string $output_pattern printf() compatible output pattern.
+ */
+function exmachina_custom_field( $field, $output_pattern = '%s' ) {
+
+  if ( $value = exmachina_get_custom_field( $field ) )
+    printf( $output_pattern, $value );
+
+} // end function exmachina_custom_field()
+
+/**
+ * Get Custom Field
+ *
+ * Return custom field post meta data. Return only the first value of custom
+ * field. Return false if field is blank or not set.
+ *
+ * @link http://codex.wordpress.org/Custom_Fields
+ * @link http://codex.wordpress.org/Function_Reference/get_the_ID
+ * @link http://codex.wordpress.org/Function_Reference/get_post_meta
+ * @link http://codex.wordpress.org/Function_Reference/stripslashes_deep
+ * @link http://codex.wordpress.org/Function_Reference/wp_kses_decode_entities
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @param string    $field  Custom field key.
+ * @return str|bool         Return value or false on failure.
+ */
+function exmachina_get_custom_field( $field ) {
+
+  /* Return early if not a post/page. */
+  if ( null === get_the_ID() )
+    return '';
+
+  /* Sets the custom field variable. */
+  $custom_field = get_post_meta( get_the_ID(), $field, true );
+
+  if ( ! $custom_field )
+    return '';
+
+  /* Return custom field, slashes stripped, sanitized if string. */
+  return is_array( $custom_field ) ? stripslashes_deep( $custom_field ) : stripslashes( wp_kses_decode_entities( $custom_field ) );
+
+} // end function exmachina_get_custom_field()
+
+/**
+ * Save Custom Fields
+ *
+ * Save post meta / custom field data for a post or page. It verifies the nonce,
+ * then checks we're not doing autosave, ajax or a future post request. It then
+ * checks the current user's permissions, before finally* either updating the post
+ * meta, or deleting the field if the value was not truthy.
+ *
+ * By passing an array of fields => values from the same metabox (and therefore
+ * same nonce) into the $data argument, repeated checks against the nonce, request
+ * and permissions are avoided.
+ *
+ * @link http://codex.wordpress.org/Custom_Fields
+ * @link http://codex.wordpress.org/Function_Reference/wp_verify_nonce
+ * @link http://codex.wordpress.org/Function_Reference/get_post
+ * @link http://codex.wordpress.org/Function_Reference/current_user_can
+ * @link http://codex.wordpress.org/Function_Reference/update_post_meta
+ * @link http://codex.wordpress.org/Function_Reference/delete_post_meta
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @param array    $data         Key/Value pairs of data to save in '_field_name' => 'value' format.
+ * @param string   $nonce_action Nonce action for use with wp_verify_nonce().
+ * @param string   $nonce_name   Name of the nonce to check for permissions.
+ * @param WP_Post|integer $post  Post object or ID.
+ * @param integer  $deprecated   Deprecated (formerly accepted a post ID).
+ *
+ * @return mixed Return null if permissions incorrect, doing autosave, ajax or future post, false if update or delete
+ *               failed, and true on success.
+ */
+function exmachina_save_custom_fields( array $data, $nonce_action, $nonce_name, $post, $deprecated = null ) {
+
+  /* Verify the nonce. */
+  if ( ! isset( $_POST[ $nonce_name ] ) || ! wp_verify_nonce( $_POST[ $nonce_name ], $nonce_action ) )
+    return;
+
+  /* Don't try to save the data under autosave, ajax, or future post. */
+  if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+    return;
+  if ( defined( 'DOING_AJAX' ) && DOING_AJAX )
+    return;
+  if ( defined( 'DOING_CRON' ) && DOING_CRON )
+    return;
+
+  /* Grab the post object . */
+  if ( ! is_null( $deprecated ) )
+    $post = get_post( $deprecated );
+  else
+    $post = get_post( $post );
+
+  /* Don't save if WP is creating a revision. */
+  if ( 'revision' === $post->post_type )
+    return;
+
+  /* Check that the user is allowed to edit the post. */
+  if ( ! current_user_can( 'edit_post', $post->ID ) )
+    return;
+
+  /* Cycle through $data, insert value or delete field. */
+  foreach ( (array) $data as $field => $value ) {
+    /* Save $value, or delete if the $value is empty. */
+    if ( $value )
+      update_post_meta( $post->ID, $field, $value );
+    else
+      delete_post_meta( $post->ID, $field );
+  }
+
+} // end function exmachina_save_custom_fields()
+
+/*-------------------------------------------------------------------------*/
+/* === Term Filter Functions === */
+/*-------------------------------------------------------------------------*/
+
+/* Filter the term data from the database. */
+add_filter( 'get_term', 'exmachina_get_term_filter', 10, 2 );
+/**
+ * Get Term Filter
+ *
+ * Merge term meta data into options table. Applies `exmachina_term_meta_defaults`,
+ * `exmachina_term_meta_{field}` and `exmachina_term_meta` filters.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/get_term
+ * @link http://codex.wordpress.org/Function_Reference/get_option
+ * @link http://codex.wordpress.org/Function_Reference/wp_parse_args
+ * @link http://codex.wordpress.org/Function_Reference/wp_kses_decode_entities
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @param  object $term     Database row object.
+ * @param  string $taxonomy Taxonomy name that $term is part of.
+ * @return object $term     Database row object.
+ */
+function exmachina_get_term_filter( $term, $taxonomy ) {
+
+  /* Do nothing, If $term is not object, return. */
+  if ( ! is_object( $term ) )
+    return $term;
+
+  /* Set the variables. */
+  $db = get_option( 'exmachina-term-meta' );
+  $term_meta = isset( $db[$term->term_id] ) ? $db[$term->term_id] : array();
+
+  $term->meta = wp_parse_args( $term_meta, apply_filters( 'exmachina_term_meta_defaults', array(
+    'headline'            => '',
+    'intro_text'          => '',
+    'doctitle'            => '',
+    'description'         => '',
+    'keywords'            => '',
+    'layout'              => '',
+    'noindex'             => 0,
+    'nofollow'            => 0,
+    'noarchive'           => 0,
+  ) ) );
+
+  /* Sanitize term meta. */
+  foreach ( $term->meta as $field => $value )
+    $term->meta[$field] = apply_filters( 'exmachina_term_meta_' . $field, stripslashes( wp_kses_decode_entities( $value ) ), $term, $taxonomy );
+
+  /* Apply the 'exmachina_term_meta' filter. */
+  $term->meta = apply_filters( 'exmachina_term_meta', $term->meta, $term, $taxonomy );
+
+  /* Return the term. */
+  return $term;
+
+} // end function exmachina_get_term_filter()
+
+/* Filter the taxonomy terms. */
+add_filter( 'get_terms', 'exmachina_get_terms_filter', 10, 2 );
+/**
+ * Get Terms Filter
+ *
+ * Add ExMachina term-meta data to functions that return multiple terms.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/get_terms
+ *
+ * @uses exmachina_get_term_filter() [description]
+ *
+ * @since 1.0.0
+ * @access public
+ *
+ * @param array  $terms    Database row objects.
+ * @param string $taxonomy Taxonomy name that $terms are part of.
+ * @return array $terms Database row objects.
+ */
+function exmachina_get_terms_filter( array $terms, $taxonomy ) {
+
+  /* Loop through the term data. */
+  foreach( $terms as $term )
+    $term = exmachina_get_term_filter( $term, $taxonomy );
+
+  /* Return the terms. */
+  return $terms;
+
+} // end function exmachina_get_terms_filter()
+
+/*-------------------------------------------------------------------------*/
+/* === Field Helper Functions === */
+/*-------------------------------------------------------------------------*/
+
+/**
+ * Get Field Name
+ *
+ * Creates a settings field name attribute for use on the theme settings pages.
+ * This is a helper function for use with the WordPress settings API.
+ *
+ * @uses EXMACHINA_SETTINGS_FIELD [description]
+ *
+ * @since 1.0.0
+ *
+ * @param  string $name    Field name base.
+ * @param  string $setting Optional. The settings field name.
+ * @return string          Full field name.
+ */
+function exmachina_get_field_name( $name, $setting = null ) {
+
+  /* Defines the default settings field so it doesn't need to be repeated. */
+  $setting = $setting ? $setting : EXMACHINA_SETTINGS_FIELD;
+
+  return sprintf( '%s[%s]', $setting, $name );
+
+} // end function exmachina_get_field_name()
+
+/**
+ * Get Field ID
+ *
+ * Creates a settings field id attribute for use on the theme settings pages.
+ * This is a helper function for use with the WordPress settings API.
+ *
+ * @uses EXMACHINA_SETTINGS_FIELD [description]
+ *
+ * @since 1.0.0
+ *
+ * @param  string $id      Field id base.
+ * @param  string $setting Optional. The settings field name.
+ * @return string          Full field id.
+ */
+function exmachina_get_field_id( $id, $setting = null ) {
+
+  /* Defines the default settings field so it doesn't need to be repeated. */
+  $setting = $setting ? $setting : EXMACHINA_SETTINGS_FIELD;
+
+  return sprintf( '%s[%s]', $setting, $id );
+} // end function exmachina_get_field_id()
+
+/**
+ * Get Field Value
+ *
+ * Creates a settings field value attribute for use on the theme settings pages.
+ * This is a helper function for use with the WordPress settings API.
+ *
+ * @uses EXMACHINA_SETTINGS_FIELD [description]
+ * @uses exmachina_get_option()   Returns an option from the options table.
+ *
+ * @since 1.0.0
+ *
+ * @param  string $key     Field key.
+ * @param  string $setting Optional. The settings field name.
+ * @return string          Full field value.
+ */
+function exmachina_get_field_value( $key, $setting = null ) {
+
+  /* Defines the default settings field so it doesn't need to be repeated. */
+  $setting = $setting ? $setting : EXMACHINA_SETTINGS_FIELD;
+
+  return exmachina_get_option( $key, $setting );
+} // end function exmachina_get_field_value()
+
+/*-------------------------------------------------------------------------*/
+/* === Update Settings Functions === */
+/*-------------------------------------------------------------------------*/
+
+/**
+ * Update Settings
+ *
+ * Takes an array of new settings, merges them with the old settings, and
+ * pushes them into the database.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/update_option
+ * @link http://codex.wordpress.org/Function_Reference/wp_parse_args
+ * @link http://codex.wordpress.org/Function_Reference/get_option
+ *
+ * @uses EXMACHINA_SETTINGS_FIELD
+ *
+ * @since 1.0.0
+ * @access private
+ *
+ * @param string|array $new     New settings. Can be a string, or an array.
+ * @param string       $setting Optional. Settings field name. Default is EXMACHINA_SETTINGS_FIELD.
+ */
+function _exmachina_update_settings( $new = '', $setting = EXMACHINA_SETTINGS_FIELD ) {
+
+  update_option( $setting, wp_parse_args( $new, get_option( $setting ) ) );
+
+} // end function _exmachina_update_settings()
