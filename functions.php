@@ -25,30 +25,3 @@ if ( !defined('ABSPATH')) exit;
 ###############################################################################
 # begin functions
 ###############################################################################
-
-/* Load the core theme framework. */
-require ( trailingslashit( get_template_directory() ) . 'library/engine.php' );
-new ExMachina();
-
-/* Do theme setup on the 'after_setup_theme' hook. */
-add_action( 'after_setup_theme', 'optimus_theme_setup' );
-
-/**
- * Theme Setup Function
- *
- * This function adds support for theme features and defines the default theme
- * actions and filters.
- *
- * @since 1.0.0
- * @access public
- * @return void
- */
-function optimus_theme_setup() {
-
-  /* Get action/filter hook prefix. */
-  $prefix = exmachina_get_prefix();
-
-  /* Add theme support for core framework features. */
-  add_theme_support( 'exmachina-core-theme-settings', array( 'updates', 'style', 'feeds', 'menus', 'edits', 'blogpage', 'brand', 'breadcrumbs', 'layout', 'archives', 'comments', 'scripts', 'footer', 'about', 'help' ) );
-
-} // end function optimus_theme_setup()
