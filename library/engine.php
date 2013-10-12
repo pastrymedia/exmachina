@@ -562,6 +562,7 @@ class ExMachina {
       /* Load the main admin functions. */
       require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'admin-menu.php' );
       require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'admin-scripts.php' );
+      require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'admin-general.php' );
 
       /* Load the theme settings file. */
       require_once( trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'theme-settings.php' );
