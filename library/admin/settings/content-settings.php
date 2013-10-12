@@ -560,7 +560,7 @@ class ExMachina_Admin_Content_Settings extends ExMachina_Admin_Metaboxes {
                     <div class="uk-form-controls">
                       <!-- Begin Form Inputs -->
                       <label for="<?php echo $this->get_field_id( 'breadcrumb_heirarchial_attachments' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'breadcrumb_heirarchial_attachments' ); ?>" id="<?php echo $this->get_field_id( 'breadcrumb_heirarchial_attachments' ); ?>" value="1"<?php checked( $this->get_field_value( 'breadcrumb_heirarchial_attachments' ) ); ?> />
-                      <?php _e( 'Enable Hierarchial Attachments?', 'exmachina' ); ?></label>
+                      <?php _e( 'Enable Hierarchial Attachments?', 'exmachina-core' ); ?></label>
                       <!-- End Form Inputs -->
                     </div><!-- .uk-form-controls -->
                   </div><!-- .uk-form-row -->
@@ -582,7 +582,7 @@ class ExMachina_Admin_Content_Settings extends ExMachina_Admin_Metaboxes {
                     <div class="uk-form-controls">
                       <!-- Begin Form Inputs -->
                       <label for="<?php echo $this->get_field_id( 'breadcrumb_heirarchial_categories' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'breadcrumb_heirarchial_categories' ); ?>" id="<?php echo $this->get_field_id( 'breadcrumb_heirarchial_categories' ); ?>" value="1"<?php checked( $this->get_field_value( 'breadcrumb_heirarchial_categories' ) ); ?> />
-                      <?php _e( 'Enable Hierarchial Categories?', 'exmachina' ); ?></label>
+                      <?php _e( 'Enable Hierarchial Categories?', 'exmachina-core' ); ?></label>
                       <!-- End Form Inputs -->
                     </div><!-- .uk-form-controls -->
                   </div><!-- .uk-form-row -->
@@ -730,7 +730,7 @@ class ExMachina_Admin_Content_Settings extends ExMachina_Admin_Metaboxes {
                     <div class="uk-form-controls">
                       <!-- Begin Form Inputs -->
                       <label for="<?php echo $this->get_field_id( 'breadcrumb_tax' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'breadcrumb_tax' ); ?>" id="<?php echo $this->get_field_id( 'breadcrumb_tax' ); ?>" value="1"<?php checked( $this->get_field_value( 'breadcrumb_tax' ) ); ?> />
-                      <?php _e( 'Taxonomy:', 'exmachina' ); ?></label>
+                      <?php _e( 'Taxonomy:', 'exmachina-core' ); ?></label>
                       <!-- End Form Inputs -->
                     </div><!-- .uk-form-controls -->
                   </div><!-- .uk-form-row -->
@@ -844,7 +844,7 @@ class ExMachina_Admin_Content_Settings extends ExMachina_Admin_Metaboxes {
                     <div class="uk-form-controls">
                       <!-- Begin Form Inputs -->
                       <input type="text" name="<?php echo $this->get_field_name( 'comment_title_wrap' ); ?>" id="<?php echo $this->get_field_id( 'comment_title_wrap' ); ?>" value="<?php echo esc_attr( $this->get_field_value( 'comment_title_wrap' ) ); ?>" size="50" /><br />
-                      <span class="description"><?php _e( 'This is the html tag used around the Comment Title and Pings Title.  Make sure you keep the <tag>%s</tag> format for the wrap to work correctly.', 'exmachina' ); ?></span>
+                      <span class="description"><?php _e( 'This is the html tag used around the Comment Title and Pings Title.  Make sure you keep the <tag>%s</tag> format for the wrap to work correctly.', 'exmachina-core' ); ?></span>
                       <!-- End Form Inputs -->
                     </div><!-- .uk-form-controls -->
                   </div><!-- .uk-form-row -->
@@ -1013,8 +1013,8 @@ class ExMachina_Admin_Content_Settings extends ExMachina_Admin_Metaboxes {
                     <div class="uk-form-controls">
                       <!-- Begin Form Inputs -->
                       <label for="<?php echo $this->get_field_id( 'comment_form_args_fields_aria_display' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'comment_form_args_fields_aria_display' ); ?>" id="<?php echo $this->get_field_id( 'comment_form_args_fields_aria_display' ); ?>" value="1"<?php checked( $this->get_field_value( 'comment_form_args_fields_aria_display' ) ); ?> />
-                      <?php _e( 'Enable Aria Require True Attribute?', 'exmachina' ); ?></label><br />
-                      <span class="description"><?php _e( 'This is enabled by default and adds an attribute to the required comment fields that adds a layout of accesibility for visually impaired site visitors.  This attribute is not technically valid XHTML but works in all browsers. Unless you need 100% valid markup at the expense of accesability, leave this option enabled.', 'exmachina' ); ?></span>
+                      <?php _e( 'Enable Aria Require True Attribute?', 'exmachina-core' ); ?></label><br />
+                      <span class="description"><?php _e( 'This is enabled by default and adds an attribute to the required comment fields that adds a layout of accesibility for visually impaired site visitors.  This attribute is not technically valid XHTML but works in all browsers. Unless you need 100% valid markup at the expense of accesability, leave this option enabled.', 'exmachina-core' ); ?></span>
                       <!-- End Form Inputs -->
                     </div><!-- .uk-form-controls -->
                   </div><!-- .uk-form-row -->
@@ -1036,7 +1036,7 @@ class ExMachina_Admin_Content_Settings extends ExMachina_Admin_Metaboxes {
                     <div class="uk-form-controls">
                       <!-- Begin Form Inputs -->
                       <label for="<?php echo $this->get_field_id( 'comment_form_args_fields_author_display' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'comment_form_args_fields_author_display' ); ?>" id="<?php echo $this->get_field_id( 'comment_form_args_fields_author_display' ); ?>" value="1"<?php checked( $this->get_field_value( 'comment_form_args_fields_author_display' ) ); ?> />
-                      <?php _e( 'Display Author Field?', 'exmachina' ); ?></label>
+                      <?php _e( 'Display Author Field?', 'exmachina-core' ); ?></label>
                       <!-- End Form Inputs -->
                     </div><!-- .uk-form-controls -->
                   </div><!-- .uk-form-row -->
@@ -1079,7 +1079,7 @@ class ExMachina_Admin_Content_Settings extends ExMachina_Admin_Metaboxes {
                     <div class="uk-form-controls">
                       <!-- Begin Form Inputs -->
                       <label for="<?php echo $this->get_field_id( 'comment_form_args_fields_email_display' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'comment_form_args_fields_email_display' ); ?>" id="<?php echo $this->get_field_id( 'comment_form_args_fields_email_display' ); ?>" value="1"<?php checked( $this->get_field_value( 'comment_form_args_fields_email_display' ) ); ?> />
-                      <?php _e( 'Display Email Field?', 'exmachina' ); ?></label>
+                      <?php _e( 'Display Email Field?', 'exmachina-core' ); ?></label>
                       <!-- End Form Inputs -->
                     </div><!-- .uk-form-controls -->
                   </div><!-- .uk-form-row -->
@@ -1122,7 +1122,7 @@ class ExMachina_Admin_Content_Settings extends ExMachina_Admin_Metaboxes {
                     <div class="uk-form-controls">
                       <!-- Begin Form Inputs -->
                       <label for="<?php echo $this->get_field_id( 'comment_form_args_fields_url_display' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'comment_form_args_fields_url_display' ); ?>" id="<?php echo $this->get_field_id( 'comment_form_args_fields_url_display' ); ?>" value="1"<?php checked( $this->get_field_value( 'comment_form_args_fields_url_display' ) ); ?> />
-                      <?php _e( 'Display URL Field?', 'exmachina' ); ?></label>
+                      <?php _e( 'Display URL Field?', 'exmachina-core' ); ?></label>
                       <!-- End Form Inputs -->
                     </div><!-- .uk-form-controls -->
                   </div><!-- .uk-form-row -->
@@ -1186,7 +1186,7 @@ class ExMachina_Admin_Content_Settings extends ExMachina_Admin_Metaboxes {
                     <div class="uk-form-controls">
                       <!-- Begin Form Inputs -->
                       <textarea name="<?php echo $this->get_field_name( 'comment_form_args_comment_notes_before' ); ?>" id="<?php echo $this->get_field_id( 'comment_form_args_comment_notes_before' ); ?>" rows="3" cols="70"><?php echo esc_textarea( $this->get_field_value( 'comment_form_args_comment_notes_before' ) ); ?></textarea><br />
-                      <span class="description"><?php _e( 'The meta description can be used to determine the text used under the title on search engine results pages.', 'exmachina' ); ?></span>
+                      <span class="description"><?php _e( 'The meta description can be used to determine the text used under the title on search engine results pages.', 'exmachina-core' ); ?></span>
                       <!-- End Form Inputs -->
                     </div><!-- .uk-form-controls -->
                   </div><!-- .uk-form-row -->
@@ -1208,7 +1208,7 @@ class ExMachina_Admin_Content_Settings extends ExMachina_Admin_Metaboxes {
                     <div class="uk-form-controls">
                       <!-- Begin Form Inputs -->
                       <textarea name="<?php echo $this->get_field_name( 'comment_form_args_comment_notes_after' ); ?>" id="<?php echo $this->get_field_id( 'comment_form_args_comment_notes_after' ); ?>" rows="3" cols="70"><?php echo esc_textarea( $this->get_field_value( 'comment_form_args_comment_notes_after' ) ); ?></textarea><br />
-                      <span class="description"><?php _e( 'The meta description can be used to determine the text used under the title on search engine results pages.', 'exmachina' ); ?></span>
+                      <span class="description"><?php _e( 'The meta description can be used to determine the text used under the title on search engine results pages.', 'exmachina-core' ); ?></span>
                       <!-- End Form Inputs -->
                     </div><!-- .uk-form-controls -->
                   </div><!-- .uk-form-row -->

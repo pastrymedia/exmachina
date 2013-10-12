@@ -204,19 +204,19 @@ class ExMachina_Admin_Import_Export extends ExMachina_Admin_Basic {
 
           <tr>
             <td class="label" scope="row">
-              <label><?php _e( 'Import ExMachina Settings File', 'exmachina' ); ?></label>
+              <label><?php _e( 'Import ExMachina Settings File', 'exmachina-core' ); ?></label>
               </td>
             <td>
-              <p><?php printf( __( 'Upload the data file (%s) from your computer and we\'ll import your settings.', 'exmachina' ), exmachina_code( '.json' ) ); ?></p>
-              <p><?php _e( 'Choose the file from your computer and click "Upload file and Import"', 'exmachina' ); ?></p>
+              <p><?php printf( __( 'Upload the data file (%s) from your computer and we\'ll import your settings.', 'exmachina-core' ), exmachina_code( '.json' ) ); ?></p>
+              <p><?php _e( 'Choose the file from your computer and click "Upload file and Import"', 'exmachina-core' ); ?></p>
               <p>
                 <form enctype="multipart/form-data" method="post" action="<?php echo menu_page_url( 'exmachina-import-export', 0 ); ?>">
                   <?php wp_nonce_field( 'exmachina-import' ); ?>
                   <input type="hidden" name="exmachina-import" value="1" />
-                  <label for="exmachina-import-upload"><?php sprintf( __( 'Upload File: (Maximum Size: %s)', 'exmachina' ), ini_get( 'post_max_size' ) ); ?></label>
+                  <label for="exmachina-import-upload"><?php sprintf( __( 'Upload File: (Maximum Size: %s)', 'exmachina-core' ), ini_get( 'post_max_size' ) ); ?></label>
                   <input type="file" id="exmachina-import-upload" name="exmachina-import-upload" size="25" />
                   <?php
-                  submit_button( __( 'Upload File and Import', 'exmachina' ), 'primary', 'upload', false );
+                  submit_button( __( 'Upload File and Import', 'exmachina-core' ), 'primary', 'upload', false );
                   ?>
                 </form>
               </p>
@@ -225,17 +225,17 @@ class ExMachina_Admin_Import_Export extends ExMachina_Admin_Basic {
 
           <tr>
             <td class="label" scope="row">
-            <label><?php _e( 'Export ExMachina Settings File', 'exmachina' ); ?></label></td>
+            <label><?php _e( 'Export ExMachina Settings File', 'exmachina-core' ); ?></label></td>
             <td>
-              <p><?php printf( __( 'When you click the button below, ExMachina will generate a data file (%s) for you to save to your computer.', 'exmachina' ), exmachina_code( '.json' ) ); ?></p>
-              <p><?php _e( 'Once you have saved the download file, you can use the import function on another site to import this data.', 'exmachina' ); ?></p>
+              <p><?php printf( __( 'When you click the button below, ExMachina will generate a data file (%s) for you to save to your computer.', 'exmachina-core' ), exmachina_code( '.json' ) ); ?></p>
+              <p><?php _e( 'Once you have saved the download file, you can use the import function on another site to import this data.', 'exmachina-core' ); ?></p>
               <p>
                 <form method="post" action="<?php echo menu_page_url( 'exmachina-import-export', 0 ); ?>">
                   <?php
                   wp_nonce_field( 'exmachina-export' );
                   $this->export_checkboxes();
                   if ( $this->get_export_options() )
-                    submit_button( __( 'Download Export File', 'exmachina' ), 'primary', 'download' );
+                    submit_button( __( 'Download Export File', 'exmachina-core' ), 'primary', 'download' );
                   ?>
                 </form>
               </p>
@@ -406,7 +406,7 @@ class ExMachina_Admin_Import_Export extends ExMachina_Admin_Basic {
     $settings = array();
 
     //* Exported file name always starts with "exmachina"
-    $prefix = array( 'exmachina' );
+    $prefix = array( 'exmachina-core' );
 
     //* Loop through set(s) of options
     foreach ( (array) $_REQUEST['exmachina-export'] as $export => $value ) {

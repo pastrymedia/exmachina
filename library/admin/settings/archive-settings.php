@@ -87,8 +87,8 @@ class ExMachina_Admin_Archive_Settings extends ExMachina_Admin_Metaboxes {
       array(
         'submenu' => array(
           'parent_slug' => 'edit.php?post_type=' . $this->post_type->name,
-          'page_title'  => apply_filters( 'exmachina_cpt_archive_settings_page_label', __( 'Archive Settings', 'exmachina' ) ),
-          'menu_title'  => apply_filters( 'exmachina_cpt_archive_settings_menu_label', __( 'Archive Settings', 'exmachina' ) ),
+          'page_title'  => apply_filters( 'exmachina_cpt_archive_settings_page_label', __( 'Archive Settings', 'exmachina-core' ) ),
+          'menu_title'  => apply_filters( 'exmachina_cpt_archive_settings_menu_label', __( 'Archive Settings', 'exmachina-core' ) ),
           'capability'  => 'edit_theme_options',
         ),
       )
@@ -97,7 +97,7 @@ class ExMachina_Admin_Archive_Settings extends ExMachina_Admin_Metaboxes {
     //* Handle non-top-level CPT menu items
     if ( is_string( $this->post_type->show_in_menu ) ) {
       $menu_ops['submenu']['parent_slug'] = $this->post_type->show_in_menu;
-      $menu_ops['submenu']['menu_title']  = apply_filters( 'exmachina_cpt_archive_settings_label', $this->post_type->labels->name . ' ' . __( 'Archive', 'exmachina' ) );
+      $menu_ops['submenu']['menu_title']  = apply_filters( 'exmachina_cpt_archive_settings_label', $this->post_type->labels->name . ' ' . __( 'Archive', 'exmachina-core' ) );
       $menu_ops['submenu']['menu_position']  = $this->post_type->menu_position;
     } // end IF statement
 
@@ -214,56 +214,56 @@ class ExMachina_Admin_Archive_Settings extends ExMachina_Admin_Metaboxes {
 
     /* Add the 'Archive Settings' help content. */
     $archive_help =
-      '<h3>' . __( 'Archive Settings', 'exmachina' ) . '</h3>' .
-      '<p>' . __( 'The Archive Headline sets the title seen on the archive page', 'exmachina' ) . '</p>' .
-      '<p>' . __( 'The Archive Intro Text sets the text before the archive entries to introduce the content to the viewer.', 'exmachina' ) . '</p>';
+      '<h3>' . __( 'Archive Settings', 'exmachina-core' ) . '</h3>' .
+      '<p>' . __( 'The Archive Headline sets the title seen on the archive page', 'exmachina-core' ) . '</p>' .
+      '<p>' . __( 'The Archive Intro Text sets the text before the archive entries to introduce the content to the viewer.', 'exmachina-core' ) . '</p>';
 
     /* Adds the 'Archive Settings' help tab. */
     $screen->add_help_tab(
       array(
         'id'      => $this->pagehook . '-archive',
-        'title'   => __( 'Archive Settings', 'exmachina' ),
+        'title'   => __( 'Archive Settings', 'exmachina-core' ),
         'content' => $archive_help,
       )
     );
 
     /* Add the 'SEO Settings' help content. */
     $seo_help =
-      '<h3>' . __( 'SEO Settings', 'exmachina' ) . '</h3>' .
-      '<p>' . __( 'The Custom Document Title sets the page title as seen in browsers and search engines. ', 'exmachina' ) . '</p>' .
-      '<p>' . __( 'The Meta description and keywords fill in the meta tags for the archive page. The Meta description is the short text blurb that appear in search engine results.', 'exmachina' ) . '</p>' .
-      '<p>' . __( 'Most search engines do not use Keywords at this time or give them very little consideration; however, it\'s worth using in case keywords are given greater consideration in the future and also to help guide your content. If the content doesn’t match with your targeted key words, then you may need to consider your content more carefully.', 'exmachina' ) . '</p>' .
-      '<p>' . __( 'The Robots Meta Tags tell search engines how to handle the archive page. Noindex means not to index the page at all, and it will not appear in search results. Nofollow means do not follow any links from this page and noarchive tells them not to make an archive copy of the page.', 'exmachina' ) . '</p>';
+      '<h3>' . __( 'SEO Settings', 'exmachina-core' ) . '</h3>' .
+      '<p>' . __( 'The Custom Document Title sets the page title as seen in browsers and search engines. ', 'exmachina-core' ) . '</p>' .
+      '<p>' . __( 'The Meta description and keywords fill in the meta tags for the archive page. The Meta description is the short text blurb that appear in search engine results.', 'exmachina-core' ) . '</p>' .
+      '<p>' . __( 'Most search engines do not use Keywords at this time or give them very little consideration; however, it\'s worth using in case keywords are given greater consideration in the future and also to help guide your content. If the content doesn’t match with your targeted key words, then you may need to consider your content more carefully.', 'exmachina-core' ) . '</p>' .
+      '<p>' . __( 'The Robots Meta Tags tell search engines how to handle the archive page. Noindex means not to index the page at all, and it will not appear in search results. Nofollow means do not follow any links from this page and noarchive tells them not to make an archive copy of the page.', 'exmachina-core' ) . '</p>';
 
     /* Adds the 'SEO Settings' help tab. */
     $screen->add_help_tab(
       array(
         'id'      => $this->pagehook . '-seo',
-        'title'   => __( 'SEO Settings', 'exmachina' ),
+        'title'   => __( 'SEO Settings', 'exmachina-core' ),
         'content' => $seo_help,
       )
     );
 
     /* Add the 'Layout Settings' help content. */
     $layout_help =
-      '<h3>' . __( 'Layout Settings', 'exmachina' ) . '</h3>' .
-      '<p>'  . __( 'This lets you select the layout for the archive page. On most of the child themes you\'ll see these options:', 'exmachina' ) . '</p>' .
+      '<h3>' . __( 'Layout Settings', 'exmachina-core' ) . '</h3>' .
+      '<p>'  . __( 'This lets you select the layout for the archive page. On most of the child themes you\'ll see these options:', 'exmachina-core' ) . '</p>' .
       '<ul>' .
-        '<li>' . __( 'Content Sidebar', 'exmachina' ) . '</li>' .
-        '<li>' . __( 'Sidebar Content', 'exmachina' ) . '</li>' .
-        '<li>' . __( 'Sidebar Content Sidebar', 'exmachina' ) . '</li>' .
-        '<li>' . __( 'Content Sidebar Sidebar', 'exmachina' ) . '</li>' .
-        '<li>' . __( 'Sidebar Sidebar Content', 'exmachina' ) . '</li>' .
-        '<li>' . __( 'Full Width Content', 'exmachina' ) . '</li>' .
+        '<li>' . __( 'Content Sidebar', 'exmachina-core' ) . '</li>' .
+        '<li>' . __( 'Sidebar Content', 'exmachina-core' ) . '</li>' .
+        '<li>' . __( 'Sidebar Content Sidebar', 'exmachina-core' ) . '</li>' .
+        '<li>' . __( 'Content Sidebar Sidebar', 'exmachina-core' ) . '</li>' .
+        '<li>' . __( 'Sidebar Sidebar Content', 'exmachina-core' ) . '</li>' .
+        '<li>' . __( 'Full Width Content', 'exmachina-core' ) . '</li>' .
       '</ul>' .
-      '<p>'  . __( 'These options can be extended or limited by the child theme.', 'exmachina' ) . '</p>' .
-      '<p>'  . __( 'The Custom Body Class adds a class to the body tag in the HTML to allow CSS modification exclusively for this post type\'s archive page.', 'exmachina' ) . '</p>';
+      '<p>'  . __( 'These options can be extended or limited by the child theme.', 'exmachina-core' ) . '</p>' .
+      '<p>'  . __( 'The Custom Body Class adds a class to the body tag in the HTML to allow CSS modification exclusively for this post type\'s archive page.', 'exmachina-core' ) . '</p>';
 
     /* Adds the 'Layout Settings' help tab. */
     $screen->add_help_tab(
       array(
         'id'      => $this->pagehook . '-layout',
-        'title'   => __( 'Layout Settings', 'exmachina' ),
+        'title'   => __( 'Layout Settings', 'exmachina-core' ),
         'content' => $layout_help,
       )
     );
@@ -305,13 +305,13 @@ class ExMachina_Admin_Archive_Settings extends ExMachina_Admin_Metaboxes {
     add_meta_box( 'exmachina-core-archive-settings-save', __( '<i class="uk-icon-save"></i> Save Settings', 'exmachina-core' ), array( $this, 'exmachina_meta_box_archive_display_save' ), $this->pagehook, 'side', 'high' );
 
     /* Register the 'Archive Settings' metabox to the 'side' priority. */
-    add_meta_box( 'exmachina-cpt-archives-settings', __( '<i class="uk-icon-archive"></i> Archive Settings', 'exmachina' ), array( $this, 'exmachina_meta_box_archive_display_archive_box' ), $this->pagehook, 'normal' );
+    add_meta_box( 'exmachina-cpt-archives-settings', __( '<i class="uk-icon-archive"></i> Archive Settings', 'exmachina-core' ), array( $this, 'exmachina_meta_box_archive_display_archive_box' ), $this->pagehook, 'normal' );
 
     /* Register the 'SEO Settings' metabox to the 'side' priority. */
-    add_meta_box( 'exmachina-cpt-archives-seo-settings', __( '<i class="uk-icon-cog"></i> SEO Settings', 'exmachina' ), array( $this, 'exmachina_meta_box_archive_display_seo_box' ), $this->pagehook, 'normal' );
+    add_meta_box( 'exmachina-cpt-archives-seo-settings', __( '<i class="uk-icon-cog"></i> SEO Settings', 'exmachina-core' ), array( $this, 'exmachina_meta_box_archive_display_seo_box' ), $this->pagehook, 'normal' );
 
     /* Register the 'Layout Settings' metabox to the 'side' priority. */
-    add_meta_box( 'exmachina-cpt-archives-layout-settings', __( '<i class="uk-icon-cog"></i> Layout Settings', 'exmachina' ), array( $this, 'exmachina_meta_box_archive_display_layout_box' ), $this->pagehook, 'normal' );
+    add_meta_box( 'exmachina-cpt-archives-layout-settings', __( '<i class="uk-icon-cog"></i> Layout Settings', 'exmachina-core' ), array( $this, 'exmachina_meta_box_archive_display_layout_box' ), $this->pagehook, 'normal' );
 
     /* Trigger the archive settings metabox action hook. */
     do_action( 'exmachina_archives_settings_metaboxes', $this->pagehook );
@@ -417,25 +417,25 @@ class ExMachina_Admin_Archive_Settings extends ExMachina_Admin_Metaboxes {
                 <!-- Begin Fieldset -->
                 <fieldset class="uk-form uk-width-1-1 uk-form-stacked">
 
-                  <legend><?php printf( __( 'View the <a href="%s">%s archive</a>.', 'exmachina' ), get_post_type_archive_link( $this->post_type->name ), $this->post_type->name ); ?></legend>
+                  <legend><?php printf( __( 'View the <a href="%s">%s archive</a>.', 'exmachina-core' ), get_post_type_archive_link( $this->post_type->name ), $this->post_type->name ); ?></legend>
 
                   <div class="uk-form-row">
-                    <label class="uk-form-label" for="<?php echo $this->get_field_id( 'headline' ); ?>"><?php _e( 'Archive Headline', 'exmachina' ); ?></label>
+                    <label class="uk-form-label" for="<?php echo $this->get_field_id( 'headline' ); ?>"><?php _e( 'Archive Headline', 'exmachina-core' ); ?></label>
                     <div class="uk-form-controls">
                       <input class="large-text uk-form-width-large" type="text" name="<?php echo $this->get_field_name( 'headline' ); ?>" id="<?php echo $this->get_field_id( 'headline' ); ?>" value="<?php echo esc_attr( $this->get_field_value( 'headline' ) ); ?>" />
                     </div><!-- .uk-form-controls -->
                   </div><!-- uk-form-row -->
-                  <p class="uk-text-muted"><?php _e( 'Leave empty if you do not want to display a headline.', 'exmachina' ); ?></p>
+                  <p class="uk-text-muted"><?php _e( 'Leave empty if you do not want to display a headline.', 'exmachina-core' ); ?></p>
 
                   <div class="uk-form-row">
-                    <label class="uk-form-label" for="<?php echo $this->get_field_id( 'intro_text' ); ?>"><?php _e( 'Archive Intro Text', 'exmachina' ); ?></label>
+                    <label class="uk-form-label" for="<?php echo $this->get_field_id( 'intro_text' ); ?>"><?php _e( 'Archive Intro Text', 'exmachina-core' ); ?></label>
                     <div class="uk-form-controls">
                       <!-- Begin Form Inputs -->
                       <textarea class="input-block-level vertical-resize widefat" name="<?php echo $this->get_field_name( 'intro_text' ); ?>" id="<?php echo $this->get_field_id( 'intro_text' ); ?>" cols="30" rows="5"><?php echo esc_textarea( $this->get_field_value( 'intro_text' ) ); ?></textarea>
                       <!-- End Form Inputs -->
                     </div><!-- .uk-form-controls -->
                   </div><!-- .uk-form-row -->
-                  <p class="uk-text-muted"><?php _e( 'Leave empty if you do not want to display any intro text.', 'exmachina' ); ?></p>
+                  <p class="uk-text-muted"><?php _e( 'Leave empty if you do not want to display any intro text.', 'exmachina-core' ); ?></p>
 
                 </fieldset>
                 <!-- End Fieldset -->
@@ -555,7 +555,7 @@ class ExMachina_Admin_Archive_Settings extends ExMachina_Admin_Metaboxes {
                       <!-- End Form Inputs -->
                     </div><!-- .uk-form-controls -->
                   </div><!-- .uk-form-row -->
-                  <p class="description"><?php _e( 'Comma separated list', 'exmachina' ); ?></p>
+                  <p class="description"><?php _e( 'Comma separated list', 'exmachina-core' ); ?></p>
                 </fieldset>
                 <!-- End Fieldset -->
               </div><!-- .fieldset-wrap -->
@@ -576,13 +576,13 @@ class ExMachina_Admin_Archive_Settings extends ExMachina_Admin_Metaboxes {
                       <ul class="checkbox-list vertical">
 
                         <li><label for="<?php echo $this->get_field_id( 'noindex' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'noindex' ); ?>" id="<?php echo $this->get_field_id( 'noindex' ); ?>" value="1" <?php checked( $this->get_field_value( 'noindex' ) ); ?> />
-                        <?php printf( __( 'Apply %s to this archive', 'exmachina' ), exmachina_code( 'noindex' ) ); ?> <a href="http://yoast.com/articles/robots-meta-tags/" target="_blank">[?]</a></label></li>
+                        <?php printf( __( 'Apply %s to this archive', 'exmachina-core' ), exmachina_code( 'noindex' ) ); ?> <a href="http://yoast.com/articles/robots-meta-tags/" target="_blank">[?]</a></label></li>
 
                         <li><label for="<?php echo $this->get_field_id( 'nofollow' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'nofollow' ); ?>" id="<?php echo $this->get_field_id( 'nofollow' ); ?>" value="1" <?php checked( $this->get_field_value( 'nofollow' ) ); ?> />
-                        <?php printf( __( 'Apply %s to this archive', 'exmachina' ), exmachina_code( 'nofollow' ) ); ?> <a href="http://yoast.com/articles/robots-meta-tags/" target="_blank">[?]</a></label></li>
+                        <?php printf( __( 'Apply %s to this archive', 'exmachina-core' ), exmachina_code( 'nofollow' ) ); ?> <a href="http://yoast.com/articles/robots-meta-tags/" target="_blank">[?]</a></label></li>
 
                         <li><label for="<?php echo $this->get_field_id( 'noarchive' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'noarchive' ); ?>" id="<?php echo $this->get_field_id( 'noarchive' ); ?>" value="1" <?php checked( $this->get_field_value( 'noarchive' ) ); ?> />
-                        <?php printf( __( 'Apply %s to this archive', 'exmachina' ), exmachina_code( 'noarchive' ) ); ?> <a href="http://yoast.com/articles/robots-meta-tags/" target="_blank">[?]</a></label></li>
+                        <?php printf( __( 'Apply %s to this archive', 'exmachina-core' ), exmachina_code( 'noarchive' ) ); ?> <a href="http://yoast.com/articles/robots-meta-tags/" target="_blank">[?]</a></label></li>
 
                       </ul>
                       <!-- End Form Inputs -->
@@ -654,7 +654,7 @@ class ExMachina_Admin_Archive_Settings extends ExMachina_Admin_Metaboxes {
               <div class="fieldset-wrap uk-margin uk-grid">
                 <fieldset class="uk-form uk-width-1-1">
                   <div class="exmachina-layout-selector radio-container uk-grid uk-grid-preserve">
-                    <p><input type="radio" class="default-layout" name="<?php echo $this->get_field_name( 'layout' ); ?>" id="default-layout" value="" <?php checked( $layout, '' ); ?> /> <label class="default" for="default-layout"><?php printf( __( 'Default Layout set in <a href="%s">Theme Settings</a>', 'exmachina' ), menu_page_url( 'exmachina', 0 ) ); ?></label></p>
+                    <p><input type="radio" class="default-layout" name="<?php echo $this->get_field_name( 'layout' ); ?>" id="default-layout" value="" <?php checked( $layout, '' ); ?> /> <label class="default" for="default-layout"><?php printf( __( 'Default Layout set in <a href="%s">Theme Settings</a>', 'exmachina-core' ), menu_page_url( 'exmachina-core', 0 ) ); ?></label></p>
                     <p><?php exmachina_layout_selector( array( 'name' => $this->get_field_name( 'layout' ), 'selected' => $layout, 'type' => 'site' ) ); ?></p>
                   </div><!-- .radio-container -->
                 </fieldset>

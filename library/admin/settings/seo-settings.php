@@ -480,37 +480,37 @@ class ExMachina_Admin_SEO_Settings extends ExMachina_Admin_Metaboxes {
                 <!-- Begin Fieldset -->
                 <fieldset class="uk-form uk-width-1-1">
 
-                <p><span class="description"><?php printf( __( 'The document title (%s) is the single most important element in your document source for <abbr title="Search engine optimization">SEO</abbr>. It succinctly informs search engines of what information is contained in the document. The title can, and should, be different on each page, but these options will help you control what it will look like by default.', 'exmachina' ), exmachina_code( '<title>' ) ); ?></span></p>
+                <p><span class="description"><?php printf( __( 'The document title (%s) is the single most important element in your document source for <abbr title="Search engine optimization">SEO</abbr>. It succinctly informs search engines of what information is contained in the document. The title can, and should, be different on each page, but these options will help you control what it will look like by default.', 'exmachina-core' ), exmachina_code( '<title>' ) ); ?></span></p>
 
-                <p><span class="description"><?php _e( '<strong>By default</strong>, the home page document title will contain the site title, the single post and page document titles will contain the post or page title, the archive pages will contain the archive type, etc.', 'exmachina' ); ?></span></p>
+                <p><span class="description"><?php _e( '<strong>By default</strong>, the home page document title will contain the site title, the single post and page document titles will contain the post or page title, the archive pages will contain the archive type, etc.', 'exmachina-core' ); ?></span></p>
 
                 <p>
                   <label for="<?php echo $this->get_field_id( 'append_description_home' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'append_description_home' ); ?>" id="<?php echo $this->get_field_id( 'append_description_home' ); ?>" value="1" <?php checked( $this->get_field_value( 'append_description_home' ) ); ?> />
-                  <?php printf( __( 'Add site description (tagline) to %s on home page?', 'exmachina' ), exmachina_code( '<title>' ) ); ?></label>
+                  <?php printf( __( 'Add site description (tagline) to %s on home page?', 'exmachina-core' ), exmachina_code( '<title>' ) ); ?></label>
                 </p>
 
                 <p>
                   <label for="<?php echo $this->get_field_id( 'append_site_title' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'append_site_title' ); ?>" id="<?php echo $this->get_field_id( 'append_site_title' ); ?>" value="1" <?php checked( $this->get_field_value( 'append_site_title' ) ); ?> />
-                  <?php printf( __( 'Add site name to %s on inner pages?', 'exmachina' ), exmachina_code( '<title>' ) ); ?> </label>
+                  <?php printf( __( 'Add site name to %s on inner pages?', 'exmachina-core' ), exmachina_code( '<title>' ) ); ?> </label>
                 </p>
 
                 <fieldset>
-                  <legend><?php _e( 'Document Title Additions Location:', 'exmachina' ); ?></legend>
-                  <span class="description"><?php _e( 'Determines which side the added title text will go on.', 'exmachina' ); ?></span>
+                  <legend><?php _e( 'Document Title Additions Location:', 'exmachina-core' ); ?></legend>
+                  <span class="description"><?php _e( 'Determines which side the added title text will go on.', 'exmachina-core' ); ?></span>
 
                   <p>
                     <input type="radio" name="<?php echo $this->get_field_name( 'doctitle_seplocation' ); ?>" id="<?php echo $this->get_field_id( 'doctitle_seplocation_left' ); ?>" value="left" <?php checked( $this->get_field_value( 'doctitle_seplocation' ), 'left' ); ?> />
-                    <label for="<?php echo $this->get_field_id( 'doctitle_seplocation_left' ); ?>"><?php _e( 'Left', 'exmachina' ); ?></label>
+                    <label for="<?php echo $this->get_field_id( 'doctitle_seplocation_left' ); ?>"><?php _e( 'Left', 'exmachina-core' ); ?></label>
                     <br />
                     <input type="radio" name="<?php echo $this->get_field_name( 'doctitle_seplocation' ); ?>" id="<?php echo $this->get_field_id( 'doctitle_seplocation_right' ); ?>" value="right" <?php checked( $this->get_field_value( 'doctitle_seplocation' ), 'right' ); ?> />
-                    <label for="<?php echo $this->get_field_id( 'doctitle_seplocation_right' ); ?>"><?php _e( 'Right', 'exmachina' ); ?></label>
+                    <label for="<?php echo $this->get_field_id( 'doctitle_seplocation_right' ); ?>"><?php _e( 'Right', 'exmachina-core' ); ?></label>
                   </p>
                 </fieldset>
 
                 <p>
-                  <label for="<?php echo $this->get_field_id( 'doctitle_sep' ); ?>"><?php _e( 'Document Title Separator:', 'exmachina' ); ?></label>
+                  <label for="<?php echo $this->get_field_id( 'doctitle_sep' ); ?>"><?php _e( 'Document Title Separator:', 'exmachina-core' ); ?></label>
                   <input type="text" name="<?php echo $this->get_field_name( 'doctitle_sep' ); ?>" value="<?php echo esc_attr( $this->get_field_value( 'doctitle_sep' ) ); ?>" size="15" /><br />
-                  <span class="description"><?php _e( 'If the title consists of two parts (original title and optional addition), then the separator will go in between them.', 'exmachina' ); ?></span>
+                  <span class="description"><?php _e( 'If the title consists of two parts (original title and optional addition), then the separator will go in between them.', 'exmachina-core' ); ?></span>
                 </p>
 
                 </fieldset>
@@ -575,67 +575,67 @@ class ExMachina_Admin_SEO_Settings extends ExMachina_Admin_Metaboxes {
 
                   <p>
                     <label for="<?php echo $this->get_field_id( 'semantic_headings' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'semantic_headings' ); ?>" id="<?php echo $this->get_field_id( 'semantic_headings' ); ?>" value="1" <?php checked( $this->get_field_value( 'semantic_headings' ) ); ?> />
-                    <?php _e( 'Use semantic HTML5 page and section headings throughout site?', 'exmachina' ); ?></label>
+                    <?php _e( 'Use semantic HTML5 page and section headings throughout site?', 'exmachina-core' ); ?></label>
                   </p>
 
-                  <p><span class="description"><?php printf( __( 'HTML5 allows for multiple %s tags throughout the document source, provided they are the primary title for the section in which they appear. However, following this standard may have a marginal negative impact on SEO.', 'exmachina' ), exmachina_code( 'h1' ) ); ?></span></p>
+                  <p><span class="description"><?php printf( __( 'HTML5 allows for multiple %s tags throughout the document source, provided they are the primary title for the section in which they appear. However, following this standard may have a marginal negative impact on SEO.', 'exmachina-core' ), exmachina_code( 'h1' ) ); ?></span></p>
 
 
                   <fieldset id="exmachina_seo_h1_wrap">
-                    <legend><?php printf( __( 'Which text would you like to be wrapped in %s tags?', 'exmachina' ), exmachina_code( 'h1' ) ); ?></legend>
+                    <legend><?php printf( __( 'Which text would you like to be wrapped in %s tags?', 'exmachina-core' ), exmachina_code( 'h1' ) ); ?></legend>
 
                     <p>
                       <input type="radio" name="<?php echo $this->get_field_name( 'home_h1_on' ); ?>" id="<?php echo $this->get_field_id( 'home_h1_on_title' ); ?>" value="title" <?php checked( $this->get_field_value( 'home_h1_on' ), 'title' ); ?> />
-                      <label for="<?php echo $this->get_field_id( 'home_h1_on_title' ); ?>"><?php _e( 'Site Title', 'exmachina' ); ?></label>
+                      <label for="<?php echo $this->get_field_id( 'home_h1_on_title' ); ?>"><?php _e( 'Site Title', 'exmachina-core' ); ?></label>
                       <br />
                       <input type="radio" name="<?php echo $this->get_field_name( 'home_h1_on' ); ?>" id="<?php echo $this->get_field_id( 'home_h1_on_description' ); ?>" value="description" <?php checked( $this->get_field_value( 'home_h1_on' ), 'description' ); ?> />
-                      <label for="<?php echo $this->get_field_id( 'home_h1_on_description' ); ?>"><?php _e( 'Site Description (Tagline)', 'exmachina' ); ?></label>
+                      <label for="<?php echo $this->get_field_id( 'home_h1_on_description' ); ?>"><?php _e( 'Site Description (Tagline)', 'exmachina-core' ); ?></label>
                       <br />
                       <input type="radio" name="<?php echo $this->get_field_name( 'home_h1_on' ); ?>" id="<?php echo $this->get_field_id( 'home_h1_on_neither' ); ?>" value="neither" <?php checked( $this->get_field_value( 'home_h1_on' ), 'neither' ); ?> />
-                      <label for="<?php echo $this->get_field_id( 'home_h1_on_neither' ); ?>"><?php _e( 'Neither. I\'ll manually wrap my own text on the homepage', 'exmachina' ); ?></label>
+                      <label for="<?php echo $this->get_field_id( 'home_h1_on_neither' ); ?>"><?php _e( 'Neither. I\'ll manually wrap my own text on the homepage', 'exmachina-core' ); ?></label>
                     </p>
                   </fieldset>
 
                   <p>
-                    <label for="<?php echo $this->get_field_id( 'home_doctitle' ); ?>"><?php _e( 'Homepage Document Title:', 'exmachina' ); ?></label><br />
+                    <label for="<?php echo $this->get_field_id( 'home_doctitle' ); ?>"><?php _e( 'Homepage Document Title:', 'exmachina-core' ); ?></label><br />
                     <input type="text" name="<?php echo $this->get_field_name( 'home_doctitle' ); ?>" id="<?php echo $this->get_field_id( 'home_doctitle' ); ?>" value="<?php echo esc_attr( $this->get_field_value( 'home_doctitle' ) ); ?>" size="80" /><br />
-                    <span class="description"><?php _e( 'If you leave the document title field blank, your site&#8217;s title will be used instead.', 'exmachina' ); ?></span>
+                    <span class="description"><?php _e( 'If you leave the document title field blank, your site&#8217;s title will be used instead.', 'exmachina-core' ); ?></span>
                   </p>
 
                   <p>
-                    <label for="<?php echo $this->get_field_id( 'home_description' ); ?>"><?php _e( 'Home Meta Description:', 'exmachina' ); ?></label><br />
+                    <label for="<?php echo $this->get_field_id( 'home_description' ); ?>"><?php _e( 'Home Meta Description:', 'exmachina-core' ); ?></label><br />
                     <textarea name="<?php echo $this->get_field_name( 'home_description' ); ?>" id="<?php echo $this->get_field_id( 'home_description' ); ?>" rows="3" cols="70"><?php echo esc_textarea( $this->get_field_value( 'home_description' ) ); ?></textarea><br />
-                    <span class="description"><?php _e( 'The meta description can be used to determine the text used under the title on search engine results pages.', 'exmachina' ); ?></span>
+                    <span class="description"><?php _e( 'The meta description can be used to determine the text used under the title on search engine results pages.', 'exmachina-core' ); ?></span>
                   </p>
 
                   <p>
-                    <label for="<?php echo $this->get_field_id( 'home_keywords' ); ?>"><?php _e( 'Home Meta Keywords (comma separated):', 'exmachina' ); ?></label><br />
+                    <label for="<?php echo $this->get_field_id( 'home_keywords' ); ?>"><?php _e( 'Home Meta Keywords (comma separated):', 'exmachina-core' ); ?></label><br />
                     <input type="text" name="<?php echo $this->get_field_name( 'home_keywords' ); ?>" id="<?php echo $this->get_field_id( 'home_keywords' ); ?>" value="<?php echo esc_attr( $this->get_field_value( 'home_keywords' ) ); ?>" size="80" /><br />
-                    <span class="description"><?php _e( 'Keywords are generally ignored by Search Engines.', 'exmachina' ); ?></span>
+                    <span class="description"><?php _e( 'Keywords are generally ignored by Search Engines.', 'exmachina-core' ); ?></span>
                   </p>
 
-                  <h4><?php _e( 'Homepage Robots Meta Tags:', 'exmachina' ); ?></h4>
+                  <h4><?php _e( 'Homepage Robots Meta Tags:', 'exmachina-core' ); ?></h4>
 
                   <p>
                     <label for="<?php echo $this->get_field_id( 'home_noindex' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'home_noindex' ); ?>" id="<?php echo $this->get_field_id( 'home_noindex' ); ?>" value="1" <?php checked( $this->get_field_value( 'home_noindex' ) ); ?> />
-                    <?php printf( __( 'Apply %s to the homepage?', 'exmachina' ), exmachina_code( 'noindex' ) ); ?></label>
+                    <?php printf( __( 'Apply %s to the homepage?', 'exmachina-core' ), exmachina_code( 'noindex' ) ); ?></label>
                     <br />
                     <label for="<?php echo $this->get_field_id( 'home_nofollow' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'home_nofollow' ); ?>" id="<?php echo $this->get_field_id( 'home_nofollow' ); ?>" value="1" <?php checked( $this->get_field_value( 'home_nofollow' ) ); ?> />
-                    <?php printf( __( 'Apply %s to the homepage?', 'exmachina' ), exmachina_code( 'nofollow' ) ); ?></label>
+                    <?php printf( __( 'Apply %s to the homepage?', 'exmachina-core' ), exmachina_code( 'nofollow' ) ); ?></label>
                     <br />
                     <label for="<?php echo $this->get_field_id( 'home_noarchive' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'home_noarchive' ); ?>" id="<?php echo $this->get_field_id( 'home_noarchive' ); ?>" value="1" <?php checked( $this->get_field_value( 'home_noarchive' ) ); ?> />
-                    <?php printf( __( 'Apply %s to the homepage?', 'exmachina' ), exmachina_code( 'noarchive' ) ); ?></label>
+                    <?php printf( __( 'Apply %s to the homepage?', 'exmachina-core' ), exmachina_code( 'noarchive' ) ); ?></label>
                   </p>
 
-                  <h4><?php _e( 'Homepage Author', 'exmachina' ); ?></h4>
+                  <h4><?php _e( 'Homepage Author', 'exmachina-core' ); ?></h4>
 
                   <p>
-                    <span class="description"><?php printf( __( 'Select the user that you would like to be used as the %s for the homepage. Be sure the user you select has entered their Google+ profile address on the profile edit screen.', 'exmachina' ), exmachina_code( 'rel="author"' ) ); ?></span>
+                    <span class="description"><?php printf( __( 'Select the user that you would like to be used as the %s for the homepage. Be sure the user you select has entered their Google+ profile address on the profile edit screen.', 'exmachina-core' ), exmachina_code( 'rel="author"' ) ); ?></span>
                   </p>
                   <p>
                     <?php
                     wp_dropdown_users( array(
-                      'show_option_none' => __( 'Select User', 'exmachina' ),
+                      'show_option_none' => __( 'Select User', 'exmachina-core' ),
                       'selected' => $this->get_field_value( 'home_author' ),
                       'name' => $this->get_field_name( 'home_author' ),
                     ) );
@@ -702,30 +702,30 @@ class ExMachina_Admin_SEO_Settings extends ExMachina_Admin_Metaboxes {
                 <!-- Begin Fieldset -->
                 <fieldset class="uk-form uk-width-1-1">
 
-                  <p><span class="description"><?php printf( __( 'By default, WordPress places several tags in your document %1$s. Most of these tags are completely unnecessary, and provide no <abbr title="Search engine optimization">SEO</abbr> value whatsoever; they just make your site slower to load. Choose which tags you would like included in your document %1$s. If you do not know what something is, leave it unchecked.', 'exmachina' ), exmachina_code( '<head>' ) ); ?></span></p>
+                  <p><span class="description"><?php printf( __( 'By default, WordPress places several tags in your document %1$s. Most of these tags are completely unnecessary, and provide no <abbr title="Search engine optimization">SEO</abbr> value whatsoever; they just make your site slower to load. Choose which tags you would like included in your document %1$s. If you do not know what something is, leave it unchecked.', 'exmachina-core' ), exmachina_code( '<head>' ) ); ?></span></p>
 
-                  <h4><?php _e( 'Relationship Link Tags:', 'exmachina' ); ?></h4>
+                  <h4><?php _e( 'Relationship Link Tags:', 'exmachina-core' ); ?></h4>
 
                   <p>
                     <label for="<?php echo $this->get_field_id( 'head_adjacent_posts_rel_link' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'head_adjacent_posts_rel_link' ); ?>" id="<?php echo $this->get_field_id( 'head_adjacent_posts_rel_link' ); ?>" value="1" <?php checked( $this->get_field_value( 'head_adjacent_posts_rel_link' ) ); ?> />
-                    <?php printf( __( 'Adjacent Posts %s link tags', 'exmachina' ), exmachina_code( 'rel' ) ); ?></label>
+                    <?php printf( __( 'Adjacent Posts %s link tags', 'exmachina-core' ), exmachina_code( 'rel' ) ); ?></label>
                   </p>
 
-                  <h4><?php _e( 'Windows Live Writer Support:', 'exmachina' ); ?></h4>
+                  <h4><?php _e( 'Windows Live Writer Support:', 'exmachina-core' ); ?></h4>
 
                   <p>
                     <label for="<?php echo $this->get_field_id( 'head_wlmanifest_link' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'head_wlwmanifest_link' ); ?>" id="<?php echo $this->get_field_id( 'head_wlmanifest_link' ); ?>" value="1" <?php checked( $this->get_field_value( 'head_wlwmanifest_link' ) ); ?> />
-                    <?php printf( __( 'Include Windows Live Writer Support Tag?', 'exmachina' ) ); ?></label>
+                    <?php printf( __( 'Include Windows Live Writer Support Tag?', 'exmachina-core' ) ); ?></label>
                   </p>
 
-                  <h4><?php _e( 'Shortlink Tag:', 'exmachina' ); ?></h4>
+                  <h4><?php _e( 'Shortlink Tag:', 'exmachina-core' ); ?></h4>
 
                   <p>
                     <label for="<?php echo $this->get_field_id( 'head_shortlink' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'head_shortlink' ); ?>" id="<?php echo $this->get_field_id( 'head_shortlink' ); ?>" value="1" <?php checked( $this->get_field_value( 'head_shortlink' ) ); ?> />
-                    <?php printf( __( 'Include Shortlink tag?', 'exmachina' ) ); ?></label>
+                    <?php printf( __( 'Include Shortlink tag?', 'exmachina-core' ) ); ?></label>
                   </p>
                   <p>
-                    <span class="description"><?php _e( '<span class="exmachina-admin-note">Note:</span> The shortlink tag might have some use for 3rd party service discoverability, but it has no <abbr title="Search engine optimization">SEO</abbr> value whatsoever.', 'exmachina' ); ?></span>
+                    <span class="description"><?php _e( '<span class="exmachina-admin-note">Note:</span> The shortlink tag might have some use for 3rd party service discoverability, but it has no <abbr title="Search engine optimization">SEO</abbr> value whatsoever.', 'exmachina-core' ); ?></span>
                   </p>
 
                 </fieldset>
@@ -788,57 +788,57 @@ class ExMachina_Admin_SEO_Settings extends ExMachina_Admin_Metaboxes {
                 <!-- Begin Fieldset -->
                 <fieldset class="uk-form uk-width-1-1">
 
-                  <p><span class="description"><?php _e( 'Depending on your situation, you may or may not want the following archive pages to be indexed by search engines. Only you can make that determination.', 'exmachina' ); ?></span></p>
+                  <p><span class="description"><?php _e( 'Depending on your situation, you may or may not want the following archive pages to be indexed by search engines. Only you can make that determination.', 'exmachina-core' ); ?></span></p>
 
                   <p>
                     <label for="<?php echo $this->get_field_id( 'noindex_cat_archive' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'noindex_cat_archive' ); ?>" id="<?php echo $this->get_field_id( 'noindex_cat_archive' ); ?>" value="1" <?php checked( $this->get_field_value( 'noindex_cat_archive' ) ); ?> />
-                    <?php printf( __( 'Apply %s to Category Archives?', 'exmachina' ), exmachina_code( 'noindex' ) ); ?></label>
+                    <?php printf( __( 'Apply %s to Category Archives?', 'exmachina-core' ), exmachina_code( 'noindex' ) ); ?></label>
                     <br />
                     <label for="<?php echo $this->get_field_id( 'noindex_tag_archive' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'noindex_tag_archive' ); ?>" id="<?php echo $this->get_field_id( 'noindex_tag_archive' ); ?>" value="1" <?php checked( $this->get_field_value( 'noindex_tag_archive' ) ); ?> />
-                    <?php printf( __( 'Apply %s to Tag Archives?', 'exmachina' ), exmachina_code( 'noindex' ) ); ?></label>
+                    <?php printf( __( 'Apply %s to Tag Archives?', 'exmachina-core' ), exmachina_code( 'noindex' ) ); ?></label>
                     <br />
                     <label for="<?php echo $this->get_field_id( 'noindex_author_archive' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'noindex_author_archive' ); ?>" id="<?php echo $this->get_field_id( 'noindex_author_archive' ); ?>" value="1" <?php checked( $this->get_field_value( 'noindex_author_archive' ) ); ?> />
-                    <?php printf( __( 'Apply %s to Author Archives?', 'exmachina' ), exmachina_code( 'noindex' ) ); ?></label>
+                    <?php printf( __( 'Apply %s to Author Archives?', 'exmachina-core' ), exmachina_code( 'noindex' ) ); ?></label>
                     <br />
                     <label for="<?php echo $this->get_field_id( 'noindex_date_archive' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'noindex_date_archive' ); ?>" id="<?php echo $this->get_field_id( 'noindex_date_archive' ); ?>" value="1" <?php checked( $this->get_field_value( 'noindex_date_archive' ) ); ?> />
-                    <?php printf( __( 'Apply %s to Date Archives?', 'exmachina' ), exmachina_code( 'noindex' ) ); ?></label>
+                    <?php printf( __( 'Apply %s to Date Archives?', 'exmachina-core' ), exmachina_code( 'noindex' ) ); ?></label>
                     <br />
                     <label for="<?php echo $this->get_field_id( 'noindex_search_archive' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'noindex_search_archive' ); ?>" id="<?php echo $this->get_field_id( 'noindex_search_archive' ); ?>" value="1" <?php checked( $this->get_field_value( 'noindex_search_archive' ) ); ?> />
-                    <?php printf( __( 'Apply %s to Search Archives?', 'exmachina' ), exmachina_code( 'noindex' ) ); ?></label>
+                    <?php printf( __( 'Apply %s to Search Archives?', 'exmachina-core' ), exmachina_code( 'noindex' ) ); ?></label>
                   </p>
 
-                  <p><span class="description"><?php printf( __( 'Some search engines will cache pages in your site (e.g. Google Cache). The %1$s tag will prevent them from doing so. Choose which archives you want %1$s applied to.', 'exmachina' ), exmachina_code( 'noarchive' ) ); ?></span></p>
+                  <p><span class="description"><?php printf( __( 'Some search engines will cache pages in your site (e.g. Google Cache). The %1$s tag will prevent them from doing so. Choose which archives you want %1$s applied to.', 'exmachina-core' ), exmachina_code( 'noarchive' ) ); ?></span></p>
 
                   <p>
                     <label for="<?php echo $this->get_field_id( 'noarchive' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'noarchive' ); ?>" id="<?php echo $this->get_field_id( 'noarchive' ); ?>" value="1" <?php checked( $this->get_field_value( 'noarchive' ) ); ?> />
-                    <?php printf( __( 'Apply %s to Entire Site?', 'exmachina' ), exmachina_code( 'noarchive' ) ); ?></label>
+                    <?php printf( __( 'Apply %s to Entire Site?', 'exmachina-core' ), exmachina_code( 'noarchive' ) ); ?></label>
                   </p>
 
                   <p>
                     <label for="<?php echo $this->get_field_id( 'noarchive_cat_archive' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'noarchive_cat_archive' ); ?>" id="<?php echo $this->get_field_id( 'noarchive_cat_archive' ); ?>" value="1" <?php checked( $this->get_field_value( 'noarchive_cat_archive' ) ); ?> />
-                    <?php printf( __( 'Apply %s to Category Archives?', 'exmachina' ), exmachina_code( 'noarchive' ) ); ?></label>
+                    <?php printf( __( 'Apply %s to Category Archives?', 'exmachina-core' ), exmachina_code( 'noarchive' ) ); ?></label>
                     <br />
                     <label for="<?php echo $this->get_field_id( 'noarchive_tag_archive' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'noarchive_tag_archive' ); ?>" id="<?php echo $this->get_field_id( 'noarchive_tag_archive' ); ?>" value="1" <?php checked( $this->get_field_value( 'noarchive_tag_archive' ) ); ?> />
-                    <?php printf( __( 'Apply %s to Tag Archives?', 'exmachina' ), exmachina_code( 'noarchive' ) ); ?></label>
+                    <?php printf( __( 'Apply %s to Tag Archives?', 'exmachina-core' ), exmachina_code( 'noarchive' ) ); ?></label>
                     <br />
                     <label for="<?php echo $this->get_field_id( 'noarchive_author_archive' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'noarchive_author_archive' ); ?>" id="<?php echo $this->get_field_id( 'noarchive_author_archive' ); ?>" value="1" <?php checked( $this->get_field_value( 'noarchive_author_archive' ) ); ?> />
-                    <?php printf( __( 'Apply %s to Author Archives?', 'exmachina' ), exmachina_code( 'noarchive' ) ); ?></label>
+                    <?php printf( __( 'Apply %s to Author Archives?', 'exmachina-core' ), exmachina_code( 'noarchive' ) ); ?></label>
                     <br />
                     <label for="<?php echo $this->get_field_id( 'noarchive_date_archive' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'noarchive_date_archive' ); ?>" id="<?php echo $this->get_field_id( 'noarchive_date_archive' ); ?>" value="1" <?php checked( $this->get_field_value( 'noarchive_date_archive' ) ); ?> />
-                    <?php printf( __( 'Apply %s to Date Archives?', 'exmachina' ), exmachina_code( 'noarchive' ) ); ?></label>
+                    <?php printf( __( 'Apply %s to Date Archives?', 'exmachina-core' ), exmachina_code( 'noarchive' ) ); ?></label>
                     <br />
                     <label for="<?php echo $this->get_field_id( 'noarchive_search_archive' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'noarchive_search_archive' ); ?>" id="<?php echo $this->get_field_id( 'noarchive_search_archive' ); ?>" value="1" <?php checked( $this->get_field_value( 'noarchive_search_archive' ) ); ?> />
-                    <?php printf( __( 'Apply %s to Search Archives?', 'exmachina' ), exmachina_code( 'noarchive' ) ); ?></label>
+                    <?php printf( __( 'Apply %s to Search Archives?', 'exmachina-core' ), exmachina_code( 'noarchive' ) ); ?></label>
                   </p>
 
-                  <p><span class="description"><?php printf( __( 'Occasionally, search engines use resources like the Open Directory Project and the Yahoo! Directory to find titles and descriptions for your content. Generally, you will not want them to do this. The %s and %s tags prevent them from doing so.', 'exmachina' ), exmachina_code( 'noodp' ), exmachina_code( 'noydir' ) ); ?></span></p>
+                  <p><span class="description"><?php printf( __( 'Occasionally, search engines use resources like the Open Directory Project and the Yahoo! Directory to find titles and descriptions for your content. Generally, you will not want them to do this. The %s and %s tags prevent them from doing so.', 'exmachina-core' ), exmachina_code( 'noodp' ), exmachina_code( 'noydir' ) ); ?></span></p>
 
                   <p>
                     <label for="<?php echo $this->get_field_id( 'noodp' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'noodp' ); ?>" id="<?php echo $this->get_field_id( 'noodp' ); ?>" value="1" <?php checked( $this->get_field_value( 'noodp' ) ); ?> />
-                    <?php printf( __( 'Apply %s to your site?', 'exmachina' ), exmachina_code( 'nooodp' ) ) ?></label>
+                    <?php printf( __( 'Apply %s to your site?', 'exmachina-core' ), exmachina_code( 'nooodp' ) ) ?></label>
                     <br />
                     <label for="<?php echo $this->get_field_id( 'noydir' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'noydir' ); ?>" id="<?php echo $this->get_field_id( 'noydir' ); ?>" value="1" <?php checked( $this->get_field_value( 'noydir' ) ); ?> />
-                    <?php printf( __( 'Apply %s to your site?', 'exmachina' ), exmachina_code( 'noydir' ) ) ?></label>
+                    <?php printf( __( 'Apply %s to your site?', 'exmachina-core' ), exmachina_code( 'noydir' ) ) ?></label>
                   </p>
 
                 </fieldset>
@@ -903,10 +903,10 @@ class ExMachina_Admin_SEO_Settings extends ExMachina_Admin_Metaboxes {
 
                   <p>
                     <label for="<?php echo $this->get_field_id( 'canonical_archives' ); ?>"><input type="checkbox" name="<?php echo $this->get_field_name( 'canonical_archives' ); ?>" id="<?php echo $this->get_field_id( 'canonical_archives' ); ?>" value="1" <?php checked( $this->get_field_value( 'canonical_archives' ) ); ?> />
-                    <?php printf( __( 'Canonical Paginated Archives', 'exmachina' ) ); ?></label>
+                    <?php printf( __( 'Canonical Paginated Archives', 'exmachina-core' ) ); ?></label>
                   </p>
                   <p>
-                    <span class="description"><?php _e( 'This option points search engines to the first page of an archive, if viewing a paginated page. If you do not know what this means, leave it on.', 'exmachina' ); ?></span>
+                    <span class="description"><?php _e( 'This option points search engines to the first page of an archive, if viewing a paginated page. If you do not know what this means, leave it on.', 'exmachina-core' ); ?></span>
                   </p>
 
                 </fieldset>

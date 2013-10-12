@@ -150,8 +150,8 @@ class ExMachina_Admin_Theme_Settings extends ExMachina_Admin_Metaboxes {
         'site_layout'               => exmachina_get_default_layout(),
         'nav_extras'                => '',
         'nav_extras_twitter_id'     => '',
-        'nav_extras_twitter_text'   => __( 'Follow me on Twitter', 'exmachina' ),
-        'post_info'                 => '[post_date] ' . __( 'by', 'exmachina' ) . ' [post_author_posts_link] [post_comments] [post_edit]',
+        'nav_extras_twitter_text'   => __( 'Follow me on Twitter', 'exmachina-core' ),
+        'post_info'                 => '[post_date] ' . __( 'by', 'exmachina-core' ) . ' [post_author_posts_link] [post_comments] [post_edit]',
         'post_meta'                 => '[post_categories] [post_tags]',
         'comments_pages'            => 0,
         'comments_posts'            => 1,
@@ -365,8 +365,8 @@ class ExMachina_Admin_Theme_Settings extends ExMachina_Admin_Metaboxes {
       '<li>' . __( 'Sidebar Sidebar Content', 'exmachina-core' ) . '</li>' .
       '<li>' . __( 'Full Width Content', 'exmachina-core' ) . '</li>' .
     '</ul>' .
-    '<p>'  . __( 'These options can be extended or limited by the child theme. Additionally, many of the child themes do not allow different layouts on the home page as they have been designed for a specific home page layout.', 'exmachina' ) . '</p>' .
-    '<p>'  . __( 'This layout can also be overridden in the post/page/term layout options on each post/page/term.', 'exmachina' ) . '</p>';
+    '<p>'  . __( 'These options can be extended or limited by the child theme. Additionally, many of the child themes do not allow different layouts on the home page as they have been designed for a specific home page layout.', 'exmachina-core' ) . '</p>' .
+    '<p>'  . __( 'This layout can also be overridden in the post/page/term layout options on each post/page/term.', 'exmachina-core' ) . '</p>';
 
     $navigation_help =
       '<h3>' . __( 'Navigation', 'exmachina-core' ) . '</h3>' .
@@ -385,23 +385,23 @@ class ExMachina_Admin_Theme_Settings extends ExMachina_Admin_Metaboxes {
     '<p>'  . __( 'If you enable comments or trackbacks here, it can be disabled on an individual post or page. If you disable here, they cannot be enabled on an individual post or page.', 'exmachina-core' ) . '</p>';
 
     $archives_help =
-      '<h3>' . __( 'Content Archives', 'exmachina' ) . '</h3>' .
-      '<p>'  . __( 'In the ExMachina Theme Settings you may change the site wide Content Archives options to control what displays in the site\'s Archives.', 'exmachina' ) . '</p>' .
-      '<p>'  . __( 'Archives include any pages using the blog template, category pages, tag pages, date archive, author archives, and the latest posts if there is no custom home page.', 'exmachina' ) . '</p>' .
-      '<p>'  . __( 'The first option allows you to display the post content or the post excerpt. The Display post content setting will display the entire post including HTML code up to the <!--more--> tag if used (this is HTML for the comment tag that is not displayed in the browser).', 'exmachina' ) . '</p>' .
-      '<p>'  . __( 'It may also be coupled with the second field "Limit content to [___] characters" to limit the content to a specific number of letters or spaces. This will strip any HTML, but allows for more precise and easily changed lengths than the excerpt.', 'exmachina' ) . '</p>' .
-      '<p>'  . __( 'The Display post excerpt setting will display the first 55 words of the post after also stripping any included HTML or the manual/custom excerpt added in the post edit screen.', 'exmachina' ) . '</p>' .
-      '<p>'  . __( 'The \'Include post image?\' setting allows you to show a thumbnail of the first attached image or currently set featured image.', 'exmachina' ) . '</p>' .
-      '<p>'  . __( 'This option should not be used with the post content unless the content is limited to avoid duplicate images.', 'exmachina' ) . '</p>' .
-      '<p>'  . __( 'The \'Image Size\' list is populated by the available image sizes defined in the theme.', 'exmachina' ) . '</p>' .
-      '<p>'  . __( 'Post Navigation Technique allows you to select one of three navigation methods.', 'exmachina' ) . '</p>';
+      '<h3>' . __( 'Content Archives', 'exmachina-core' ) . '</h3>' .
+      '<p>'  . __( 'In the ExMachina Theme Settings you may change the site wide Content Archives options to control what displays in the site\'s Archives.', 'exmachina-core' ) . '</p>' .
+      '<p>'  . __( 'Archives include any pages using the blog template, category pages, tag pages, date archive, author archives, and the latest posts if there is no custom home page.', 'exmachina-core' ) . '</p>' .
+      '<p>'  . __( 'The first option allows you to display the post content or the post excerpt. The Display post content setting will display the entire post including HTML code up to the <!--more--> tag if used (this is HTML for the comment tag that is not displayed in the browser).', 'exmachina-core' ) . '</p>' .
+      '<p>'  . __( 'It may also be coupled with the second field "Limit content to [___] characters" to limit the content to a specific number of letters or spaces. This will strip any HTML, but allows for more precise and easily changed lengths than the excerpt.', 'exmachina-core' ) . '</p>' .
+      '<p>'  . __( 'The Display post excerpt setting will display the first 55 words of the post after also stripping any included HTML or the manual/custom excerpt added in the post edit screen.', 'exmachina-core' ) . '</p>' .
+      '<p>'  . __( 'The \'Include post image?\' setting allows you to show a thumbnail of the first attached image or currently set featured image.', 'exmachina-core' ) . '</p>' .
+      '<p>'  . __( 'This option should not be used with the post content unless the content is limited to avoid duplicate images.', 'exmachina-core' ) . '</p>' .
+      '<p>'  . __( 'The \'Image Size\' list is populated by the available image sizes defined in the theme.', 'exmachina-core' ) . '</p>' .
+      '<p>'  . __( 'Post Navigation Technique allows you to select one of three navigation methods.', 'exmachina-core' ) . '</p>';
 
     $blog_help =
-      '<h3>' . __( 'Blog Page', 'exmachina' ) . '</h3>' .
-      '<p>'  . __( 'This works with the Blog Template, which is a page template that shows your latest posts. It\'s what people see when they land on your homepage.', 'exmachina' ) . '</p>' .
-      '<p>'  . __( 'In the General Settings you can select a specific category to display from the drop down menu, and exclude categories by ID, or even select how many posts you\'d like to display on this page.', 'exmachina' ) . '</p>' .
-      '<p>'  . __( 'There are some special features of the Blog Template that allow you to specify which category to show on each page using the template, which is helpful if you have a "News" category (or something else) that you want to display separately.', 'exmachina' ) . '</p>' .
-      '<p>'  . sprintf( __( 'You can find more on this feature in the <a href="%s" target="_blank">How to Add a Post Category Page tutorial.</a>', 'exmachina' ), 'http://www.machinathemes.com/tutorials/exmachina/add-post-category-page' ) . '</p>';
+      '<h3>' . __( 'Blog Page', 'exmachina-core' ) . '</h3>' .
+      '<p>'  . __( 'This works with the Blog Template, which is a page template that shows your latest posts. It\'s what people see when they land on your homepage.', 'exmachina-core' ) . '</p>' .
+      '<p>'  . __( 'In the General Settings you can select a specific category to display from the drop down menu, and exclude categories by ID, or even select how many posts you\'d like to display on this page.', 'exmachina-core' ) . '</p>' .
+      '<p>'  . __( 'There are some special features of the Blog Template that allow you to specify which category to show on each page using the template, which is helpful if you have a "News" category (or something else) that you want to display separately.', 'exmachina-core' ) . '</p>' .
+      '<p>'  . sprintf( __( 'You can find more on this feature in the <a href="%s" target="_blank">How to Add a Post Category Page tutorial.</a>', 'exmachina-core' ), 'http://www.machinathemes.com/tutorials/exmachina/add-post-category-page' ) . '</p>';
 
     /* Adds the 'Header & Footer Scripts' help content. */
     $scripts_help =
@@ -1960,7 +1960,7 @@ class ExMachina_Admin_Theme_Settings extends ExMachina_Admin_Metaboxes {
                   <div class="uk-form-row">
                     <div class="uk-form-controls">
                       <!-- Begin Form Inputs -->
-                      <?php wp_dropdown_categories( array( 'selected' => $this->get_field_value( 'blog_cat' ), 'name' => $this->get_field_name( 'blog_cat' ), 'orderby' => 'Name', 'hierarchical' => 1, 'show_option_all' => __( 'All Categories', 'exmachina' ), 'hide_empty' => '0' ) ); ?>
+                      <?php wp_dropdown_categories( array( 'selected' => $this->get_field_value( 'blog_cat' ), 'name' => $this->get_field_name( 'blog_cat' ), 'orderby' => 'Name', 'hierarchical' => 1, 'show_option_all' => __( 'All Categories', 'exmachina-core' ), 'hide_empty' => '0' ) ); ?>
                       <!-- End Form Inputs -->
                     </div><!-- .uk-form-controls -->
                   </div><!-- .uk-form-row -->
@@ -1982,7 +1982,7 @@ class ExMachina_Admin_Theme_Settings extends ExMachina_Admin_Metaboxes {
                     <div class="uk-form-controls">
                       <!-- Begin Form Inputs -->
                       <input type="text" name="<?php echo $this->get_field_name( 'blog_cat_exclude' ); ?>" id="<?php echo $this->get_field_id( 'blog_cat_exclude' ); ?>" value="<?php echo esc_attr( $this->get_field_value( 'blog_cat_exclude' ) ); ?>" size="40" />
-                      <br /><small><strong><?php _e( 'Comma separated - 1,2,3 for example', 'exmachina' ); ?></strong></small>
+                      <br /><small><strong><?php _e( 'Comma separated - 1,2,3 for example', 'exmachina-core' ); ?></strong></small>
                       <!-- End Form Inputs -->
                     </div><!-- .uk-form-controls -->
                   </div><!-- .uk-form-row -->

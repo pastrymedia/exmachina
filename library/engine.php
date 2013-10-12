@@ -565,6 +565,12 @@ class ExMachina {
 
     } // end if (is_admin())
 
+    /* Load the term meta functions. */
+    require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'term-meta.php' );
+
+    /* Load the user meta functions. */
+    require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'user-meta.php' );
+
 
   } // end function exmachina_load_admin()
 
