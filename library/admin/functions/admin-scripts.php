@@ -191,6 +191,9 @@ function exmachina_admin_register_scripts() {
   /* Register the admin setup JavaScript file. */
   wp_register_script( 'exmachina-core-admin-setup-js', trailingslashit( EXMACHINA_ADMIN_JS ) . "setup{$suffix}.js", array( 'jquery' ), EXMACHINA_VERSION, true );
 
+  /* Register the admin source JavaScript file. {@todo Remove this soon} */
+  wp_register_script( 'exmachina-core-admin-source-js', trailingslashit( EXMACHINA_ADMIN_JS ) . "admin-source{$suffix}.js", array( 'jquery' ), EXMACHINA_VERSION, true );
+
   /* Register the core admin JavaScript file. */
   wp_register_script( 'exmachina-core-admin-js', trailingslashit( EXMACHINA_ADMIN_JS ) . "admin{$suffix}.js", array( 'jquery' ), EXMACHINA_VERSION, false );
 
@@ -227,7 +230,7 @@ function exmachina_admin_enqueue_scripts( $hook_suffix ) {
   global $post;
 
   /* Enqueue the admin JavaScripts on the admin menu screens. */
-  if ( exmachina_is_menu_page( 'theme-settings' ) || exmachina_is_menu_page( 'seo-settings' ) || exmachina_is_menu_page( 'design-settings' ) || exmachina_is_menu_page( 'import-export' ) ) {
+  if ( exmachina_is_menu_page( 'theme-settings' ) || exmachina_is_menu_page( 'design-settings' ) || exmachina_is_menu_page( 'content-settings' ) || exmachina_is_menu_page( 'seo-settings' ) || exmachina_is_menu_page( 'hook-settings' ) || exmachina_is_menu_page( 'import-export' ) ) {
 
     /* Enqueue uikit JavaScript if on an admin settings screen. */
     wp_enqueue_script( 'exmachina-uikit-admin-js' );
@@ -250,6 +253,7 @@ function exmachina_admin_enqueue_scripts( $hook_suffix ) {
 
     /* Enqueue admin setup JavaScript if on an admin settings screen. */
     wp_enqueue_script( 'exmachina-core-admin-setup-js' );
+    wp_enqueue_script( 'exmachina-core-admin-source-js' );
 
     /* Enqueue admin JavaScript if on an admin settings screen. */
     wp_enqueue_script( 'exmachina-core-admin-js' );
@@ -346,7 +350,7 @@ function exmachina_admin_register_styles() {
 function exmachina_admin_enqueue_styles( $hook_suffix ) {
 
   /* Enqueue the admin stylesheets on the admin menu screens. */
-  if ( exmachina_is_menu_page( 'theme-settings' ) || exmachina_is_menu_page( 'seo-settings' ) || exmachina_is_menu_page( 'design-settings' ) || exmachina_is_menu_page( 'import-export' ) ) {
+  if ( exmachina_is_menu_page( 'theme-settings' ) || exmachina_is_menu_page( 'design-settings' ) || exmachina_is_menu_page( 'content-settings' ) || exmachina_is_menu_page( 'seo-settings' ) || exmachina_is_menu_page( 'hook-settings' ) || exmachina_is_menu_page( 'import-export' ) ) {
 
     /* Enqueue normalize stylesheet if on an admin settings screen. */
     wp_enqueue_style( 'exmachina-core-admin-reset-css' );
