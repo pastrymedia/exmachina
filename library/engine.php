@@ -389,6 +389,9 @@ class ExMachina {
     add_theme_support( 'exmachina-hook-settings-menu' );
     add_theme_support( 'exmachina-import-export-menu' );
 
+    add_theme_support( 'exmachina-inpost-layouts' );
+    add_theme_support( 'exmachina-archive-layouts' );
+
   } // end function exmachina_theme_support()
 
   /**
@@ -403,6 +406,9 @@ class ExMachina {
    * @since 1.0.0
    */
   function exmachina_post_type_support() {
+
+    add_post_type_support( 'post', array( 'exmachina-seo', 'exmachina-scripts', 'exmachina-layouts' ) );
+    add_post_type_support( 'page', array( 'exmachina-seo', 'exmachina-scripts', 'exmachina-layouts' ) );
 
   } // end function exmachina_post_type_support()
 
@@ -563,6 +569,7 @@ class ExMachina {
       require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'admin-menu.php' );
       require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'admin-scripts.php' );
       require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'admin-general.php' );
+      require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'inpost-metaboxes.php' );
 
       /* Load the theme settings file. */
       require_once( trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'theme-settings.php' );
@@ -574,6 +581,9 @@ class ExMachina {
       require_once( trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'archive-settings.php' );
 
     } // end if (is_admin())
+
+    /* Load the post meta functions. */
+    require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'post-meta.php' );
 
     /* Load the term meta functions. */
     require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'term-meta.php' );
