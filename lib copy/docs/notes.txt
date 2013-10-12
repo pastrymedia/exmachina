@@ -1,0 +1,92 @@
+////////////////////////////////////////////////////////////////////////////////////
+Contents
+////////////////////////////////////////////////////////////////////////////////////
+
+1. TODO
+2. Future Releases
+3. Credits
+
+////////////////////////////////////////////////////////////////////////////////////
+1. TODO
+////////////////////////////////////////////////////////////////////////////////////
+
+engine.php
+- add file description
+- add the meta template filter from hybrid
+- check for additional filters to add
+- test i18n functions (make sure to text domain exmachina-core) maybe replace
+- define prefix into settings field filters
+
+== Admin ==
+
+theme-settings.php
+- write file description
+- apply filters to menu title
+- apply filters to page title
+- properly prefix filters
+
+== Classes ==
+
+admin.class.php
+- write file description
+- update pagehooks to action hooks
+- properly prefix function
+- add layout columns selector to metabox screen
+- add settings errors to Admin_Form
+- abstract buttons to method in Admin_Form
+- add admin JS to metabox
+- add admin CSS to metabox
+- add admin JS to form
+- add admin CSS to form
+- create clear settings button (or just remove it)
+- add a reset confirmation JS
+- add docblock descriptions to Metabox_Builder
+- add multiple metabox support to Metabox_Builder
+
+
+sanitize.class.php
+- write file description
+- prefix sanitize_option filter ???
+
+settings.class.php
+- write file description
+- finish writing class
+
+== Framework ==
+
+context.php
+- add closing comments to if statements.
+
+core.php - READY
+
+i18n.php
+- replace $theme->get('TextDomain') with older version in exmachina_get_parent_textdomain()
+- replace $theme->get('TextDomain') with older version in exmachina_get_child_textdomain()
+- create some sort of extension list filter for translations
+
+== Functions ==
+
+
+
+options.php
+- add file description
+- test filters for prefix use
+- change action hook for metabox builder
+
+
+----
+- Switch out codemirror for ace editor
+- add selectize and drop the other selectors http://brianreavis.github.io/selectize.js/
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////
+2. Future Releases
+////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////
+3. Credits
+////////////////////////////////////////////////////////////////////////////////////
