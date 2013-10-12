@@ -147,7 +147,7 @@ class ExMachina_Admin_Theme_Settings extends ExMachina_Admin_Metaboxes {
         'breadcrumb_archive'        => 0,
         'breadcrumb_404'            => 0,
         'breadcrumb_attachment'     => 0,
-        'site_layout'               => '', //exmachina_get_default_layout(),
+        'site_layout'               => exmachina_get_default_layout(),
         'nav_extras'                => '',
         'nav_extras_twitter_id'     => '',
         'nav_extras_twitter_text'   => __( 'Follow me on Twitter', 'exmachina' ),
@@ -1379,31 +1379,7 @@ class ExMachina_Admin_Theme_Settings extends ExMachina_Admin_Metaboxes {
               <div class="fieldset-wrap uk-margin uk-grid">
                 <fieldset class="uk-form uk-width-1-1">
                   <div class="exmachina-layout-selector radio-container uk-grid uk-grid-preserve">
-                    <?php // exmachina_layout_selector( array( 'name' => $this->get_field_name( 'site_layout' ), 'selected' => $this->get_field_value( 'site_layout' ), 'type' => 'site' ) ); ?>
-                    <label class="layout-label uk-width-1-6">
-                      <input type="radio" class="layout-radio" id="" name="" value="1" onclick="">
-                      <img class="layout-img" src="<?php echo esc_url( trailingslashit( EXMACHINA_ADMIN_IMAGES ) . 'layouts/img01.png' ); ?>">
-                    </label>
-                    <label class="layout-label uk-width-1-6">
-                      <input type="radio" class="layout-radio" id="" name="" value="1" onclick="">
-                      <img class="layout-img" src="<?php echo esc_url( trailingslashit( EXMACHINA_ADMIN_IMAGES ) . 'layouts/img02.png' ); ?>">
-                    </label>
-                    <label class="layout-label uk-width-1-6">
-                      <input type="radio" class="layout-radio" id="" name="" value="1" onclick="">
-                      <img class="layout-img layout-img-selected" src="<?php echo esc_url( trailingslashit( EXMACHINA_ADMIN_IMAGES ) . 'layouts/img03.png' ); ?>">
-                    </label>
-                    <label class="layout-label uk-width-1-6">
-                      <input type="radio" class="layout-radio" id="" name="" value="1" onclick="">
-                      <img class="layout-img" src="<?php echo esc_url( trailingslashit( EXMACHINA_ADMIN_IMAGES ) . 'layouts/img04.png' ); ?>">
-                    </label>
-                    <label class="layout-label uk-width-1-6">
-                      <input type="radio" class="layout-radio" id="" name="" value="1" onclick="">
-                      <img class="layout-img" src="<?php echo esc_url( trailingslashit( EXMACHINA_ADMIN_IMAGES ) . 'layouts/img05.png' ); ?>">
-                    </label>
-                    <label class="layout-label uk-width-1-6">
-                      <input type="radio" class="layout-radio" id="" name="" value="1" onclick="">
-                      <img class="layout-img" src="<?php echo esc_url( trailingslashit( EXMACHINA_ADMIN_IMAGES ) . 'layouts/img06.png' ); ?>">
-                    </label>
+                    <?php exmachina_layout_selector( array( 'name' => $this->get_field_name( 'site_layout' ), 'selected' => $this->get_field_value( 'site_layout' ), 'type' => 'site' ) ); ?>
                   </div><!-- .radio-container -->
                 </fieldset>
               </div><!-- .fieldset-wrap -->

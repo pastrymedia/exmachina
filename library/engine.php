@@ -459,6 +459,9 @@ class ExMachina {
     /* Load the hooks functions. */
     require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'hooks.php' );
 
+    /* Load the layout functions. */
+    require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'layout.php' );
+
   } // end function exmachina_load_framework()
 
   /**
