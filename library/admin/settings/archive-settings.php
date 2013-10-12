@@ -692,27 +692,3 @@ class ExMachina_Admin_Archive_Settings extends ExMachina_Admin_Metaboxes {
   } // end function exmachina_meta_box_archive_display_layout_box()
 
 } // end class ExMachina_Admin_Archive_Settings
-
-add_action( 'exmachina_admin_menu', 'exmachina_add_archive_settings_page' );
-/**
- * Add Archive Settings Page
- *
- * Initializes a new instance of the ExMachina_Admin_Archive_Settings and adds
- * the Archive Settings Page.
- *
- * @since 1.0.0
- */
-function exmachina_add_archive_settings_page() {
-
-  /* Globalize the $_exmachina_admin_archive_settings variable. */
-  global $_exmachina_admin_archive_settings;
-
-  /* Create a new instance of the ExMachina_Admin_Archive_Settings class. */
-  $_exmachina_admin_archive_settings = new ExMachina_Admin_Archive_Settings;
-
-  //* Set the old global pagehook var for backward compatibility (May not need this)
-  global $_exmachina_admin_archive_settings_pagehook;
-  $_exmachina_admin_archive_settings_pagehook = $_exmachina_admin_archive_settings->pagehook;
-
-
-} // end function exmachina_add_archive_settings_page()

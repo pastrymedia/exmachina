@@ -1079,27 +1079,3 @@ class ExMachina_Admin_Hook_Settings extends ExMachina_Admin_Metaboxes {
   } // end function exmachina_meta_box_hook_display_footer_hooks_box()
 
 } // end class ExMachina_Admin_Hook_Settings
-
-add_action( 'exmachina_admin_menu', 'exmachina_add_hook_settings_page' );
-/**
- * Add Hook Settings Page
- *
- * Initializes a new instance of the ExMachina_Admin_Hook_Settings and adds
- * the Hook Settings Page.
- *
- * @since 1.0.0
- */
-function exmachina_add_hook_settings_page() {
-
-  /* Globalize the $_exmachina_admin_hook_settings variable. */
-  global $_exmachina_admin_hook_settings;
-
-  /* Create a new instance of the ExMachina_Admin_Hook_Settings class. */
-  $_exmachina_admin_hook_settings = new ExMachina_Admin_Hook_Settings;
-
-  //* Set the old global pagehook var for backward compatibility (May not need this)
-  global $_exmachina_admin_hook_settings_pagehook;
-  $_exmachina_admin_hook_settings_pagehook = $_exmachina_admin_hook_settings->pagehook;
-
-
-} // end function exmachina_add_hook_settings_page()

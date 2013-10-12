@@ -2358,30 +2358,3 @@ class ExMachina_Admin_Theme_Settings extends ExMachina_Admin_Metaboxes {
   } // end function exmachina_metabox_theme_display_help()
 
 } // end class ExMachina_Admin_Theme_Settings
-
-add_action( 'exmachina_setup', 'exmachina_add_theme_settings_page' );
-/**
- * Add Theme Settings Page
- *
- * Initializes a new instance of the ExMachina_Admin_Theme_Settings and adds
- * the Theme Settings Page.
- *
- * @todo move this to admin menu file
- *
- * @since 1.0.0
- */
-function exmachina_add_theme_settings_page() {
-
-  /* Globalize the $_exmachina_admin_theme_settings variable. */
-  global $_exmachina_admin_theme_settings;
-
-  /* Create a new instance of the ExMachina_Admin_Theme_Settings class. */
-  $_exmachina_admin_theme_settings = new ExMachina_Admin_Theme_Settings;
-
-  //* Set the old global pagehook var for backward compatibility (May not need this)
-  global $_exmachina_admin_theme_settings_pagehook;
-  $_exmachina_admin_theme_settings_pagehook = $_exmachina_admin_theme_settings->pagehook;
-
-  do_action( 'exmachina_admin_menu' );
-
-} // end function exmachina_add_theme_settings_page()

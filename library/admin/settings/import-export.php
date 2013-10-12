@@ -504,27 +504,3 @@ class ExMachina_Admin_Import_Export extends ExMachina_Admin_Basic {
   } // end function import()
 
 } // end class ExMachina_Admin_Import_Export
-
-add_action( 'exmachina_admin_menu', 'exmachina_add_import_export_settings_page' );
-/**
- * Add Import/Export Settings Page
- *
- * Initializes a new instance of the ExMachina_Admin_Import_Export and adds
- * the Import/Export Settings Page.
- *
- * @since 1.0.0
- */
-function exmachina_add_import_export_settings_page() {
-
-  /* Globalize the $_exmachina_admin_import_export_settings variable. */
-  global $_exmachina_admin_import_export_settings;
-
-  /* Create a new instance of the ExMachina_Admin_Import_Export class. */
-  $_exmachina_admin_import_export_settings = new ExMachina_Admin_Import_Export;
-
-  //* Set the old global pagehook var for backward compatibility (May not need this)
-  global $_exmachina_admin_import_export_settings_pagehook;
-  $_exmachina_admin_import_export_settings_pagehook = $_exmachina_admin_import_export_settings->pagehook;
-
-
-} // end function exmachina_add_import_export_settings_page()

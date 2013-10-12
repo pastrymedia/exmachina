@@ -302,27 +302,3 @@ class ExMachina_Admin_Design_Settings extends ExMachina_Admin_Metaboxes {
   } // end function exmachina_meta_box_design_display_save()
 
 } // end class ExMachina_Admin_Design_Settings
-
-add_action( 'exmachina_admin_menu', 'exmachina_add_design_settings_page' );
-/**
- * Add Design Settings Page
- *
- * Initializes a new instance of the ExMachina_Admin_Design_Settings and adds
- * the Design Settings Page.
- *
- * @since 1.0.0
- */
-function exmachina_add_design_settings_page() {
-
-  /* Globalize the $_exmachina_admin_design_settings variable. */
-  global $_exmachina_admin_design_settings;
-
-  /* Create a new instance of the ExMachina_Admin_Design_Settings class. */
-  $_exmachina_admin_design_settings = new ExMachina_Admin_Design_Settings;
-
-  //* Set the old global pagehook var for backward compatibility (May not need this)
-  global $_exmachina_admin_design_settings_pagehook;
-  $_exmachina_admin_design_settings_pagehook = $_exmachina_admin_design_settings->pagehook;
-
-
-} // end function exmachina_add_design_settings_page()

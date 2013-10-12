@@ -381,6 +381,14 @@ class ExMachina {
    */
   function exmachina_theme_support() {
 
+    /* Add theme support for admin menu. */
+    add_theme_support( 'exmachina-admin-menu' );
+    add_theme_support( 'exmachina-design-settings-menu' );
+    add_theme_support( 'exmachina-content-settings-menu' );
+    add_theme_support( 'exmachina-seo-settings-menu' );
+    add_theme_support( 'exmachina-hook-settings-menu' );
+    add_theme_support( 'exmachina-import-export-menu' );
+
   } // end function exmachina_theme_support()
 
   /**
@@ -551,7 +559,8 @@ class ExMachina {
     /* Check if in the WordPress admin. */
     if ( is_admin() ) {
 
-      /* Load the admin scripts file. */
+      /* Load the main admin functions. */
+      require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'admin-menu.php' );
       require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'admin-scripts.php' );
 
       /* Load the theme settings file. */
@@ -561,7 +570,7 @@ class ExMachina {
       require_once( trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'seo-settings.php' );
       require_once( trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'hook-settings.php' );
       require_once( trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'import-export.php' );
-      //require_once( trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'archive-settings.php' );
+      require_once( trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'archive-settings.php' );
 
     } // end if (is_admin())
 
