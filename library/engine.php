@@ -561,6 +561,7 @@ class ExMachina {
       require_once( trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'seo-settings.php' );
       require_once( trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'hook-settings.php' );
       require_once( trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'import-export.php' );
+      //require_once( trailingslashit( EXMACHINA_ADMIN_SETTINGS ) . 'archive-settings.php' );
 
     } // end if (is_admin())
 
