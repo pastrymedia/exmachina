@@ -1,7 +1,7 @@
 <?php
 /**
- * Functions for registering and setting theme settings that tie into the WordPress theme customizer.  
- * This file loads additional classes and adds settings to the customizer for the built-in Hybrid Core 
+ * Functions for registering and setting theme settings that tie into the WordPress theme customizer.
+ * This file loads additional classes and adds settings to the customizer for the built-in Hybrid Core
  * settings.
  *
  * @package    HybridCore
@@ -22,8 +22,11 @@ add_action( 'customize_register', 'hybrid_customize_register' );
 add_action( 'wp_ajax_hybrid_customize_footer_content', 'hybrid_customize_footer_content_ajax' );
 add_action( 'wp_ajax_nopriv_hybrid_customize_footer_content', 'hybrid_customize_footer_content_ajax' );
 
+/* Add customizer preview JavaScript. */
+add_action( 'customize_preview_init', 'hybrid_customize_preview_js' );
+
 /**
- * Loads framework-specific customize control classes.  Customize control classes extend the WordPress 
+ * Loads framework-specific customize control classes.  Customize control classes extend the WordPress
  * WP_Customize_Control class to create unique classes that can be used within the framework.
  *
  * @since 1.4.0
@@ -52,6 +55,11 @@ function hybrid_customize_register( $wp_customize ) {
 
 	/* Get the default theme settings. */
 	$default_settings = hybrid_get_default_theme_settings();
+
+	/* Add postMessage support for site title and description for the Theme Customizer. */
+	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
+	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
+	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 
 	/* Add the footer section, setting, and control if theme supports the 'footer' setting. */
 	if ( is_array( $supports[0] ) && in_array( 'footer', $supports[0] ) ) {
@@ -99,7 +107,7 @@ function hybrid_customize_register( $wp_customize ) {
 }
 
 /**
- * Sanitizes the footer content on the customize screen.  Users with the 'unfiltered_html' cap can post 
+ * Sanitizes the footer content on the customize screen.  Users with the 'unfiltered_html' cap can post
  * anything.  For other users, wp_filter_post_kses() is ran over the setting.
  *
  * @since 1.4.0
@@ -122,7 +130,7 @@ function hybrid_customize_sanitize( $setting, $object ) {
 }
 
 /**
- * Runs the footer content posted via Ajax through the do_shortcode() function.  This makes sure the 
+ * Runs the footer content posted via Ajax through the do_shortcode() function.  This makes sure the
  * shortcodes are output correctly in the live preview.
  *
  * @since 1.4.0
@@ -159,9 +167,9 @@ function hybrid_customize_preview_script() {
 		function( value ) {
 			value.bind(
 				function( to ) {
-					jQuery.post( 
-						'<?php echo admin_url( 'admin-ajax.php' ); ?>', 
-						{ 
+					jQuery.post(
+						'<?php echo admin_url( 'admin-ajax.php' ); ?>',
+						{
 							action: 'hybrid_customize_footer_content',
 							_ajax_nonce: '<?php echo $nonce; ?>',
 							footer_content: to
@@ -176,6 +184,13 @@ function hybrid_customize_preview_script() {
 	);
 	</script>
 	<?php
+}
+
+/**
+ * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
+ */
+function hybrid_customize_preview_js() {
+	wp_enqueue_script( 'hybrid-customize-preview', esc_url( trailingslashit( HYBRID_JS ) . 'customizer.js'), array( 'customize-preview' ), '20130508', true );
 }
 
 ?>

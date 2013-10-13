@@ -3,24 +3,24 @@
  * Hybrid Core - A WordPress theme development framework.
  *
  * Hybrid Core is a framework for developing WordPress themes.  The framework allows theme developers
- * to quickly build themes without having to handle all of the "logic" behind the theme or having to code 
- * complex functionality for features that are often needed in themes.  The framework does these things 
- * for developers to allow them to get back to what matters the most:  developing and designing themes.  
- * The framework was built to make it easy for developers to include (or not include) specific, pre-coded 
+ * to quickly build themes without having to handle all of the "logic" behind the theme or having to code
+ * complex functionality for features that are often needed in themes.  The framework does these things
+ * for developers to allow them to get back to what matters the most:  developing and designing themes.
+ * The framework was built to make it easy for developers to include (or not include) specific, pre-coded
  * features.  Themes handle all the markup, style, and scripts while the framework handles the logic.
  *
- * Hybrid Core is a modular system, which means that developers can pick and choose the features they 
- * want to include within their themes.  Most files are only loaded if the theme registers support for the 
+ * Hybrid Core is a modular system, which means that developers can pick and choose the features they
+ * want to include within their themes.  Most files are only loaded if the theme registers support for the
  * feature using the add_theme_support( $feature ) function within their theme.
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU 
- * General Public License as published by the Free Software Foundation; either version 2 of the License, 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
+ * General Public License as published by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * You should have received a copy of the GNU General Public License along with this program; if not, write 
+ * You should have received a copy of the GNU General Public License along with this program; if not, write
  * to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  * @package   HybridCore
@@ -32,11 +32,11 @@
  */
 
 /**
- * The Hybrid class launches the framework.  It's the organizational structure behind the entire framework. 
- * This class should be loaded and initialized before anything else within the theme is called to properly use 
- * the framework.  
+ * The Hybrid class launches the framework.  It's the organizational structure behind the entire framework.
+ * This class should be loaded and initialized before anything else within the theme is called to properly use
+ * the framework.
  *
- * After parent themes call the Hybrid class, they should perform a theme setup function on the 
+ * After parent themes call the Hybrid class, they should perform a theme setup function on the
  * 'after_setup_theme' hook with a priority of 10.  Child themes should add their theme setup function on
  * the 'after_setup_theme' hook with a priority of 11.  This allows the class to load theme-supported features
  * at the appropriate time, which is on the 'after_setup_theme' hook with a priority of 12.
@@ -46,8 +46,8 @@
 class Hybrid {
 
 	/**
-	 * Constructor method for the Hybrid class.  This method adds other methods of the class to 
-	 * specific hooks within WordPress.  It controls the load order of the required files for running 
+	 * Constructor method for the Hybrid class.  This method adds other methods of the class to
+	 * specific hooks within WordPress.  It controls the load order of the required files for running
 	 * the framework.
 	 *
 	 * @since 1.0.0
@@ -84,8 +84,8 @@ class Hybrid {
 	}
 
 	/**
-	 * Defines the constant paths for use within the core framework, parent theme, and child theme.  
-	 * Constants prefixed with 'HYBRID_' are for use only within the core framework and don't 
+	 * Defines the constant paths for use within the core framework, parent theme, and child theme.
+	 * Constants prefixed with 'HYBRID_' are for use only within the core framework and don't
 	 * reference other areas of the parent or child theme.
 	 *
 	 * @since 0.7.0
@@ -139,7 +139,7 @@ class Hybrid {
 	}
 
 	/**
-	 * Loads the core framework functions.  These files are needed before loading anything else in the 
+	 * Loads the core framework functions.  These files are needed before loading anything else in the
 	 * framework because they have required functions for use.
 	 *
 	 * @since 1.0.0
@@ -158,9 +158,9 @@ class Hybrid {
 
 	/**
 	 * Loads both the parent and child theme translation files.  If a locale-based functions file exists
-	 * in either the parent or child theme (child overrides parent), it will also be loaded.  All translation 
-	 * and locale functions files are expected to be within the theme's '/languages' folder, but the 
-	 * framework will fall back on the theme root folder if necessary.  Translation files are expected 
+	 * in either the parent or child theme (child overrides parent), it will also be loaded.  All translation
+	 * and locale functions files are expected to be within the theme's '/languages' folder, but the
+	 * framework will fall back on the theme root folder if necessary.  Translation files are expected
 	 * to be prefixed with the template or stylesheet path (example: 'templatename-en_US.mo').
 	 *
 	 * @since 1.2.0
@@ -226,7 +226,7 @@ class Hybrid {
 	}
 
 	/**
-	 * Loads the framework functions.  Many of these functions are needed to properly run the 
+	 * Loads the framework functions.  Many of these functions are needed to properly run the
 	 * framework.  Some components are only loaded if the theme supports them.
 	 *
 	 * @since 0.7.0
@@ -236,6 +236,12 @@ class Hybrid {
 		/* Load the comments functions. */
 		require_once( trailingslashit( HYBRID_FUNCTIONS ) . 'comments.php' );
 
+		/* Load the extras functions. */
+		require_once( trailingslashit( HYBRID_FUNCTIONS ) . 'extras.php' );
+
+		/* Load image-related functions. */
+		require_once( trailingslashit( HYBRID_FUNCTIONS ) . 'image.php' );
+
 		/* Load media-related functions. */
 		require_once( trailingslashit( HYBRID_FUNCTIONS ) . 'media.php' );
 
@@ -244,6 +250,9 @@ class Hybrid {
 
 		/* Load the template functions. */
 		require_once( trailingslashit( HYBRID_FUNCTIONS ) . 'template.php' );
+
+		/* Load the template tags functions. */
+		require_once( trailingslashit( HYBRID_FUNCTIONS ) . 'template-tags.php' );
 
 		/* Load the utility functions. */
 		require_once( trailingslashit( HYBRID_FUNCTIONS ) . 'utility.php' );
@@ -292,9 +301,9 @@ class Hybrid {
 	}
 
 	/**
-	 * Load extensions (external projects).  Extensions are projects that are included within the 
-	 * framework but are not a part of it.  They are external projects developed outside of the 
-	 * framework.  Themes must use add_theme_support( $extension ) to use a specific extension 
+	 * Load extensions (external projects).  Extensions are projects that are included within the
+	 * framework but are not a part of it.  They are external projects developed outside of the
+	 * framework.  Themes must use add_theme_support( $extension ) to use a specific extension
 	 * within the theme.  This should be declared on 'after_setup_theme' no later than a priority of 11.
 	 *
 	 * @since 0.7.0

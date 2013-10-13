@@ -132,6 +132,14 @@ function hybrid_load_settings_page_meta_boxes() {
 		if ( in_array( 'about', $supports[0] ) )
 			require_once( trailingslashit( HYBRID_ADMIN ) . 'meta-box-theme-about.php' );
 
+		/* Load the 'Comments Settings' meta box if it is supported. */
+		if ( in_array( 'comments', $supports[0] ) )
+			require_once( trailingslashit( HYBRID_ADMIN ) . 'meta-box-theme-comments.php' );
+
+		/* Load the 'Content Archives' meta box if it is supported. */
+		if ( in_array( 'archives', $supports[0] ) )
+			require_once( trailingslashit( HYBRID_ADMIN ) . 'meta-box-theme-archives.php' );
+
 		/* Load the 'Header & Footer Scripts' meta box if it is supported. */
 		if ( in_array( 'scripts', $supports[0] ) )
 			require_once( trailingslashit( HYBRID_ADMIN ) . 'meta-box-theme-scripts.php' );
