@@ -70,6 +70,11 @@ function omega_theme_setup() {
   add_theme_support( 'loop-pagination' );
   add_theme_support( 'entry-views' );
   add_theme_support( 'post-stylesheets' );
+  add_theme_support( 'responsive-viewport' );
+  add_theme_support( 'structural-wraps' );
+  add_theme_support( 'footer-widgets', 3 );
+  add_theme_support( 'custom-css' );
+  add_theme_support( 'custom-logo' );
 
   /* Add theme support for WordPress features. */
   add_theme_support( 'automatic-feed-links' );

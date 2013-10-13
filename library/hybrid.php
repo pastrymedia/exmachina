@@ -348,6 +348,21 @@ class Hybrid {
 
 		/* Load the Theme Fonts extension if supported. */
 		require_if_theme_supports( 'theme-fonts', trailingslashit( HYBRID_EXTENSIONS ) . 'theme-fonts.php' );
+
+		/* Load the Responsive Viewport extension if supported. */
+		require_if_theme_supports( 'responsive-viewport', trailingslashit( HYBRID_EXTENSIONS ) . 'responsive-viewport.php' );
+
+		/* Load the Structural Wraps extension if supported. */
+		require_if_theme_supports( 'structural-wraps', trailingslashit( HYBRID_EXTENSIONS ) . 'structural-wraps.php' );
+
+		/* Load the Footer Widgets extension if supported. */
+		require_if_theme_supports( 'footer-widgets', trailingslashit( HYBRID_EXTENSIONS ) . 'footer-widgets.php' );
+
+		/* Load the Custom CSS extension if supported. */
+    require_if_theme_supports( 'custom-css', trailingslashit( HYBRID_EXTENSIONS ) . 'custom-css.php' );
+
+    /* Load the Custom Logo extension if supported. */
+    require_if_theme_supports( 'custom-logo', trailingslashit( HYBRID_EXTENSIONS ) . 'custom-logo.php' );
 	}
 
 	/**

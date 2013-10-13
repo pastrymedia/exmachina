@@ -17,6 +17,7 @@ add_action( 'customize_register', 'hybrid_load_customize_controls', 1 );
 
 /* Register custom sections, settings, and controls. */
 add_action( 'customize_register', 'hybrid_customize_register' );
+add_action( 'customize_register', 'hybrid_branding_customize_register' );
 
 /* Add the footer content Ajax to the correct hooks. */
 add_action( 'wp_ajax_hybrid_customize_footer_content', 'hybrid_customize_footer_content_ajax' );
@@ -39,6 +40,30 @@ function hybrid_load_customize_controls() {
 }
 
 /**
+ * Branding Customize Register
+ *
+ * Add postMessage support for site title and description for the Theme
+ * Customizer.
+ *
+ * @link http://codex.wordpress.org/Theme_Customization_API
+ * @link http://codex.wordpress.org/Class_Reference/WP_Customize_Manager
+ * @link http://codex.wordpress.org/Class_Reference/WP_Customize_Manager/get_setting
+ *
+ * @since 1.0.7
+ * @access private
+ *
+ * @param  object $wp_customize Theme Customizer object.
+ * @return void
+ */
+function hybrid_branding_customize_register( $wp_customize ) {
+
+  $wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
+  $wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
+  $wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
+
+} // end function exmachina_branding_customize_register()
+
+/**
  * Registers custom sections, settings, and controls for the $wp_customize instance.
  *
  * @since 1.4.0
@@ -55,11 +80,6 @@ function hybrid_customize_register( $wp_customize ) {
 
 	/* Get the default theme settings. */
 	$default_settings = hybrid_get_default_theme_settings();
-
-	/* Add postMessage support for site title and description for the Theme Customizer. */
-	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
-	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
-	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 
 	/* Add the footer section, setting, and control if theme supports the 'footer' setting. */
 	if ( is_array( $supports[0] ) && in_array( 'footer', $supports[0] ) ) {
