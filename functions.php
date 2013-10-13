@@ -25,3 +25,57 @@ if ( !defined('ABSPATH')) exit;
 ###############################################################################
 # begin functions
 ###############################################################################
+
+/* Load the core theme framework. */
+require ( trailingslashit( get_template_directory() ) . 'library/hybrid.php' );
+new Hybrid();
+
+/* Do theme setup on the 'after_setup_theme' hook. */
+add_action( 'after_setup_theme', 'omega_theme_setup' );
+
+/**
+ * Theme setup function. This function adds support for theme features and defines
+ * the default theme actions and filters.
+ *
+ * @since 1.0.0
+ */
+function omega_theme_setup() {
+
+  /* Get action/filter hook prefix. */
+  $prefix = hybrid_get_prefix();
+
+  /* Add theme support for core framework features. */
+  add_theme_support( 'hybrid-core-menus', array( 'primary', 'secondary', 'subsidiary' ) );
+  add_theme_support( 'hybrid-core-sidebars', array( 'primary', 'secondary' ) );
+  add_theme_support( 'hybrid-core-widgets' );
+  add_theme_support( 'hybrid-core-shortcodes' );
+  add_theme_support( 'hybrid-core-theme-settings', array( 'about', 'footer' ) );
+  add_theme_support( 'hybrid-core-scripts', array( 'comment-reply' ) );
+  add_theme_support( 'hybrid-core-styles', array( 'style' ) );
+  add_theme_support( 'hybrid-core-template-hierarchy' );
+
+  /* Enable theme layouts (need to add stylesheet support). */
+  add_theme_support(
+    'theme-layouts',
+    array( '1c', '2c-l', '2c-r' ),
+    array( 'default' => '2c-l', 'customizer' => true )
+  );
+
+  /* Add theme support for framework extensions. */
+  add_theme_support( 'breadcrumb-trail' );
+  add_theme_support( 'cleaner-gallery' );
+  add_theme_support( 'get-the-image' );
+  add_theme_support( 'cleaner-caption' );
+  add_theme_support( 'custom-field-series' );
+  add_theme_support( 'loop-pagination' );
+  add_theme_support( 'entry-views' );
+  add_theme_support( 'post-stylesheets' );
+
+  /* Add theme support for WordPress features. */
+  add_theme_support( 'automatic-feed-links' );
+  add_editor_style();
+
+  /* Set content width. */
+  hybrid_set_content_width( 640 );
+
+} // end function omega_theme_setup()
