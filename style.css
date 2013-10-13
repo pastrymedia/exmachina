@@ -618,8 +618,8 @@ Site Header
 Site Navigation
 ---------------------------------------------------------------------------------------------------- */
 
-.exmachina-nav-menu,
-.exmachina-nav-menu > ul {
+.nav-menu,
+.nav-menu > ul {
   clear: both;
   color: #999;
   letter-spacing: 1px;
@@ -630,15 +630,15 @@ Site Navigation
   text-align: center;
 }
 
-.exmachina-nav-menu .menu-item,
-.exmachina-nav-menu .page_item {
+.nav-menu .menu-item,
+.nav-menu .page_item {
   display: inline-block;
   margin: 0;
   padding: 0;
   text-align: left;
 }
 
-.exmachina-nav-menu a {
+.nav-menu a {
   border: none;
   color: #999;
   display: block;
@@ -646,8 +646,8 @@ Site Navigation
   position: relative;
 }
 
-.exmachina-nav-menu .sub-menu,
-.exmachina-nav-menu .children {
+.nav-menu .sub-menu,
+.nav-menu .children {
   left: -9999px;
   margin: 0;
   opacity: 0;
@@ -662,8 +662,8 @@ Site Navigation
   z-index: 99;
 }
 
-.exmachina-nav-menu .sub-menu a,
-.exmachina-nav-menu .children a {
+.nav-menu .sub-menu a,
+.nav-menu .children a {
   background: #fff;
   border: 1px solid #eee;
   border-top: none;
@@ -674,27 +674,27 @@ Site Navigation
   width: 200px;
 }
 
-.exmachina-nav-menu .sub-menu .sub-menu,
-.exmachina-nav-menu .children .children {
+.nav-menu .sub-menu .sub-menu,
+.nav-menu .children .children {
   margin: -54px 0 0 199px;
 }
 
-.exmachina-nav-menu .menu-item:hover,
-.exmachina-nav-menu .page_item:hover {
+.nav-menu .menu-item:hover,
+.nav-menu .page_item:hover {
   position: static;
 }
 
-.exmachina-nav-menu .menu-item:hover > .sub-menu,
-.exmachina-nav-menu .page_item:hover > .children {
+.nav-menu .menu-item:hover > .sub-menu,
+.nav-menu .page_item:hover > .children {
   left: auto;
   opacity: 1;
 }
 
-.exmachina-nav-menu > .first > a {
+.nav-menu > .first > a {
   padding-left: 0;
 }
 
-.exmachina-nav-menu > .last > a {
+.nav-menu > .last > a {
   padding-right: 0;
 }
 
@@ -1015,24 +1015,24 @@ Media Queries
     background: none;
   }
 
-  .exmachina-nav-menu li {
+  .nav-menu li {
     float: none;
   }
 
-  .exmachina-nav-menu,
+  .nav-menu,
   .site-description,
   .site-header .title-area,
   .site-title {
     text-align: center;
   }
 
-  .exmachina-nav-menu a,
-  .exmachina-nav-menu > .first > a,
-  .exmachina-nav-menu > .last > a {
+  .nav-menu a,
+  .nav-menu > .first > a,
+  .nav-menu > .last > a {
     padding: 20px 16px;
   }
 
-  .exmachina-nav-menu li.right {
+  .nav-menu li.right {
     display: none;
   }
 

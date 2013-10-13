@@ -27,10 +27,12 @@ elseif ( is_singular( 'page' ) && ( !hybrid_get_setting( 'trackbacks_pages' ) &&
 
 ?>
 
-<div id="comments" class="entry-comments">
+<section id="comments" class="entry-comments">
 
 	<?php get_template_part( 'partials/comments-loop' ); // Loads the comments-loop.php template. ?>
 
-</div><!-- #comments -->
+  <?php comment_form(); // Loads the comment form. ?>
 
-<?php comment_form(); ?>
+</section><!-- #comments -->
+
+

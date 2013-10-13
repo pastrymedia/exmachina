@@ -11,7 +11,7 @@
 	wp_nav_menu( array(
 		'theme_location' => 'primary',
 		'container'      => '',
-		'menu_class'     => 'menu exmachina-nav-menu menu-primary',
+		'menu_class'     => 'menu nav-menu menu-primary',
 		'fallback_cb'	 => 'hybrid_default_menu'
 		));
 	?>
