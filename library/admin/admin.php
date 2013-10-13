@@ -63,6 +63,7 @@ function hybrid_admin_register_scripts() {
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
 	wp_register_script( 'hybrid-core-admin', esc_url( trailingslashit( HYBRID_JS ) . "admin{$suffix}.js" ), array( 'jquery' ), '20130528', false );
+	wp_register_script( 'hybrid-core-favicon', esc_url( trailingslashit( HYBRID_JS ) . "favicon{$suffix}.js" ), array( 'jquery' ), '20130528', false );
 }
 
 /**

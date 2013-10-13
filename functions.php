@@ -62,6 +62,12 @@ function omega_theme_setup() {
     array( 'default' => '2c-l', 'customizer' => true )
   );
 
+  /* Enable custom background support. */
+  add_theme_support(
+    'custom-background',
+    array( 'default-color' => '333333' )
+  );
+
   /* Add theme support for framework extensions. */
   add_theme_support( 'breadcrumb-trail' );
   add_theme_support( 'cleaner-gallery' );
@@ -76,6 +82,7 @@ function omega_theme_setup() {
   add_theme_support( 'footer-widgets', 3 );
   add_theme_support( 'custom-css' );
   add_theme_support( 'custom-logo' );
+  add_theme_support( 'custom-favicon' );
 
   /* Add theme support for WordPress features. */
   add_theme_support( 'automatic-feed-links' );

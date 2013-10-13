@@ -379,6 +379,7 @@ function hybrid_settings_page_enqueue_scripts( $hook_suffix ) {
 		wp_enqueue_script( 'wp-lists' );
 		wp_enqueue_script( 'postbox' );
 		wp_enqueue_script( 'hybrid-core-admin' );
+		wp_enqueue_script( 'hybrid-core-favicon' );
 
 	}
 }
