@@ -60,15 +60,15 @@ function hybrid_settings_page_init() {
 		/* Sanitize the scripts settings before adding them to the database. */
 		add_filter( "sanitize_option_{$prefix}_theme_settings", 'hybrid_theme_validate_settings' );
 
-		/* Add help tabs to the theme settings page. */
-		add_action( "load-{$hybrid->settings_page}", 'hybrid_settings_page_help' );
-		add_action( "load-{$hybrid->settings_page}", 'hybrid_theme_settings_help' );
-
 		/* Load the theme settings meta boxes. */
 		add_action( "load-{$hybrid->settings_page}", 'hybrid_load_settings_page_meta_boxes' );
 
 		/* Create a hook for adding meta boxes. */
 		add_action( "load-{$hybrid->settings_page}", 'hybrid_settings_page_add_meta_boxes' );
+
+		/* Add help tabs to the theme settings page. */
+		add_action( "load-{$hybrid->settings_page}", 'hybrid_settings_page_help' );
+		add_action( "load-{$hybrid->settings_page}", 'hybrid_theme_settings_help' );
 
 		/* Load the JavaScript and stylesheets needed for the theme settings screen. */
 		add_action( 'admin_enqueue_scripts', 'hybrid_settings_page_enqueue_scripts' );
@@ -131,6 +131,10 @@ function hybrid_load_settings_page_meta_boxes() {
 		/* Load the 'About' meta box if it is supported. */
 		if ( in_array( 'about', $supports[0] ) )
 			require_once( trailingslashit( HYBRID_ADMIN ) . 'meta-box-theme-about.php' );
+
+		/* Load the 'Header & Footer Scripts' meta box if it is supported. */
+		if ( in_array( 'scripts', $supports[0] ) )
+			require_once( trailingslashit( HYBRID_ADMIN ) . 'meta-box-theme-scripts.php' );
 
 		/* Load the 'Footer' meta box if it is supported. */
 		if ( in_array( 'footer', $supports[0] ) )
@@ -334,6 +338,8 @@ function hybrid_theme_settings_help() {
 		'<p><strong>' . __( 'For more information:', 'hybrid-core' ) . '</strong></p>' .
 		'<p><a href="http://machinathemes.com/contact" target="_blank" title="' . __( 'Get Support', 'hybrid-core' ) . '">' . __( 'Get Support', 'hybrid-core' ) . '</a></p>'
 	);
+
+	do_action( 'add_help_tabs', hybrid_get_settings_page_name() );
 
 }
 
