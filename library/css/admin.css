@@ -7,7 +7,22 @@
 	}
 .appearance_page_theme-settings .metabox-holder textarea {
 	width: 100%;
+	margin-bottom: 5px;
 	}
+
+/* Settings errors. */
+.wrap div.error,
+.wrap div.updated {
+	clear: both;
+}
+
+/* Horizontal rule. */
+hr.div {
+	background: #ccc;
+	height: 1px;
+	border: none;
+	margin: 10px 0;
+}
 
 /* Post edit screen. */
 .custom-post-format-wrap, .post-layout-wrap {

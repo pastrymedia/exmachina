@@ -1,6 +1,6 @@
 <?php
 /**
- * Theme administration functions used with other components of the framework admin.  This file is for 
+ * Theme administration functions used with other components of the framework admin.  This file is for
  * setting up any basic features and holding additional admin helper functions.
  *
  * @package    HybridCore
@@ -26,7 +26,8 @@ function hybrid_admin_setup() {
 	add_action( 'load-post.php', 'hybrid_admin_load_post_meta_boxes' );
 	add_action( 'load-post-new.php', 'hybrid_admin_load_post_meta_boxes' );
 
-	/* Registers admin stylesheets for the framework. */
+	/* Registers admin javascripts and stylesheets for the framework. */
+	add_action( 'admin_enqueue_scripts', 'hybrid_admin_register_scripts', 1 );
 	add_action( 'admin_enqueue_scripts', 'hybrid_admin_register_styles', 1 );
 
 	/* Loads admin stylesheets for the framework. */
@@ -34,7 +35,7 @@ function hybrid_admin_setup() {
 }
 
 /**
- * Loads the core post meta box files on the 'load-post.php' action hook.  Each meta box file is only loaded if 
+ * Loads the core post meta box files on the 'load-post.php' action hook.  Each meta box file is only loaded if
  * the theme declares support for the feature.
  *
  * @since 1.2.0
@@ -47,6 +48,21 @@ function hybrid_admin_load_post_meta_boxes() {
 
 	/* Load the post template meta box. */
 	require_if_theme_supports( 'hybrid-core-template-hierarchy', trailingslashit( HYBRID_ADMIN ) . 'meta-box-post-template.php' );
+}
+
+/**
+ * Registers the framework's 'admin.js' javascript file.  The function does not load the javascript.  It merely
+ * registers it with WordPress.
+ *
+ * @since 1.2.0
+ * @return void
+ */
+function hybrid_admin_register_scripts() {
+
+	/* Use the .min javascript if SCRIPT_DEBUG is turned off. */
+	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
+	wp_register_script( 'hybrid-core-admin', esc_url( trailingslashit( HYBRID_JS ) . "admin{$suffix}.js" ), array( 'jquery' ), '20130528', false );
 }
 
 /**
@@ -78,7 +94,7 @@ function hybrid_admin_enqueue_styles( $hook_suffix ) {
 }
 
 /**
- * Function for getting an array of available custom templates with a specific header. Ideally, this function 
+ * Function for getting an array of available custom templates with a specific header. Ideally, this function
  * would be used to grab custom singular post (any post type) templates.  It is a recreation of the WordPress
  * page templates function because it doesn't allow for other types of templates.
  *
@@ -122,7 +138,7 @@ function hybrid_get_post_templates( $post_type = 'post' ) {
 		/* Get file data based on the post type singular name (e.g., "Post Template", "Book Template", etc.). */
 		$headers = get_file_data(
 			$path,
-			array( 
+			array(
 				"{$post_type_object->name} Template" => "{$post_type_object->name} Template",
 			)
 		);

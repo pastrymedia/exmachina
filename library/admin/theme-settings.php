@@ -57,8 +57,12 @@ function hybrid_settings_page_init() {
 		/* Filter the settings page capability so that it recognizes the 'edit_theme_options' cap. */
 		add_filter( "option_page_capability_{$prefix}_theme_settings", 'hybrid_settings_page_capability' );
 
+		/* Sanitize the scripts settings before adding them to the database. */
+		add_filter( "sanitize_option_{$prefix}_theme_settings", 'hybrid_theme_validate_settings' );
+
 		/* Add help tabs to the theme settings page. */
 		add_action( "load-{$hybrid->settings_page}", 'hybrid_settings_page_help' );
+		add_action( "load-{$hybrid->settings_page}", 'hybrid_theme_settings_help' );
 
 		/* Load the theme settings meta boxes. */
 		add_action( "load-{$hybrid->settings_page}", 'hybrid_load_settings_page_meta_boxes' );
@@ -147,6 +151,24 @@ function hybrid_save_theme_settings( $settings ) {
 
 	/* @deprecated 1.0.0. Developers should filter "sanitize_option_{$prefix}_theme_settings" instead. */
 	return apply_filters( hybrid_get_prefix() . '_validate_theme_settings', $settings );
+}
+
+/**
+ * Saves the scripts meta box settings by filtering the "sanitize_option_{$prefix}_theme_settings" hook.
+ *
+ * @since 0.3.0
+ * @param array $settings Array of theme settings passed by the Settings API for validation.
+ * @return array $settings
+ */
+function hybrid_theme_validate_settings( $settings ) {
+
+	if ( isset( $_POST['reset'] ) ) {
+		$settings = hybrid_get_default_theme_settings();
+		add_settings_error( hybrid_get_settings_page_name() . '-notices', 'restore_defaults', __( 'Default setting restored.', 'hybrid-core' ), 'updated fade' );
+	}
+
+	/* Return the theme settings. */
+	return $settings;
 }
 
 /**
@@ -282,6 +304,40 @@ function hybrid_settings_page_help() {
 }
 
 /**
+ * Contextual help content.
+ */
+function hybrid_theme_settings_help() {
+
+	$screen = get_current_screen();
+
+	$theme_settings_help =
+		'<h3>' . __( 'Theme Settings', 'hybrid-core' ) . '</h3>' .
+		'<p>'  . __( 'Your Theme Settings provides control over how the theme works. You will be able to control a lot of common and even advanced features from this menu. Some child themes may add additional menu items to this list. Each of the boxes can be collapsed by clicking the box header and expanded by doing the same. They can also be dragged into any order you desire or even hidden by clicking on "Screen Options" in the top right of the screen and "unchecking" the boxes you do not want to see.', 'hybrid-core' ) . '</p>';
+
+	$customize_help =
+		'<h3>' . __( 'Customize', 'hybrid-core' ) . '</h3>' .
+		'<p>'  . __( 'The theme customizer is available for a real time editing environment where theme options can be tried before being applied to the live site. Click \'Customize\' button below to personalize your theme', 'hybrid-core' ) . '</p>';
+
+	$screen->add_help_tab( array(
+		'id'      => hybrid_get_settings_page_name() . '-theme-settings',
+		'title'   => __( 'Theme Settings', 'hybrid-core' ),
+		'content' => $theme_settings_help,
+	) );
+	$screen->add_help_tab( array(
+		'id'      => hybrid_get_settings_page_name() . '-customize',
+		'title'   => __( 'Customize', 'hybrid-core' ),
+		'content' => $customize_help,
+	) );
+
+	//* Add help sidebar
+	$screen->set_help_sidebar(
+		'<p><strong>' . __( 'For more information:', 'hybrid-core' ) . '</strong></p>' .
+		'<p><a href="http://machinathemes.com/contact" target="_blank" title="' . __( 'Get Support', 'hybrid-core' ) . '">' . __( 'Get Support', 'hybrid-core' ) . '</a></p>'
+	);
+
+}
+
+/**
  * Loads the required stylesheets for displaying the theme settings page in the WordPress admin.
  *
  * @since 1.2.0
@@ -308,6 +364,7 @@ function hybrid_settings_page_enqueue_scripts( $hook_suffix ) {
 		wp_enqueue_script( 'common' );
 		wp_enqueue_script( 'wp-lists' );
 		wp_enqueue_script( 'postbox' );
+		wp_enqueue_script( 'hybrid-core-admin' );
 
 	}
 }
