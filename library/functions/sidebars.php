@@ -1,8 +1,8 @@
 <?php
 /**
- * Sets up the default framework sidebars if the theme supports them.  By default, the framework registers 
- * seven sidebars.  Themes may choose to use one or more of these sidebars.  A theme must register support 
- * for 'hybrid-core-sidebars' to use them and register each sidebar ID within an array for the second 
+ * Sets up the default framework sidebars if the theme supports them.  By default, the framework registers
+ * seven sidebars.  Themes may choose to use one or more of these sidebars.  A theme must register support
+ * for 'hybrid-core-sidebars' to use them and register each sidebar ID within an array for the second
  * parameter of add_theme_support().
  *
  * @package    HybridCore
@@ -17,7 +17,7 @@
 add_action( 'widgets_init', 'hybrid_register_sidebars' );
 
 /**
- * Registers the default framework dynamic sidebars based on the sidebars the theme has added support 
+ * Registers the default framework dynamic sidebars based on the sidebars the theme has added support
  * for using add_theme_support().
  *
  * @since 0.7.0
@@ -46,8 +46,8 @@ function hybrid_register_sidebars() {
 
 			/* Set up some default sidebar arguments. */
 			$defaults = array(
-				'before_widget' => '<section id="%1$s" class="widget %2$s widget-%2$s">',
-				'after_widget'  => '</section>',
+				'before_widget' => '<section id="%1$s" class="widget %2$s widget-%2$s"><div class="widget-wrap">',
+				'after_widget'  => '</div></section>',
 				'before_title'  => '<h3 class="widget-title">',
 				'after_title'   => '</h3>'
 			);
@@ -71,8 +71,8 @@ function hybrid_register_sidebars() {
 }
 
 /**
- * Returns an array of the core framework's available sidebars for use in themes.  We'll just set the 
- * ID (array keys), name, and description of each sidebar.  The other sidebar arguments will be set when the 
+ * Returns an array of the core framework's available sidebars for use in themes.  We'll just set the
+ * ID (array keys), name, and description of each sidebar.  The other sidebar arguments will be set when the
  * sidebar is registered.
  *
  * @since 1.2.0

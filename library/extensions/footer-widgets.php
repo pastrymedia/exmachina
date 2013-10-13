@@ -51,11 +51,11 @@ add_action( hybrid_get_prefix() . '_before_footer', 'hybrid_footer_widget_areas'
  *
  * The child theme must style the widget areas.
  *
- * Applies the `omega_footer_widget_areas` filter.
+ * Applies the `hybrid_footer_widget_areas` filter.
  *
  * @since 0.3.4
  *
- * @uses omega_structural_wrap() Optionally adds wrap with footer-widgets context.
+ * @uses hybrid_structural_wrap() Optionally adds wrap with footer-widgets context.
  *
  * @return null Return early if number of widget areas could not be determined, or nothing is added to the first widget area.
  */

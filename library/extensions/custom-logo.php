@@ -79,5 +79,5 @@ function hybrid_customize_logo_preview_script() {
 	</script>
 	<?php
 }
-*/
+
 ?>

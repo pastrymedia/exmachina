@@ -47,12 +47,13 @@ function omega_theme_setup() {
   /* Add theme support for core framework features. */
   add_theme_support( 'hybrid-core-menus', array( 'primary', 'secondary', 'subsidiary' ) );
   add_theme_support( 'hybrid-core-sidebars', array( 'primary', 'secondary' ) );
+  add_theme_support( 'hybrid-core-scripts', array( 'comment-reply' ) );
+  add_theme_support( 'hybrid-core-styles', array( 'parent', 'style' ) );
+  add_theme_support( 'hybrid-core-theme-settings', array( 'about', 'comments', 'archives', 'scripts', 'footer' ) );
   add_theme_support( 'hybrid-core-widgets' );
   add_theme_support( 'hybrid-core-shortcodes' );
-  add_theme_support( 'hybrid-core-theme-settings', array( 'about', 'comments', 'archives', 'scripts', 'footer' ) );
-  add_theme_support( 'hybrid-core-scripts', array( 'comment-reply' ) );
-  add_theme_support( 'hybrid-core-styles', array( 'style' ) );
   add_theme_support( 'hybrid-core-template-hierarchy' );
+  add_theme_support( 'hybrid-core-deprecated' );
 
   /* Enable theme layouts (need to add stylesheet support). */
   add_theme_support(

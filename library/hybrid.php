@@ -76,8 +76,11 @@ class Hybrid {
 		/* Load the framework functions. */
 		add_action( 'after_setup_theme', array( &$this, 'functions' ), 13 );
 
+		/* Load the structure functions. */
+    add_action( 'after_setup_theme', array( &$this, 'structure' ), 14 );
+
 		/* Load the framework extensions. */
-		add_action( 'after_setup_theme', array( &$this, 'extensions' ), 14 );
+		add_action( 'after_setup_theme', array( &$this, 'extensions' ), 15 );
 
 		/* Load admin files. */
 		add_action( 'wp_loaded', array( &$this, 'admin' ) );
@@ -124,6 +127,9 @@ class Hybrid {
 
 		/* Sets the path to the core framework functions directory. */
 		define( 'HYBRID_FUNCTIONS', trailingslashit( HYBRID_DIR ) . 'functions' );
+
+		/* Sets the path to the core framework structure directory. */
+		define( 'HYBRID_STRUCTURE', trailingslashit( HYBRID_DIR ) . 'structure' );
 
 		/* Sets the path to the core framework languages directory. */
 		define( 'HYBRID_LANGUAGES', trailingslashit( HYBRID_DIR ) . 'languages' );
@@ -299,6 +305,63 @@ class Hybrid {
 		/* Load the deprecated functions if supported. */
 		require_if_theme_supports( 'hybrid-core-deprecated', trailingslashit( HYBRID_FUNCTIONS ) . 'deprecated.php' );
 	}
+
+	/**
+   * Load Structure
+   *
+   * Loads the framework markup structure. The 'hybrid_pre_structure' action
+   * hook is called before any of the structure files are required.
+   *
+   * If a parent or child theme defines 'HYBRID_LOAD_STRUCTURE' as false
+   * before requring this engine.php file, then this function will abort before
+   * any structure files are loaded.
+   *
+   * @since 0.8.1
+   */
+  function structure() {
+
+    /* Triggers the 'hybrid_pre_structure' action hook. */
+    do_action( 'hybrid_pre_structure' );
+
+    /* Short circuits the framework if 'HYBRID_LOAD_FRAMEWORK' is defined as false. */
+    if ( defined( 'HYBRID_LOAD_FRAMEWORK' ) && HYBRID_LOAD_FRAMEWORK === false )
+      return;
+
+    /* Short circuits the framework if 'HYBRID_LOAD_STRUCTURE' is defined as false. */
+    if ( defined( 'HYBRID_LOAD_STRUCTURE' ) && HYBRID_LOAD_STRUCTURE === false )
+      return;
+
+    /* Load the archive structure template. */
+    require_once( trailingslashit( HYBRID_STRUCTURE ) . 'archive.php' );
+
+    /* Load the comments structure template. */
+    require_once( trailingslashit( HYBRID_STRUCTURE ) . 'comments.php' );
+
+    /* Load the footer structure template. */
+    require_once( trailingslashit( HYBRID_STRUCTURE ) . 'footer.php' );
+
+    /* Load the header structure template. */
+    require_once( trailingslashit( HYBRID_STRUCTURE ) . 'header.php' );
+
+    /* Load the layout structure template. */
+    require_once( trailingslashit( HYBRID_STRUCTURE ) . 'layout.php' );
+
+    /* Load the loops structure template. */
+    require_once( trailingslashit( HYBRID_STRUCTURE ) . 'loops.php' );
+
+    /* Load the menu structure template. */
+    require_once( trailingslashit( HYBRID_STRUCTURE ) . 'menu.php' );
+
+    /* Load the post structure template. */
+    require_once( trailingslashit( HYBRID_STRUCTURE ) . 'post.php' );
+
+    /* Load the search structure template. */
+    require_once( trailingslashit( HYBRID_STRUCTURE ) . 'search.php' );
+
+    /* Load the sidebar structure template. */
+    require_once( trailingslashit( HYBRID_STRUCTURE ) . 'sidebar.php' );
+
+  } // end function exmachina_load_structure()
 
 	/**
 	 * Load extensions (external projects).  Extensions are projects that are included within the
