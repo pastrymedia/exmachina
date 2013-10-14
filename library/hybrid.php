@@ -444,6 +444,9 @@ class Hybrid {
 
     /* Load the Grid Columns extension if supported. */
     require_if_theme_supports( 'grid-columns', trailingslashit( HYBRID_EXTENSIONS ) . 'grid-columns.php' );
+
+    /* Load the Custom Header Extended extension if supported. */
+    require_if_theme_supports( 'custom-header-extended', trailingslashit( HYBRID_EXTENSIONS ) . 'custom-header-extended.php' );
 	}
 
 	/**
