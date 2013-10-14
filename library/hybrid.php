@@ -432,6 +432,9 @@ class Hybrid {
 
     /* Load the Sliding Panel extension if supported. */
     require_if_theme_supports( 'sliding-panel', trailingslashit( HYBRID_EXTENSIONS ) . 'sliding-panel.php' );
+
+    /* Load the Template Tags Shortcodes extension if supported. */
+    require_if_theme_supports( 'template-tags', trailingslashit( HYBRID_EXTENSIONS ) . 'template-tag-shortcodes.php' );
 	}
 
 	/**

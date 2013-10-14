@@ -84,6 +84,7 @@ function omega_theme_setup() {
   add_theme_support( 'custom-logo' );
   add_theme_support( 'custom-favicon' );
   add_theme_support( 'sliding-panel' );
+  add_theme_support( 'template-tags' );
 
   /* Add theme support for WordPress features. */
   add_theme_support( 'automatic-feed-links' );
