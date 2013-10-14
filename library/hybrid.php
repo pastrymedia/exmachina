@@ -429,6 +429,9 @@ class Hybrid {
 
     /* Load the Custom Favicon extension if supported. */
     require_if_theme_supports( 'custom-favicon', trailingslashit( HYBRID_EXTENSIONS ) . 'custom-favicon.php' );
+
+    /* Load the Sliding Panel extension if supported. */
+    require_if_theme_supports( 'sliding-panel', trailingslashit( HYBRID_EXTENSIONS ) . 'sliding-panel.php' );
 	}
 
 	/**
