@@ -1,7 +1,7 @@
 <?php
 /**
- * Functions for handling stylesheets in the framework.  Themes can add support for the 
- * 'hybrid-core-styles' feature to allow the framework to handle loading the stylesheets into the 
+ * Functions for handling stylesheets in the framework.  Themes can add support for the
+ * 'hybrid-core-styles' feature to allow the framework to handle loading the stylesheets into the
  * theme header at an appropriate point.
  *
  * @package    HybridCore
@@ -23,7 +23,7 @@ add_filter( 'stylesheet_uri', 'hybrid_min_stylesheet_uri', 10, 2 );
 
 /**
  * Registers stylesheets for the framework.  This function merely registers styles with WordPress using
- * the wp_register_style() function.  It does not load any stylesheets on the site.  If a theme wants to 
+ * the wp_register_style() function.  It does not load any stylesheets on the site.  If a theme wants to
  * register its own custom styles, it should do so on the 'wp_enqueue_scripts' hook.
  *
  * @since 1.5.0
@@ -41,8 +41,8 @@ function hybrid_register_styles() {
 	/* Loop through each style and register it. */
 	foreach ( $styles as $style => $args ) {
 
-		$defaults = array( 
-			'handle'  => $style, 
+		$defaults = array(
+			'handle'  => $style,
 			'src'     => trailingslashit( HYBRID_CSS ) . "{$style}{$suffix}.css",
 			'deps'    => null,
 			'version' => false,
@@ -52,10 +52,10 @@ function hybrid_register_styles() {
 		$args = wp_parse_args( $args, $defaults );
 
 		wp_register_style(
-			sanitize_key( $args['handle'] ), 
-			esc_url( $args['src'] ), 
-			is_array( $args['deps'] ) ? $args['deps'] : null, 
-			preg_replace( '/[^a-z0-9_\-.]/', '', strtolower( $args['version'] ) ), 
+			sanitize_key( $args['handle'] ),
+			esc_url( $args['src'] ),
+			is_array( $args['deps'] ) ? $args['deps'] : null,
+			preg_replace( '/[^a-z0-9_\-.]/', '', strtolower( $args['version'] ) ),
 			esc_attr( $args['media'] )
 		);
 	}
@@ -112,6 +112,7 @@ function hybrid_get_styles() {
 		'drop-downs' => array( 'version' => '20110919' ),
 		'nav-bar'    => array( 'version' => '20110519' ),
 		'gallery'    => array( 'version' => '20130526' ),
+		'media-element'    => array( 'version' => '20130526' ),
 	);
 
 	/* If a child theme is active, add the parent theme's style. */
@@ -136,8 +137,8 @@ function hybrid_get_styles() {
 }
 
 /**
- * Filters the 'stylesheet_uri' to allow theme developers to offer a minimized version of their main 
- * 'style.css' file.  It will detect if a 'style.min.css' file is available and use it if SCRIPT_DEBUG 
+ * Filters the 'stylesheet_uri' to allow theme developers to offer a minimized version of their main
+ * 'style.css' file.  It will detect if a 'style.min.css' file is available and use it if SCRIPT_DEBUG
  * is disabled.
  *
  * @since 1.5.0
@@ -165,6 +166,27 @@ function hybrid_min_stylesheet_uri( $stylesheet_uri, $stylesheet_dir_uri ) {
 
 	/* Return the theme stylesheet. */
 	return $stylesheet_uri;
+}
+
+add_action( 'wp_enqueue_scripts', 'hybrid_deregister_media_element_styles' );
+
+function hybrid_deregister_media_element_styles() {
+
+	/* Get theme-supported meta boxes for the settings page. */
+	$styles = get_theme_support( 'hybrid-core-styles' );
+
+	/* If there is no array of styles, return. */
+	if ( !is_array( $styles[0] ) )
+		return;
+
+	/* If media element style suported, deregister default. */
+	if ( in_array( 'media-element', $styles[0] ) ) {
+
+		wp_deregister_style( 'mediaelement' );
+    wp_deregister_style( 'wp-mediaelement' );
+
+	} // end if ( in_array('media-element', $styles[0] ))
+
 }
 
 ?>
