@@ -441,6 +441,9 @@ class Hybrid {
 
     /* Load the Cleaner Archives extension if supported. */
     require_if_theme_supports( 'cleaner-archives', trailingslashit( HYBRID_EXTENSIONS ) . 'cleaner-archives.php' );
+
+    /* Load the Grid Columns extension if supported. */
+    require_if_theme_supports( 'grid-columns', trailingslashit( HYBRID_EXTENSIONS ) . 'grid-columns.php' );
 	}
 
 	/**
