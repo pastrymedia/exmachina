@@ -438,6 +438,9 @@ class Hybrid {
 
     /* Load the Custom Snippets extension if supported. */
     require_if_theme_supports( 'custom-snippets', trailingslashit( HYBRID_EXTENSIONS ) . 'custom-snippets.php' );
+
+    /* Load the Cleaner Archives extension if supported. */
+    require_if_theme_supports( 'cleaner-archives', trailingslashit( HYBRID_EXTENSIONS ) . 'cleaner-archives.php' );
 	}
 
 	/**
