@@ -447,6 +447,9 @@ class Hybrid {
 
     /* Load the Custom Header Extended extension if supported. */
     require_if_theme_supports( 'custom-header-extended', trailingslashit( HYBRID_EXTENSIONS ) . 'custom-header-extended.php' );
+
+    /* Load the Custom Background Extended extension if supported. */
+    require_if_theme_supports( 'custom-background-extended', trailingslashit( HYBRID_EXTENSIONS ) . 'custom-background-extended.php' );
 	}
 
 	/**
