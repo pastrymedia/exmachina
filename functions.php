@@ -88,6 +88,7 @@ function omega_theme_setup() {
   add_theme_support( 'custom-snippets' );
   add_theme_support( 'cleaner-archives' );
   add_theme_support( 'grid-columns' );
+  add_theme_support( 'custom-classes' );
 
   /* Add theme support for WordPress features. */
   add_theme_support( 'automatic-feed-links' );

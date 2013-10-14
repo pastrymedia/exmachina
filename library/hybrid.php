@@ -450,6 +450,9 @@ class Hybrid {
 
     /* Load the Custom Background Extended extension if supported. */
     require_if_theme_supports( 'custom-background-extended', trailingslashit( HYBRID_EXTENSIONS ) . 'custom-background-extended.php' );
+
+    /* Load the Custom Classes extension if supported. */
+    require_if_theme_supports( 'custom-classes', trailingslashit( HYBRID_EXTENSIONS ) . 'custom-classes.php' );
 	}
 
 	/**
