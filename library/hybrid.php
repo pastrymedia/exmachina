@@ -435,6 +435,9 @@ class Hybrid {
 
     /* Load the Template Tags Shortcodes extension if supported. */
     require_if_theme_supports( 'template-tags', trailingslashit( HYBRID_EXTENSIONS ) . 'template-tag-shortcodes.php' );
+
+    /* Load the Custom Snippets extension if supported. */
+    require_if_theme_supports( 'custom-snippets', trailingslashit( HYBRID_EXTENSIONS ) . 'custom-snippets.php' );
 	}
 
 	/**
