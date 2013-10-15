@@ -1068,3 +1068,24 @@ p.credit {
   }
 
 }
+
+/* Move to a responsive stylesheet */
+/* line 777, sass/_base.scss */
+.embed-wrap {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  padding-top: 1.875em;
+  margin-bottom: 1.563em;
+  padding-bottom: 56.25%;
+}
+/* line 786, sass/_base.scss */
+.embed-wrap iframe,
+.embed-wrap object,
+.embed-wrap embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
