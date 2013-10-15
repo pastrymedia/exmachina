@@ -13,7 +13,19 @@
 
 
 /* Add the primary sidebars after the main content. */
-add_action( hybrid_get_prefix() . '_after_main', 'hybrid_after_main' );
+add_action( hybrid_get_prefix() . '_after_main', 'hybrid_get_primary_sidebar' );
+
+/* Add the secondary sidebars after the main content. */
+add_action( hybrid_get_prefix() . '_after_main', 'hybrid_get_secondary_sidebar' );
+
+/* Add the before content sidebars before the content. */
+add_action( hybrid_get_prefix() . '_before_content', 'hybrid_get_before_content_sidebar' );
+
+/* Add the after content sidebars after the content. */
+add_action( hybrid_get_prefix() . '_after_content', 'hybrid_get_after_content_sidebar' );
+
+/* Add the after singular sidebars after the entry. */
+add_action( hybrid_get_prefix() . '_after_entry', 'hybrid_get_after_singular_sidebar' );
 
 /* Filter the sidebar widgets. */
 add_filter( 'sidebars_widgets', 'hybrid_disable_sidebars' );
@@ -22,8 +34,49 @@ add_action( 'template_redirect', 'hybrid_one_column' );
 /**
  * Display sidebar
  */
-function hybrid_after_main() {
-  get_sidebar();
+function hybrid_get_primary_sidebar() {
+  //get_sidebar();
+  get_template_part( 'partials/sidebar', 'primary' );
+  //get_sidebar( 'primary' );
+}
+
+/**
+ * Display sidebar
+ */
+function hybrid_get_secondary_sidebar() {
+  //get_sidebar();
+  get_template_part( 'partials/sidebar', 'secondary' );
+  //get_sidebar( 'secondary' );
+}
+
+/**
+ * Display sidebar
+ */
+function hybrid_get_before_content_sidebar() {
+  //get_sidebar();
+  get_template_part( 'partials/sidebar', 'before-content' );
+  //get_sidebar( 'before-content' );
+}
+
+/**
+ * Display sidebar
+ */
+function hybrid_get_after_content_sidebar() {
+  //get_sidebar();
+  get_template_part( 'partials/sidebar', 'after-content' );
+  //get_sidebar( 'before-content' );
+}
+
+/**
+ * Display sidebar
+ */
+function hybrid_get_after_singular_sidebar() {
+  //get_sidebar();
+
+  if ( is_single() ) {
+    get_template_part( 'partials/sidebar', 'after-singular' );
+  }
+  //get_sidebar( 'before-content' );
 }
 
 /**
