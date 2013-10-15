@@ -12,7 +12,7 @@
 		'theme_location' => 'primary',
 		'container'      => '',
 		'menu_class'     => 'menu nav-menu menu-primary',
-		'fallback_cb'	 => 'hybrid_default_menu'
+		'fallback_cb'	 => ''
 		));
 	?>
 

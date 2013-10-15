@@ -1,6 +1,6 @@
 <?php
 /**
- * The menus functions deal with registering nav menus within WordPress for the core framework.  Theme 
+ * The menus functions deal with registering nav menus within WordPress for the core framework.  Theme
  * developers may use the default menu(s) provided by the framework within their own themes, decide not
  * to use them, or register additional menus.
  *
@@ -45,5 +45,6 @@ function hybrid_register_menus() {
 	if ( in_array( 'subsidiary', $menus[0] ) )
 		register_nav_menu( 'subsidiary', _x( 'Subsidiary', 'nav menu location', 'hybrid-core' ) );
 }
+
 
 ?>

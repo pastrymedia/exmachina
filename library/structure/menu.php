@@ -15,9 +15,47 @@
  /* Load the primary menu. */
 add_action( hybrid_get_prefix() . '_before_header', 'hybrid_get_primary_menu' );
 
+ /* Load the secondary menu. */
+add_action( hybrid_get_prefix() . '_after_header', 'hybrid_get_secondary_menu' );
+
+ /* Load the subsibiary menu. */
+add_action( hybrid_get_prefix() . '_before_footer', 'hybrid_get_subsidiary_menu' );
+
 /**
  * Loads the menu-primary.php template.
  */
 function hybrid_get_primary_menu() {
+
+  //* If menu is assigned to theme location, output
+  if ( has_nav_menu( 'primary' ) ) {
+
   get_template_part( 'partials/menu', 'primary' );
+
+  }
+}
+
+/**
+ * Loads the menu-secondary.php template.
+ */
+function hybrid_get_secondary_menu() {
+
+  //* If menu is assigned to theme location, output
+  if ( has_nav_menu( 'secondary' ) ) {
+
+  get_template_part( 'partials/menu', 'secondary' );
+
+  }
+}
+
+/**
+ * Loads the menu-subsidiary.php template.
+ */
+function hybrid_get_subsidiary_menu() {
+
+  //* If menu is assigned to theme location, output
+  if ( has_nav_menu( 'subsidiary' ) ) {
+
+  get_template_part( 'partials/menu', 'subsidiary' );
+
+  }
 }
