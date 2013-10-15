@@ -33,8 +33,17 @@ input[type="search"] {
   box-sizing:         border-box;
 }
 
-/* Float Clearing
---------------------------------------------- */
+/**
+ * Clearing Floats
+ * --------------------------------------------------------------------------- */
+
+.clearfix::after {
+  content:    ".";
+  display:    block;
+  height:     0;
+  clear:      both;
+  visibility: hidden;
+}
 
 .clearfix:before, .clearfix:after {
   content: " ";
@@ -945,9 +954,9 @@ Footer Widgets
   float: right;
 }
 
-/*
-Site Footer
----------------------------------------------------------------------------------------------------- */
+/**
+ * Footer
+ * --------------------------------------------------------------------------- */
 
 .site-footer {
   border-top: 1px solid #F5F5F5;
@@ -957,6 +966,9 @@ Site Footer
   text-align: center;
 }
 
+.site-footer .wrap {}
+.site-footer .wrap .footer-content{}
+
 .site-footer p {
   margin: 0;
 }
@@ -965,9 +977,14 @@ p.copyright {
   font-size: inherit;
 }
 
-/*
-Media Queries
----------------------------------------------------------------------------------------------------- */
+p.credit {
+  font-size: inherit;
+}
+
+
+/**
+ * Media Queries
+ * --------------------------------------------------------------------------- */
 
 @media only screen and (max-width: 1139px) {
 

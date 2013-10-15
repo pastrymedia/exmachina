@@ -12,3 +12,26 @@
  */
 
 
+/* Add the before content breadcrumbs before the content. */
+add_action( hybrid_get_prefix() . '_before_content', 'hybrid_get_breadcrumbs' );
+
+/**
+ * Display sidebar
+ */
+function hybrid_get_breadcrumbs() {
+
+  if ( current_theme_supports( 'breadcrumb-trail' ) ) {
+
+  breadcrumb_trail(
+    array(
+      'container' => 'nav',
+      'separator' => '>',
+      'labels'    => array(
+        'browse' => __( 'You are here:', 'hybrid-base' )
+      )
+    )
+  );
+
+}
+
+}
