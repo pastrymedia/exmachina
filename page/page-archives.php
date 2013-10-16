@@ -2,7 +2,7 @@
 /**
  * Template Name: Archives
  *
- * This will list your categories and monthly archives by default.  Alternatively, you can activate 
+ * This will list your categories and monthly archives by default.  Alternatively, you can activate
  * an archives plugin.
  *
  * @package ExMachina
@@ -18,7 +18,7 @@ get_header(); // Loads the header.php template. ?>
 
 		<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
-			<div id="post-<?php the_ID(); ?>" class="<?php exmachina_entry_class(); ?>">
+			<div id="post-<?php the_ID(); ?>" class="<?php exmachina_post_class(); ?>">
 
 				<?php do_atomic( 'before_entry' ); // exmachina_before_entry ?>
 

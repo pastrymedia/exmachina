@@ -102,7 +102,7 @@ get_header(); // Loads the header.php template. ?>
 
 				<?php while ( $loop->have_posts() ) : $loop->the_post(); $do_not_duplicate[] = get_the_ID();  ?>
 
-					<article id="post-<?php the_ID(); ?>" class="<?php exmachina_entry_class(); ?>">
+					<article id="post-<?php the_ID(); ?>" class="<?php exmachina_post_class(); ?>">
 
 							<?php if ( current_theme_supports( 'get-the-image' ) ) get_the_image( array( 'meta_key' => 'Thumbnail', 'size' => 'thumbnail' ) ); ?>
 

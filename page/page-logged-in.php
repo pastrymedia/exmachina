@@ -3,7 +3,7 @@
  * Template Name: Logged In
  *
  * The Logged In template is a page template that allows only logged-in users to view the content
- * of the page and its comments. If the user isn't logged in, a message to log in with a link to the 
+ * of the page and its comments. If the user isn't logged in, a message to log in with a link to the
  * WordPress login page will be displayed. If the site has open registration, a link to register will
  * also be displayed.
  *
@@ -21,7 +21,7 @@ get_header(); // Loads the header.php template. ?>
 
 		<?php if ( have_posts() && is_user_logged_in() ) : while ( have_posts() ) : the_post(); ?>
 
-			<div id="post-<?php the_ID(); ?>" class="<?php exmachina_entry_class(); ?>">
+			<div id="post-<?php the_ID(); ?>" class="<?php exmachina_post_class(); ?>">
 
 				<?php do_atomic( 'before_entry' ); // exmachina_before_entry ?>
 
@@ -42,7 +42,7 @@ get_header(); // Loads the header.php template. ?>
 
 		<?php elseif ( have_posts() && !is_user_logged_in() ) : // If user is not logged in ?>
 
-			<div id="post-0" class="<?php exmachina_entry_class(); ?>">
+			<div id="post-0" class="<?php exmachina_post_class(); ?>">
 
 				<?php do_atomic( 'before_entry' ); // exmachina_before_entry ?>
 

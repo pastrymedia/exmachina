@@ -11,7 +11,7 @@ get_header(); // Loads the header.php template. ?>
 
 			<?php while ( have_posts() ) : the_post(); ?>
 
-				<article id="post-<?php the_ID(); ?>" class="<?php exmachina_entry_class(); ?>">
+				<article id="post-<?php the_ID(); ?>" class="<?php exmachina_post_class(); ?>">
 
 					<header class="entry-header">
 						<h1 class="entry-title"><?php single_post_title(); ?></h1>

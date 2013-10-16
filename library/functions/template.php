@@ -57,4 +57,80 @@ function exmachina_get_content_template() {
 	include( apply_atomic( 'content_template', locate_template( $templates, true, false ) ) );
 }
 
+/**
+ * Advance Get Template by Atomic Context.
+ * An easy to use feature for developer to create context based template file.
+ *
+ * @param $dir	string	template files directory
+ * @param $loop	bool	if it's used in the loop, to give extra template based on post data.
+ * @since 0.1.0
+ */
+function exmachina_get_atomic_template( $dir, $loop = false ) {
+
+	/* array of available templates */
+	$templates = array();
+
+	/* get theme path  */
+	$theme_dir = trailingslashit( THEME_DIR ) . $dir;
+	$child_dir = trailingslashit( CHILD_THEME_DIR ) . $dir;
+
+	if ( is_dir( $child_dir ) || is_dir( $theme_dir ) ) {
+
+		/* index.php in folder are fallback template */
+		$templates[] = "{$dir}/index.php";
+	}
+	else{
+		return ''; // empty string if dir not found
+	}
+
+	/* get current page (atomic) contexts */
+	$contexts = exmachina_get_context();
+
+	/* for each contexts */
+	foreach ( $contexts as $context ){
+
+		/* add context based template */
+		$templates[] = "{$dir}/{$context}.php";
+
+		/* if context is in the loop, ( how to check if it's in the loop? ) */
+		if ( true === $loop ){
+
+			/* file based on post data */
+			$files = array();
+
+			/* current post - post type */
+			$files[] = get_post_type();
+
+			/* if post type support post-formats */
+			if ( post_type_supports( get_post_type(), 'post-formats' ) ){
+				$files[] = get_post_type() . '-format-' . get_post_format();
+			}
+
+			/*
+			 * In blog pages, archives and search result pages, add post type and post format template
+			 * post format in singular pages is not needed, cause it's already added in core context.
+			 */
+			if ( !is_singular() ){
+
+				/* add file based on post type and post format */
+				foreach ( $files as $file ){
+					$templates[] = "{$dir}/{$context}_{$file}.php";
+				}
+
+				/* add sticky post in home page */
+				if ( is_home() && !is_paged() ){
+					if ( is_sticky( get_the_ID() ) ){
+						$templates[] = "{$dir}/_sticky.php";
+					}
+				}
+			}
+		}
+	}
+	/* allow developer to modify template */
+	$templates = apply_filters( 'exmachina_atomic_template',  $templates, $dir, $loop );
+
+	return locate_template( array_reverse( $templates ), true, false );
+}
+
+
 ?>

@@ -2,7 +2,7 @@
 /**
  * Template Name: Categories
  *
- * The categories template is a page template that lists your categories along with a link 
+ * The categories template is a page template that lists your categories along with a link
  * to the each category's RSS feed and post count.
  *
  * @package ExMachina
@@ -19,7 +19,7 @@ get_header(); // Loads the header.php template. ?>
 
 		<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
-			<div id="post-<?php the_ID(); ?>" class="<?php exmachina_entry_class(); ?>">
+			<div id="post-<?php the_ID(); ?>" class="<?php exmachina_post_class(); ?>">
 
 				<?php do_atomic( 'before_entry' ); // exmachina_before_entry ?>
 

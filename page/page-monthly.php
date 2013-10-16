@@ -2,7 +2,7 @@
 /**
  * Template Name: Monthly
  *
- * The Monthly page template is used to show a list of your post archives by month. For each month a 
+ * The Monthly page template is used to show a list of your post archives by month. For each month a
  * post has been made, the month is listed along with the number of posts for that particular month.
  *
  * @package ExMachina
@@ -18,7 +18,7 @@ get_header(); // Loads the header.php template. ?>
 
 		<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
-			<div id="post-<?php the_ID(); ?>" class="<?php exmachina_entry_class(); ?>">
+			<div id="post-<?php the_ID(); ?>" class="<?php exmachina_post_class(); ?>">
 
 				<?php do_atomic( 'before_entry' ); // exmachina_before_entry ?>
 

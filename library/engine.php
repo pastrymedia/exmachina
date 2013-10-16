@@ -125,6 +125,9 @@ class ExMachina {
 		/* Sets the path to the core framework extensions directory. */
 		define( 'EXMACHINA_EXTENSIONS', trailingslashit( EXMACHINA_DIR ) . 'extensions' );
 
+		/* Sets the path to the core framework framework directory. */
+		define( 'EXMACHINA_FRAMEWORK', trailingslashit( EXMACHINA_DIR ) . 'framework' );
+
 		/* Sets the path to the core framework functions directory. */
 		define( 'EXMACHINA_FUNCTIONS', trailingslashit( EXMACHINA_DIR ) . 'functions' );
 
@@ -156,13 +159,13 @@ class ExMachina {
 	function core() {
 
 		/* Load the core framework functions. */
-		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'core.php' );
+		require_once( trailingslashit( EXMACHINA_FRAMEWORK ) . 'core.php' );
 
 		/* Load the context-based functions. */
-		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'context.php' );
+		require_once( trailingslashit( EXMACHINA_FRAMEWORK ) . 'context.php' );
 
 		/* Load the core framework internationalization functions. */
-		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'i18n.php' );
+		require_once( trailingslashit( EXMACHINA_FRAMEWORK ) . 'i18n.php' );
 	}
 
 	/**
