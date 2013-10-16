@@ -156,7 +156,7 @@ add_action( 'init', 'unique_add_image_sizes' );
 function unique_enqueue_styles() {
 
 	if ( is_page_template( 'page/page-template-magazine.php' ) )
-		wp_enqueue_style( 'flexslider', exmachina_locate_theme_file( 'css/flexslider.css' ), array( '25px' ) );
+		wp_enqueue_style( 'flexslider', trailingslashit( EXMACHINA_CSS ) . 'flexslider.css', array( '25px' ) );
 }
 
 /**
@@ -170,10 +170,9 @@ function unique_enqueue_scripts() {
 
 	/* Enqueue the 'flexslider' script. */
 	if ( is_page_template( 'page/page-template-magazine.php' ) )
-		wp_enqueue_script( 'flexslider', exmachina_locate_theme_file( 'js/flexslider/flexslider.min.js' ), array( 'jquery' ), '20120713', true );
+		wp_enqueue_script( 'flexslider', esc_url( trailingslashit( EXMACHINA_JS ) . 'flexslider.min.js' ), array( 'jquery' ), '20120713', true );
 
-	/* Enqueue the Unique theme script. */
-	wp_enqueue_script( 'unique-theme', exmachina_locate_theme_file( 'js/unique.js' ), array( 'jquery' ), '20130326', true );
+
 }
 
 /**

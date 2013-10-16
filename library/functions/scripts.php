@@ -39,10 +39,6 @@ function exmachina_register_scripts() {
 	if ( isset( $supports[0] ) && in_array( 'drop-downs', $supports[0] ) )
 		wp_register_script( 'drop-downs', esc_url( apply_atomic( 'drop_downs_script', trailingslashit( EXMACHINA_JS ) . "drop-downs{$suffix}.js" ) ), array( 'jquery' ), '20130805', true );
 
-	/* Register the 'nav-bar' script if the current theme supports 'nav-bar'. */
-	if ( isset( $supports[0] ) && in_array( 'nav-bar', $supports[0] ) )
-		wp_register_script( 'nav-bar', esc_url( apply_atomic( 'nav_bar_script', trailingslashit( EXMACHINA_JS ) . "nav-bar{$suffix}.js" ) ), array( 'jquery' ), '20130805', true );
-
 	/* Register the 'mobile-toggle' script if the current theme supports 'mobile-toggle'. */
 	if ( isset( $supports[0] ) && in_array( 'mobile-toggle', $supports[0] ) )
 		wp_register_script( 'mobile-toggle', esc_url( trailingslashit( EXMACHINA_JS ) . "mobile-toggle{$suffix}.js" ), array( 'jquery' ), '20130528', true );

@@ -110,7 +110,6 @@ function exmachina_get_styles() {
 		'24px'       => array( 'version' => '20130526' ),
 		'25px'       => array( 'version' => '20130526' ),
 		'drop-downs' => array( 'version' => '20110919' ),
-		'nav-bar'    => array( 'version' => '20110519' ),
 		'gallery'    => array( 'version' => '20130526' ),
 		'media-element'    => array( 'version' => '20130526' ),
 	);
