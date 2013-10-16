@@ -11,7 +11,7 @@ get_header(); // Loads the header.php template. ?>
 
 			<?php while ( have_posts() ) : the_post(); ?>
 
-				<article id="post-<?php the_ID(); ?>" class="<?php hybrid_entry_class(); ?>">
+				<article id="post-<?php the_ID(); ?>" class="<?php exmachina_entry_class(); ?>">
 
 					<header class="entry-header">
 						<h1 class="entry-title"><?php single_post_title(); ?></h1>
@@ -28,13 +28,13 @@ get_header(); // Loads the header.php template. ?>
 
 						<?php else : ?>
 
-							<h2><?php _e( 'Archives by category', 'hybrid-core' ); ?></h2>
+							<h2><?php _e( 'Archives by category', 'exmachina-core' ); ?></h2>
 
 							<ul class="xoxo category-archives">
-								<?php wp_list_categories( array( 'feed' => __( 'RSS', 'hybrid-core' ), 'show_count' => true, 'use_desc_for_title' => false, 'title_li' => false ) ); ?>
+								<?php wp_list_categories( array( 'feed' => __( 'RSS', 'exmachina-core' ), 'show_count' => true, 'use_desc_for_title' => false, 'title_li' => false ) ); ?>
 							</ul><!-- .xoxo .category-archives -->
 
-							<h2><?php _e( 'Archives by month', 'hybrid-core' ); ?></h2>
+							<h2><?php _e( 'Archives by month', 'exmachina-core' ); ?></h2>
 
 							<ul class="xoxo monthly-archives">
 								<?php wp_get_archives( array( 'show_post_count' => true, 'type' => 'monthly' ) ); ?>
@@ -42,7 +42,7 @@ get_header(); // Loads the header.php template. ?>
 
 						<?php endif; ?>
 
-						<?php wp_link_pages( array( 'before' => '<p class="page-links">' . __( 'Pages:', 'hybrid-core' ), 'after' => '</p>' ) ); ?>
+						<?php wp_link_pages( array( 'before' => '<p class="page-links">' . __( 'Pages:', 'exmachina-core' ), 'after' => '</p>' ) ); ?>
 					</div><!-- .entry-content -->
 
 					<footer class="entry-footer">

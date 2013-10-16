@@ -15,7 +15,7 @@
  *
  * @since 0.1.0
  */
-class Hybrid_Widget_Image extends WP_Widget {
+class ExMachina_Widget_Image extends WP_Widget {
 
 	/**
 	 * Set up the widget's unique name, ID, class, description, and other options.
@@ -27,7 +27,7 @@ class Hybrid_Widget_Image extends WP_Widget {
 		/* Set up the widget options. */
 		$widget_options = array(
 			'classname' => 'image',
-			'description' => __( 'Display an image in any sidebar.', 'hybrid-core' )
+			'description' => __( 'Display an image in any sidebar.', 'exmachina-core' )
 		);
 
 		/* Set up the widget control options. */
@@ -38,7 +38,7 @@ class Hybrid_Widget_Image extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		$this->WP_Widget( 'image', __( 'Image', 'hybrid-core' ), $widget_options, $control_options );
+		$this->WP_Widget( 'image', __( 'Image', 'exmachina-core' ), $widget_options, $control_options );
 	}
 
 	/**
@@ -122,7 +122,7 @@ class Hybrid_Widget_Image extends WP_Widget {
 
 		/* Set up the defaults. */
 		$defaults = array(
-			'title' => __( 'Image', 'hybrid-core' ),
+			'title' => __( 'Image', 'exmachina-core' ),
 			'image_align' => 'aligncenter',
 			'image_url' => '',
 			'image_title' => '',
@@ -137,43 +137,43 @@ class Hybrid_Widget_Image extends WP_Widget {
 
 		<div>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'exmachina-core' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'image_url' ); ?>"><?php _e( 'Image <acronym title="Uniform Resource Locator">URL</acronym>:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'image_url' ); ?>"><?php _e( 'Image <acronym title="Uniform Resource Locator">URL</acronym>:', 'exmachina-core' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'image_url' ); ?>" name="<?php echo $this->get_field_name( 'image_url' ); ?>" value="<?php echo $instance['image_url']; ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'alt_text' ); ?>"><?php _e( 'Alternate Text:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'alt_text' ); ?>"><?php _e( 'Alternate Text:', 'exmachina-core' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'alt_text' ); ?>" name="<?php echo $this->get_field_name( 'alt_text' ); ?>" value="<?php echo $instance['alt_text']; ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'image_title' ); ?>"><?php _e( 'Image Title:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'image_title' ); ?>"><?php _e( 'Image Title:', 'exmachina-core' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'image_title' ); ?>" name="<?php echo $this->get_field_name( 'image_title' ); ?>" value="<?php echo $instance['image_title']; ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'image_caption' ); ?>"><?php _e( 'Caption:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'image_caption' ); ?>"><?php _e( 'Caption:', 'exmachina-core' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'image_caption' ); ?>" name="<?php echo $this->get_field_name( 'image_caption' ); ?>" value="<?php echo $instance['image_caption']; ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'image_align' ); ?>"><?php _e( 'Alignment:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'image_align' ); ?>"><?php _e( 'Alignment:', 'exmachina-core' ); ?></label>
 			<select style="float:right;max-width:66px;" class="widefat" id="<?php echo $this->get_field_id( 'image_align' ); ?>" name="<?php echo $this->get_field_name( 'image_align' ); ?>">
-				<?php foreach ( array( 'alignnone' => __( 'None', 'hybrid-core'), 'aligncenter' => __( 'Center', 'hybrid-core' ), 'alignleft' => __( 'Left', 'hybrid-core' ), 'alignright' => __( 'Right', 'hybrid-core' ) ) as $option_value => $option_label ) { ?>
+				<?php foreach ( array( 'alignnone' => __( 'None', 'exmachina-core'), 'aligncenter' => __( 'Center', 'exmachina-core' ), 'alignleft' => __( 'Left', 'exmachina-core' ), 'alignright' => __( 'Right', 'exmachina-core' ) ) as $option_value => $option_label ) { ?>
 					<option value="<?php echo $option_value; ?>" <?php selected( $instance['image_align'], $option_value ); ?>><?php echo $option_label; ?></option>
 				<?php } ?>
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'image_width' ); ?>"><?php _e( 'Width:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'image_width' ); ?>"><?php _e( 'Width:', 'exmachina-core' ); ?></label>
 			<input style="float:right;width:66px;" type="text" class="widefat" id="<?php echo $this->get_field_id( 'image_width' ); ?>" name="<?php echo $this->get_field_name( 'image_width' ); ?>" value="<?php echo $instance['image_width']; ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'image_height' ); ?>"><?php _e( 'Height:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'image_height' ); ?>"><?php _e( 'Height:', 'exmachina-core' ); ?></label>
 			<input style="float:right;width:66px;" type="text" class="widefat" id="<?php echo $this->get_field_id( 'image_height' ); ?>" name="<?php echo $this->get_field_name( 'image_height' ); ?>" value="<?php echo $instance['image_height']; ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'link_url' ); ?>"><?php _e( 'Link <acronym title="Uniform Resource Locator">URL</acronym>:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'link_url' ); ?>"><?php _e( 'Link <acronym title="Uniform Resource Locator">URL</acronym>:', 'exmachina-core' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'link_url' ); ?>" name="<?php echo $this->get_field_name( 'link_url' ); ?>" value="<?php echo $instance['link_url']; ?>" />
 		</p>
 		</div>

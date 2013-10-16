@@ -27,8 +27,8 @@ if ( !defined('ABSPATH')) exit;
 ###############################################################################
 
 /* Load the core theme framework. */
-require ( trailingslashit( get_template_directory() ) . 'library/hybrid.php' );
-new Hybrid();
+require ( trailingslashit( get_template_directory() ) . 'library/engine.php' );
+new ExMachina();
 
 /* Do theme setup on the 'after_setup_theme' hook. */
 add_action( 'after_setup_theme', 'omega_theme_setup' );
@@ -42,18 +42,18 @@ add_action( 'after_setup_theme', 'omega_theme_setup' );
 function omega_theme_setup() {
 
   /* Get action/filter hook prefix. */
-  $prefix = hybrid_get_prefix();
+  $prefix = exmachina_get_prefix();
 
   /* Add theme support for core framework features. */
-  add_theme_support( 'hybrid-core-menus', array( 'primary', 'secondary', 'subsidiary' ) );
-  add_theme_support( 'hybrid-core-sidebars', array( 'primary', 'secondary', 'before-content', 'after-content', 'after-singular' ) );
-  add_theme_support( 'hybrid-core-scripts', array( 'comment-reply' ) );
-  add_theme_support( 'hybrid-core-styles', array( 'parent', 'style' ) );
-  add_theme_support( 'hybrid-core-theme-settings', array( 'about', 'comments', 'archives', 'scripts', 'footer' ) );
-  add_theme_support( 'hybrid-core-widgets' );
-  add_theme_support( 'hybrid-core-shortcodes' );
-  add_theme_support( 'hybrid-core-template-hierarchy' );
-  add_theme_support( 'hybrid-core-deprecated' );
+  add_theme_support( 'exmachina-core-menus', array( 'primary', 'secondary', 'subsidiary' ) );
+  add_theme_support( 'exmachina-core-sidebars', array( 'primary', 'secondary', 'before-content', 'after-content', 'after-singular' ) );
+  add_theme_support( 'exmachina-core-scripts', array( 'comment-reply' ) );
+  add_theme_support( 'exmachina-core-styles', array( 'parent', 'style' ) );
+  add_theme_support( 'exmachina-core-theme-settings', array( 'about', 'comments', 'archives', 'scripts', 'footer' ) );
+  add_theme_support( 'exmachina-core-widgets' );
+  add_theme_support( 'exmachina-core-shortcodes' );
+  add_theme_support( 'exmachina-core-template-hierarchy' );
+  add_theme_support( 'exmachina-core-deprecated' );
 
   /* Enable theme layouts (need to add stylesheet support). */
   add_theme_support(
@@ -80,7 +80,7 @@ function omega_theme_setup() {
     array(
       'default-color'    => 'f1f1f1',
       'default-image'    => trailingslashit( get_template_directory_uri() ) . 'images/bg.png',
-      'wp-head-callback' => 'hybrid_custom_background_callback'
+      'wp-head-callback' => 'exmachina_custom_background_callback'
     )
   );
 
@@ -114,6 +114,6 @@ function omega_theme_setup() {
   add_editor_style();
 
   /* Set content width. */
-  hybrid_set_content_width( 640 );
+  exmachina_set_content_width( 640 );
 
 } // end function omega_theme_setup()

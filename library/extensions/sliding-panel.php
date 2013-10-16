@@ -84,7 +84,7 @@ final class Sliding_Panel_Plugin {
 		register_sidebar(
 			array(
 				'id'            => 'sliding-panel',
-				'name'          => __( 'Sliding Panel', 'hybrid-core' ),
+				'name'          => __( 'Sliding Panel', 'exmachina-core' ),
 				'before_widget' => '<section id="%1$s" class="widget %2$s widget-%2$s">',
 				'after_widget'  => '</section>',
 				'before_title'  => '<h3 class="widget-title">',
@@ -109,17 +109,17 @@ final class Sliding_Panel_Plugin {
 		if ( is_active_sidebar( 'sliding-panel' ) ) {
 
 			/* Register the sliding panel script. */
-			wp_register_script( 'sliding-panel', esc_url( trailingslashit( HYBRID_JS ) . "sliding-panel{$suffix}.js" ), array( 'jquery' ), '20130528', true );
+			wp_register_script( 'sliding-panel', esc_url( trailingslashit( EXMACHINA_JS ) . "sliding-panel{$suffix}.js" ), array( 'jquery' ), '20130528', true );
 
 			/* Register the sliding panel style. */
-			wp_register_style( 'sliding-panel', trailingslashit( HYBRID_CSS ) . "sliding-panel{$suffix}.css", false, '20130515', 'screen' );
+			wp_register_style( 'sliding-panel', trailingslashit( EXMACHINA_CSS ) . "sliding-panel{$suffix}.css", false, '20130515', 'screen' );
 
 			/* Get the plugin options. */
 			$settings = get_option(
 				'plugin_sliding_panel',
 				array(
-					'label_open'  => __( 'Open',  'hybrid-core' ),
-					'label_close' => __( 'Close', 'hybrid-core' )
+					'label_open'  => __( 'Open',  'exmachina-core' ),
+					'label_close' => __( 'Close', 'exmachina-core' )
 				)
 			);
 

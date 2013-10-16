@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Custom Background Extended
- * Plugin URI: http://themehybrid.com/plugins/custom-background-extended
+ * Plugin URI: http://themeexmachina.com/plugins/custom-background-extended
  * Description: Allows users to create <a href="http://codex.wordpress.org/Custom_Backgrounds">custom backgrounds</a> for individual posts, which are displayed on the single post page.  It works alongside any theme that supports the WordPress <code>custom-background</code> feature.
  * Version: 0.1.0
  * Author: Justin Tadlock
@@ -26,7 +26,7 @@
  * @since     0.1.0
  * @author    Justin Tadlock <justin@justintadlock.com>
  * @copyright Copyright (c) 2013, Justin Tadlock
- * @link      http://themehybrid.com/plugins/custom-background-extended
+ * @link      http://themeexmachina.com/plugins/custom-background-extended
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
@@ -103,7 +103,7 @@ final class CBE_Custom_Backgrounds {
 		/* Use the .min javascript if SCRIPT_DEBUG is turned off. */
 		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-		wp_register_script( 'custom-background-extended', esc_url( trailingslashit( HYBRID_JS ) . "custom-backgrounds{$suffix}.js" ), array( 'wp-color-picker', 'media-views' ), '20130528', true );
+		wp_register_script( 'custom-background-extended', esc_url( trailingslashit( EXMACHINA_JS ) . "custom-backgrounds{$suffix}.js" ), array( 'wp-color-picker', 'media-views' ), '20130528', true );
 
 	}
 
@@ -150,7 +150,7 @@ final class CBE_Custom_Backgrounds {
  * @since     0.1.0
  * @author    Justin Tadlock <justin@justintadlock.com>
  * @copyright Copyright (c) 2013, Justin Tadlock
- * @link      http://themehybrid.com/plugins/custom-background-extended
+ * @link      http://themeexmachina.com/plugins/custom-background-extended
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
@@ -495,7 +495,7 @@ final class CBE_Custom_Backgrounds_Filter {
  * @since     0.1.0
  * @author    Justin Tadlock <justin@justintadlock.com>
  * @copyright Copyright (c) 2013, Justin Tadlock
- * @link      http://themehybrid.com/plugins/custom-background-extended
+ * @link      http://themeexmachina.com/plugins/custom-background-extended
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
@@ -863,9 +863,9 @@ final class CBE_Custom_Backgrounds_Admin {
 	public function plugin_row_meta( $meta, $file ) {
 
 		if ( preg_match( '/custom-background-extended\.php/i', $file ) ) {
-			$meta[] = '<a href="http://themehybrid.com/support">' . __( 'Plugin support', 'custom-background-extended' ) . '</a>';
+			$meta[] = '<a href="http://themeexmachina.com/support">' . __( 'Plugin support', 'custom-background-extended' ) . '</a>';
 			$meta[] = '<a href="http://wordpress.org/plugins/custom-background-extended">' . __( 'Rate plugin', 'custom-background-extended' ) . '</a>';
-			$meta[] = '<a href="http://themehybrid.com/donate">' . __( 'Donate', 'custom-background-extended' ) . '</a>';
+			$meta[] = '<a href="http://themeexmachina.com/donate">' . __( 'Donate', 'custom-background-extended' ) . '</a>';
 		}
 
 		return $meta;

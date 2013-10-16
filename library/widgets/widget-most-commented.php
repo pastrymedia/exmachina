@@ -15,7 +15,7 @@
  *
  * @since 0.1.0
  */
-class Hybrid_Widget_Most_Commented extends WP_Widget {
+class ExMachina_Widget_Most_Commented extends WP_Widget {
 
 	/**
 	 * Set up the widget's unique name, ID, class, description, and other options.
@@ -27,7 +27,7 @@ class Hybrid_Widget_Most_Commented extends WP_Widget {
 		/* Set up the widget options. */
 		$widget_options = array(
 			'classname' => 'most-commented',
-			'description' => __( 'Display top commented posts.', 'hybrid-core' )
+			'description' => __( 'Display top commented posts.', 'exmachina-core' )
 		);
 
 		/* Set up the widget control options. */
@@ -38,7 +38,7 @@ class Hybrid_Widget_Most_Commented extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		$this->WP_Widget( 'most-commented', __( 'Most Commented', 'hybrid-core' ), $widget_options, $control_options );
+		$this->WP_Widget( 'most-commented', __( 'Most Commented', 'exmachina-core' ), $widget_options, $control_options );
 	}
 
 	/**
@@ -88,7 +88,7 @@ class Hybrid_Widget_Most_Commented extends WP_Widget {
 				echo '<li>';
 				the_title( '<a class="post-link" href="' . get_permalink() . '" title="' . the_title_attribute( 'echo=0' ) . '">', '</a> ' );
 				echo '<span class="comments-number">';
-				comments_number( __( '(0)', 'hybrid-core' ), __( '(1)', 'hybrid-core' ), __( '(%)', 'hybrid-core' ), 'comments-link', '' );
+				comments_number( __( '(0)', 'exmachina-core' ), __( '(1)', 'exmachina-core' ), __( '(%)', 'exmachina-core' ), 'comments-link', '' );
 				echo '<span>';
 				echo '</li>';
 			}
@@ -128,7 +128,7 @@ class Hybrid_Widget_Most_Commented extends WP_Widget {
 
 		/* Set up the defaults. */
 		$defaults = array(
-			'title' => __( 'Most Commented', 'hybrid-core' ),
+			'title' => __( 'Most Commented', 'exmachina-core' ),
 			'post_type' => 'post',
 			'posts_per_page' => 10,
 			'year' => '',
@@ -144,12 +144,12 @@ class Hybrid_Widget_Most_Commented extends WP_Widget {
 		?>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'exmachina-core' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'post_type' ); ?>"><?php _e( 'Post Type:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'post_type' ); ?>"><?php _e( 'Post Type:', 'exmachina-core' ); ?></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'post_type' ); ?>" name="<?php echo $this->get_field_name( 'post_type' ); ?>">
 				<?php foreach ( $post_types as $type ) {
 					if ( post_type_supports( $type->name, 'comments' ) || post_type_supports( $type->name, 'trackbacks' ) ) { ?>
@@ -160,17 +160,17 @@ class Hybrid_Widget_Most_Commented extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"><?php _e( 'Limit:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"><?php _e( 'Limit:', 'exmachina-core' ); ?></label>
 			<input style="float:right;width:66px;" type="text" class="widefat" id="<?php echo $this->get_field_id( 'posts_per_page' ); ?>" name="<?php echo $this->get_field_name( 'posts_per_page' ); ?>" value="<?php echo $instance['posts_per_page']; ?>" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'year' ); ?>"><?php _e( 'Year:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'year' ); ?>"><?php _e( 'Year:', 'exmachina-core' ); ?></label>
 			<input style="float:right;width:66px;" type="text" class="widefat" id="<?php echo $this->get_field_id( 'year' ); ?>" name="<?php echo $this->get_field_name( 'year' ); ?>" value="<?php echo $instance['year']; ?>" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'monthnum' ); ?>"><?php _e( 'Month:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'monthnum' ); ?>"><?php _e( 'Month:', 'exmachina-core' ); ?></label>
 			<select style="float:right;max-width:66px;" class="widefat" id="<?php echo $this->get_field_id( 'monthnum' ); ?>" name="<?php echo $this->get_field_name( 'monthnum' ); ?>">
 				<?php foreach ( $months as $month ) { ?>
 					<option value="<?php echo esc_attr( $month ); ?>" <?php selected( $instance['monthnum'], $month ); ?>><?php echo $month; ?></option>
@@ -179,7 +179,7 @@ class Hybrid_Widget_Most_Commented extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'day' ); ?>"><?php _e( 'Day:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'day' ); ?>"><?php _e( 'Day:', 'exmachina-core' ); ?></label>
 			<select style="float:right;max-width:66px;" class="widefat" id="<?php echo $this->get_field_id( 'day' ); ?>" name="<?php echo $this->get_field_name( 'day' ); ?>">
 				<?php foreach ( $days as $day ) { ?>
 					<option value="<?php echo esc_attr( $day ); ?>" <?php selected( $instance['day'], $day ); ?>><?php echo $day; ?></option>

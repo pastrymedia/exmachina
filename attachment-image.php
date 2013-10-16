@@ -8,7 +8,7 @@
 
 				<?php the_post(); // Loads the post data. ?>
 
-				<article id="post-<?php the_ID(); ?>" class="<?php hybrid_entry_class(); ?>" itemscope="itemscope" itemtype="http://schema.org/CreativeWork">
+				<article id="post-<?php the_ID(); ?>" class="<?php exmachina_entry_class(); ?>" itemscope="itemscope" itemtype="http://schema.org/CreativeWork">
 
 					<header class="entry-header">
 						<h1 class="entry-title"><?php single_post_title(); ?></h1>
@@ -32,7 +32,7 @@
 
 				<div class="attachment-meta">
 
-					<?php hybrid_image_info(); ?>
+					<?php exmachina_image_info(); ?>
 
 					<?php $gallery = gallery_shortcode( array( 'columns' => 4, 'numberposts' => 8, 'id' => $post->post_parent, 'exclude' => get_the_ID() ) ); ?>
 
@@ -45,7 +45,7 @@
 
 				</div><!-- .attachment-meta -->
 
-				<?php hybrid_content_nav( 'nav-below' ); ?>
+				<?php exmachina_content_nav( 'nav-below' ); ?>
 
 				<?php comments_template(); // Loads the comments.php template. ?>
 

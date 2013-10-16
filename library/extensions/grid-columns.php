@@ -126,7 +126,7 @@ class Grid_Columns {
 		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
 		/* Enqueue the stylesheet. */
-		wp_register_style( 'grid-columns', trailingslashit( HYBRID_CSS ) . "columns{$suffix}.css", null, '20130515' );
+		wp_register_style( 'grid-columns', trailingslashit( EXMACHINA_CSS ) . "columns{$suffix}.css", null, '20130515' );
 
 	}
 

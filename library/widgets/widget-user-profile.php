@@ -15,7 +15,7 @@
  *
  * @since 0.1.0
  */
-class Hybrid_Widget_User_Profile extends WP_Widget {
+class ExMachina_Widget_User_Profile extends WP_Widget {
 
 	/**
 	 * Set up the widget's unique name, ID, class, description, and other options.
@@ -27,7 +27,7 @@ class Hybrid_Widget_User_Profile extends WP_Widget {
 		/* Set up the widget options. */
 		$widget_options = array(
 			'classname' => 'user-profile',
-			'description' => __( "Display a user's profile.", 'hybrid-core' )
+			'description' => __( "Display a user's profile.", 'exmachina-core' )
 		);
 
 		/* Set up the widget control options. */
@@ -38,7 +38,7 @@ class Hybrid_Widget_User_Profile extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		$this->WP_Widget( 'user-profile', esc_attr__( 'User Profile', 'hybrid-core' ), $widget_options, $control_options );
+		$this->WP_Widget( 'user-profile', esc_attr__( 'User Profile', 'exmachina-core' ), $widget_options, $control_options );
 	}
 
 	/**
@@ -61,7 +61,7 @@ class Hybrid_Widget_User_Profile extends WP_Widget {
 		else
 			$more_url = get_author_posts_url( $user_id );
 
-		$more = '<a class="user-profile-more" href="' . $more_url . '" title="' . esc_attr( get_the_author_meta( 'display_name', $user_id ) ) . '">' . __( 'Read more &rarr;', 'hybrid-core' ) . '</a>';
+		$more = '<a class="user-profile-more" href="' . $more_url . '" title="' . esc_attr( get_the_author_meta( 'display_name', $user_id ) ) . '">' . __( 'Read more &rarr;', 'exmachina-core' ) . '</a>';
 
 		/* Get the user profile text. */
 		if ( empty( $instance['custom_user_text'] ) )
@@ -146,12 +146,12 @@ class Hybrid_Widget_User_Profile extends WP_Widget {
 		<div style="width:48%;float:left;">
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'exmachina-core' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'user' ); ?>"><?php _e( 'User:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'user' ); ?>"><?php _e( 'User:', 'exmachina-core' ); ?></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'user' ); ?>" name="<?php echo $this->get_field_name( 'user' ); ?>">
 				<?php foreach ( get_users_of_blog() as $author ) { ?>
 					<option value="<?php echo $author->ID; ?>" <?php selected( $instance['user'], $author->ID ); ?>><?php echo $author->display_name; ?></option>
@@ -160,14 +160,14 @@ class Hybrid_Widget_User_Profile extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'avatar_size' ); ?>"><?php _e( 'Avatar Size:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'avatar_size' ); ?>"><?php _e( 'Avatar Size:', 'exmachina-core' ); ?></label>
 			<input style="float:right;width:66px;" type="text" class="widefat" id="<?php echo $this->get_field_id( 'avatar_size' ); ?>" name="<?php echo $this->get_field_name( 'avatar_size' ); ?>" value="<?php echo $instance['avatar_size']; ?>" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'avatar_align' ); ?>"><?php _e( 'Avatar Alignment:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'avatar_align' ); ?>"><?php _e( 'Avatar Alignment:', 'exmachina-core' ); ?></label>
 			<select style="float:right;max-width:66px;" class="widefat" id="<?php echo $this->get_field_id( 'avatar_align' ); ?>" name="<?php echo $this->get_field_name( 'avatar_align' ); ?>">
-				<?php foreach ( array( 'alignnone' => __( 'None', 'hybrid-core'), 'alignleft' => __( 'Left', 'hybrid-core' ), 'alignright' => __( 'Right', 'hybrid-core' ), 'aligncenter' => __( 'Center', 'hybrid-core' ) ) as $option_value => $option_label ) { ?>
+				<?php foreach ( array( 'alignnone' => __( 'None', 'exmachina-core'), 'alignleft' => __( 'Left', 'exmachina-core' ), 'alignright' => __( 'Right', 'exmachina-core' ), 'aligncenter' => __( 'Center', 'exmachina-core' ) ) as $option_value => $option_label ) { ?>
 					<option value="<?php echo $option_value; ?>" <?php selected( $instance['avatar_align'], $option_value ); ?>><?php echo $option_label; ?></option>
 				<?php } ?>
 			</select>
@@ -178,20 +178,20 @@ class Hybrid_Widget_User_Profile extends WP_Widget {
 		<div style="width:48%;float:right;">
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'custom_user_text' ); ?>"><?php _e( 'Custom Text:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'custom_user_text' ); ?>"><?php _e( 'Custom Text:', 'exmachina-core' ); ?></label>
 			<textarea class="widefat" rows="3" cols="20" id="<?php echo $this->get_field_id( 'custom_user_text' ); ?>" name="<?php echo $this->get_field_name( 'custom_user_text' ); ?>"><?php echo esc_textarea( $instance['custom_user_text'] ); ?></textarea>
-			<?php _e( 'User bio will be used if left empty.', 'hybrid-core' ); ?>
+			<?php _e( 'User bio will be used if left empty.', 'exmachina-core' ); ?>
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'custom_user_page' ); ?>"><?php _e( '"Read More" should link to:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'custom_user_page' ); ?>"><?php _e( '"Read More" should link to:', 'exmachina-core' ); ?></label>
 
 			<?php $select = wp_dropdown_pages(
 				array(
 					'selected' => ( !empty( $instance['custom_user_page'] ) ? absint( $instance['custom_user_page'] ) : 0 ),
 					'name' => $this->get_field_name( 'custom_user_page' ),
 					'id' => $this->get_field_id( 'custom_user_page' ),
-					'show_option_none' => __( 'Author Archive Page', 'hybrid-core' ),
+					'show_option_none' => __( 'Author Archive Page', 'exmachina-core' ),
 					'echo' => false
 				)
 			);

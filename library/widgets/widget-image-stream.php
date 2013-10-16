@@ -2,7 +2,7 @@
 /**
  * Attachment image stream widget.
  *
- * @package Hybrid
+ * @package ExMachina
  * @subpackage Includes
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>
@@ -10,7 +10,7 @@
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
-class Hybrid_Widget_Image_Stream extends WP_Widget {
+class ExMachina_Widget_Image_Stream extends WP_Widget {
 
 	/**
 	 * Set up the widget's unique name, ID, class, description, and other options.
@@ -22,7 +22,7 @@ class Hybrid_Widget_Image_Stream extends WP_Widget {
 		/* Set up the widget options. */
 		$widget_options = array(
 			'classname' => 'image-stream',
-			'description' => __( 'Displays image thumbnails in a gallery-like format.', 'hybrid-core' )
+			'description' => __( 'Displays image thumbnails in a gallery-like format.', 'exmachina-core' )
 		);
 
 		/* Set up the widget control options. */
@@ -33,7 +33,7 @@ class Hybrid_Widget_Image_Stream extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		$this->WP_Widget( 'image-stream', __( 'Image Stream', 'hybrid-core' ), $widget_options, $control_options );
+		$this->WP_Widget( 'image-stream', __( 'Image Stream', 'exmachina-core' ), $widget_options, $control_options );
 	}
 
 	/**
@@ -90,7 +90,7 @@ class Hybrid_Widget_Image_Stream extends WP_Widget {
 		}
 
 		else {
-			echo '<p>' . __( 'There are currently no images found.', 'hybrid-core' ) . '</p>';
+			echo '<p>' . __( 'There are currently no images found.', 'exmachina-core' ) . '</p>';
 		}
 
 		wp_reset_query();
@@ -124,7 +124,7 @@ class Hybrid_Widget_Image_Stream extends WP_Widget {
 
 		/* Set up the default form values. */
 		$defaults = array(
-			'title' => esc_attr__( 'Image Stream', 'hybrid-core' ),
+			'title' => esc_attr__( 'Image Stream', 'exmachina-core' ),
 			'posts_per_page' => 6,
 		);
 
@@ -133,13 +133,13 @@ class Hybrid_Widget_Image_Stream extends WP_Widget {
 
 		?>
 
-		<div class="hybrid-widget-controls columns-1">
+		<div class="exmachina-widget-controls columns-1">
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'exmachina-core' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"><?php _e( 'Limit:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"><?php _e( 'Limit:', 'exmachina-core' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'posts_per_page' ); ?>" name="<?php echo $this->get_field_name( 'posts_per_page' ); ?>" value="<?php echo esc_attr( $instance['posts_per_page'] ); ?>" />
 		</p>
 		</div>

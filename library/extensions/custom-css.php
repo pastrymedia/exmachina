@@ -1,16 +1,16 @@
 <?php
 
 /* Load custom control classes. */
-add_action( 'customize_register', 'hybrid_load_customize_controls_css', 1 );
+add_action( 'customize_register', 'exmachina_load_customize_controls_css', 1 );
 
-function hybrid_load_customize_controls_css() {
+function exmachina_load_customize_controls_css() {
 
 	/**
 	 * CSS customize control class.
 	 *
 	 * @since 0.3.0
 	 */
-	class Hybrid_Customize_Control_CSS extends WP_Customize_Control {
+	class ExMachina_Customize_Control_CSS extends WP_Customize_Control {
 
 		/**
 		 * The type of customize control being rendered.
@@ -37,7 +37,7 @@ function hybrid_load_customize_controls_css() {
 }
 
 /* Register custom sections, settings, and controls. */
-add_action( 'customize_register', 'hybrid_customize_css_register' );
+add_action( 'customize_register', 'exmachina_customize_css_register' );
 
 /* Output CSS into <head>. */
 add_action( 'wp_head', 'print_custom_css' );
@@ -85,13 +85,13 @@ function print_custom_css() {
  * @access private
  * @param object $wp_customize
  */
-function hybrid_customize_css_register( $wp_customize ) {
+function exmachina_customize_css_register( $wp_customize ) {
 
 	/* Add the footer section. */
 	$wp_customize->add_section(
 		'layout',
 		array(
-			'title'      => esc_html__( 'Global Settings', 'hybrid-core' ),
+			'title'      => esc_html__( 'Global Settings', 'exmachina-core' ),
 			'priority'   => 150,
 			'capability' => 'edit_theme_options'
 		)
@@ -104,19 +104,19 @@ function hybrid_customize_css_register( $wp_customize ) {
 			'default'              => '',
 			'type'                 => 'theme_mod',
 			'capability'           => 'edit_theme_options',
-			'sanitize_callback'    => 'hybrid_customize_sanitize',
-			'sanitize_js_callback' => 'hybrid_customize_sanitize',
+			'sanitize_callback'    => 'exmachina_customize_sanitize',
+			'sanitize_js_callback' => 'exmachina_customize_sanitize',
 			'transport'            => 'postMessage',
 		)
 	);
 
 	/* Add the textarea control for the 'custom_css' setting. */
 	$wp_customize->add_control(
-		new Hybrid_Customize_Control_CSS(
+		new ExMachina_Customize_Control_CSS(
 			$wp_customize,
 			'custom_css',
 			array(
-				'label'    => esc_html__( 'Custom CSS', 'hybrid-core' ),
+				'label'    => esc_html__( 'Custom CSS', 'exmachina-core' ),
 				'section'  => 'layout',
 				'settings' => "custom_css",
 			)
@@ -125,7 +125,7 @@ function hybrid_customize_css_register( $wp_customize ) {
 
 	/* If viewing the customize preview screen, add a script to show a live preview. */
 	if ( $wp_customize->is_preview() && !is_admin() ) {
-		add_action( 'wp_footer', 'hybrid_customize_preview_script_css', 22 );
+		add_action( 'wp_footer', 'exmachina_customize_preview_script_css', 22 );
 	}
 }
 
@@ -135,7 +135,7 @@ function hybrid_customize_css_register( $wp_customize ) {
  * @since 0.3.2
  * @access private
  */
-function hybrid_customize_preview_script_css() {
+function exmachina_customize_preview_script_css() {
 
 	?>
 	<script type="text/javascript">

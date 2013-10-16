@@ -11,7 +11,7 @@ jQuery(document).ready(function($) {
 		}
 	}
 
-	$('#hybrid_theme_settings-content_archive').on('change', function() {
+	$('#exmachina_theme_settings-content_archive').on('change', function() {
 	  	if (this.value != 'full') {
 			$(this).parent().next().removeClass('hidden');
 		}

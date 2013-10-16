@@ -1,7 +1,7 @@
 <?php
 
 /* Register custom sections, settings, and controls. */
-add_action( 'customize_register', 'hybrid_customize_logo_register' );
+add_action( 'customize_register', 'exmachina_customize_logo_register' );
 
 
 /**
@@ -11,13 +11,13 @@ add_action( 'customize_register', 'hybrid_customize_logo_register' );
  * @access private
  * @param object $wp_customize
  */
-function hybrid_customize_logo_register( $wp_customize ) {
+function exmachina_customize_logo_register( $wp_customize ) {
 
 	/* Add the footer section. */
 	$wp_customize->add_section(
 		'title_tagline',
 		array(
-			'title'      => esc_html__( 'Branding', 'hybrid-core' ),
+			'title'      => esc_html__( 'Branding', 'exmachina-core' ),
 			'priority'   => 1,
 			'capability' => 'edit_theme_options'
 		)
@@ -30,8 +30,8 @@ function hybrid_customize_logo_register( $wp_customize ) {
 			'default'              => '',
 			'type'                 => 'theme_mod',
 			'capability'           => 'edit_theme_options',
-			'sanitize_callback'    => 'hybrid_customize_sanitize',
-			'sanitize_js_callback' => 'hybrid_customize_sanitize',
+			'sanitize_callback'    => 'exmachina_customize_sanitize',
+			'sanitize_js_callback' => 'exmachina_customize_sanitize',
 			//'transport'            => 'postMessage',
 		)
 	);
@@ -42,7 +42,7 @@ function hybrid_customize_logo_register( $wp_customize ) {
 			$wp_customize,
 			'custom_logo',
 			array(
-				'label'    => esc_html__( 'Logo', 'hybrid-core' ),
+				'label'    => esc_html__( 'Logo', 'exmachina-core' ),
 				'section'  => 'title_tagline',
 				'settings' => "custom_logo",
 			)
@@ -51,7 +51,7 @@ function hybrid_customize_logo_register( $wp_customize ) {
 
 	/* If viewing the customize preview screen, add a script to show a live preview.
 	if ( $wp_customize->is_preview() && !is_admin() ) {
-		add_action( 'wp_footer', 'hybrid_customize_logo_preview_script', 22 );
+		add_action( 'wp_footer', 'exmachina_customize_logo_preview_script', 22 );
 	}
 	*/
 }
@@ -62,7 +62,7 @@ function hybrid_customize_logo_register( $wp_customize ) {
  * @since 0.3.2
  * @access private
  */
-function hybrid_customize_logo_preview_script() {
+function exmachina_customize_logo_preview_script() {
 
 	?>
 	<script type="text/javascript">

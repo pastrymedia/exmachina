@@ -386,7 +386,7 @@ class My_Snippets_Widget_Snippet extends WP_Widget {
 		/* Merge the user-selected arguments with the defaults. */
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
-		<div class="hybrid-widget-controls columns-1">
+		<div class="exmachina-widget-controls columns-1">
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Default Title:', 'my-snippets'); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />

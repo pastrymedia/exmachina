@@ -3,16 +3,16 @@
  * Functions for handling media (i.e., attachments) within themes.  Most functions are for handling
  * the display of appropriate HTML elements on attachment pages.
  *
- * @package HybridCore
+ * @package ExMachinaCore
  * @subpackage Functions
  * @author Justin Tadlock <justin@justintadlock.com>
  * @copyright Copyright (c) 2008 - 2013, Justin Tadlock
- * @link http://themehybrid.com/hybrid-core
+ * @link http://themeexmachina.com/exmachina-core
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
 /* Add all image sizes to the image editor to insert into post. */
-add_filter( 'image_size_names_choose', 'hybrid_image_size_names_choose' );
+add_filter( 'image_size_names_choose', 'exmachina_image_size_names_choose' );
 
 /**
  * Adds theme/plugin custom images sizes added with add_image_size() to the image uploader/editor.  This
@@ -23,7 +23,7 @@ add_filter( 'image_size_names_choose', 'hybrid_image_size_names_choose' );
  * @param array $sizes Selectable image sizes.
  * @return array $sizes
  */
-function hybrid_image_size_names_choose( $sizes ) {
+function exmachina_image_size_names_choose( $sizes ) {
 
 	/* Get all intermediate image sizes. */
 	$intermediate_sizes = get_intermediate_image_sizes();
@@ -54,15 +54,15 @@ function hybrid_image_size_names_choose( $sizes ) {
  * @uses wp_get_attachment_url() Gets the URL of the attachment file.
  * @return void
  */
-function hybrid_attachment() {
+function exmachina_attachment() {
 	$file = wp_get_attachment_url();
 	$mime = get_post_mime_type();
 	$mime_type = explode( '/', $mime );
 
 	/* Loop through each mime type. If a function exists for it, call it. Allow users to filter the display. */
 	foreach ( $mime_type as $type ) {
-		if ( function_exists( "hybrid_{$type}_attachment" ) )
-			$attachment = call_user_func( "hybrid_{$type}_attachment", $mime, $file );
+		if ( function_exists( "exmachina_{$type}_attachment" ) )
+			$attachment = call_user_func( "exmachina_{$type}_attachment", $mime, $file );
 
 		$attachment = apply_atomic( "{$type}_attachment", $attachment );
 	}
@@ -80,7 +80,7 @@ function hybrid_attachment() {
  * @param string $file attachment file URL
  * @return string
  */
-function hybrid_application_attachment( $mime = '', $file = '' ) {
+function exmachina_application_attachment( $mime = '', $file = '' ) {
 	$embed_defaults = wp_embed_defaults();
 	$application = '<object class="text" type="' . esc_attr( $mime ) . '" data="' . esc_url( $file ) . '" width="' . esc_attr( $embed_defaults['width'] ) . '" height="' . esc_attr( $embed_defaults['height'] ) . '">';
 	$application .= '<param name="src" value="' . esc_url( $file ) . '" />';
@@ -99,7 +99,7 @@ function hybrid_application_attachment( $mime = '', $file = '' ) {
  * @param string $file attachment file URL
  * @return string
  */
-function hybrid_text_attachment( $mime = '', $file = '' ) {
+function exmachina_text_attachment( $mime = '', $file = '' ) {
 	$embed_defaults = wp_embed_defaults();
 	$text = '<object class="text" type="' . esc_attr( $mime ) . '" data="' . esc_url( $file ) . '" width="' . esc_attr( $embed_defaults['width'] ) . '" height="' . esc_attr( $embed_defaults['height'] ) . '">';
 	$text .= '<param name="src" value="' . esc_url( $file ) . '" />';
@@ -120,7 +120,7 @@ function hybrid_text_attachment( $mime = '', $file = '' ) {
  * @param string $file attachment file URL
  * @return string
  */
-function hybrid_audio_attachment( $mime = '', $file = '' ) {
+function exmachina_audio_attachment( $mime = '', $file = '' ) {
 	return do_shortcode( '[audio src="' . esc_url( $file ) . '"]' );
 }
 
@@ -133,7 +133,7 @@ function hybrid_audio_attachment( $mime = '', $file = '' ) {
  * @param string $file attachment file URL
  * @return string
  */
-function hybrid_video_attachment( $mime = false, $file = false ) {
+function exmachina_video_attachment( $mime = false, $file = false ) {
 	return do_shortcode( '[video src="' . esc_url( $file ) . '"]' );
 }
 
@@ -156,7 +156,7 @@ add_action( 'init', 'unique_add_image_sizes' );
 function unique_enqueue_styles() {
 
 	if ( is_page_template( 'page/page-template-magazine.php' ) )
-		wp_enqueue_style( 'flexslider', hybrid_locate_theme_file( 'css/flexslider.css' ), array( '25px' ) );
+		wp_enqueue_style( 'flexslider', exmachina_locate_theme_file( 'css/flexslider.css' ), array( '25px' ) );
 }
 
 /**
@@ -170,10 +170,10 @@ function unique_enqueue_scripts() {
 
 	/* Enqueue the 'flexslider' script. */
 	if ( is_page_template( 'page/page-template-magazine.php' ) )
-		wp_enqueue_script( 'flexslider', hybrid_locate_theme_file( 'js/flexslider/flexslider.min.js' ), array( 'jquery' ), '20120713', true );
+		wp_enqueue_script( 'flexslider', exmachina_locate_theme_file( 'js/flexslider/flexslider.min.js' ), array( 'jquery' ), '20120713', true );
 
 	/* Enqueue the Unique theme script. */
-	wp_enqueue_script( 'unique-theme', hybrid_locate_theme_file( 'js/unique.js' ), array( 'jquery' ), '20130326', true );
+	wp_enqueue_script( 'unique-theme', exmachina_locate_theme_file( 'js/unique.js' ), array( 'jquery' ), '20130326', true );
 }
 
 /**
@@ -233,7 +233,7 @@ function unique_get_image_size_links() {
  * @access public
  * @return void
  */
-function hybrid_image_info() {
+function exmachina_image_info() {
 
 	/* Set up some default variables and get the image metadata. */
 	$meta = wp_get_attachment_metadata( get_the_ID() );

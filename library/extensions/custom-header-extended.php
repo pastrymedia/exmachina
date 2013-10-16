@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Custom Header Extended
- * Plugin URI: http://themehybrid.com/plugins/custom-header-extended
+ * Plugin URI: http://themeexmachina.com/plugins/custom-header-extended
  * Description: Allows users to create <a href="http://codex.wordpress.org/Custom_Headers">custom headers</a> for individual posts, which are displayed on the single post page.  It works alongside any theme that supports the WordPress <code>custom-header</code> feature.
  * Version: 0.1.0
  * Author: Machina Themes
@@ -102,7 +102,7 @@ final class CHE_Custom_Headers {
 		/* Use the .min javascript if SCRIPT_DEBUG is turned off. */
 		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-		wp_register_script( 'custom-header-extended', esc_url( trailingslashit( HYBRID_JS ) . "custom-headers{$suffix}.js" ), array( 'wp-color-picker', 'media-views' ), '20130528', true );
+		wp_register_script( 'custom-header-extended', esc_url( trailingslashit( EXMACHINA_JS ) . "custom-headers{$suffix}.js" ), array( 'wp-color-picker', 'media-views' ), '20130528', true );
 
 	}
 
@@ -965,9 +965,9 @@ final class CHE_Custom_Headers_Admin {
 	public function plugin_row_meta( $meta, $file ) {
 
 		if ( preg_match( '/custom-header-extended\.php/i', $file ) ) {
-			$meta[] = '<a href="http://themehybrid.com/support">' . __( 'Plugin support', 'custom-header-extended' ) . '</a>';
+			$meta[] = '<a href="http://themeexmachina.com/support">' . __( 'Plugin support', 'custom-header-extended' ) . '</a>';
 			$meta[] = '<a href="http://wordpress.org/plugins/custom-header-extended">' . __( 'Rate plugin', 'custom-header-extended' ) . '</a>';
-			$meta[] = '<a href="http://themehybrid.com/donate">' . __( 'Donate', 'custom-header-extended' ) . '</a>';
+			$meta[] = '<a href="http://themeexmachina.com/donate">' . __( 'Donate', 'custom-header-extended' ) . '</a>';
 		}
 
 		return $meta;

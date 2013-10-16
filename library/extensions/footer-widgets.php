@@ -1,6 +1,6 @@
 <?php
 /* Register footer widget areas. */
-add_action( 'widgets_init', 'hybrid_register_footer_widget_areas' );
+add_action( 'widgets_init', 'exmachina_register_footer_widget_areas' );
 
 /**
  * Register footer widget areas based on the number of widget areas the user wishes to create with `add_theme_support()`.
@@ -11,7 +11,7 @@ add_action( 'widgets_init', 'hybrid_register_footer_widget_areas' );
  *
  * @return null Return early if there's no theme support.
  */
-function hybrid_register_footer_widget_areas() {
+function exmachina_register_footer_widget_areas() {
 
 	$footer_widgets = get_theme_support( 'footer-widgets' );
 
@@ -27,8 +27,8 @@ function hybrid_register_footer_widget_areas() {
 		/* Set up some default sidebar arguments. */
 		$defaults = array(
 			'id'            => sprintf( 'footer-%d', $counter ),
-			'name'          => sprintf( __( 'Footer %d', 'hybrid-core' ), $counter ),
-			'description'   => sprintf( __( 'Footer %d widget area.', 'hybrid-core' ), $counter ),
+			'name'          => sprintf( __( 'Footer %d', 'exmachina-core' ), $counter ),
+			'description'   => sprintf( __( 'Footer %d widget area.', 'exmachina-core' ), $counter ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s widget-%2$s"><div class="widget-wrap">',
 			'after_widget'  => '</div></section>',
 			'before_title'  => '<h4 class="widget-title widgettitle">',
@@ -43,7 +43,7 @@ function hybrid_register_footer_widget_areas() {
 }
 
 
-add_action( hybrid_get_prefix() . '_before_footer', 'hybrid_footer_widget_areas' );
+add_action( exmachina_get_prefix() . '_before_footer', 'exmachina_footer_widget_areas' );
 /**
  * Echo the markup necessary to facilitate the footer widget areas.
  *
@@ -51,15 +51,15 @@ add_action( hybrid_get_prefix() . '_before_footer', 'hybrid_footer_widget_areas'
  *
  * The child theme must style the widget areas.
  *
- * Applies the `hybrid_footer_widget_areas` filter.
+ * Applies the `exmachina_footer_widget_areas` filter.
  *
  * @since 0.3.4
  *
- * @uses hybrid_structural_wrap() Optionally adds wrap with footer-widgets context.
+ * @uses exmachina_structural_wrap() Optionally adds wrap with footer-widgets context.
  *
  * @return null Return early if number of widget areas could not be determined, or nothing is added to the first widget area.
  */
-function hybrid_footer_widget_areas() {
+function exmachina_footer_widget_areas() {
 
 	$footer_widgets = get_theme_support( 'footer-widgets' );
 
@@ -99,6 +99,6 @@ function hybrid_footer_widget_areas() {
 
 	}
 
-	echo apply_filters( hybrid_get_prefix() . '_footer_widget_areas', $output, $footer_widgets );
+	echo apply_filters( exmachina_get_prefix() . '_footer_widget_areas', $output, $footer_widgets );
 
 }

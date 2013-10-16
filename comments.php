@@ -4,7 +4,7 @@
  *
  * The area of the page that contains both current comments
  * and the comment form. The actual display of comments is
- * handled by a callback to hybrid_comment() which is
+ * handled by a callback to exmachina_comment() which is
  * located in the inc/template-tags.php file.
  *
  * @package ExMachina
@@ -20,9 +20,9 @@
 if ( post_password_required() || ( !have_comments() && !comments_open() && !pings_open() ) )
 	return;
 
-if ( is_singular( 'post' ) && ( !hybrid_get_setting( 'trackbacks_posts' ) && !hybrid_get_setting( 'comments_posts' ) ) )
+if ( is_singular( 'post' ) && ( !exmachina_get_setting( 'trackbacks_posts' ) && !exmachina_get_setting( 'comments_posts' ) ) )
 	return;
-elseif ( is_singular( 'page' ) && ( !hybrid_get_setting( 'trackbacks_pages' ) && !hybrid_get_setting( 'comments_pages' ) ) )
+elseif ( is_singular( 'page' ) && ( !exmachina_get_setting( 'trackbacks_pages' ) && !exmachina_get_setting( 'comments_pages' ) ) )
 	return;
 
 ?>

@@ -15,7 +15,7 @@
  *
  * @since 0.1.0
  */
-class Hybrid_Widget_List_Sub_Pages extends WP_Widget {
+class ExMachina_Widget_List_Sub_Pages extends WP_Widget {
 
 	/**
 	 * Set up the widget's unique name, ID, class, description, and other options.
@@ -27,7 +27,7 @@ class Hybrid_Widget_List_Sub_Pages extends WP_Widget {
 		/* Set up the widget options. */
 		$widget_options = array(
 			'classname' => 'list-sub-pages',
-			'description' => __( 'Displays the sub-pages of the current page. Widget only appears if there are sub-pages of the current page.', 'hybrid-core' )
+			'description' => __( 'Displays the sub-pages of the current page. Widget only appears if there are sub-pages of the current page.', 'exmachina-core' )
 		);
 
 		/* Set up the widget control options. */
@@ -38,7 +38,7 @@ class Hybrid_Widget_List_Sub_Pages extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		$this->WP_Widget( 'list-sub-pages', __( 'List Sub-Pages', 'hybrid-core' ), 	$widget_options, $control_options
+		$this->WP_Widget( 'list-sub-pages', __( 'List Sub-Pages', 'exmachina-core' ), 	$widget_options, $control_options
 		);
 	}
 
@@ -114,14 +114,14 @@ class Hybrid_Widget_List_Sub_Pages extends WP_Widget {
 
 		/* Set up the defaults. */
 		$defaults = array(
-			'title' => __( 'Sub Pages', 'hybrid-core' )
+			'title' => __( 'Sub Pages', 'exmachina-core' )
 		);
 
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
 		<div>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'exmachina-core' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
 		</p>
 		</div>

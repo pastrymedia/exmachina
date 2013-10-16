@@ -4,22 +4,22 @@
  *
  * Eventually, some of the functionality here could be replaced by core features
  *
- * @package Hybrid
+ * @package ExMachina
  */
 
 /**
  * Get our wp_nav_menu() fallback, wp_page_menu(), to show a home link.
  */
-function hybrid_page_menu_args( $args ) {
+function exmachina_page_menu_args( $args ) {
 	$args['show_home'] = true;
 	return $args;
 }
-add_filter( 'wp_page_menu_args', 'hybrid_page_menu_args' );
+add_filter( 'wp_page_menu_args', 'exmachina_page_menu_args' );
 
 /**
  * Adds custom classes to the array of body classes.
  */
-function hybrid_body_classes( $classes ) {
+function exmachina_body_classes( $classes ) {
 	global $is_lynx, $is_gecko, $is_IE, $is_opera, $is_NS4, $is_safari, $is_chrome;
 
 	// Adds a class of group-blog to blogs with more than 1 published author
@@ -36,7 +36,7 @@ function hybrid_body_classes( $classes ) {
 		}
 	}
 
-	/* Hybrid theme widgets detection. */
+	/* ExMachina theme widgets detection. */
 	foreach ( array( 'primary', 'secondary', 'subsidiary' ) as $sidebar )
 		$classes[] = ( is_active_sidebar( $sidebar ) ) ? "{$sidebar}-active" : "{$sidebar}-inactive";
 
@@ -77,7 +77,7 @@ function hybrid_body_classes( $classes ) {
 	/* Return the array of classes. */
 	return $classes;
 }
-add_filter( 'body_class', 'hybrid_body_classes' );
+add_filter( 'body_class', 'exmachina_body_classes' );
 
 /**
  * Dynamic HTML Class to target context in body class.
@@ -87,7 +87,7 @@ add_filter( 'body_class', 'hybrid_body_classes' );
  *
  * @since 0.1.0
  */
-function hybrid_html_class( $class = '' ){
+function exmachina_html_class( $class = '' ){
 
 	global $wp_query;
 
@@ -143,18 +143,18 @@ function hybrid_html_class( $class = '' ){
  * Add Theme Settings menu item to Admin Bar.
  */
 
-function hybrid_adminbar() {
+function exmachina_adminbar() {
 
 	global $wp_admin_bar;
 
 	$wp_admin_bar->add_menu( array(
 			'parent' => 'appearance',
 			'id' => 'theme-settings',
-			'title' => __( 'Theme Settings', 'hybrid-core' ),
+			'title' => __( 'Theme Settings', 'exmachina-core' ),
 			'href' => admin_url( 'themes.php?page=theme-settings' )
 		));
 }
-add_action( 'wp_before_admin_bar_render', 'hybrid_adminbar' );
+add_action( 'wp_before_admin_bar_render', 'exmachina_adminbar' );
 
 
 /**
@@ -172,7 +172,7 @@ add_action( 'wp_before_admin_bar_render', 'hybrid_adminbar' );
  *
  * @return string Truncated string
  */
-function hybrid_truncate_phrase( $text, $max_characters ) {
+function exmachina_truncate_phrase( $text, $max_characters ) {
 
 	$text = trim( $text );
 
@@ -212,7 +212,7 @@ function get_the_content_limit( $max_characters, $more_link_text = '(more...)', 
 
 	//* Truncate $content to $max_char
 	if ($max_characters < strlen( $content )) {
-		$content = hybrid_truncate_phrase( $content, $max_characters );
+		$content = exmachina_truncate_phrase( $content, $max_characters );
 		$no_more = false;
 	} else {
 		$no_more = true;
@@ -251,18 +251,18 @@ function the_content_limit( $max_characters, $more_link_text = '(more...)', $str
 
 
 /* Additional css classes for widgets */
-	add_filter( 'dynamic_sidebar_params', 'hybrid_widget_classes' );
+	add_filter( 'dynamic_sidebar_params', 'exmachina_widget_classes' );
 /**
  * Additional widget classes with number of each widget position and first/last widget class.
  * This is a modified code from Sukelius Magazine Theme.
  *
- * @link http://themehybrid.com/themes/sukelius-magazine
+ * @link http://themeexmachina.com/themes/sukelius-magazine
  * @since 0.1.0
  */
-function hybrid_widget_classes( $params ) {
+function exmachina_widget_classes( $params ) {
 
 	/* Global a counter array */
-	global $hybrid_widget_num;
+	global $exmachina_widget_num;
 
 	/* Get the id for the current sidebar we're processing */
 	$this_id = $params[0]['id'];
@@ -271,8 +271,8 @@ function hybrid_widget_classes( $params ) {
 	$arr_registered_widgets = wp_get_sidebars_widgets();
 
 	/* If the counter array doesn't exist, create it */
-	if ( !$hybrid_widget_num ) {
-		$hybrid_widget_num = array();
+	if ( !$exmachina_widget_num ) {
+		$exmachina_widget_num = array();
 	}
 
 	/* if current sidebar has no widget, return. */
@@ -281,23 +281,23 @@ function hybrid_widget_classes( $params ) {
 	}
 
 	/* See if the counter array has an entry for this sidebar */
-	if ( isset( $hybrid_widget_num[$this_id] ) ) {
-		$hybrid_widget_num[$this_id] ++;
+	if ( isset( $exmachina_widget_num[$this_id] ) ) {
+		$exmachina_widget_num[$this_id] ++;
 	}
 	/* If not, create it starting with 1 */
 	else {
-		$hybrid_widget_num[$this_id] = 1;
+		$exmachina_widget_num[$this_id] = 1;
 	}
 
 	/* Add a widget number class for additional styling options */
-	$class = 'class="widget widget-' . $hybrid_widget_num[$this_id] . ' ';
+	$class = 'class="widget widget-' . $exmachina_widget_num[$this_id] . ' ';
 
 	/* in first widget, add 'widget-first' class */
-	if ( $hybrid_widget_num[$this_id] == 1 ) {
+	if ( $exmachina_widget_num[$this_id] == 1 ) {
 		$class .= 'widget-first ';
 	}
 	/* in last widget, add 'widget-last' class */
-	elseif( $hybrid_widget_num[$this_id] == count( $arr_registered_widgets[$this_id] ) ) {
+	elseif( $exmachina_widget_num[$this_id] == count( $arr_registered_widgets[$this_id] ) ) {
 		$class .= 'widget-last ';
 	}
 
@@ -307,16 +307,16 @@ function hybrid_widget_classes( $params ) {
 	return $params;
 }
 
-/* Hybrid Core Context */
-	add_filter( 'hybrid_context', 'shell_hybrid_context' );
+/* ExMachina Core Context */
+	add_filter( 'exmachina_context', 'shell_exmachina_context' );
 /**
- * Add Current Post template, Post Format, and Attachment Mime Type to Hybrid Core Context
+ * Add Current Post template, Post Format, and Attachment Mime Type to ExMachina Core Context
  *
  * @todo integrate into main context function
  * @todo add canvas page template context
  * @since 0.1.0
  */
-function shell_hybrid_context( $context ){
+function shell_exmachina_context( $context ){
 
 	/* Singular post (post_type) classes. */
 	if ( is_singular() ) {
@@ -354,7 +354,7 @@ function shell_hybrid_context( $context ){
 /**
  * Add Singular Post Format Template
  *
- * @link http://themehybrid.com/support/topic/add-post-format-singular-template-in-template-hierarchy#post-75579
+ * @link http://themeexmachina.com/support/topic/add-post-format-singular-template-in-template-hierarchy#post-75579
  * @since 0.1.0
  */
 function shell_post_format_singular_template( $template ){

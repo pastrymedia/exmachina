@@ -24,7 +24,7 @@ get_header(); ?>
 
 			<?php endwhile; ?>
 
-			<?php hybrid_content_nav( 'nav-below' ); ?>
+			<?php exmachina_content_nav( 'nav-below' ); ?>
 
 		<?php else : ?>
 

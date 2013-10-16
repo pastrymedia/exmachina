@@ -1,15 +1,15 @@
 <?php
 /**
- * Hybrid Core - A WordPress theme development framework.
+ * ExMachina Core - A WordPress theme development framework.
  *
- * Hybrid Core is a framework for developing WordPress themes.  The framework allows theme developers
+ * ExMachina Core is a framework for developing WordPress themes.  The framework allows theme developers
  * to quickly build themes without having to handle all of the "logic" behind the theme or having to code
  * complex functionality for features that are often needed in themes.  The framework does these things
  * for developers to allow them to get back to what matters the most:  developing and designing themes.
  * The framework was built to make it easy for developers to include (or not include) specific, pre-coded
  * features.  Themes handle all the markup, style, and scripts while the framework handles the logic.
  *
- * Hybrid Core is a modular system, which means that developers can pick and choose the features they
+ * ExMachina Core is a modular system, which means that developers can pick and choose the features they
  * want to include within their themes.  Most files are only loaded if the theme registers support for the
  * feature using the add_theme_support( $feature ) function within their theme.
  *
@@ -23,40 +23,40 @@
  * You should have received a copy of the GNU General Public License along with this program; if not, write
  * to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
- * @package   HybridCore
+ * @package   ExMachinaCore
  * @version   1.6.2-alpha
  * @author    Justin Tadlock <justin@justintadlock.com>
  * @copyright Copyright (c) 2008 - 2013, Justin Tadlock
- * @link      http://themehybrid.com/hybrid-core
+ * @link      http://themeexmachina.com/exmachina-core
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
 /**
- * The Hybrid class launches the framework.  It's the organizational structure behind the entire framework.
+ * The ExMachina class launches the framework.  It's the organizational structure behind the entire framework.
  * This class should be loaded and initialized before anything else within the theme is called to properly use
  * the framework.
  *
- * After parent themes call the Hybrid class, they should perform a theme setup function on the
+ * After parent themes call the ExMachina class, they should perform a theme setup function on the
  * 'after_setup_theme' hook with a priority of 10.  Child themes should add their theme setup function on
  * the 'after_setup_theme' hook with a priority of 11.  This allows the class to load theme-supported features
  * at the appropriate time, which is on the 'after_setup_theme' hook with a priority of 12.
  *
  * @since 0.7.0
  */
-class Hybrid {
+class ExMachina {
 
 	/**
-	 * Constructor method for the Hybrid class.  This method adds other methods of the class to
+	 * Constructor method for the ExMachina class.  This method adds other methods of the class to
 	 * specific hooks within WordPress.  It controls the load order of the required files for running
 	 * the framework.
 	 *
 	 * @since 1.0.0
 	 */
 	function __construct() {
-		global $hybrid;
+		global $exmachina;
 
-		/* Set up an empty class for the global $hybrid object. */
-		$hybrid = new stdClass;
+		/* Set up an empty class for the global $exmachina object. */
+		$exmachina = new stdClass;
 
 		/* Define framework, parent theme, and child theme constants. */
 		add_action( 'after_setup_theme', array( &$this, 'constants' ), 1 );
@@ -88,7 +88,7 @@ class Hybrid {
 
 	/**
 	 * Defines the constant paths for use within the core framework, parent theme, and child theme.
-	 * Constants prefixed with 'HYBRID_' are for use only within the core framework and don't
+	 * Constants prefixed with 'EXMACHINA_' are for use only within the core framework and don't
 	 * reference other areas of the parent or child theme.
 	 *
 	 * @since 0.7.0
@@ -96,7 +96,7 @@ class Hybrid {
 	function constants() {
 
 		/* Sets the framework version number. */
-		define( 'HYBRID_VERSION', '1.6.2' );
+		define( 'EXMACHINA_VERSION', '1.6.2' );
 
 		/* Sets the path to the parent theme directory. */
 		define( 'THEME_DIR', get_template_directory() );
@@ -111,40 +111,40 @@ class Hybrid {
 		define( 'CHILD_THEME_URI', get_stylesheet_directory_uri() );
 
 		/* Sets the path to the core framework directory. */
-		define( 'HYBRID_DIR', trailingslashit( THEME_DIR ) . basename( dirname( __FILE__ ) ) );
+		define( 'EXMACHINA_DIR', trailingslashit( THEME_DIR ) . basename( dirname( __FILE__ ) ) );
 
 		/* Sets the path to the core framework directory URI. */
-		define( 'HYBRID_URI', trailingslashit( THEME_URI ) . basename( dirname( __FILE__ ) ) );
+		define( 'EXMACHINA_URI', trailingslashit( THEME_URI ) . basename( dirname( __FILE__ ) ) );
 
 		/* Sets the path to the core framework admin directory. */
-		define( 'HYBRID_ADMIN', trailingslashit( HYBRID_DIR ) . 'admin' );
+		define( 'EXMACHINA_ADMIN', trailingslashit( EXMACHINA_DIR ) . 'admin' );
 
 		/* Sets the path to the core framework classes directory. */
-		define( 'HYBRID_CLASSES', trailingslashit( HYBRID_DIR ) . 'classes' );
+		define( 'EXMACHINA_CLASSES', trailingslashit( EXMACHINA_DIR ) . 'classes' );
 
 		/* Sets the path to the core framework extensions directory. */
-		define( 'HYBRID_EXTENSIONS', trailingslashit( HYBRID_DIR ) . 'extensions' );
+		define( 'EXMACHINA_EXTENSIONS', trailingslashit( EXMACHINA_DIR ) . 'extensions' );
 
 		/* Sets the path to the core framework functions directory. */
-		define( 'HYBRID_FUNCTIONS', trailingslashit( HYBRID_DIR ) . 'functions' );
+		define( 'EXMACHINA_FUNCTIONS', trailingslashit( EXMACHINA_DIR ) . 'functions' );
 
 		/* Sets the path to the core framework structure directory. */
-		define( 'HYBRID_STRUCTURE', trailingslashit( HYBRID_DIR ) . 'structure' );
+		define( 'EXMACHINA_STRUCTURE', trailingslashit( EXMACHINA_DIR ) . 'structure' );
 
 		/* Sets the path to the core framework widgets directory. */
-		define( 'HYBRID_WIDGETS', trailingslashit( HYBRID_DIR ) . 'widgets' );
+		define( 'EXMACHINA_WIDGETS', trailingslashit( EXMACHINA_DIR ) . 'widgets' );
 
 		/* Sets the path to the core framework languages directory. */
-		define( 'HYBRID_LANGUAGES', trailingslashit( HYBRID_DIR ) . 'languages' );
+		define( 'EXMACHINA_LANGUAGES', trailingslashit( EXMACHINA_DIR ) . 'languages' );
 
 		/* Sets the path to the core framework images directory URI. */
-		define( 'HYBRID_IMAGES', trailingslashit( HYBRID_URI ) . 'images' );
+		define( 'EXMACHINA_IMAGES', trailingslashit( EXMACHINA_URI ) . 'images' );
 
 		/* Sets the path to the core framework CSS directory URI. */
-		define( 'HYBRID_CSS', trailingslashit( HYBRID_URI ) . 'css' );
+		define( 'EXMACHINA_CSS', trailingslashit( EXMACHINA_URI ) . 'css' );
 
 		/* Sets the path to the core framework JavaScript directory URI. */
-		define( 'HYBRID_JS', trailingslashit( HYBRID_URI ) . 'js' );
+		define( 'EXMACHINA_JS', trailingslashit( EXMACHINA_URI ) . 'js' );
 	}
 
 	/**
@@ -156,13 +156,13 @@ class Hybrid {
 	function core() {
 
 		/* Load the core framework functions. */
-		require_once( trailingslashit( HYBRID_FUNCTIONS ) . 'core.php' );
+		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'core.php' );
 
 		/* Load the context-based functions. */
-		require_once( trailingslashit( HYBRID_FUNCTIONS ) . 'context.php' );
+		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'context.php' );
 
 		/* Load the core framework internationalization functions. */
-		require_once( trailingslashit( HYBRID_FUNCTIONS ) . 'i18n.php' );
+		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'i18n.php' );
 	}
 
 	/**
@@ -175,20 +175,20 @@ class Hybrid {
 	 * @since 1.2.0
 	 */
 	function i18n() {
-		global $hybrid;
+		global $exmachina;
 
 		/* Get parent and child theme textdomains. */
-		$parent_textdomain = hybrid_get_parent_textdomain();
-		$child_textdomain = hybrid_get_child_textdomain();
+		$parent_textdomain = exmachina_get_parent_textdomain();
+		$child_textdomain = exmachina_get_child_textdomain();
 
 		/* Load the framework textdomain. */
-		$hybrid->textdomain_loaded['hybrid-core'] = hybrid_load_framework_textdomain( 'hybrid-core' );
+		$exmachina->textdomain_loaded['exmachina-core'] = exmachina_load_framework_textdomain( 'exmachina-core' );
 
 		/* Load theme textdomain. */
-		$hybrid->textdomain_loaded[$parent_textdomain] = load_theme_textdomain( $parent_textdomain );
+		$exmachina->textdomain_loaded[$parent_textdomain] = load_theme_textdomain( $parent_textdomain );
 
 		/* Load child theme textdomain. */
-		$hybrid->textdomain_loaded[$child_textdomain] = is_child_theme() ? load_child_theme_textdomain( $child_textdomain ) : false;
+		$exmachina->textdomain_loaded[$child_textdomain] = is_child_theme() ? load_child_theme_textdomain( $child_textdomain ) : false;
 
 		/* Get the user's locale. */
 		$locale = get_locale();
@@ -211,7 +211,7 @@ class Hybrid {
 
 		/* Remove support for the core SEO component if the WP SEO plugin is installed. */
 		if ( defined( 'WPSEO_VERSION' ) )
-			remove_theme_support( 'hybrid-core-seo' );
+			remove_theme_support( 'exmachina-core-seo' );
 
 		/* Remove support for the the Breadcrumb Trail extension if the plugin is installed. */
 		if ( function_exists( 'breadcrumb_trail' ) )
@@ -243,79 +243,79 @@ class Hybrid {
 	function functions() {
 
 		/* Load the comments functions. */
-		require_once( trailingslashit( HYBRID_FUNCTIONS ) . 'comments.php' );
+		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'comments.php' );
 
 		/* Load the extras functions. */
-		require_once( trailingslashit( HYBRID_FUNCTIONS ) . 'extras.php' );
+		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'extras.php' );
 
 		/* Load image-related functions. */
-		require_once( trailingslashit( HYBRID_FUNCTIONS ) . 'image.php' );
+		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'image.php' );
 
 		/* Load media-related functions. */
-		require_once( trailingslashit( HYBRID_FUNCTIONS ) . 'media.php' );
+		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'media.php' );
 
 		/* Load the metadata functions. */
-		require_once( trailingslashit( HYBRID_FUNCTIONS ) . 'meta.php' );
+		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'meta.php' );
 
 		/* Load the template functions. */
-		require_once( trailingslashit( HYBRID_FUNCTIONS ) . 'template.php' );
+		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'template.php' );
 
 		/* Load the template tags functions. */
-		require_once( trailingslashit( HYBRID_FUNCTIONS ) . 'template-tags.php' );
+		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'template-tags.php' );
 
 		/* Load the utility functions. */
-		require_once( trailingslashit( HYBRID_FUNCTIONS ) . 'utility.php' );
+		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'utility.php' );
 
 		/* Load the wish-list functions. */
-		require_once( trailingslashit( HYBRID_FUNCTIONS ) . 'wish-list.php' );
+		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'wish-list.php' );
 
 		/* Load the theme settings functions if supported. */
-		require_if_theme_supports( 'hybrid-core-theme-settings', trailingslashit( HYBRID_FUNCTIONS ) . 'settings.php' );
+		require_if_theme_supports( 'exmachina-core-theme-settings', trailingslashit( EXMACHINA_FUNCTIONS ) . 'settings.php' );
 
 		/* Load the customizer functions if theme settings are supported. */
-		require_if_theme_supports( 'hybrid-core-theme-settings', trailingslashit( HYBRID_FUNCTIONS ) . 'customize.php' );
+		require_if_theme_supports( 'exmachina-core-theme-settings', trailingslashit( EXMACHINA_FUNCTIONS ) . 'customize.php' );
 
 		/* Load the menus functions if supported. */
-		require_if_theme_supports( 'hybrid-core-menus', trailingslashit( HYBRID_FUNCTIONS ) . 'menus.php' );
+		require_if_theme_supports( 'exmachina-core-menus', trailingslashit( EXMACHINA_FUNCTIONS ) . 'menus.php' );
 
 		/* Load the core SEO component if supported. */
-		require_if_theme_supports( 'hybrid-core-seo', trailingslashit( HYBRID_FUNCTIONS ) . 'core-seo.php' );
+		require_if_theme_supports( 'exmachina-core-seo', trailingslashit( EXMACHINA_FUNCTIONS ) . 'core-seo.php' );
 
 		/* Load the shortcodes if supported. */
-		require_if_theme_supports( 'hybrid-core-shortcodes', trailingslashit( HYBRID_FUNCTIONS ) . 'shortcodes.php' );
+		require_if_theme_supports( 'exmachina-core-shortcodes', trailingslashit( EXMACHINA_FUNCTIONS ) . 'shortcodes.php' );
 
 		/* Load the sidebars if supported. */
-		require_if_theme_supports( 'hybrid-core-sidebars', trailingslashit( HYBRID_FUNCTIONS ) . 'sidebars.php' );
+		require_if_theme_supports( 'exmachina-core-sidebars', trailingslashit( EXMACHINA_FUNCTIONS ) . 'sidebars.php' );
 
 		/* Load the widgets if supported. */
-		require_if_theme_supports( 'hybrid-core-widgets', trailingslashit( HYBRID_FUNCTIONS ) . 'widgets.php' );
+		require_if_theme_supports( 'exmachina-core-widgets', trailingslashit( EXMACHINA_FUNCTIONS ) . 'widgets.php' );
 
 		/* Load the template hierarchy if supported. */
-		require_if_theme_supports( 'hybrid-core-template-hierarchy', trailingslashit( HYBRID_FUNCTIONS ) . 'template-hierarchy.php' );
+		require_if_theme_supports( 'exmachina-core-template-hierarchy', trailingslashit( EXMACHINA_FUNCTIONS ) . 'template-hierarchy.php' );
 
 		/* Load the styles if supported. */
-		require_if_theme_supports( 'hybrid-core-styles', trailingslashit( HYBRID_FUNCTIONS ) . 'styles.php' );
+		require_if_theme_supports( 'exmachina-core-styles', trailingslashit( EXMACHINA_FUNCTIONS ) . 'styles.php' );
 
 		/* Load the scripts if supported. */
-		require_if_theme_supports( 'hybrid-core-scripts', trailingslashit( HYBRID_FUNCTIONS ) . 'scripts.php' );
+		require_if_theme_supports( 'exmachina-core-scripts', trailingslashit( EXMACHINA_FUNCTIONS ) . 'scripts.php' );
 
 		/* Load the media grabber script if supported. */
-		require_if_theme_supports( 'hybrid-core-media-grabber', trailingslashit( HYBRID_CLASSES ) . 'hybrid-media-grabber.php' );
+		require_if_theme_supports( 'exmachina-core-media-grabber', trailingslashit( EXMACHINA_CLASSES ) . 'media-grabber.php' );
 
 		/* Load the post format functionality if post formats are supported. */
-		require_if_theme_supports( 'post-formats', trailingslashit( HYBRID_FUNCTIONS ) . 'post-formats.php' );
+		require_if_theme_supports( 'post-formats', trailingslashit( EXMACHINA_FUNCTIONS ) . 'post-formats.php' );
 
 		/* Load the deprecated functions if supported. */
-		require_if_theme_supports( 'hybrid-core-deprecated', trailingslashit( HYBRID_FUNCTIONS ) . 'deprecated.php' );
+		require_if_theme_supports( 'exmachina-core-deprecated', trailingslashit( EXMACHINA_FUNCTIONS ) . 'deprecated.php' );
 	}
 
 	/**
    * Load Structure
    *
-   * Loads the framework markup structure. The 'hybrid_pre_structure' action
+   * Loads the framework markup structure. The 'exmachina_pre_structure' action
    * hook is called before any of the structure files are required.
    *
-   * If a parent or child theme defines 'HYBRID_LOAD_STRUCTURE' as false
+   * If a parent or child theme defines 'EXMACHINA_LOAD_STRUCTURE' as false
    * before requring this engine.php file, then this function will abort before
    * any structure files are loaded.
    *
@@ -323,46 +323,46 @@ class Hybrid {
    */
   function structure() {
 
-    /* Triggers the 'hybrid_pre_structure' action hook. */
-    do_action( 'hybrid_pre_structure' );
+    /* Triggers the 'exmachina_pre_structure' action hook. */
+    do_action( 'exmachina_pre_structure' );
 
-    /* Short circuits the framework if 'HYBRID_LOAD_FRAMEWORK' is defined as false. */
-    if ( defined( 'HYBRID_LOAD_FRAMEWORK' ) && HYBRID_LOAD_FRAMEWORK === false )
+    /* Short circuits the framework if 'EXMACHINA_LOAD_FRAMEWORK' is defined as false. */
+    if ( defined( 'EXMACHINA_LOAD_FRAMEWORK' ) && EXMACHINA_LOAD_FRAMEWORK === false )
       return;
 
-    /* Short circuits the framework if 'HYBRID_LOAD_STRUCTURE' is defined as false. */
-    if ( defined( 'HYBRID_LOAD_STRUCTURE' ) && HYBRID_LOAD_STRUCTURE === false )
+    /* Short circuits the framework if 'EXMACHINA_LOAD_STRUCTURE' is defined as false. */
+    if ( defined( 'EXMACHINA_LOAD_STRUCTURE' ) && EXMACHINA_LOAD_STRUCTURE === false )
       return;
 
     /* Load the archive structure template. */
-    require_once( trailingslashit( HYBRID_STRUCTURE ) . 'archive.php' );
+    require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'archive.php' );
 
     /* Load the comments structure template. */
-    require_once( trailingslashit( HYBRID_STRUCTURE ) . 'comments.php' );
+    require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'comments.php' );
 
     /* Load the footer structure template. */
-    require_once( trailingslashit( HYBRID_STRUCTURE ) . 'footer.php' );
+    require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'footer.php' );
 
     /* Load the header structure template. */
-    require_once( trailingslashit( HYBRID_STRUCTURE ) . 'header.php' );
+    require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'header.php' );
 
     /* Load the layout structure template. */
-    require_once( trailingslashit( HYBRID_STRUCTURE ) . 'layout.php' );
+    require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'layout.php' );
 
     /* Load the loops structure template. */
-    require_once( trailingslashit( HYBRID_STRUCTURE ) . 'loops.php' );
+    require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'loops.php' );
 
     /* Load the menu structure template. */
-    require_once( trailingslashit( HYBRID_STRUCTURE ) . 'menu.php' );
+    require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'menu.php' );
 
     /* Load the post structure template. */
-    require_once( trailingslashit( HYBRID_STRUCTURE ) . 'post.php' );
+    require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'post.php' );
 
     /* Load the search structure template. */
-    require_once( trailingslashit( HYBRID_STRUCTURE ) . 'search.php' );
+    require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'search.php' );
 
     /* Load the sidebar structure template. */
-    require_once( trailingslashit( HYBRID_STRUCTURE ) . 'sidebar.php' );
+    require_once( trailingslashit( EXMACHINA_STRUCTURE ) . 'sidebar.php' );
 
   } // end function exmachina_load_structure()
 
@@ -377,85 +377,85 @@ class Hybrid {
 	function extensions() {
 
 		/* Load the Breadcrumb Trail extension if supported. */
-		require_if_theme_supports( 'breadcrumb-trail', trailingslashit( HYBRID_EXTENSIONS ) . 'breadcrumb-trail.php' );
+		require_if_theme_supports( 'breadcrumb-trail', trailingslashit( EXMACHINA_EXTENSIONS ) . 'breadcrumb-trail.php' );
 
 		/* Load the Cleaner Gallery extension if supported. */
-		require_if_theme_supports( 'cleaner-gallery', trailingslashit( HYBRID_EXTENSIONS ) . 'cleaner-gallery.php' );
+		require_if_theme_supports( 'cleaner-gallery', trailingslashit( EXMACHINA_EXTENSIONS ) . 'cleaner-gallery.php' );
 
 		/* Load the Get the Image extension if supported. */
-		require_if_theme_supports( 'get-the-image', trailingslashit( HYBRID_EXTENSIONS ) . 'get-the-image.php' );
+		require_if_theme_supports( 'get-the-image', trailingslashit( EXMACHINA_EXTENSIONS ) . 'get-the-image.php' );
 
 		/* Load the Cleaner Caption extension if supported. */
-		require_if_theme_supports( 'cleaner-caption', trailingslashit( HYBRID_EXTENSIONS ) . 'cleaner-caption.php' );
+		require_if_theme_supports( 'cleaner-caption', trailingslashit( EXMACHINA_EXTENSIONS ) . 'cleaner-caption.php' );
 
 		/* Load the Custom Field Series extension if supported. */
-		require_if_theme_supports( 'custom-field-series', trailingslashit( HYBRID_EXTENSIONS ) . 'custom-field-series.php' );
+		require_if_theme_supports( 'custom-field-series', trailingslashit( EXMACHINA_EXTENSIONS ) . 'custom-field-series.php' );
 
 		/* Load the Loop Pagination extension if supported. */
-		require_if_theme_supports( 'loop-pagination', trailingslashit( HYBRID_EXTENSIONS ) . 'loop-pagination.php' );
+		require_if_theme_supports( 'loop-pagination', trailingslashit( EXMACHINA_EXTENSIONS ) . 'loop-pagination.php' );
 
 		/* Load the Entry Views extension if supported. */
-		require_if_theme_supports( 'entry-views', trailingslashit( HYBRID_EXTENSIONS ) . 'entry-views.php' );
+		require_if_theme_supports( 'entry-views', trailingslashit( EXMACHINA_EXTENSIONS ) . 'entry-views.php' );
 
 		/* Load the Theme Layouts extension if supported. */
-		require_if_theme_supports( 'theme-layouts', trailingslashit( HYBRID_EXTENSIONS ) . 'theme-layouts.php' );
+		require_if_theme_supports( 'theme-layouts', trailingslashit( EXMACHINA_EXTENSIONS ) . 'theme-layouts.php' );
 
 		/* Load the Post Stylesheets extension if supported. */
-		require_if_theme_supports( 'post-stylesheets', trailingslashit( HYBRID_EXTENSIONS ) . 'post-stylesheets.php' );
+		require_if_theme_supports( 'post-stylesheets', trailingslashit( EXMACHINA_EXTENSIONS ) . 'post-stylesheets.php' );
 
 		/* Load the Featured Header extension if supported. */
-		require_if_theme_supports( 'featured-header', trailingslashit( HYBRID_EXTENSIONS ) . 'featured-header.php' );
+		require_if_theme_supports( 'featured-header', trailingslashit( EXMACHINA_EXTENSIONS ) . 'featured-header.php' );
 
 		/* Load the Random Custom Background extension if supported. */
-		require_if_theme_supports( 'random-custom-background', trailingslashit( HYBRID_EXTENSIONS ) . 'random-custom-background.php' );
+		require_if_theme_supports( 'random-custom-background', trailingslashit( EXMACHINA_EXTENSIONS ) . 'random-custom-background.php' );
 
 		/* Load the Color Palette extension if supported. */
-		require_if_theme_supports( 'color-palette', trailingslashit( HYBRID_EXTENSIONS ) . 'color-palette.php' );
+		require_if_theme_supports( 'color-palette', trailingslashit( EXMACHINA_EXTENSIONS ) . 'color-palette.php' );
 
 		/* Load the Theme Fonts extension if supported. */
-		require_if_theme_supports( 'theme-fonts', trailingslashit( HYBRID_EXTENSIONS ) . 'theme-fonts.php' );
+		require_if_theme_supports( 'theme-fonts', trailingslashit( EXMACHINA_EXTENSIONS ) . 'theme-fonts.php' );
 
 		/* Load the Responsive Viewport extension if supported. */
-		require_if_theme_supports( 'responsive-viewport', trailingslashit( HYBRID_EXTENSIONS ) . 'responsive-viewport.php' );
+		require_if_theme_supports( 'responsive-viewport', trailingslashit( EXMACHINA_EXTENSIONS ) . 'responsive-viewport.php' );
 
 		/* Load the Structural Wraps extension if supported. */
-		require_if_theme_supports( 'structural-wraps', trailingslashit( HYBRID_EXTENSIONS ) . 'structural-wraps.php' );
+		require_if_theme_supports( 'structural-wraps', trailingslashit( EXMACHINA_EXTENSIONS ) . 'structural-wraps.php' );
 
 		/* Load the Footer Widgets extension if supported. */
-		require_if_theme_supports( 'footer-widgets', trailingslashit( HYBRID_EXTENSIONS ) . 'footer-widgets.php' );
+		require_if_theme_supports( 'footer-widgets', trailingslashit( EXMACHINA_EXTENSIONS ) . 'footer-widgets.php' );
 
 		/* Load the Custom CSS extension if supported. */
-    require_if_theme_supports( 'custom-css', trailingslashit( HYBRID_EXTENSIONS ) . 'custom-css.php' );
+    require_if_theme_supports( 'custom-css', trailingslashit( EXMACHINA_EXTENSIONS ) . 'custom-css.php' );
 
     /* Load the Custom Logo extension if supported. */
-    require_if_theme_supports( 'custom-logo', trailingslashit( HYBRID_EXTENSIONS ) . 'custom-logo.php' );
+    require_if_theme_supports( 'custom-logo', trailingslashit( EXMACHINA_EXTENSIONS ) . 'custom-logo.php' );
 
     /* Load the Custom Favicon extension if supported. */
-    require_if_theme_supports( 'custom-favicon', trailingslashit( HYBRID_EXTENSIONS ) . 'custom-favicon.php' );
+    require_if_theme_supports( 'custom-favicon', trailingslashit( EXMACHINA_EXTENSIONS ) . 'custom-favicon.php' );
 
     /* Load the Sliding Panel extension if supported. */
-    require_if_theme_supports( 'sliding-panel', trailingslashit( HYBRID_EXTENSIONS ) . 'sliding-panel.php' );
+    require_if_theme_supports( 'sliding-panel', trailingslashit( EXMACHINA_EXTENSIONS ) . 'sliding-panel.php' );
 
     /* Load the Template Tags Shortcodes extension if supported. */
-    require_if_theme_supports( 'template-tags', trailingslashit( HYBRID_EXTENSIONS ) . 'template-tag-shortcodes.php' );
+    require_if_theme_supports( 'template-tags', trailingslashit( EXMACHINA_EXTENSIONS ) . 'template-tag-shortcodes.php' );
 
     /* Load the Custom Snippets extension if supported. */
-    require_if_theme_supports( 'custom-snippets', trailingslashit( HYBRID_EXTENSIONS ) . 'custom-snippets.php' );
+    require_if_theme_supports( 'custom-snippets', trailingslashit( EXMACHINA_EXTENSIONS ) . 'custom-snippets.php' );
 
     /* Load the Cleaner Archives extension if supported. */
-    require_if_theme_supports( 'cleaner-archives', trailingslashit( HYBRID_EXTENSIONS ) . 'cleaner-archives.php' );
+    require_if_theme_supports( 'cleaner-archives', trailingslashit( EXMACHINA_EXTENSIONS ) . 'cleaner-archives.php' );
 
     /* Load the Grid Columns extension if supported. */
-    require_if_theme_supports( 'grid-columns', trailingslashit( HYBRID_EXTENSIONS ) . 'grid-columns.php' );
+    require_if_theme_supports( 'grid-columns', trailingslashit( EXMACHINA_EXTENSIONS ) . 'grid-columns.php' );
 
     /* Load the Custom Header Extended extension if supported. */
-    require_if_theme_supports( 'custom-header-extended', trailingslashit( HYBRID_EXTENSIONS ) . 'custom-header-extended.php' );
+    require_if_theme_supports( 'custom-header-extended', trailingslashit( EXMACHINA_EXTENSIONS ) . 'custom-header-extended.php' );
 
     /* Load the Custom Background Extended extension if supported. */
-    require_if_theme_supports( 'custom-background-extended', trailingslashit( HYBRID_EXTENSIONS ) . 'custom-background-extended.php' );
+    require_if_theme_supports( 'custom-background-extended', trailingslashit( EXMACHINA_EXTENSIONS ) . 'custom-background-extended.php' );
 
     /* Load the Custom Classes extension if supported. */
-    require_if_theme_supports( 'custom-classes', trailingslashit( HYBRID_EXTENSIONS ) . 'custom-classes.php' );
+    require_if_theme_supports( 'custom-classes', trailingslashit( EXMACHINA_EXTENSIONS ) . 'custom-classes.php' );
 	}
 
 	/**
@@ -469,10 +469,10 @@ class Hybrid {
 		if ( is_admin() ) {
 
 			/* Load the main admin file. */
-			require_once( trailingslashit( HYBRID_ADMIN ) . 'admin.php' );
+			require_once( trailingslashit( EXMACHINA_ADMIN ) . 'admin.php' );
 
 			/* Load the theme settings feature if supported. */
-			require_if_theme_supports( 'hybrid-core-theme-settings', trailingslashit( HYBRID_ADMIN ) . 'theme-settings.php' );
+			require_if_theme_supports( 'exmachina-core-theme-settings', trailingslashit( EXMACHINA_ADMIN ) . 'theme-settings.php' );
 		}
 	}
 
@@ -492,7 +492,7 @@ class Hybrid {
 		add_action( 'wp_head', 'wp_generator', 1 );
 
 		/* Add the theme info to the header (lets theme developers give better support). */
-		add_action( 'wp_head', 'hybrid_meta_template', 1 );
+		add_action( 'wp_head', 'exmachina_meta_template', 1 );
 
 		/* Make text widgets and term descriptions shortcode aware. */
 		add_filter( 'widget_text', 'do_shortcode' );

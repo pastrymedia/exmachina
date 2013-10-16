@@ -14,7 +14,7 @@
  * @param integer $index Optional. Index of which image to return from a post. Default is 0
  * @return integer|boolean Returns image ID, or false if image with given index does not exist
  */
-function hybrid_get_image_id( $index = 0 ) {
+function exmachina_get_image_id( $index = 0 ) {
 
 	global $post;
 
@@ -49,17 +49,17 @@ function hybrid_get_image_id( $index = 0 ) {
  *
  * @since 0.1.0
  *
- * @uses hybrid_get_image_id()
+ * @uses exmachina_get_image_id()
  *
  * @global WP_Post $post Post object.
  * @param array|string $args Optional. Image query arguments. Default is empty array
  * @return string|boolean Returns img element HTML, URL of image, or false
  */
-function hybrid_get_image( $args = array() ) {
+function exmachina_get_image( $args = array() ) {
 
 	global $post;
 
-	$defaults = apply_filters( 'hybrid_get_image_default_args', array(
+	$defaults = apply_filters( 'exmachina_get_image_default_args', array(
 		'format'   => 'html',
 		'size'     => 'full',
 		'num'      => 0,
@@ -71,7 +71,7 @@ function hybrid_get_image( $args = array() ) {
 	$args = wp_parse_args( $args, $defaults );
 
 	//* Allow child theme to short-circuit this function
-	$pre = apply_filters( 'hybrid_pre_get_image', false, $args, $post );
+	$pre = apply_filters( 'exmachina_pre_get_image', false, $args, $post );
 	if ( false !== $pre )
 		return $pre;
 
@@ -83,7 +83,7 @@ function hybrid_get_image( $args = array() ) {
 	}
 	//* Else if first-attached, pull the first (default) image attachment
 	elseif ( 'first-attached' == $args['fallback'] ) {
-		$id = hybrid_get_image_id( $args['num'] );
+		$id = exmachina_get_image_id( $args['num'] );
 		$html = wp_get_attachment_image( $id, $args['size'], false, $args['attr'] );
 		list( $url ) = wp_get_attachment_image_src( $id, $args['size'], false, $args['attr'] );
 	}
@@ -117,7 +117,7 @@ function hybrid_get_image( $args = array() ) {
 //		$output = false;
 
 	//* Return data, filtered
-	return apply_filters( 'hybrid_get_image', $output, $args, $id, $html, $url, $src );
+	return apply_filters( 'exmachina_get_image', $output, $args, $id, $html, $url, $src );
 }
 
 /**
@@ -131,14 +131,14 @@ function hybrid_get_image( $args = array() ) {
  *
  * @since 0.1.0
  *
- * @uses hybrid_get_image()
+ * @uses exmachina_get_image()
  *
  * @param array|string $args Optional. Image query arguments. Default is empty array
  * @return false Returns false if URL is empty
  */
-function hybrid_image( $args = array() ) {
+function exmachina_image( $args = array() ) {
 
-	$image = hybrid_get_image( $args );
+	$image = exmachina_get_image( $args );
 
 	if ( $image )
 		echo $image;
@@ -158,7 +158,7 @@ function hybrid_image( $args = array() ) {
  * @global array $_wp_additional_image_sizes Additionally registered image sizes
  * @return array Two-dimensional, with width, height and crop sub-keys
  */
-function hybrid_get_additional_image_sizes() {
+function exmachina_get_additional_image_sizes() {
 
 	global $_wp_additional_image_sizes;
 
@@ -180,11 +180,11 @@ function hybrid_get_additional_image_sizes() {
  *
  * @since 1.0.2
  *
- * @uses hybrid_get_additional_image_sizes()
+ * @uses exmachina_get_additional_image_sizes()
  *
  * @return array Two-dimensional, with width, height and crop sub-keys
  */
-function hybrid_get_image_sizes() {
+function exmachina_get_image_sizes() {
 
 	$builtin_sizes = array(
 		'large'		=> array(
@@ -202,7 +202,7 @@ function hybrid_get_image_sizes() {
 		),
 	);
 
-	$additional_sizes = hybrid_get_additional_image_sizes();
+	$additional_sizes = exmachina_get_additional_image_sizes();
 
 	return array_merge( $builtin_sizes, $additional_sizes );
 

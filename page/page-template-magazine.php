@@ -102,13 +102,13 @@ get_header(); // Loads the header.php template. ?>
 
 				<?php while ( $loop->have_posts() ) : $loop->the_post(); $do_not_duplicate[] = get_the_ID();  ?>
 
-					<article id="post-<?php the_ID(); ?>" class="<?php hybrid_entry_class(); ?>">
+					<article id="post-<?php the_ID(); ?>" class="<?php exmachina_entry_class(); ?>">
 
 							<?php if ( current_theme_supports( 'get-the-image' ) ) get_the_image( array( 'meta_key' => 'Thumbnail', 'size' => 'thumbnail' ) ); ?>
 
 							<header class="entry-header">
 								<?php echo apply_atomic_shortcode( 'entry_title', '[entry-title tag="h2"]' ); ?>
-								<?php echo apply_atomic_shortcode( 'entry_byline', '<div class="entry-byline">' . __( 'Published on [entry-published] [entry-edit-link before=" | "]', 'hybrid-core' ) . '</div>' ); ?>
+								<?php echo apply_atomic_shortcode( 'entry_byline', '<div class="entry-byline">' . __( 'Published on [entry-published] [entry-edit-link before=" | "]', 'exmachina-core' ) . '</div>' ); ?>
 							</header><!-- .entry-header -->
 
 							<div class="entry-summary">
@@ -147,8 +147,8 @@ get_header(); // Loads the header.php template. ?>
 			<div class="gallery">
 
 				<h2 class="gallery-title">
-					<?php _e( 'Latest Images', 'hybrid-core' ); ?>
-					<a class="post-format-link" href="<?php echo get_post_format_link( 'image' ); ?>"><?php _e( 'View Archive &rarr;', 'hybrid-core' ); ?></a>
+					<?php _e( 'Latest Images', 'exmachina-core' ); ?>
+					<a class="post-format-link" href="<?php echo get_post_format_link( 'image' ); ?>"><?php _e( 'View Archive &rarr;', 'exmachina-core' ); ?></a>
 				</h2>
 
 				<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
@@ -200,8 +200,8 @@ get_header(); // Loads the header.php template. ?>
 			<div class="gallery">
 
 				<h2 class="gallery-title">
-					<?php _e( 'Latest Galleries', 'hybrid-core' ); ?>
-					<a class="post-format-link" href="<?php echo get_post_format_link( 'gallery' ); ?>"><?php _e( 'View Archive &rarr;', 'hybrid-core' ); ?></a>
+					<?php _e( 'Latest Galleries', 'exmachina-core' ); ?>
+					<a class="post-format-link" href="<?php echo get_post_format_link( 'gallery' ); ?>"><?php _e( 'View Archive &rarr;', 'exmachina-core' ); ?></a>
 				</h2>
 
 				<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>

@@ -15,7 +15,7 @@
  *
  * @since 0.1.0
  */
-class Hybrid_Widget_Newsletter extends WP_Widget {
+class ExMachina_Widget_Newsletter extends WP_Widget {
 
 	/**
 	 * Set up the widget's unique name, ID, class, description, and other options.
@@ -27,7 +27,7 @@ class Hybrid_Widget_Newsletter extends WP_Widget {
 		/* Set up the widget options. */
 		$widget_options = array(
 			'classname' => 'newsletter',
-			'description' => __( 'Displays a subscription form for your Google/Feedburner account.', 'hybrid-core' )
+			'description' => __( 'Displays a subscription form for your Google/Feedburner account.', 'exmachina-core' )
 		);
 
 		/* Set up the widget control options. */
@@ -38,7 +38,7 @@ class Hybrid_Widget_Newsletter extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		$this->WP_Widget( 'newsletter', __( 'Newsletter', 'hybrid-core' ), $widget_options, $control_options );
+		$this->WP_Widget( 'newsletter', __( 'Newsletter', 'exmachina-core' ), $widget_options, $control_options );
 	}
 
 	/**
@@ -95,28 +95,28 @@ class Hybrid_Widget_Newsletter extends WP_Widget {
 
 		//Defaults
 		$defaults = array(
-			'title' => __( 'Newsletter', 'hybrid-core' ),
-			'input_text' => __( 'you@site.com', 'hybrid-core' ),
-			'submit_text' => __( 'Subscribe', 'hybrid-core' ),
+			'title' => __( 'Newsletter', 'exmachina-core' ),
+			'input_text' => __( 'you@site.com', 'exmachina-core' ),
+			'submit_text' => __( 'Subscribe', 'exmachina-core' ),
 			'id' => ''
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
-		<div class="hybrid-widget-controls columns-1">
+		<div class="exmachina-widget-controls columns-1">
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'exmachina-core' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'id' ); ?>"><?php _e( 'Google/Feedburner ID:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'id' ); ?>"><?php _e( 'Google/Feedburner ID:', 'exmachina-core' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'id' ); ?>" name="<?php echo $this->get_field_name( 'id' ); ?>" value="<?php echo esc_attr( $instance['id'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'input_text' ); ?>"><?php _e( 'Input Text:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'input_text' ); ?>"><?php _e( 'Input Text:', 'exmachina-core' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'input_text' ); ?>" name="<?php echo $this->get_field_name( 'input_text' ); ?>" value="<?php echo esc_attr( $instance['input_text'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'submit_text' ); ?>"><?php _e( 'Submit Text:', 'hybrid-core' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'submit_text' ); ?>"><?php _e( 'Submit Text:', 'exmachina-core' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'submit_text' ); ?>" name="<?php echo $this->get_field_name( 'submit_text' ); ?>" value="<?php echo esc_attr( $instance['submit_text'] ); ?>" />
 		</p>
 		</div>
