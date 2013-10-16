@@ -1,7 +1,7 @@
 <?php
 /**
- * Functions for handling JavaScript in the framework.  Themes can add support for the 
- * 'hybrid-core-scripts' feature to allow the framework to handle loading the stylesheets into 
+ * Functions for handling JavaScript in the framework.  Themes can add support for the
+ * 'hybrid-core-scripts' feature to allow the framework to handle loading the stylesheets into
  * the theme header or footer at an appropriate time.
  *
  * @package    HybridCore
@@ -20,7 +20,7 @@ add_action( 'wp_enqueue_scripts', 'hybrid_enqueue_scripts' );
 
 /**
  * Registers JavaScript files for the framework.  This function merely registers scripts with WordPress using
- * the wp_register_script() function.  It does not load any script files on the site.  If a theme wants to register 
+ * the wp_register_script() function.  It does not load any script files on the site.  If a theme wants to register
  * its own custom scripts, it should do so on the 'wp_enqueue_scripts' hook.
  *
  * @since 1.2.0
@@ -46,6 +46,10 @@ function hybrid_register_scripts() {
 	/* Register the 'mobile-toggle' script if the current theme supports 'mobile-toggle'. */
 	if ( isset( $supports[0] ) && in_array( 'mobile-toggle', $supports[0] ) )
 		wp_register_script( 'mobile-toggle', esc_url( trailingslashit( HYBRID_JS ) . "mobile-toggle{$suffix}.js" ), array( 'jquery' ), '20130528', true );
+
+	/* Register the 'mobile-toggle' script if the current theme supports 'mobile-toggle'. */
+	if ( isset( $supports[0] ) && in_array( 'fitvids', $supports[0] ) )
+		wp_register_script( 'fitvids', esc_url( trailingslashit( HYBRID_JS ) . "fitvids{$suffix}.js" ), array( 'jquery' ), '20130528', true );
 }
 
 /**
@@ -75,6 +79,10 @@ function hybrid_enqueue_scripts() {
 	/* Load the 'mobile-toggle' script if the current theme supports 'mobile-toggle'. */
 	if ( isset( $supports[0] ) && in_array( 'mobile-toggle', $supports[0] ) )
 		wp_enqueue_script( 'mobile-toggle' );
+
+	/* Load the 'mobile-toggle' script if the current theme supports 'mobile-toggle'. */
+	if ( !is_admin() && isset( $supports[0] ) && in_array( 'fitvids', $supports[0] ) )
+		wp_enqueue_script( 'fitvids' );
 }
 
 ?>

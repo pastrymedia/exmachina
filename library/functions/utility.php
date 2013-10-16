@@ -23,7 +23,7 @@ add_filter( 'the_title', 'hybrid_untitled_post' );
 /**
  * This function is for adding extra support for features not default to the core post types.
  * Excerpts are added to the 'page' post type.  Comments and trackbacks are added for the
- * 'attachment' post type.  Technically, these are already used for attachments in core, but 
+ * 'attachment' post type.  Technically, these are already used for attachments in core, but
  * they're not registered.
  *
  * @since 0.8.0
@@ -41,8 +41,8 @@ function hybrid_add_post_type_support() {
 }
 
 /**
- * Creates custom theme headers.  This is the information shown in the header block of a theme's 'style.css' 
- * file.  Themes are not required to use this information, but the framework does make use of the data for 
+ * Creates custom theme headers.  This is the information shown in the header block of a theme's 'style.css'
+ * file.  Themes are not required to use this information, but the framework does make use of the data for
  * displaying additional information to the theme user.
  *
  * @since 1.2.0
@@ -78,8 +78,8 @@ function hybrid_extra_theme_headers( $headers ) {
 }
 
 /**
- * Generates the relevant template info.  Adds template meta with theme version.  Uses the theme 
- * name and version from style.css.  In 0.6, added the hybrid_meta_template 
+ * Generates the relevant template info.  Adds template meta with theme version.  Uses the theme
+ * name and version from style.css.  In 0.6, added the hybrid_meta_template
  * filter hook.
  *
  * @since 0.4.0
@@ -93,8 +93,8 @@ function hybrid_meta_template() {
 }
 
 /**
- * Dynamic element to wrap the site title in.  If it is the front page, wrap it in an <h1> element.  One other 
- * pages, wrap it in a <div> element. 
+ * Dynamic element to wrap the site title in.  If it is the front page, wrap it in an <h1> element.  One other
+ * pages, wrap it in a <div> element.
  *
  * @since 0.1.0
  * @access public
@@ -114,7 +114,7 @@ function hybrid_site_title() {
 }
 
 /**
- * Dynamic element to wrap the site description in.  If it is the front page, wrap it in an <h2> element.  
+ * Dynamic element to wrap the site description in.  If it is the front page, wrap it in an <h2> element.
  * On other pages, wrap it in a <div> element.
  *
  * @since 0.1.0
@@ -149,7 +149,7 @@ function hybrid_footer_content() {
 }
 
 /**
- * Checks if a post of any post type has a custom template.  This is the equivalent of WordPress' 
+ * Checks if a post of any post type has a custom template.  This is the equivalent of WordPress'
  * is_page_template() function with the exception that it works for all post types.
  *
  * @since 1.2.0
@@ -182,8 +182,8 @@ function hybrid_has_post_template( $template = '' ) {
 }
 
 /**
- * The WordPress.org theme review requires that a link be provided to the single post page for untitled 
- * posts.  This is a filter on 'the_title' so that an '(Untitled)' title appears in that scenario, allowing 
+ * The WordPress.org theme review requires that a link be provided to the single post page for untitled
+ * posts.  This is a filter on 'the_title' so that an '(Untitled)' title appears in that scenario, allowing
  * for the normal method to work.
  *
  * @since  1.6.0
@@ -197,6 +197,19 @@ function hybrid_untitled_post( $title ) {
 		$title = __( '(Untitled)', 'hybrid-core' );
 
 	return $title;
+}
+
+/**
+ * Get the version of theme file using theme version.
+ *
+ * @since 0.1.0
+ */
+function hybrid_theme_file_version( $file ){
+	$theme = wp_get_theme( get_template() );
+	if ( file_exists( trailingslashit( get_stylesheet_directory() ) . $file )){
+		$theme = wp_get_theme();
+	}
+	return $theme->get( 'Version' );
 }
 
 ?>

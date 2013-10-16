@@ -1,8 +1,8 @@
 <?php
 /**
- * Functions for making various theme elements context-aware.  Controls things such as the smart 
- * and logical body, post, and comment CSS classes as well as context-based action and filter hooks.  
- * The functions also integrate with WordPress' implementations of body_class, post_class, and 
+ * Functions for making various theme elements context-aware.  Controls things such as the smart
+ * and logical body, post, and comment CSS classes as well as context-based action and filter hooks.
+ * The functions also integrate with WordPress' implementations of body_class, post_class, and
  * comment_class, so your theme won't have any trouble with plugin integration.
  *
  * @package    HybridCore
@@ -14,8 +14,8 @@
  */
 
 /**
- * Hybrid's main contextual function.  This allows code to be used more than once without running 
- * hundreds of conditional checks within the theme.  It returns an array of contexts based on what 
+ * Hybrid's main contextual function.  This allows code to be used more than once without running
+ * hundreds of conditional checks within the theme.  It returns an array of contexts based on what
  * page a visitor is currently viewing on the site.  This function is useful for making dynamic/contextual
  * classes, action and filter hooks, and handling the templating system.
  *
@@ -126,7 +126,7 @@ function hybrid_get_context() {
 }
 
 /**
- * Outputs the attributes for the <body> element.  By default, this is just the 'class' attribute, but 
+ * Outputs the attributes for the <body> element.  By default, this is just the 'class' attribute, but
  * developers can filter this to add other attributes.
  *
  * @since  1.6.0
@@ -167,7 +167,7 @@ function hybrid_body_class( $class = '' ) {
 
 /**
  * Returns classes for the <body> element depending on page context.
- * 
+ *
  * @since  1.6.0
  * @access public
  * @param  string|array $class Additional classes for more control.
@@ -250,7 +250,7 @@ function hybrid_get_body_class( $class = '' ) {
 }
 
 /**
- * Outputs the attributes for the post wrapper.  By default, this is the 'class' and 'id' attributes, 
+ * Outputs the attributes for the post wrapper.  By default, this is the 'class' and 'id' attributes,
  * but developers can filter this to add other attributes.
  *
  * @since  1.6.0
@@ -311,8 +311,8 @@ function hybrid_entry_class( $class = '', $post_id = null ) {
 }
 
 /**
- * Creates a set of classes for each site entry upon display. Each entry is given the class of 
- * 'hentry'. Posts are given category, tag, and author classes. Alternate post classes of odd, 
+ * Creates a set of classes for each site entry upon display. Each entry is given the class of
+ * 'hentry'. Posts are given category, tag, and author classes. Alternate post classes of odd,
  * even, and alt are added.
  *
  * @since  1.6.0
@@ -393,7 +393,7 @@ function hybrid_get_post_class( $class = '', $post_id = null ) {
 }
 
 /**
- * Outputs the attributes for the comment wrapper.  By default, this is the 'class' and 'id' attributes, 
+ * Outputs the attributes for the comment wrapper.  By default, this is the 'class' and 'id' attributes,
  * but developers can filter this to add other attributes.
  *
  * @since  1.6.0
@@ -434,8 +434,8 @@ function hybrid_comment_class( $class = '' ) {
 }
 
 /**
- * Sets a class for each comment. Sets alt, odd/even, and author/user classes. Adds author, user, 
- * and reader classes. Needs more work because WP, by default, assigns even/odd backwards 
+ * Sets a class for each comment. Sets alt, odd/even, and author/user classes. Adds author, user,
+ * and reader classes. Needs more work because WP, by default, assigns even/odd backwards
  * (Odd should come first, even second).
  *
  * @since  1.6.0
@@ -495,7 +495,7 @@ function hybrid_get_comment_class( $class = '' ) {
 }
 
 /**
- * Function for handling what the browser/search engine title should be. Attempts to handle every 
+ * Function for handling what the browser/search engine title should be. Attempts to handle every
  * possible situation WordPress throws at it for the best optimization.
  *
  * @since 0.1.0
@@ -598,5 +598,82 @@ function hybrid_document_title() {
 	/* Print the title to the screen. */
 	echo apply_atomic( 'document_title', esc_attr( $doctitle ) );
 }
+
+
+/**
+ * Advance Get Template by Atomic Context.
+ * An easy to use feature for developer to create context based template file.
+ *
+ * @param $dir	string	template files directory
+ * @param $loop	bool	if it's used in the loop, to give extra template based on post data.
+ * @since 0.1.0
+ */
+function hybrid_get_atomic_template( $dir, $loop = false ) {
+
+	/* array of available templates */
+	$templates = array();
+
+	/* get theme path  */
+	$theme_dir = trailingslashit( THEME_DIR ) . $dir;
+	$child_dir = trailingslashit( CHILD_THEME_DIR ) . $dir;
+
+	if ( is_dir( $child_dir ) || is_dir( $theme_dir ) ) {
+
+		/* index.php in folder are fallback template */
+		$templates[] = "{$dir}/index.php";
+	}
+	else{
+		return ''; // empty string if dir not found
+	}
+
+	/* get current page (atomic) contexts */
+	$contexts = hybrid_get_context();
+
+	/* for each contexts */
+	foreach ( $contexts as $context ){
+
+		/* add context based template */
+		$templates[] = "{$dir}/{$context}.php";
+
+		/* if context is in the loop, ( how to check if it's in the loop? ) */
+		if ( true === $loop ){
+
+			/* file based on post data */
+			$files = array();
+
+			/* current post - post type */
+			$files[] = get_post_type();
+
+			/* if post type support post-formats */
+			if ( post_type_supports( get_post_type(), 'post-formats' ) ){
+				$files[] = get_post_type() . '-format-' . get_post_format();
+			}
+
+			/*
+			 * In blog pages, archives and search result pages, add post type and post format template
+			 * post format in singular pages is not needed, cause it's already added in core context.
+			 */
+			if ( !is_singular() ){
+
+				/* add file based on post type and post format */
+				foreach ( $files as $file ){
+					$templates[] = "{$dir}/{$context}_{$file}.php";
+				}
+
+				/* add sticky post in home page */
+				if ( is_home() && !is_paged() ){
+					if ( is_sticky( get_the_ID() ) ){
+						$templates[] = "{$dir}/_sticky.php";
+					}
+				}
+			}
+		}
+	}
+	/* allow developer to modify template */
+	$templates = apply_filters( 'hybrid_atomic_template',  $templates, $dir, $loop );
+
+	return locate_template( array_reverse( $templates ), true, false );
+}
+
 
 ?>

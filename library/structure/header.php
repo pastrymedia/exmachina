@@ -23,6 +23,25 @@ function hybrid_conditional_styles() {
 
 }
 
+/* Add respond.js and  html5shiv.js for unsupported browsers. */
+add_action( 'wp_head', 'hybrid_respond_html5shiv' );
+/**
+ * Function for help to unsupported browsers understand mediaqueries and html5.
+ * This is added in 'head' using 'wp_head' hook.
+ *
+ * @link: https://github.com/scottjehl/Respond
+ * @link: http://code.google.com/p/html5shiv/
+ * @since 0.1.0
+ */
+function hybrid_respond_html5shiv() {
+  ?><!-- Enables media queries and html5 in some unsupported browsers. -->
+  <!--[if (lt IE 9) & (!IEMobile)]>
+  <script type="text/javascript" src="<?php echo trailingslashit( HYBRID_JS ) . 'respond.min.js' ; ?>"></script>
+  <script type="text/javascript" src="<?php echo trailingslashit( HYBRID_JS ) . 'html5shiv.min.js' ; ?>"></script>
+  <![endif]-->
+<?php
+}
+
 
 add_action( 'wp_head', 'hybrid_custom_header_scripts' );
 /**

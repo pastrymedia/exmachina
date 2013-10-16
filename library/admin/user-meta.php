@@ -38,3 +38,4 @@ function hybrid_contact_methods( $meta ) {
   /* Return the array of contact methods. */
   return $meta;
 }
+
