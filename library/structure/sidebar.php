@@ -125,5 +125,25 @@ function hybrid_theme_layout_one_column( $layout ) {
   return '1c';
 }
 
+/* Disables widget areas. */
+  add_filter( 'sidebars_widgets', 'hybrid_theme_remove_sidebars' );
 
+/**
+ * Removes all widget areas on the No Widgets page/post template.  No widget templates should come in
+ * the form of $post_type-no-widgets.php.  This function also provides backwards compatibility with the old
+ * no-widgets.php template.
+ *
+ * @since 0.9.0
+ */
+function hybrid_theme_remove_sidebars( $sidebars_widgets ) {
+
+  if ( is_singular() ) {
+    $post = get_queried_object();
+
+    if ( hybrid_has_post_template( 'no-widgets.php' ) || hybrid_has_post_template( "{$post->post_type}-no-widgets.php" ) )
+      $sidebars_widgets = array( false );
+  }
+
+  return $sidebars_widgets;
+}
 

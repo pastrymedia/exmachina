@@ -20,11 +20,30 @@ add_filter( 'wp_page_menu_args', 'hybrid_page_menu_args' );
  * Adds custom classes to the array of body classes.
  */
 function hybrid_body_classes( $classes ) {
+	global $is_lynx, $is_gecko, $is_IE, $is_opera, $is_NS4, $is_safari, $is_chrome;
+
 	// Adds a class of group-blog to blogs with more than 1 published author
 	if ( is_multi_author() ) {
 		$classes[] = 'group-blog';
 	}
 
+	/* Browser detection. */
+	$browsers = array( 'gecko' => $is_gecko, 'opera' => $is_opera, 'lynx' => $is_lynx, 'ns4' => $is_NS4, 'safari' => $is_safari, 'chrome' => $is_chrome, 'msie' => $is_IE );
+	foreach ( $browsers as $key => $value ) {
+		if ( $value ) {
+			$classes[] = $key;
+			break;
+		}
+	}
+
+	/* Hybrid theme widgets detection. */
+	foreach ( array( 'primary', 'secondary', 'subsidiary' ) as $sidebar )
+		$classes[] = ( is_active_sidebar( $sidebar ) ) ? "{$sidebar}-active" : "{$sidebar}-inactive";
+
+	if ( in_array( 'primary-inactive', $classes ) && in_array( 'secondary-inactive', $classes ) && in_array( 'subsidiary-inactive', $classes ) )
+		$classes[] = 'no-widgets';
+
+	/* Return the array of classes. */
 	return $classes;
 }
 add_filter( 'body_class', 'hybrid_body_classes' );

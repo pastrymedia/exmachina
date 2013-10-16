@@ -26,6 +26,7 @@ function hybrid_get_breadcrumbs() {
     array(
       'container' => 'nav',
       'separator' => '>',
+      'front_page' => false,
       'labels'    => array(
         'browse' => __( 'You are here:', 'hybrid-base' )
       )

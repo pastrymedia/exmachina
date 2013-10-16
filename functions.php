@@ -105,6 +105,8 @@ function omega_theme_setup() {
   add_theme_support( 'cleaner-archives' );
   add_theme_support( 'grid-columns' );
   add_theme_support( 'custom-classes' );
+  add_theme_support( 'post-stylesheets' );
+  add_theme_support( 'custom-field-series' );
 
   /* Add theme support for WordPress features. */
   add_theme_support( 'automatic-feed-links' );

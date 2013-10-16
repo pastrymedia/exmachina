@@ -110,6 +110,14 @@ function hybrid_get_sidebars() {
 		'after-singular' => array(
 			'name'        => _x( 'After Singular', 'sidebar', 'hybrid-core' ),
 			'description' => __( 'Loaded on singular post (page, attachment, etc.) views before the comments area.', 'hybrid-core' ),
+		),
+		'error-404-template' => array(
+			'name'        => _x( '404 Template', 'sidebar', 'hybrid-core' ),
+			'description' => __( 'Replaces the default 404 error page content.', 'hybrid-core' ),
+		),
+		'widgets-template' => array(
+			'name'        => _x( 'Widgets Template', 'sidebar', 'hybrid-core' ),
+			'description' => __( 'Used as the content of the Widgets page template.', 'hybrid-core' ),
 		)
 	);
 
