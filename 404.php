@@ -38,6 +38,14 @@ get_header(); ?>
 					</div><!-- .widget -->
 					<?php endif; ?>
 
+					<p>
+					<?php _e( "The following is a list of the latest posts from the blog. Maybe it will help you find what you're looking for.", 'unique' ); ?>
+				</p>
+
+					<ul>
+					<?php wp_get_archives( array( 'limit' => 20, 'type' => 'postbypost' ) ); ?>
+				</ul>
+
 					<?php
 					/* translators: %1$s: smiley */
 					$archive_content = '<p>' . sprintf( __( 'Try looking in the monthly archives. %1$s', 'exmachina' ), convert_smilies( ':)' ) ) . '</p>';

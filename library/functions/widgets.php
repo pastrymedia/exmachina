@@ -1,8 +1,8 @@
 <?php
 /**
- * Sets up the core framework's widgets and unregisters some of the default WordPress widgets if the 
+ * Sets up the core framework's widgets and unregisters some of the default WordPress widgets if the
  * theme supports this feature.  The framework's widgets are meant to extend the default WordPress
- * widgets by giving users highly-customizable widget settings.  A theme must register support for the 
+ * widgets by giving users highly-customizable widget settings.  A theme must register support for the
  * 'hybrid-core-widgets' feature to use the framework widgets.
  *
  * @package    HybridCore
@@ -32,32 +32,32 @@ add_action( 'widgets_init', 'hybrid_register_widgets' );
 function hybrid_register_widgets() {
 
 	/* Load the archives widget class. */
-	require_once( trailingslashit( HYBRID_CLASSES ) . 'widget-archives.php' );
+	require_once( trailingslashit( HYBRID_WIDGETS ) . 'widget-archives.php' );
 
 	/* Load the authors widget class. */
-	require_once( trailingslashit( HYBRID_CLASSES ) . 'widget-authors.php' );
+	require_once( trailingslashit( HYBRID_WIDGETS ) . 'widget-authors.php' );
 
 	/* Load the bookmarks widget class. */
 	if ( get_option( 'link_manager_enabled' ) )
-		require_once( trailingslashit( HYBRID_CLASSES ) . 'widget-bookmarks.php' );
+		require_once( trailingslashit( HYBRID_WIDGETS ) . 'widget-bookmarks.php' );
 
 	/* Load the calendar widget class. */
-	require_once( trailingslashit( HYBRID_CLASSES ) . 'widget-calendar.php' );
+	require_once( trailingslashit( HYBRID_WIDGETS ) . 'widget-calendar.php' );
 
 	/* Load the categories widget class. */
-	require_once( trailingslashit( HYBRID_CLASSES ) . 'widget-categories.php' );
+	require_once( trailingslashit( HYBRID_WIDGETS ) . 'widget-categories.php' );
 
 	/* Load the nav menu widget class. */
-	require_once( trailingslashit( HYBRID_CLASSES ) . 'widget-nav-menu.php' );
+	require_once( trailingslashit( HYBRID_WIDGETS ) . 'widget-nav-menu.php' );
 
 	/* Load the pages widget class. */
-	require_once( trailingslashit( HYBRID_CLASSES ) . 'widget-pages.php' );
+	require_once( trailingslashit( HYBRID_WIDGETS ) . 'widget-pages.php' );
 
 	/* Load the search widget class. */
-	require_once( trailingslashit( HYBRID_CLASSES ) . 'widget-search.php' );
+	require_once( trailingslashit( HYBRID_WIDGETS ) . 'widget-search.php' );
 
 	/* Load the tags widget class. */
-	require_once( trailingslashit( HYBRID_CLASSES ) . 'widget-tags.php' );
+	require_once( trailingslashit( HYBRID_WIDGETS ) . 'widget-tags.php' );
 
 	/* Register the archives widget. */
 	register_widget( 'Hybrid_Widget_Archives' );
@@ -86,6 +86,38 @@ function hybrid_register_widgets() {
 
 	/* Register the tags widget. */
 	register_widget( 'Hybrid_Widget_Tags' );
+
+	/* Load and register the image stream widget. */
+	require_once( trailingslashit( HYBRID_WIDGETS ) . 'widget-image-stream.php' );
+	register_widget( 'Hybrid_Widget_Image_Stream' );
+
+	/* Load and register the newsletter widget. */
+	require_once( trailingslashit( HYBRID_WIDGETS ) . 'widget-newsletter.php' );
+	register_widget( 'Hybrid_Widget_Newsletter' );
+
+	/* Load and register the list sub-pages widget. */
+	require_once( trailingslashit( HYBRID_WIDGETS ) . 'widget-list-sub-pages.php' );
+	register_widget( 'Hybrid_Widget_List_Sub_Pages' );
+
+	/* Load and register the user profile widget. */
+	require_once( trailingslashit( HYBRID_WIDGETS ) . 'widget-user-profile.php' );
+	register_widget( 'Hybrid_Widget_User_Profile' );
+
+	/* Load and register the most-commented posts widget. */
+	require_once( trailingslashit( HYBRID_WIDGETS ) . 'widget-most-commented.php' );
+	register_widget( 'Hybrid_Widget_Most_Commented' );
+
+	/* Load and register the image widget. */
+	require_once( trailingslashit( HYBRID_WIDGETS ) . 'widget-image.php' );
+	register_widget( 'Hybrid_Widget_Image' );
+
+	/* Load and register the gallery posts widget. */
+	require_once( trailingslashit( HYBRID_WIDGETS ) . 'widget-gallery-posts.php' );
+	register_widget( 'Hybrid_Widget_Gallery_Posts' );
+
+	/* Load and register the image posts widget. */
+	require_once( trailingslashit( HYBRID_WIDGETS ) . 'widget-image-posts.php' );
+	register_widget( 'Hybrid_Widget_Image_Posts' );
 }
 
 /**

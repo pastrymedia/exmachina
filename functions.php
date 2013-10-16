@@ -62,10 +62,26 @@ function omega_theme_setup() {
     array( 'default' => '2c-l', 'customizer' => true )
   );
 
-  /* Enable custom background support. */
+  /* Add support for a custom header image (logo). */
+  add_theme_support(
+    'custom-header',
+    array(
+      'width'       => 1080,
+      'height'      => 200,
+      'flex-height' => true,
+      'flex-width'  => false,
+      'header-text' => false
+    )
+  );
+
+  /* Add support for a custom background. */
   add_theme_support(
     'custom-background',
-    array( 'default-color' => '333333' )
+    array(
+      'default-color'    => 'f1f1f1',
+      'default-image'    => trailingslashit( get_template_directory_uri() ) . 'images/bg.png',
+      'wp-head-callback' => 'hybrid_custom_background_callback'
+    )
   );
 
   /* Add theme support for framework extensions. */
@@ -92,6 +108,7 @@ function omega_theme_setup() {
 
   /* Add theme support for WordPress features. */
   add_theme_support( 'automatic-feed-links' );
+  add_theme_support( 'post-formats', array( 'aside', 'audio', 'chat', 'image', 'gallery', 'link', 'quote', 'status', 'video' ) );
   add_editor_style();
 
   /* Set content width. */

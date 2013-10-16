@@ -131,6 +131,9 @@ class Hybrid {
 		/* Sets the path to the core framework structure directory. */
 		define( 'HYBRID_STRUCTURE', trailingslashit( HYBRID_DIR ) . 'structure' );
 
+		/* Sets the path to the core framework widgets directory. */
+		define( 'HYBRID_WIDGETS', trailingslashit( HYBRID_DIR ) . 'widgets' );
+
 		/* Sets the path to the core framework languages directory. */
 		define( 'HYBRID_LANGUAGES', trailingslashit( HYBRID_DIR ) . 'languages' );
 

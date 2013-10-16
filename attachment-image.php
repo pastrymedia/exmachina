@@ -32,6 +32,8 @@
 
 				<div class="attachment-meta">
 
+					<?php hybrid_image_info(); ?>
+
 					<?php $gallery = gallery_shortcode( array( 'columns' => 4, 'numberposts' => 8, 'id' => $post->post_parent, 'exclude' => get_the_ID() ) ); ?>
 
 					<?php if ( !empty( $gallery ) ) { ?>

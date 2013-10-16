@@ -56,6 +56,9 @@ function hybrid_add_shortcodes() {
 	add_shortcode( 'comment-edit-link',  'hybrid_comment_edit_link_shortcode' );
 	add_shortcode( 'comment-reply-link', 'hybrid_comment_reply_link_shortcode' );
 	add_shortcode( 'comment-permalink',  'hybrid_comment_permalink_shortcode' );
+
+	/* Add general function shortcodes. */
+	add_shortcode( 'entry-mood', 'hybrid_entry_mood_shortcode' );
 }
 
 /**
@@ -557,6 +560,26 @@ function hybrid_comment_reply_link_shortcode( $attr ) {
 	$attr = shortcode_atts( $defaults, $attr, 'comment-reply-link' );
 
 	return get_comment_reply_link( $attr );
+}
+
+/**
+ * Returns the mood for the current post.  The mood is set by the 'mood' custom field.
+ *
+ * @since 0.1.0
+ * @access public
+ * @param array $attr The shortcode arguments.
+ * @return string
+ */
+function hybrid_entry_mood_shortcode( $attr ) {
+
+	$attr = shortcode_atts( array( 'before' => '', 'after' => '' ), $attr );
+
+	$mood = get_post_meta( get_the_ID(), 'mood', true );
+
+	if ( !empty( $mood ) )
+		$mood = $attr['before'] . convert_smilies( $mood ) . $attr['after'];
+
+	return $mood;
 }
 
 ?>

@@ -17,3 +17,32 @@
     remove_filter( 'comments_template', 'dsq_comments_template' );
     add_filter( 'comments_template', 'dsq_comments_template', 12 ); // You can use any priority higher than '10'
   }
+
+
+/* Add classes to the comments pagination. */
+  add_filter( 'previous_comments_link_attributes', 'hybrid_previous_comments_link_attributes' );
+  add_filter( 'next_comments_link_attributes', 'hybrid_next_comments_link_attributes' );
+
+/**
+ * Adds 'class="prev" to the previous comments link.
+ *
+ * @since 0.1.0
+ * @access public
+ * @param string $attributes The previous comments link attributes.
+ * @return string
+ */
+function hybrid_previous_comments_link_attributes( $attributes ) {
+  return $attributes . ' class="prev"';
+}
+
+/**
+ * Adds 'class="next" to the next comments link.
+ *
+ * @since 0.1.0
+ * @access public
+ * @param string $attributes The next comments link attributes.
+ * @return string
+ */
+function hybrid_next_comments_link_attributes( $attributes ) {
+  return $attributes . ' class="next"';
+}

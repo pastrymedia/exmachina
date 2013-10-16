@@ -81,15 +81,23 @@ function hybrid_get_after_singular_sidebar() {
 
 /**
  * Disables sidebars if viewing a one-column page.
+ *
+ * @since 0.1.0
+ * @access public
+ * @param array $sidebars_widgets A multidimensional array of sidebars and widgets.
+ * @return array $sidebars_widgets
  */
-
 function hybrid_disable_sidebars( $sidebars_widgets ) {
   global $wp_customize;
 
   $customize = ( is_object( $wp_customize ) && $wp_customize->is_preview() ) ? true : false;
 
-  if ( !is_admin() && !$customize && '1c' == get_theme_mod( 'theme_layout' ) )
-    $sidebars_widgets['primary'] = false;
+  if ( current_theme_supports( 'theme-layouts' ) && !is_admin() && !$customize ) {
+    if ( '1c' == get_theme_mod( 'theme_layout' ) ) {
+      $sidebars_widgets['primary'] = false;
+      $sidebars_widgets['secondary'] = false;
+    }
+  }
 
   return $sidebars_widgets;
 }
@@ -99,12 +107,14 @@ function hybrid_disable_sidebars( $sidebars_widgets ) {
  */
 function hybrid_one_column() {
 
-  if ( !is_active_sidebar( 'primary' ) )
+  if ( !is_active_sidebar( 'primary' ) && !is_active_sidebar( 'secondary' ) )
     add_filter( 'theme_mod_theme_layout', 'hybrid_theme_layout_one_column' );
 
   elseif ( is_attachment() && wp_attachment_is_image() && 'default' == get_post_layout( get_queried_object_id() ) )
     add_filter( 'theme_mod_theme_layout', 'hybrid_theme_layout_one_column' );
 
+  elseif ( is_page_template( 'page/page-template-magazine.php' ) )
+    add_filter( 'theme_mod_theme_layout', 'hybrid_theme_layout_one_column' );
 }
 
 
@@ -114,4 +124,6 @@ function hybrid_one_column() {
 function hybrid_theme_layout_one_column( $layout ) {
   return '1c';
 }
+
+
 
