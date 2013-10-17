@@ -1,16 +1,32 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
- * Functions for registering and setting theme settings that tie into the WordPress theme customizer.
- * This file loads additional classes and adds settings to the customizer for the built-in ExMachina Core
- * settings.
+ * ExMachina WordPress Theme Framework Engine
+ * Customize Functions
  *
- * @package    ExMachinaCore
- * @subpackage Functions
- * @author     Justin Tadlock <justin@justintadlock.com>
- * @copyright  Copyright (c) 2008 - 2013, Justin Tadlock
- * @link       http://themeexmachina.com/exmachina-core
- * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * customize.php
+ *
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
+ *
+ * Functions for registering and setting theme settings that tie into the
+ * WordPress theme customizer. This file loads additional classes and adds
+ * settings to the customizer for the built-in ExMachina Core settings.
+ *
+ * @package     ExMachina
+ * @subpackage  Functions
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
  */
+###############################################################################
+# Begin functions
+###############################################################################
 
 /* Load custom control classes. */
 add_action( 'customize_register', 'exmachina_load_customize_controls', 1 );
@@ -27,17 +43,23 @@ add_action( 'wp_ajax_nopriv_exmachina_customize_footer_content', 'exmachina_cust
 add_action( 'customize_preview_init', 'exmachina_customize_preview_js' );
 
 /**
- * Loads framework-specific customize control classes.  Customize control classes extend the WordPress
- * WP_Customize_Control class to create unique classes that can be used within the framework.
+ * Load Customize Controls
  *
- * @since 1.4.0
+ * Loads framework-specific customize control classes. Customize control classes
+ * extend the WordPress WP_Customize_Control class to create unique classes that
+ * can be used within the framework.
+ *
+ * @since 2.5.0
  * @access private
+ *
+ * @return void
  */
 function exmachina_load_customize_controls() {
 
-	/* Loads the textarea customize control class. */
-	require_once( trailingslashit( EXMACHINA_CLASSES ) . 'customize-control-textarea.php' );
-}
+  /* Loads the customize control class. */
+  require_once( trailingslashit( EXMACHINA_CLASSES ) . 'customize-control.php' );
+
+} // end function exmachina_load_customize_controls()
 
 /**
  * Branding Customize Register
@@ -49,7 +71,7 @@ function exmachina_load_customize_controls() {
  * @link http://codex.wordpress.org/Class_Reference/WP_Customize_Manager
  * @link http://codex.wordpress.org/Class_Reference/WP_Customize_Manager/get_setting
  *
- * @since 1.0.7
+ * @since 2.5.0
  * @access private
  *
  * @param  object $wp_customize Theme Customizer object.
@@ -64,11 +86,29 @@ function exmachina_branding_customize_register( $wp_customize ) {
 } // end function exmachina_branding_customize_register()
 
 /**
- * Registers custom sections, settings, and controls for the $wp_customize instance.
+ * Customize Register
  *
- * @since 1.4.0
+ * Registers custom sections, settings, and controls for the $wp_customize
+ * instance.
+ *
+ * @link http://codex.wordpress.org/Theme_Customization_API
+ * @link http://codex.wordpress.org/Class_Reference/WP_Customize_Manager
+ * @link http://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_section
+ * @link http://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
+ * @link http://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_control
+ * @link http://codex.wordpress.org/Function_Reference/get_theme_support
+ * @link http://codex.wordpress.org/Function_Reference/esc_html
+ * @link http://codex.wordpress.org/Function_Reference/is_preview
+ * @link http://codex.wordpress.org/Function_Reference/is_admin
+ *
+ * @uses exmachina_get_prefix()                 Gets the theme prefix.
+ * @uses exmachina_get_default_theme_settings() Gets default theme settings.
+ *
+ * @since 2.5.0
  * @access private
- * @param object $wp_customize
+ *
+ * @param  object $wp_customize Theme Customizer object.
+ * @return void
  */
 function exmachina_customize_register( $wp_customize ) {
 
@@ -124,17 +164,26 @@ function exmachina_customize_register( $wp_customize ) {
 		if ( $wp_customize->is_preview() && !is_admin() )
 			add_action( 'wp_footer', 'exmachina_customize_preview_script', 21 );
 	}
-}
+} // end function exmachina_customize_register()
 
 /**
- * Sanitizes the footer content on the customize screen.  Users with the 'unfiltered_html' cap can post
- * anything.  For other users, wp_filter_post_kses() is ran over the setting.
+ * Customize Sanitize
  *
- * @since 1.4.0
+ * Sanitizes the footer content on the customize screen. Users with the
+ * 'unfiltered_html' cap can post anything. For other users, wp_filter_post_kses()
+ * is ran over the setting.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/current_user_can
+ * @link http://codex.wordpress.org/Function_Reference/wp_filter_post_kses
+ *
+ * @uses exmachina_get_prefix() Gets the theme prefix.
+ *
+ * @since 2.5.0
  * @access public
- * @param mixed $setting The current setting passed to sanitize.
- * @param object $object The setting object passed via WP_Customize_Setting.
- * @return mixed $setting
+ *
+ * @param  mixed  $setting The current setting passed to sanitize.
+ * @param  object $object  The setting object passed via WP_Customize_Setting.
+ * @return mixed           The sanitized setting.
  */
 function exmachina_customize_sanitize( $setting, $object ) {
 
@@ -147,14 +196,23 @@ function exmachina_customize_sanitize( $setting, $object ) {
 
 	/* Return the sanitized setting and apply filters. */
 	return apply_filters( "{$prefix}_customize_sanitize", $setting, $object );
-}
+
+} // end function exmachina_customize_sanitize()
 
 /**
- * Runs the footer content posted via Ajax through the do_shortcode() function.  This makes sure the
- * shortcodes are output correctly in the live preview.
+ * Customize Footer Content AJAX
  *
- * @since 1.4.0
+ * Runs the footer content posted via Ajax through the do_shortcode() function.
+ * This makes sure the shortcodes are output correctly in the live preview.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/check_ajax_referer
+ * @link http://codex.wordpress.org/Function_Reference/do_shortcode
+ * @link http://codex.wordpress.org/Function_Reference/wp_kses_stripslashes
+ *
+ * @since 2.5.0
  * @access private
+ *
+ * @return void
  */
 function exmachina_customize_footer_content_ajax() {
 
@@ -167,13 +225,20 @@ function exmachina_customize_footer_content_ajax() {
 
 	/* Always die() when handling Ajax. */
 	die();
-}
+
+} // end function exmachina_customize_footer_content_ajax()
 
 /**
+ * Customize Preview Script
+ *
  * Handles changing settings for the live preview of the theme.
  *
- * @since 1.4.0
+ * @link http://codex.wordpress.org/Function_Reference/wp_create_nonce
+ *
+ * @since 2.5.0
  * @access private
+ *
+ * @return void
  */
 function exmachina_customize_preview_script() {
 
@@ -204,13 +269,31 @@ function exmachina_customize_preview_script() {
 	);
 	</script>
 	<?php
-}
+
+} // end function exmachina_customize_preview_script()
 
 /**
- * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
+ * Customize Preview JavaScript
+ *
+ * Binds JS handlers to make Theme Customizer preview reload changes
+ * asynchronously.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/wp_enqueue_script
+ * @link http://codex.wordpress.org/Function_Reference/esc_url
+ * @link http://codex.wordpress.org/Function_Reference/trailingslashit
+ *
+ * @since 2.5.0
+ * @access private
+ *
+ * @return void
  */
 function exmachina_customize_preview_js() {
-	wp_enqueue_script( 'exmachina-customize-preview', esc_url( trailingslashit( EXMACHINA_JS ) . 'customizer.js'), array( 'customize-preview' ), '20130508', true );
-}
 
-?>
+	/* Use the .min script if SCRIPT_DEBUG is turned off. */
+  $suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
+  /* Enqueue the customizer preview script. */
+	wp_enqueue_script( 'exmachina-customize-preview', esc_url( trailingslashit( EXMACHINA_JS ) . "customizer{$suffix}.js" ), array( 'customize-preview' ), EXMACHINA_VERSION, true );
+
+} // end function exmachina_customize_preview_js()
+
