@@ -82,6 +82,7 @@ function exmachina_add_shortcodes() {
 
 	/* Add general function shortcodes. */
 	add_shortcode( 'entry-mood', 'exmachina_entry_mood_shortcode' );
+	add_shortcode( 'search-form', 'exmachina_searchform_shortcode' );
 
 } // end function exmachina_add_shortcodes()
 
@@ -811,5 +812,23 @@ function exmachina_entry_mood_shortcode( $attr ) {
 	return $mood;
 
 } // end function exmachina_entry_mood_shortcode()
+
+/**
+ * Searchform Shortcode
+ *
+ * Returns a search form string.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/get_search_form
+ *
+ * @since 2.5.0
+ * @access public
+ *
+ * @return string
+ */
+function exmachina_searchform_shortcode() {
+
+	return '<div class="exmachina-searchform">' . get_search_form( false ) . '</div>';
+
+} // end function exmachina_searchform_shortcode()
 
 ?>

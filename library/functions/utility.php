@@ -900,7 +900,7 @@ function exmachina_get_help_sidebar() {
 } // end function exmachina_get_help_sidebar()
 
 /*-------------------------------------------------------------------------*/
-/* Formatting Functions */
+/* ==Formatting Functions */
 /*-------------------------------------------------------------------------*/
 
 
@@ -1321,4 +1321,150 @@ function shell_post_format_singular_template( $template ){
   return $template;
 }
 
+/*-------------------------------------------------------------------------*/
+/* === Compatibility Functions === */
+/* These functions are intended to provide simple compatibilty for those that
+/* don't have the mbstring extension enabled. WordPress already provides a
+/* proper working definition for mb_substr().
+/*-------------------------------------------------------------------------*/
 
+if ( ! function_exists( 'mb_strpos' ) ) {
+  /**
+   * [mb_strpos description]
+   * @param  [type]  $haystack [description]
+   * @param  [type]  $needle   [description]
+   * @param  integer $offset   [description]
+   * @param  string  $encoding [description]
+   * @return [type]            [description]
+   */
+  function mb_strpos( $haystack, $needle, $offset = 0, $encoding = '' ) {
+    return strpos( $haystack, $needle, $offset );
+  } // end function mb_strpos()
+} // end if ( !function_exists( 'mb_strpos' ))
+
+if ( ! function_exists( 'mb_strrpos' ) ) {
+  /**
+   * [mb_strrpos description]
+   * @param  [type]  $haystack [description]
+   * @param  [type]  $needle   [description]
+   * @param  integer $offset   [description]
+   * @param  string  $encoding [description]
+   * @return [type]            [description]
+   */
+  function mb_strrpos( $haystack, $needle, $offset = 0, $encoding = '' ) {
+    return strrpos( $haystack, $needle, $offset );
+  } // end function mb_strrpos()
+} // end if ( !function_exists( 'mb_strrpos' ))
+
+if ( ! function_exists( 'mb_strlen' ) ) {
+  /**
+   * [mb_strlen description]
+   * @param  [type] $string   [description]
+   * @param  string $encoding [description]
+   * @return [type]           [description]
+   */
+  function mb_strlen( $string, $encoding = '' ) {
+    return strlen( $string );
+  } // end function mb_strlen()
+} // end if ( !function_exists( 'mb_strlen' ))
+
+if ( ! function_exists( 'mb_strtolower' ) ) {
+  /**
+   * [mb_strtolower description]
+   * @param  [type] $string   [description]
+   * @param  string $encoding [description]
+   * @return [type]           [description]
+   */
+  function mb_strtolower( $string, $encoding = '' ) {
+    return strtolower( $string );
+  } // end function mb_strtolower()
+} // end if ( !function_exists( 'mb_strtolower' ))
+
+
+/*-------------------------------------------------------------------------*/
+/* === Admin Functions === */
+/*-------------------------------------------------------------------------*/
+
+/**
+ * Admin Redirect
+ *
+ * Redirect the user to an admin page and add query args to the URL string for
+ * alerts, etc.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/menu_page_url
+ * @link http://codex.wordpress.org/Function_Reference/add_query_arg
+ * @link http://codex.wordpress.org/Function_Reference/wp_redirect
+ *
+ * @since 2.5.0
+ * @access public
+ *
+ * @param  string $page       Menu slug.
+ * @param  array  $query_args Optional. Associative array of query string arguments.
+ * @return null               Return early if not on a page.
+ */
+function exmachina_admin_redirect( $page, array $query_args = array() ) {
+
+  /* If not a page, return. */
+  if ( ! $page )
+    return;
+
+  /* Define the menu page url. */
+  $url = html_entity_decode( menu_page_url( $page, 0 ) );
+
+  /* Loop through and unset the $query_args. */
+  foreach ( (array) $query_args as $key => $value ) {
+    if ( empty( $key ) && empty( $value ) ) {
+      unset( $query_args[$key] );
+    } // end if (empty($key) && empty($value))
+  } // end foreach ((array) $query_args as $key => $value)
+
+  /* Add the $query_args to the url. */
+  $url = add_query_arg( $query_args, $url );
+
+  /* Redirect to the admin page. */
+  wp_redirect( esc_url_raw( $url ) );
+
+} // end function exmachina_admin_redirect()
+
+/*-------------------------------------------------------------------------*/
+/* === Theme Update Functions === */
+/*-------------------------------------------------------------------------*/
+
+/* Don't update theme fromt the WordPress repo. */
+add_filter( 'http_request_args', 'exmachina_dont_update_theme', 5, 2 );
+
+/**
+ * Don't Update Theme
+ *
+ * If there is a theme in the repo with the same name, this prevents WP from
+ * prompting an update.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/get_option
+ *
+ * @since 2.5.0
+ * @access private
+ *
+ * @param  array  $req Request arguments
+ * @param  string $url Request url
+ * @return array       Request arguments
+ */
+
+function exmachina_dont_update_theme( $req, $url ) {
+
+  if ( 0 !== strpos( $url, 'http://api.wordpress.org/themes/update-check' ) )
+    return $req; // Not a theme update request. Bail immediately.
+
+  /* Unserialize the request arguments. */
+  $themes = unserialize( $req['body']['themes'] );
+
+  /* Gets the template and stylesheet option and unset. */
+  unset( $themes[ get_option( 'template' ) ] );
+  unset( $themes[ get_option( 'stylesheet' ) ] );
+
+  /* Reserialize the request arguments. */
+  $req['body']['themes'] = serialize( $themes );
+
+  /* Return the request args. */
+  return $req;
+
+} // end function exmachina_dont_update_theme()
