@@ -161,6 +161,9 @@ class ExMachina {
 		/* Sets the path to the core framework admin functions directory. */
 		define( 'EXMACHINA_ADMIN_FUNCTIONS', trailingslashit( EXMACHINA_DIR ) . 'admin/functions' );
 
+		/* Sets the path to the core framework admin metaboxes directory. */
+		define( 'EXMACHINA_ADMIN_METABOXES', trailingslashit( EXMACHINA_DIR ) . 'admin/metaboxes' );
+
 		/* Sets the path to the core framework admin assets CSS directory URI. */
 		define( 'EXMACHINA_ADMIN_CSS', trailingslashit( EXMACHINA_ADMIN_ASSETS ) . 'css' );
 
