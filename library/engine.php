@@ -140,14 +140,20 @@ class ExMachina {
 		/* Sets the path to the core framework languages directory. */
 		define( 'EXMACHINA_LANGUAGES', trailingslashit( EXMACHINA_DIR ) . 'languages' );
 
+		/* Sets the path to the core framework assets directory URI. */
+		define( 'EXMACHINA_ASSETS', trailingslashit( EXMACHINA_URI ) . 'assets' );
+
 		/* Sets the path to the core framework images directory URI. */
-		define( 'EXMACHINA_IMAGES', trailingslashit( EXMACHINA_URI ) . 'images' );
+		define( 'EXMACHINA_IMAGES', trailingslashit( EXMACHINA_ASSETS ) . 'images' );
 
 		/* Sets the path to the core framework CSS directory URI. */
-		define( 'EXMACHINA_CSS', trailingslashit( EXMACHINA_URI ) . 'css' );
+		define( 'EXMACHINA_CSS', trailingslashit( EXMACHINA_ASSETS ) . 'css' );
 
 		/* Sets the path to the core framework JavaScript directory URI. */
-		define( 'EXMACHINA_JS', trailingslashit( EXMACHINA_URI ) . 'js' );
+		define( 'EXMACHINA_JS', trailingslashit( EXMACHINA_ASSETS ) . 'js' );
+
+		/* Sets the path to the core framework vendor directory URI. */
+		define( 'EXMACHINA_VENDOR', trailingslashit( EXMACHINA_ASSETS ) . 'vendor' );
 	}
 
 	/**
@@ -245,6 +251,9 @@ class ExMachina {
 	 */
 	function functions() {
 
+		/* Load the assets functions. */
+		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'assets.php' );
+
 		/* Load the comments functions. */
 		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'comments.php' );
 
@@ -295,12 +304,6 @@ class ExMachina {
 
 		/* Load the template hierarchy if supported. */
 		require_if_theme_supports( 'exmachina-core-template-hierarchy', trailingslashit( EXMACHINA_FUNCTIONS ) . 'template-hierarchy.php' );
-
-		/* Load the styles if supported. */
-		require_if_theme_supports( 'exmachina-core-styles', trailingslashit( EXMACHINA_FUNCTIONS ) . 'styles.php' );
-
-		/* Load the scripts if supported. */
-		require_if_theme_supports( 'exmachina-core-scripts', trailingslashit( EXMACHINA_FUNCTIONS ) . 'scripts.php' );
 
 		/* Load the media grabber script if supported. */
 		require_if_theme_supports( 'exmachina-core-media-grabber', trailingslashit( EXMACHINA_CLASSES ) . 'media-grabber.php' );
