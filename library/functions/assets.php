@@ -51,6 +51,10 @@ add_filter( 'stylesheet_uri', 'exmachina_min_stylesheet_uri', 10, 2 );
 /* Load third-party vendor assets. */
 add_action( 'wp_enqueue_scripts', 'exmachina_enqueue_vendor', 2 );
 
+/* Enqueue conditional scripts and styles. */
+add_action( 'wp_enqueue_scripts', 'exmachina_conditional_enqueue_scripts' );
+add_action( 'wp_enqueue_scripts', 'exmachina_conditional_enqueue_styles', 4 );
+
 
 /*-------------------------------------------------------------------------*/
 /* == Javascript Functions */
@@ -436,4 +440,61 @@ function exmachina_enqueue_vendor() {
     wp_enqueue_style( 'semantic', trailingslashit( EXMACHINA_VENDOR ) . "semantic/css/semantic{$suffix}.css", false, '1.0.0', 'screen' );
   }
 } // end exmachina_enqueue_vendor()
+
+/*-------------------------------------------------------------------------*/
+/* == Conditional Functions */
+/*-------------------------------------------------------------------------*/
+
+/**
+ * Enqueue Conditional Stylesheets
+ *
+ * Enqueus specific stylesheets needed by certain theme page templates and
+ * features.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/is_page_template
+ * @link http://codex.wordpress.org/Function_Reference/wp_enqueue_style
+ * @link http://codex.wordpress.org/Function_Reference/trailingslashit
+ *
+ * @since  2.5.0
+ * @access public
+ *
+ * @return void
+ */
+function exmachina_conditional_enqueue_styles() {
+
+  /* Use the .min script if SCRIPT_DEBUG is turned off. */
+  $suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
+  /* Enqueue the flexslider stylesheet if on the magazine page template. */
+  if ( is_page_template( 'page/page-template-magazine.php' ) )
+    wp_enqueue_style( 'flexslider', trailingslashit( EXMACHINA_VENDOR ) . "flexslider/css/flexslider{$suffix}.css", false, '2.2.0', 'screen' );
+
+} // end function exmachina_conditional_enqueue_styles()
+
+/**
+ * Enqueue Conditional JavaScripts
+ *
+ * Enqueus specific javascripts needed by certain theme page templates and
+ * features.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/is_page_template
+ * @link http://codex.wordpress.org/Function_Reference/wp_enqueue_script
+ * @link http://codex.wordpress.org/Function_Reference/esc_url
+ * @link http://codex.wordpress.org/Function_Reference/trailingslashit
+ *
+ * @since  2.5.0
+ * @access public
+ *
+ * @return void
+ */
+function exmachina_conditional_enqueue_scripts() {
+
+  /* Use the .min script if SCRIPT_DEBUG is turned off. */
+  $suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
+  /* Enqueue the flexslider javascript if on the magazine page template. */
+  if ( is_page_template( 'page/page-template-magazine.php' ) )
+    wp_enqueue_script( 'flexslider', esc_url( trailingslashit( EXMACHINA_VENDOR ) . "flexslider/js/jquery.flexslider{$suffix}.js" ), array( 'jquery' ), '2.2.0', true );
+
+} // end function exmachina_conditional_enqueue_scripts()
 

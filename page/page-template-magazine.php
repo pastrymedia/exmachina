@@ -45,7 +45,7 @@ get_header(); // Loads the header.php template. ?>
 
 					<figure class="slide">
 
-						<?php get_the_image( array( 'meta_key' => false, 'size' => 'unique-slider' ) ); ?>
+						<?php get_the_image( array( 'meta_key' => false, 'size' => 'magazine-slider' ) ); ?>
 
 						<figcaption class="slide-caption">
 
