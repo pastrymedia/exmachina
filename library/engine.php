@@ -253,9 +253,6 @@ class ExMachina {
 		/* Load the comments functions. */
 		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'comments.php' );
 
-		/* Load the extras functions. */
-		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'extras.php' );
-
 		/* Load image-related functions. */
 		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'image.php' );
 
