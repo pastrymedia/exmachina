@@ -1,6 +1,6 @@
 <?php
 /**
- * Metadata functions used in the core framework.  This file registers meta keys for use in WordPress 
+ * Metadata functions used in the core framework.  This file registers meta keys for use in WordPress
  * in a safe manner by setting up a custom sanitize callback.
  *
  * @package    ExMachinaCore
@@ -22,20 +22,6 @@ add_action( 'init', 'exmachina_register_meta' );
  */
 function exmachina_register_meta() {
 
-	/* Register meta if the theme supports the 'exmachina-core-seo' feature. */
-	if ( current_theme_supports( 'exmachina-core-seo' ) ) {
-
-		/* Register 'Title', 'Description', and 'Keywords' meta for posts. */
-		register_meta( 'post', 'Title', 'exmachina_sanitize_meta' );
-		register_meta( 'post', 'Description', 'exmachina_sanitize_meta' );
-		register_meta( 'post', 'Keywords', 'exmachina_sanitize_meta' );
-
-		/* Register 'Title', 'Description', and 'Keywords' meta for users. */
-		register_meta( 'user', 'Title', 'exmachina_sanitize_meta' );
-		register_meta( 'user', 'Description', 'exmachina_sanitize_meta' );
-		register_meta( 'user', 'Keywords', 'exmachina_sanitize_meta' );
-	}
-
 	/* Register meta if the theme supports the 'exmachina-core-template-hierarchy' feature. */
 	if ( current_theme_supports( 'exmachina-core-template-hierarchy' ) ) {
 
@@ -49,8 +35,8 @@ function exmachina_register_meta() {
 }
 
 /**
- * Callback function for sanitizing meta when add_metadata() or update_metadata() is called by WordPress. 
- * If a developer wants to set up a custom method for sanitizing the data, they should use the 
+ * Callback function for sanitizing meta when add_metadata() or update_metadata() is called by WordPress.
+ * If a developer wants to set up a custom method for sanitizing the data, they should use the
  * "sanitize_{$meta_type}_meta_{$meta_key}" filter hook to do so.
  *
  * @since 1.3.0
