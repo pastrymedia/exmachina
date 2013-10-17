@@ -273,7 +273,7 @@ video.wp-video-shortcode {}
   width:      80px;
   height:     80px;
   margin:     -40px 0 0 -40px;
-  /*background: transparent url( '../images/loading.gif' ) 50% 50% no-repeat;*/
+  /*background: transparent url( '../images/ajax-loader.gif' ) 50% 50% no-repeat;*/
 }
 
 /*
