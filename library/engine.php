@@ -154,6 +154,24 @@ class ExMachina {
 
 		/* Sets the path to the core framework vendor directory URI. */
 		define( 'EXMACHINA_VENDOR', trailingslashit( EXMACHINA_ASSETS ) . 'vendor' );
+
+		/* Sets the path to the core framework admin assets directory. */
+		define( 'EXMACHINA_ADMIN_ASSETS', trailingslashit( EXMACHINA_URI ) . 'admin/assets' );
+
+		/* Sets the path to the core framework admin functions directory. */
+		define( 'EXMACHINA_ADMIN_FUNCTIONS', trailingslashit( EXMACHINA_DIR ) . 'admin/functions' );
+
+		/* Sets the path to the core framework admin assets CSS directory URI. */
+		define( 'EXMACHINA_ADMIN_CSS', trailingslashit( EXMACHINA_ADMIN_ASSETS ) . 'css' );
+
+		/* Sets the path to the core framework admin assets images directory URI. */
+		define( 'EXMACHINA_ADMIN_IMAGES', trailingslashit( EXMACHINA_ADMIN_ASSETS ) . 'images' );
+
+		/* Sets the path to the core framework admin assets JS directory URI. */
+		define( 'EXMACHINA_ADMIN_JS', trailingslashit( EXMACHINA_ADMIN_ASSETS ) . 'js' );
+
+		/* Sets the path to the core framework admin assets vendor directory URI. */
+		define( 'EXMACHINA_ADMIN_VENDOR', trailingslashit( EXMACHINA_ADMIN_ASSETS ) . 'vendor' );
 	}
 
 	/**
@@ -457,10 +475,10 @@ class ExMachina {
 		if ( is_admin() ) {
 
 			/* Load the main admin file. */
-			require_once( trailingslashit( EXMACHINA_ADMIN ) . 'admin.php' );
+			require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'admin.php' );
 
 			/* Load the theme settings feature if supported. */
-			require_if_theme_supports( 'exmachina-core-theme-settings', trailingslashit( EXMACHINA_ADMIN ) . 'theme-settings.php' );
+			require_if_theme_supports( 'exmachina-core-theme-settings', trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'theme-settings.php' );
 		}
 	}
 

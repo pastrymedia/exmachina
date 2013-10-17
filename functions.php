@@ -102,10 +102,10 @@ function omega_theme_setup() {
   add_theme_support( 'custom-favicon' );
   add_theme_support( 'sliding-panel' );
   add_theme_support( 'template-tags' );
-  add_theme_support( 'custom-snippets' );
+  //add_theme_support( 'custom-snippets' );
   add_theme_support( 'cleaner-archives' );
   add_theme_support( 'grid-columns' );
-  add_theme_support( 'custom-classes' );
+  //add_theme_support( 'custom-classes' );
   add_theme_support( 'post-stylesheets' );
   add_theme_support( 'custom-field-series' );
 

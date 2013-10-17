@@ -813,25 +813,6 @@ function the_content_limit( $max_characters, $more_link_text = '(more...)', $str
 
 
 /**
- * Settings Page Capability
- *
- * Returns the required capability for viewing and saving theme settings.
- *
- * @link http://codex.wordpress.org/Roles_and_Capabilities
- *
- * @uses exmachina_get_prefix() Gets the theme prefix.
- *
- * @since 2.5.0
- * @access public
- *
- * @return string   The filtered page capability.
- */
-function exmachina_settings_page_capability() {
-  return apply_filters( exmachina_get_prefix() . '_settings_capability', 'edit_theme_options' );
-
-} // end function exmachina_settings_page_capability()
-
-/**
  * Get Help Sidebar
  *
  * Adds a help tab to the theme settings screen if the theme has provided a

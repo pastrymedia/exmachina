@@ -361,7 +361,7 @@ function exmachina_settings_page_enqueue_styles( $hook_suffix ) {
 
 	/* Load admin stylesheet if on the theme settings screen. */
 	if ( $hook_suffix == exmachina_get_settings_page_name() )
-		wp_enqueue_style( 'exmachina-core-admin' );
+		wp_enqueue_style( 'exmachina-core-admin-css' );
 }
 
 /**
@@ -378,8 +378,7 @@ function exmachina_settings_page_enqueue_scripts( $hook_suffix ) {
 		wp_enqueue_script( 'common' );
 		wp_enqueue_script( 'wp-lists' );
 		wp_enqueue_script( 'postbox' );
-		wp_enqueue_script( 'exmachina-core-admin' );
-		wp_enqueue_script( 'exmachina-core-favicon' );
+		wp_enqueue_script( 'exmachina-core-admin-js' );
 
 	}
 }

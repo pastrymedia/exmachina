@@ -14,6 +14,9 @@
 /* Add the admin setup function to the 'admin_menu' hook. */
 add_action( 'admin_menu', 'exmachina_admin_setup' );
 
+/* Add additional contact methods. */
+add_filter( 'user_contactmethods', 'exmachina_contact_methods' );
+
 /**
  * Sets up the adminstration functionality for the framework and themes.
  *
@@ -59,8 +62,8 @@ function exmachina_admin_register_scripts() {
 	/* Use the .min javascript if SCRIPT_DEBUG is turned off. */
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-	wp_register_script( 'exmachina-core-admin', esc_url( trailingslashit( EXMACHINA_JS ) . "admin{$suffix}.js" ), array( 'jquery' ), '20130528', false );
-	wp_register_script( 'exmachina-core-favicon', esc_url( trailingslashit( EXMACHINA_JS ) . "favicon{$suffix}.js" ), array( 'jquery' ), '20130528', false );
+	wp_register_script( 'exmachina-core-admin-js', esc_url( trailingslashit( EXMACHINA_ADMIN_JS ) . "admin{$suffix}.js" ), array( 'jquery' ), EXMACHINA_VERSION, false );
+
 }
 
 /**
@@ -75,7 +78,7 @@ function exmachina_admin_register_styles() {
 	/* Use the .min stylesheet if SCRIPT_DEBUG is turned off. */
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-	wp_register_style( 'exmachina-core-admin', trailingslashit( EXMACHINA_CSS ) . "admin{$suffix}.css", false, '20130515', 'screen' );
+	wp_register_style( 'exmachina-core-admin-css', trailingslashit( EXMACHINA_ADMIN_CSS ) . "admin{$suffix}.css", false, EXMACHINA_VERSION, 'screen' );
 }
 
 /**
@@ -88,7 +91,7 @@ function exmachina_admin_enqueue_styles( $hook_suffix ) {
 
 	/* Load admin styles if on the widgets screen and the current theme supports 'exmachina-core-widgets'. */
 	if ( current_theme_supports( 'exmachina-core-widgets' ) && 'widgets.php' == $hook_suffix )
-		wp_enqueue_style( 'exmachina-core-admin' );
+		wp_enqueue_style( 'exmachina-core-admin-css' );
 }
 
 /**
@@ -156,4 +159,25 @@ function exmachina_get_post_templates( $post_type = 'post' ) {
 	return $exmachina->post_templates[ $post_type ];
 }
 
-?>
+/**
+ * Adds new contact methods to the user profile screen for more modern social media sites.
+ *
+ * @since 0.1.0
+ * @access public
+ * @param array $meta Array of contact methods.
+ * @return array $meta
+ */
+function exmachina_contact_methods( $meta ) {
+
+  /* Twitter contact method. */
+  $meta['twitter'] = __( 'Twitter Username', 'exmachina-core' );
+
+  /* Google+ contact method. */
+  $meta['google_plus'] = __( 'Google+ URL', 'exmachina-core' );
+
+  /* Facebook contact method. */
+  $meta['facebook'] = __( 'Facebook URL', 'exmachina-core' );
+
+  /* Return the array of contact methods. */
+  return $meta;
+}
