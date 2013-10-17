@@ -1,30 +1,55 @@
 <?php
-/**
- * Functions for dealing with theme settings on both the front end of the site and the admin.  This allows us
- * to set some default settings and make it easy for theme developers to quickly grab theme settings from
- * the database.  This file is only loaded if the theme adds support for the 'exmachina-core-theme-settings'
- * feature.
- *
- * @package    ExMachinaCore
- * @subpackage Functions
- * @author     Justin Tadlock <justin@justintadlock.com>
- * @copyright  Copyright (c) 2008 - 2013, Justin Tadlock
- * @link       http://themeexmachina.com/exmachina-core
- * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- */
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
 
 /**
- * Loads the ExMachina theme settings once and allows the input of the specific field the user would
- * like to show.  ExMachina theme settings are added with 'autoload' set to 'yes', so the settings are
- * only loaded once on each page load.
+ * ExMachina WordPress Theme Framework Engine
+ * Settings Functions
  *
- * @since 0.7.0
+ * settings.php
+ *
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
+ *
+ * Functions for dealing with theme settings on both the front end of the site
+ * and the admin. This allows us to set some default settings and make it easy
+ * for theme developers to quickly grab theme settings from the database. This
+ * file is only loaded if the theme adds support for the
+ * 'exmachina-core-theme-settings' feature.
+ *
+ * @package     ExMachina
+ * @subpackage  Functions
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
+ */
+###############################################################################
+# Begin functions
+###############################################################################
+
+/**
+ * Get Setting
+ *
+ * Loads the ExMachina theme settings once and allows the input of the specific
+ * field the user would like to show. ExMachina theme settings are added with
+ * 'autoload' set to 'yes', so the settings are only loaded once on each page
+ * load.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/get_option
+ * @link http://codex.wordpress.org/Function_Reference/wp_kses_stripslashes
+ *
+ * @uses exmachina_get_default_theme_settings Gets the default settings.
+ * @uses exmachina_get_prefix() 							Gets the prefix of the theme.
+ *
+ * @since 2.5.0
  * @access public
- * @uses get_option() Gets an option from the database.
- * @uses exmachina_get_prefix() Gets the prefix of the theme.
- * @global object $exmachina The global ExMachina object.
- * @param string $option The specific theme setting the user wants.
- * @return mixed $settings[$option] Specific setting asked for.
+ *
+ * @global object $exmachina 					The global ExMachina object.
+ * @param  string $option 						The specific theme setting the user wants.
+ * @return mixed  $settings[$option] 	Specific setting asked for.
  */
 function exmachina_get_setting( $option = '' ) {
 	global $exmachina;
@@ -55,15 +80,26 @@ function exmachina_get_setting( $option = '' ) {
 	/* Strip slashes from the setting and return. */
 	else
 		return wp_kses_stripslashes( $exmachina->settings[ $option ] );
-}
+
+} // end function exmachina_get_setting()
 
 /**
- * Sets up a default array of theme settings for use with the theme.  Theme developers should filter the
- * "{$prefix}_default_theme_settings" hook to define any default theme settings.  WordPress does not
- * provide a hook for default settings at this time.
+ * Get Default Theme Settings
  *
- * @since 1.0.0
+ * Sets up a default array of theme settings for use with the theme. Theme
+ * developers should filter the "{$prefix}_default_theme_settings" hook to define
+ * any default theme settings. WordPress does not provide a hook for default
+ * settings at this time.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/get_theme_support
+ * @link http://codex.wordpress.org/Function_Reference/current_theme_supports
+ * @link http://codex.wordpress.org/Function_Reference/is_child_theme
+ *
+ * @uses exmachina_get_prefix() Gets the prefix of the theme.
+ *
+ * @since 2.5.0
  * @access public
+ *
  * @return array $settings The default theme settings.
  */
 function exmachina_get_default_theme_settings() {
@@ -81,12 +117,12 @@ function exmachina_get_default_theme_settings() {
 		'trackbacks_pages'          => 0,
 		'trackbacks_posts'          => 1,
 		'content_archive'           => 'full',
-		'content_archive_limit'		=> 0,
+		'content_archive_limit'		  => 0,
 		'content_archive_thumbnail' => 0,
 		'content_archive_more'      => '[Read more...]',
 		'image_size'                => 'thumbnail',
 		'posts_nav'                 => 'numeric',
-		'single_nav'                 => 0,
+		'single_nav'                => 0,
 		'header_scripts'            => '',
 		'footer_scripts'            => '',
 	);
@@ -105,6 +141,5 @@ function exmachina_get_default_theme_settings() {
 
 	/* Return the $settings array and provide a hook for overwriting the default settings. */
 	return apply_filters( "{$prefix}_default_theme_settings", $settings );
-}
 
-?>
+} // end function exmachina_get_default_theme_settings()
