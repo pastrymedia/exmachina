@@ -479,7 +479,7 @@ function exmachina_comment_author_shortcode( $attr ) {
 		array(
 			'before' => '',
 			'after' => '',
-			'tag' => 'span' // @deprecated 1.2.0 Back-compatibility. Please don't use this argument.
+			'tag' => 'span'
 		),
 		$attr,
 		'comment-author'

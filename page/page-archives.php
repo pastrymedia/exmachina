@@ -7,7 +7,6 @@
  *
  * @package ExMachina
  * @subpackage Template
- * @deprecated 0.9.0 Template will be renamed page-template-archives.php to comply with theme repo guidelines.
  */
 
 get_header(); // Loads the header.php template. ?>
