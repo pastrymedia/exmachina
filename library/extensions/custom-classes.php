@@ -1,26 +1,30 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
- * Plugin Name: Custom Classes
- * Plugin URI: http://justintadlock.com/archives/2012/02/06/custom-classes-wordpress-plugin
- * Description: Allows users to input custom post and <code>&lt;body></code> classes on a per-post basis.
- * Version: 0.1
- * Author: Justin Tadlock
- * Author URI: http://justintadlock.com
+ * ExMachina WordPress Theme Framework Engine
+ * EXTENSION
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
- * General Public License version 2, as published by the Free Software Foundation.  You may NOT assume
- * that you can use any other version of the GPL.
+ * EXTENSIONPHP
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
  *
- * @package CustomClasses
- * @version 0.1.0
- * @author Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2012, Justin Tadlock
- * @link http://justintadlock.com/archives/2012/02/06/custom-classes-wordpress-plugin
- * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * Allows users to input custom post and <code>&lt;body></code> classes on a per-post basis.
+ *
+ * @package     ExMachina
+ * @subpackage  Extensions
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
  */
+###############################################################################
+# Begin extension
+###############################################################################
 
 
 

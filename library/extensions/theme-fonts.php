@@ -1,26 +1,35 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
+ * ExMachina WordPress Theme Framework Engine
+ * EXTENSION
+ *
+ * EXTENSIONPHP
+ *
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
+ *
  * Theme Fonts - A script to allow users to select theme fonts.
  *
- * Theme Fonts was created to give theme developers an easy way to include multiple font settings 
- * and multiple font choices to their users.  It's main purpose is to provide integration into the 
- * WordPress theme customizer to allow for the selection of fonts.  The script will work with basic 
+ * Theme Fonts was created to give theme developers an easy way to include multiple font settings
+ * and multiple font choices to their users.  It's main purpose is to provide integration into the
+ * WordPress theme customizer to allow for the selection of fonts.  The script will work with basic
  * Web-safe fonts, custom fonts added to the theme, and fonts from Google Web Fonts.
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU 
- * General Public License as published by the Free Software Foundation; either version 2 of the License, 
- * or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * @package   ThemeFonts
- * @version   0.1.0
- * @author    Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2013, Justin Tadlock
- * @link      http://justintadlock.com
- * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @package     ExMachina
+ * @subpackage  Extensions
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
  */
+###############################################################################
+# Begin extension
+###############################################################################
 
 /**
  * A whole bunch of awesomeness wrapped into one package.
@@ -120,9 +129,9 @@ final class Theme_Fonts {
 	}
 
 	/**
-	 * This method basically serves as a wrapper on 'init' to allow themes to know when to 
-	 * register their custom fonts.  It also passes the object so that theme developers can 
-	 * interact with it.  They'll need to use `$object->add_setting()` and `$object->add_font()`. 
+	 * This method basically serves as a wrapper on 'init' to allow themes to know when to
+	 * register their custom fonts.  It also passes the object so that theme developers can
+	 * interact with it.  They'll need to use `$object->add_setting()` and `$object->add_font()`.
 	 * Theme devs should just set a 'callback' when they add support for this feature.
 	 *
 	 * @since  0.1.0
@@ -134,7 +143,7 @@ final class Theme_Fonts {
 
 		if ( !empty( $supports[0] ) ) {
 
-			if ( isset( $supports[0]['callback'] ) ) 
+			if ( isset( $supports[0]['callback'] ) )
 				add_action( 'theme_fonts_register', $supports[0]['callback'] );
 
 			if ( isset( $supports[0]['customizer'] ) && true === $supports[0]['customizer'] )
@@ -145,7 +154,7 @@ final class Theme_Fonts {
 	}
 
 	/**
-	 * Add a new font setting.  Theme developers should use this method to add new font settings 
+	 * Add a new font setting.  Theme developers should use this method to add new font settings
 	 * to their theme.
 	 *
 	 * @since  0.1.0
@@ -169,7 +178,7 @@ final class Theme_Fonts {
 	}
 
 	/**
-	 * Add a new font for selection.  Theme developers should use this method to add new fonts 
+	 * Add a new font for selection.  Theme developers should use this method to add new fonts
 	 * for their theme.
 	 *
 	 * @since  0.1.0
@@ -335,9 +344,9 @@ final class Theme_Fonts {
 	}
 
 	/**
-	 * Queues a font by its font family.  This is separate because multiples of the same family 
-	 * may be loaded.  For example, both the 'Open Sans 400' and 'Open Sans 700 Italic' could 
-	 * be loaded.  These both have the same family of 'Open Sans', so we need to queue the 
+	 * Queues a font by its font family.  This is separate because multiples of the same family
+	 * may be loaded.  For example, both the 'Open Sans 400' and 'Open Sans 700 Italic' could
+	 * be loaded.  These both have the same family of 'Open Sans', so we need to queue the
 	 * fonts and attach the styles to the font family.  This is only needed for Google Web Fonts.
 	 *
 	 * @since  0.1.0
@@ -384,8 +393,8 @@ final class Theme_Fonts {
 	}
 
 	/**
-	 * Creates the section, settings, and controls for the WordPress theme customizer screen.  Each 
-	 * font setting is given an individual setting and control within the 'fonts' section.  The data 
+	 * Creates the section, settings, and controls for the WordPress theme customizer screen.  Each
+	 * font setting is given an individual setting and control within the 'fonts' section.  The data
 	 * is saved in the 'theme_mod' setting for the theme with the 'theme_font_{$setting_id}' name.
 	 *
 	 * @since  0.1.0
@@ -450,8 +459,8 @@ final class Theme_Fonts {
 	}
 
 	/**
-	 * Returns an array of font choices for the theme customizer.  Theme developers can add fonts for 
-	 * a specific setting by using the 'setting' argument.  If not set, the font is added to all 
+	 * Returns an array of font choices for the theme customizer.  Theme developers can add fonts for
+	 * a specific setting by using the 'setting' argument.  If not set, the font is added to all
 	 * settings.
 	 *
 	 * @since  0.1.0

@@ -1,31 +1,41 @@
 <?php
-/**
- * Featured Header - A script for allowing users to set a featured header image.
- *
- * This script was created to make it easy for theme developers to add featured header image 
- * functionality to their theme.  Featured headers are just a way of using the built-in WordPress 
- * post thumbnails (i.e., featured images) to replace the theme's header image on a per-post 
- * basis.  Therefore, a theme must add support for both the 'post-thumbnails' and 'custom-header' 
- * theme features.
- *
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU 
- * General Public License as published by the Free Software Foundation; either version 2 of the License, 
- * or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * @package   FeaturedHeader
- * @version   0.1.1
- * @author    Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2013, Justin Tadlock
- * @link      http://justintadlock.com
- * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- */
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
 
 /**
- * The Featured_Header class allows users to create custom, per-post header images if their theme 
- * supports the WordPress 'custom-header' feature.  This class overwrites the header image on 
+ * ExMachina WordPress Theme Framework Engine
+ * EXTENSION
+ *
+ * EXTENSIONPHP
+ *
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
+ *
+ * Featured Header - A script for allowing users to set a featured header image.
+ *
+ * This script was created to make it easy for theme developers to add featured header image
+ * functionality to their theme.  Featured headers are just a way of using the built-in WordPress
+ * post thumbnails (i.e., featured images) to replace the theme's header image on a per-post
+ * basis.  Therefore, a theme must add support for both the 'post-thumbnails' and 'custom-header'
+ * theme features.
+ *
+ * @package     ExMachina
+ * @subpackage  Extensions
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
+ */
+###############################################################################
+# Begin extension
+###############################################################################
+
+
+/**
+ * The Featured_Header class allows users to create custom, per-post header images if their theme
+ * supports the WordPress 'custom-header' feature.  This class overwrites the header image on
  * single post views and replaces it with the featured image if the dimensions are correct.
  *
  * @since 0.1.0
@@ -101,7 +111,7 @@ class Featured_Header {
 	}
 
 	/**
-	 * Adds an image size using the add_image_size() function based off the dimensions of 
+	 * Adds an image size using the add_image_size() function based off the dimensions of
 	 * the theme's 'custom-header dimensions.
 	 *
 	 * @since 0.1.0
@@ -133,7 +143,7 @@ class Featured_Header {
 	}
 
 	/**
-	 * Filters the 'theme_mod_header_image' hook.  Checks if there's a featured image with the 
+	 * Filters the 'theme_mod_header_image' hook.  Checks if there's a featured image with the
 	 * correct dimensions to replace the header image on single posts.
 	 *
 	 * @since 0.1.0
@@ -169,7 +179,7 @@ class Featured_Header {
 	}
 
 	/**
-	 * Filters the 'theme_mod_header_image_data' hook.  This is used to set the header image width 
+	 * Filters the 'theme_mod_header_image_data' hook.  This is used to set the header image width
 	 * and height attributes if a featured header image was found.
 	 *
 	 * @since 0.1.0
@@ -189,7 +199,7 @@ class Featured_Header {
 	}
 
 	/**
-	 * Adds an internationalized version of the Featured Header image size name to the image sizes list 
+	 * Adds an internationalized version of the Featured Header image size name to the image sizes list
 	 * when inserting an image from the media gallery into a post.
 	 *
 	 * @since  0.1.1

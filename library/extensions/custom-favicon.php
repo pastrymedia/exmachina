@@ -1,19 +1,30 @@
 <?php
-/*
- * Plugin Name: Custom Favicon
- * Description: Simply add favicon to your ExMachina Powered site and the WordPress admin
- * Version: 1.0
- * Author: MachinaThemes
- * Author URI: http://machinathemes.com
- *
- * @package ExMachina
- * @subpackage Functions
- * @copyright Copyright (c) 2013, machinathemes.com
- * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- * @since 1.0
- */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
+/**
+ * ExMachina WordPress Theme Framework Engine
+ * EXTENSION
+ *
+ * EXTENSIONPHP
+ *
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
+ *
+ * DESCRIPTION
+ *
+ * @package     ExMachina
+ * @subpackage  Extensions
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
+ */
+###############################################################################
+# Begin extension
+###############################################################################
 
 
 /**

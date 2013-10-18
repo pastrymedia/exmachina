@@ -1,34 +1,35 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
+ * ExMachina WordPress Theme Framework Engine
+ * EXTENSION
+ *
+ * EXTENSIONPHP
+ *
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
+ *
  * Color Palette - A script to allow user-selected theme colors.
  *
- * Color Palette was created so that theme developers could easily add color options to the built-in 
- * WordPress theme customizer.  This makes theme developers' jobs easier by allowing them to simply 
+ * Color Palette was created so that theme developers could easily add color options to the built-in
+ * WordPress theme customizer.  This makes theme developers' jobs easier by allowing them to simply
  * plug in the values.  And, it gives users something fun to play with!
  *
- * <rant>
- * I encourage all theme developers who use this feature to use it wisely.  At some point, enough is 
- * enough.  This is not meant to be a full CSS-replacement script.  It wasn't created so that all 
- * themes could have a buttload of color options.  Use some common sense when applying this script 
- * and have fun with your designs.  A script like this can be limiting to your abilities as a 
- * designer.  You don't have to cave to user demands to add more options.  Make decisions and have 
- * some faith in your own skills.  You are a theme *designer*, right?.
- * </rant>
- *
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU 
- * General Public License as published by the Free Software Foundation; either version 2 of the License, 
- * or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * @package   ColorPalette
- * @version   0.1.0
- * @author    Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2013, Justin Tadlock
- * @link      http://justintadlock.com
- * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @package     ExMachina
+ * @subpackage  Extensions
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
  */
+###############################################################################
+# Begin extension
+###############################################################################
+
 
 /**
  * Handles custom theme color options via the WordPress theme customizer.
@@ -86,7 +87,7 @@ final class Color_Palette {
 		$supports = get_theme_support( 'color-palette' );
 
 		/* If a callback was set, add it to the correct action hook. */
-		if ( !empty( $supports[0] ) && isset( $supports[0]['callback'] ) ) 
+		if ( !empty( $supports[0] ) && isset( $supports[0]['callback'] ) )
 			add_action( 'color_palette_register', $supports[0]['callback'] );
 
 		/* Output CSS into <head>. */
@@ -221,7 +222,7 @@ final class Color_Palette {
 	}
 
 	/**
-	 * Registers the customize settings and controls.  We're tagging along on WordPress' built-in 
+	 * Registers the customize settings and controls.  We're tagging along on WordPress' built-in
 	 * 'Colors' section.
 	 *
 	 * @since  0.1.0
@@ -288,12 +289,12 @@ final class Color_Palette {
 		<script type="text/javascript">
 
 		<?php foreach ( $this->rules as $color_id => $rule ) { ?>
-			wp.customize( 
+			wp.customize(
 				'color_palette_<?php echo sanitize_key( $color_id ); ?>',
 				function( value ) {
 					value.bind(
 						function( to ) {
-						<?php foreach ( $rule as $property => $selectors ) { 
+						<?php foreach ( $rule as $property => $selectors ) {
 
 							/* Only run if property is allowed. */
 							if ( !in_array( $property, $this->allowed_properties ) )
@@ -303,24 +304,24 @@ final class Color_Palette {
 							$selectors = array_filter( $selectors, array( $this, 'remove_js_pseudo' ) );
 
 							/**
-							 * Allow theme developers to define jQuery().not() so 
-							 * they can make sure some elements don't get 
+							 * Allow theme developers to define jQuery().not() so
+							 * they can make sure some elements don't get
 							 * overwritten on the live preview.
 							 */
 							$do_not_overwrite = apply_filters( 'color_palette_preview_js_ignore', '', $color_id, $property, $selectors );
 
 							$not = !empty( $do_not_overwrite ) ? ".not( '{$do_not_overwrite}' )" : '';
 							?>
-							
+
 							jQuery( '<?php echo join( ', ', $selectors ); ?>' )<?php echo $not; ?>.css( '<?php echo $property; ?>', to );
 						<?php } ?>
 						}
 					);
 				}
-			);<?php 
-		} ?> 
+			);<?php
+		} ?>
 
-		</script><?php 
+		</script><?php
 	}
 
 	/**
@@ -339,7 +340,7 @@ final class Color_Palette {
 	}
 
 	/**
-	 * Helper function to be used in array_filter() for removing pseudo-selectors and pseudo-elements 
+	 * Helper function to be used in array_filter() for removing pseudo-selectors and pseudo-elements
 	 * from the theme customizer preview.  jQuery won't handle these well.
 	 *
 	 * @todo   Use jQuery's .hover() to handle ':hover'.

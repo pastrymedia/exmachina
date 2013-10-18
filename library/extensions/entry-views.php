@@ -1,37 +1,46 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
+ * ExMachina WordPress Theme Framework Engine
+ * EXTENSION
+ *
+ * EXTENSIONPHP
+ *
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
+ *
  * Entry Views - A WordPress script for counting post views.
  *
- * Entry views is a script for calculating the number of views a post gets.  It is meant to be basic and 
- * not a full-featured solution.  The idea is to allow theme/plugin authors to quickly load this file and 
- * build functions on top of it to suit their project needs.  This is an AJAX-based solution, so only visitors 
+ * Entry views is a script for calculating the number of views a post gets.  It is meant to be basic and
+ * not a full-featured solution.  The idea is to allow theme/plugin authors to quickly load this file and
+ * build functions on top of it to suit their project needs.  This is an AJAX-based solution, so only visitors
  * to your site with JavaScript enabled in their browser will update the view count.  It is possible to do this
  * without AJAX but not recommend (see notes below).
  *
  * By default, no post types are supported.  You have to register support for 'entry-views' for the post types
  * you wish to use this extension with.
  *
- * Not using AJAX: You can call up entry_views_update() at any time and pass it a post ID to update the 
+ * Not using AJAX: You can call up entry_views_update() at any time and pass it a post ID to update the
  * count, but this has problems.  Any links with rel="next" or rel="prefetch" will cause some browsers to prefetch
- * the data for that particular page.  This can cause the view count to be skewed.  To try and avoid this 
- * issue, you need to disable/remove adjacent_posts_rel_link_wp_head().  However, this is not bullet-proof 
+ * the data for that particular page.  This can cause the view count to be skewed.  To try and avoid this
+ * issue, you need to disable/remove adjacent_posts_rel_link_wp_head().  However, this is not bullet-proof
  * as it cannot control links it doesn't know about.
  * @link http://core.trac.wordpress.org/ticket/14568
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU 
- * General Public License as published by the Free Software Foundation; either version 2 of the License, 
- * or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * @package EntryViews
- * @version 0.2.3
- * @author Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2010 - 2012, Justin Tadlock
- * @link http://justintadlock.com
- * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @package     ExMachina
+ * @subpackage  Extensions
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
  */
+###############################################################################
+# Begin extension
+###############################################################################
 
 /* Add post type support for 'entry-views'. */
 add_action( 'init', 'entry_views_post_type_support' );
@@ -47,7 +56,7 @@ add_action( 'wp_ajax_entry_views', 'entry_views_update_ajax' );
 add_action( 'wp_ajax_nopriv_entry_views', 'entry_views_update_ajax' );
 
 /**
- * Adds support for 'entry-views' to the 'post', 'page', and 'attachment' post types (default WordPress 
+ * Adds support for 'entry-views' to the 'post', 'page', and 'attachment' post types (default WordPress
  * post types).  For all other post types, the theme should explicitly register support for this feature.
  *
  * @since 0.2.0
@@ -100,7 +109,7 @@ function entry_views_load() {
 
 /**
  * Updates the number of views when on a singular view of a post.  This function uses post meta to store
- * the number of views per post.  By default, the meta key is 'Views', but you can filter this with the 
+ * the number of views per post.  By default, the meta key is 'Views', but you can filter this with the
  * 'entry_views_meta_key' hook.
  *
  * @since 0.1.0
@@ -128,7 +137,7 @@ function entry_views_update( $post_id = '' ) {
 }
 
 /**
- * Gets the number of views a specific post has.  It also doubles as a shortcode, which is called with the 
+ * Gets the number of views a specific post has.  It also doubles as a shortcode, which is called with the
  * [entry-views] format.
  *
  * @since 0.1.0
@@ -174,7 +183,7 @@ function entry_views_update_ajax() {
 }
 
 /**
- * Displays a small script that sends an AJAX request for the page.  It passes the $post_id to the AJAX 
+ * Displays a small script that sends an AJAX request for the page.  It passes the $post_id to the AJAX
  * callback function for updating the meta.
  *
  * @since 0.1.0

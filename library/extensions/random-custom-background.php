@@ -1,29 +1,38 @@
 <?php
-/**
- * Random Custom Background - A script for handling random backgrounds.
- *
- * This script was created to make it simple for theme developers to set a random background for 
- * their theme instead of just a single background.  The script is just an extension of the WordPress 
- * 'custom-background' theme feature.  It allows the user to select a permanent background, but if 
- * no user background is set, the random background is shown.
- *
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU 
- * General Public License as published by the Free Software Foundation; either version 2 of the License, 
- * or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * @package   RandomCustomBackground
- * @version   0.2.0
- * @author    Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2012 - 2013, Justin Tadlock
- * @link      http://justintadlock.com
- * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- */
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
 
 /**
- * Generates a random custom background and filters the 'theme_mod_background_*' hooks to 
+ * ExMachina WordPress Theme Framework Engine
+ * EXTENSION
+ *
+ * EXTENSIONPHP
+ *
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
+ *
+ * Random Custom Background - A script for handling random backgrounds.
+ *
+ * This script was created to make it simple for theme developers to set a random background for
+ * their theme instead of just a single background.  The script is just an extension of the WordPress
+ * 'custom-background' theme feature.  It allows the user to select a permanent background, but if
+ * no user background is set, the random background is shown.
+ *
+ * @package     ExMachina
+ * @subpackage  Extensions
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
+ */
+###############################################################################
+# Begin extension
+###############################################################################
+
+/**
+ * Generates a random custom background and filters the 'theme_mod_background_*' hooks to
  * overwrite the theme's set background.
  *
  * @since  0.1.0
@@ -138,8 +147,8 @@ class Random_Custom_Background {
 		add_filter( 'theme_mod_background_image', array( &$this, 'background_image' ) );
 
 		/**
-		 * If no background image is set by the user, set the properties related to the background 
-		 * image.  The script must overwrite these values completely rather than relinquish control 
+		 * If no background image is set by the user, set the properties related to the background
+		 * image.  The script must overwrite these values completely rather than relinquish control
 		 * to the user setting to work properly with the random image.
 		 */
 		if ( empty( $image ) && !empty( $this->image ) ) {
@@ -161,11 +170,11 @@ class Random_Custom_Background {
 	}
 
 	/**
-	 * Generates a random background image from the theme's random images set.  Themes should 
+	 * Generates a random background image from the theme's random images set.  Themes should
 	 * add a second parameter to register their backgrounds (an array of background arrays).
 	 * add_theme_support( 'random-custom-background', $backgrounds ).
 	 *
-	 * Supported background arguments: 'image', 'color', 'repeat', 'position_y', 'position_x', 
+	 * Supported background arguments: 'image', 'color', 'repeat', 'position_y', 'position_x',
 	 * 'attachment', 'clip', 'origin', 'size'.
 	 *
 	 * @since  0.1.0
@@ -214,7 +223,7 @@ class Random_Custom_Background {
 	}
 
 	/**
-	 * Sets the background color.  This script will respect the user's background color setting.  
+	 * Sets the background color.  This script will respect the user's background color setting.
 	 * If the user has set a color, the random color won't be used.
 	 *
 	 * @since  0.1.0
@@ -229,7 +238,7 @@ class Random_Custom_Background {
 	}
 
 	/**
-	 * Sets the background image.  This script will respect the user's background image setting.  
+	 * Sets the background image.  This script will respect the user's background image setting.
 	 * If the user has set an image, the random image won't be used.
 	 *
 	 * @since  0.1.0
@@ -256,9 +265,9 @@ class Random_Custom_Background {
 	}
 
 	/**
-	 * Sets the background vertical position.  This isn't technically supported in WordPress (as 
-	 * of 3.5).  This method is only executed if using a random background image and the 
-	 * custom_background_callback() method is executed (themes can also use it in custom 
+	 * Sets the background vertical position.  This isn't technically supported in WordPress (as
+	 * of 3.5).  This method is only executed if using a random background image and the
+	 * custom_background_callback() method is executed (themes can also use it in custom
 	 * callbacks).
 	 *
 	 * @since  0.1.0
@@ -295,9 +304,9 @@ class Random_Custom_Background {
 	}
 
 	/**
-	 * Sets the background clip property.  This isn't technically supported in WordPress. This 
-	 * method is only executed if using a random background image and the 
-	 * custom_background_callback() method is executed (themes can also use it in custom 
+	 * Sets the background clip property.  This isn't technically supported in WordPress. This
+	 * method is only executed if using a random background image and the
+	 * custom_background_callback() method is executed (themes can also use it in custom
 	 * callbacks).
 	 *
 	 * @since  0.2.0
@@ -310,9 +319,9 @@ class Random_Custom_Background {
 	}
 
 	/**
-	 * Sets the background origin property.  This isn't technically supported in WordPress. This 
-	 * method is only executed if using a random background image and the 
-	 * custom_background_callback() method is executed (themes can also use it in custom 
+	 * Sets the background origin property.  This isn't technically supported in WordPress. This
+	 * method is only executed if using a random background image and the
+	 * custom_background_callback() method is executed (themes can also use it in custom
 	 * callbacks).
 	 *
 	 * @since  0.2.0
@@ -325,9 +334,9 @@ class Random_Custom_Background {
 	}
 
 	/**
-	 * Sets the background size property.  This isn't technically supported in WordPress. This 
-	 * method is only executed if using a random background image and the 
-	 * custom_background_callback() method is executed (themes can also use it in custom 
+	 * Sets the background size property.  This isn't technically supported in WordPress. This
+	 * method is only executed if using a random background image and the
+	 * custom_background_callback() method is executed (themes can also use it in custom
 	 * callbacks).
 	 *
 	 * @since  0.2.0
@@ -340,7 +349,7 @@ class Random_Custom_Background {
 	}
 
 	/**
-	 * Outputs the custom background style in the header.  This function is only executed if the value 
+	 * Outputs the custom background style in the header.  This function is only executed if the value
 	 * of the 'wp-head-callback' for the 'custom-background' feature is set to '__return_false'.
 	 *
 	 * @since  0.1.0

@@ -1,33 +1,34 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
- * Plugin Name: Clean My Archives
- * Description: A plugin that displays a full archive of posts by month and year with the <code>[clean-my-archives]</code> shortcode.
- * Version: 0.2.0
- * Author: Machina Themes
- * Author URI: http://machinathemes.com
+ * ExMachina WordPress Theme Framework Engine
+ * Clean My Archives
+ *
+ * cleaner-archives.php
+ *
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
+ *
+ * A plugin that displays a full archive of posts by month and year with the <code>[clean-my-archives]</code> shortcode.
  *
  * Clean My Archives is a plugin developed to simplify the process of adding a list of archives to your
  * site.  So many archives plugins make things overly complex or add a lot of junk to the page like unneeded
  * JavaScript.  This plugin was created to clean your archives page.
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
- * General Public License as published by the Free Software Foundation; either version 2 of the License,
- * or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * You should have received a copy of the GNU General Public License along with this program; if not, write
- * to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- *
- * @package   CleanMyArchives
- * @version   0.2.0
- * @since     0.1.0
- * @author    Machina Themes
- * @copyright Copyright (c) 2008 - 2013, Machina Themes
- * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @package     ExMachina
+ * @subpackage  Extensions
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
  */
-
+###############################################################################
+# Begin extension
+###############################################################################
 
 /* Register shortcodes. */
 add_action( 'init', 'clean_my_archives_shortcodes' );

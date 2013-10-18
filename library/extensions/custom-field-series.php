@@ -1,27 +1,36 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
+ * ExMachina WordPress Theme Framework Engine
+ * EXTENSION
+ *
+ * EXTENSIONPHP
+ *
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
+ *
  * Custom Field Series - A script for creating a series of posts by custom field.
  *
- * Custom Field Series was created to allow users to add individual posts to a larger series of posts.  It was 
- * created before WordPress made it easy for developers to create new taxonomies.  Ideally, one would use a 
- * taxonomy to handle this functionality.  However, this method is lighter, provides an extremely simple 
- * method for adding posts to a series, and offers backwards compatibility for people that have used this 
+ * Custom Field Series was created to allow users to add individual posts to a larger series of posts.  It was
+ * created before WordPress made it easy for developers to create new taxonomies.  Ideally, one would use a
+ * taxonomy to handle this functionality.  However, this method is lighter, provides an extremely simple
+ * method for adding posts to a series, and offers backwards compatibility for people that have used this
  * method before.
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU 
- * General Public License as published by the Free Software Foundation; either version 2 of the License, 
- * or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * @package CustomFieldSeries
- * @version 0.5.0
- * @author Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2007 - 2013, Justin Tadlock
- * @link http://justintadlock.com/archives/2007/11/01/wordpress-custom-fields-listing-a-series-of-posts
- * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @package     ExMachina
+ * @subpackage  Extensions
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
  */
+###############################################################################
+# Begin extension
+###############################################################################
 
 /* Add support for the 'custom-field-series' extension to posts. */
 add_action( 'init', 'custom_field_series_post_type_support' );
@@ -33,8 +42,8 @@ add_action( 'init', 'custom_field_series_register_meta' );
 add_action( 'admin_menu', 'custom_field_series_admin_setup' );
 
 /**
- * Checks for a series of posts by the current post's metadata.  The function grabs the meta value for the 
- * 'Series' meta key and checks if any posts have been given the same value.  If posts are found with this 
+ * Checks for a series of posts by the current post's metadata.  The function grabs the meta value for the
+ * 'Series' meta key and checks if any posts have been given the same value.  If posts are found with this
  * meta key/value pair, the function adds them to an unordered list.
  *
  * @since 0.1.0
@@ -116,7 +125,7 @@ function custom_field_series( $args = array() ) {
 }
 
 /**
- * Adds post type support of 'custom-field-series' to the 'post' post type.  Developers should register support 
+ * Adds post type support of 'custom-field-series' to the 'post' post type.  Developers should register support
  * for additional post types.
  *
  * @since 0.4.0
@@ -128,7 +137,7 @@ function custom_field_series_post_type_support() {
 }
 
 /**
- * Registers the custom field series meta key 'Series' for for specific object types and provides a 
+ * Registers the custom field series meta key 'Series' for for specific object types and provides a
  * function to sanitize the metadata on update.
  *
  * @since 0.4.0
@@ -140,8 +149,8 @@ function custom_field_series_register_meta() {
 }
 
 /**
- * Callback function for sanitizing meta when add_metadata() or update_metadata() is called by WordPress. 
- * If a developer wants to set up a custom method for sanitizing the data, they should use the 
+ * Callback function for sanitizing meta when add_metadata() or update_metadata() is called by WordPress.
+ * If a developer wants to set up a custom method for sanitizing the data, they should use the
  * "sanitize_{$meta_type}_meta_{$meta_key}" filter hook to do so.
  *
  * @since 0.4.0
@@ -181,7 +190,7 @@ function custom_field_series_admin_setup() {
 }
 
 /**
- * Hooks into the 'add_meta_boxes' hook to add the custom field series meta box and the 'save_post' hook 
+ * Hooks into the 'add_meta_boxes' hook to add the custom field series meta box and the 'save_post' hook
  * to save the metadata.
  *
  * @since 0.4.0

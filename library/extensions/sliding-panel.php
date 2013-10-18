@@ -1,28 +1,30 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
- * Plugin Name: Sliding Panel
- * Description: A fully-widgetized and responsive sliding panel for your site.
- * Version: 0.2.0
- * Author: Machina Themes
- * Author URI: http://machinathemes.com
+ * ExMachina WordPress Theme Framework Engine
+ * Sliding Panel
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
- * General Public License as published by the Free Software Foundation; either version 2 of the License,
- * or (at your option) any later version.
+ * EXTENSIONPHP
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
  *
- * You should have received a copy of the GNU General Public License along with this program; if not, write
- * to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ * A fully-widgetized and responsive sliding panel for your site.
  *
- * @package   SlidingPanel
- * @version   0.2.0
- * @since     0.1.0
- * @author    Machina Themes
- * @copyright Copyright (c) 2009 - 2013, Machina Themes
- * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @package     ExMachina
+ * @subpackage  Extensions
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
  */
+###############################################################################
+# Begin extension
+###############################################################################
 
 final class Sliding_Panel_Plugin {
 

@@ -1,33 +1,33 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
- * Plugin Name: Custom Header Extended
- * Plugin URI: http://themeexmachina.com/plugins/custom-header-extended
- * Description: Allows users to create <a href="http://codex.wordpress.org/Custom_Headers">custom headers</a> for individual posts, which are displayed on the single post page.  It works alongside any theme that supports the WordPress <code>custom-header</code> feature.
- * Version: 0.1.0
- * Author: Machina Themes
- * Author URI: http://machinathemes.com
+ * ExMachina WordPress Theme Framework Engine
+ * EXTENSION
+ *
+ * EXTENSIONPHP
+ *
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
  *
  * This plugin was created so that users could create custom headers for individual posts.  It ties
  * into the Wordpress 'custom-header' theme feature.  Therefore, it will only work with themes that
  * add support for 'custom-header' via 'functions.php.
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
- * General Public License as published by the Free Software Foundation; either version 2 of the License,
- * or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * You should have received a copy of the GNU General Public License along with this program; if not, write
- * to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- *
- * @package  CustomHeadersExtended
- * @version   0.1.0
- * @since     0.1.0
- * @author    Machina Themes
- * @copyright Copyright (c) 2013, Machina Themes
- * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @package     ExMachina
+ * @subpackage  Extensions
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
  */
+###############################################################################
+# Begin extension
+###############################################################################
+
 
 final class CHE_Custom_Headers {
 

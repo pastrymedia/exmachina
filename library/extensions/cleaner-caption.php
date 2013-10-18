@@ -1,33 +1,43 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
+ * ExMachina WordPress Theme Framework Engine
+ * EXTENSION
+ *
+ * EXTENSIONPHP
+ *
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
+ *
  * Cleaner Caption - Cleans up the WP [caption] shortcode.
  *
- * WordPress adds an inline style to its [caption] shortcode which specifically adds 10px of extra width to 
+ * WordPress adds an inline style to its [caption] shortcode which specifically adds 10px of extra width to
  * captions, making theme authors jump through hoops to design captioned elements to their liking.  This extra
- * width makes the assumption that all captions should have 10px of extra padding to account for a box that 
+ * width makes the assumption that all captions should have 10px of extra padding to account for a box that
  * wraps the element.  This script changes the width to match that of the 'width' attribute passed in through
  * the shortcode, allowing themes to better handle how their captions are designed.
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU 
- * General Public License as published by the Free Software Foundation; either version 2 of the License, 
- * or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * @package CleanerCaption
- * @version 0.2.1
- * @author Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2013, Justin Tadlock
- * @link http://justintadlock.com
- * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @package     ExMachina
+ * @subpackage  Extensions
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
  */
+###############################################################################
+# Begin extension
+###############################################################################
+
 
 /* Filter the caption shortcode output. */
 add_filter( 'img_caption_shortcode', 'cleaner_caption', 10, 3 );
 
 /**
- * Cleans up the default WordPress [caption] shortcode.  The main purpose of this function is to remove the 
+ * Cleans up the default WordPress [caption] shortcode.  The main purpose of this function is to remove the
  * inline styling WP adds, which creates 10px of padding around captioned elements.
  *
  * @since 0.1.0

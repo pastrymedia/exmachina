@@ -1,10 +1,19 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
- * Plugin Name: Template Tag Shortcodes
- * Description: Turns many of the WordPress template tags into shortcodes that can be used in posts and pages.
- * Version: 0.1.1
- * Author: Machina Themes
- * Author URI: http://machinathemes.com
+ * ExMachina WordPress Theme Framework Engine
+ * EXTENSION
+ *
+ * EXTENSIONPHP
+ *
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
+ *
+ * Turns many of the WordPress template tags into shortcodes that can be used in posts and pages.
  *
  * Template Tag Shortcodes takes many of the WordPress template
  * tags and turns them into shortcodes.  This allows users to use these
@@ -26,16 +35,16 @@
  * Developers can learn more about the WordPress shortcode API:
  * @link http://codex.wordpress.org/Shortcode_API
  *
- * @version 0.1.1
- * @author Machina Themes
- * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * @package TemplateTagShortcodes
+ * @package     ExMachina
+ * @subpackage  Extensions
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
  */
+###############################################################################
+# Begin extension
+###############################################################################
 
 /**
  * Add page shortcodes
