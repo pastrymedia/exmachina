@@ -1,326 +1,374 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
- * The Tags widget replaces the default WordPress Tag Cloud widget. This version gives total
- * control over the output to the user by allowing the input of all the arguments typically seen
- * in the wp_tag_cloud() function.
+ * ExMachina WordPress Theme Framework Engine
+ * Tags Cloud Widget
  *
- * @package    ExMachina
- * @subpackage Classes
- * @author     Justin Tadlock <justin@justintadlock.com>
- * @copyright  Copyright (c) 2008 - 2013, Justin Tadlock
- * @link       http://themeexmachina.com/exmachina-core
- * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * widget-tags.php
+ *
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
+ *
+ * The Tags widget replaces the default WordPress Tag Cloud widget. This version
+ * gives total control over the output to the user by allowing the input of all
+ * the arguments typically seen in the wp_tag_cloud() function.
+ *
+ * @package     ExMachina
+ * @subpackage  Widgets
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
  */
+###############################################################################
+# Begin widget
+###############################################################################
 
 /**
  * Tags Widget Class
  *
- * @since 0.6.0
+ * @since 2.7.0
+ * @access public
+ *
+ * @return void
  */
 class ExMachina_Widget_Tags extends WP_Widget {
 
-	/**
-	 * Set up the widget's unique name, ID, class, description, and other options.
-	 *
-	 * @since 1.2.0
-	 */
-	function __construct() {
+  /**
+   * Widget Constructor
+   *
+   * Specifies the widget's unique name, ID, classname, description, and other
+   * options.
+   *
+   * @since 2.7.0
+   * @access public
+   *
+   * @return void
+   */
+  function __construct() {
 
-		/* Set up the widget options. */
-		$widget_options = array(
-			'classname'   => 'tags',
-			'description' => esc_html__( 'An advanced widget that gives you total control over the output of your tags.', 'exmachina-core' )
-		);
+    /* Set up the widget options. */
+    $widget_options = array(
+      'classname'   => 'tags',
+      'description' => esc_html__( 'An advanced widget that gives you total control over the output of your tags.', 'exmachina-core' )
+    );
 
-		/* Set up the widget control options. */
-		$control_options = array(
-			'width'  => 800,
-			'height' => 350
-		);
+    /* Set up the widget control options. */
+    $control_options = array(
+      'width'  => 800,
+      'height' => 350
+    );
 
-		/* Create the widget. */
-		$this->WP_Widget(
-			'exmachina-tags',               // $this->id_base
-			__( 'Tags', 'exmachina-core' ), // $this->name
-			$widget_options,             // $this->widget_options
-			$control_options             // $this->control_options
-		);
-	}
+    /* Create the widget. */
+    $this->WP_Widget(
+      'exmachina-tags',               // $this->id_base
+      __( 'Tags', 'exmachina-core' ), // $this->name
+      $widget_options,             // $this->widget_options
+      $control_options             // $this->control_options
+    );
 
-	/**
-	 * Outputs the widget based on the arguments input through the widget controls.
-	 *
-	 * @since 0.6.0
-	 */
-	function widget( $sidebar, $instance ) {
-		extract( $sidebar );
+  } // end function __construct()
 
-		/* Set the $args for wp_tag_cloud() to the $instance array. */
-		$args = $instance;
+  /**
+   * Widget API
+   *
+   * Outputs the widget based on the arguments input through the widget controls.
+   *
+   * @since 2.7.0
+   * @access public
+   *
+   * @param  array $args      The array of form elements
+   * @param  array $instance  The current instance of the widget
+   * @return void
+   */
+  function widget( $sidebar, $instance ) {
+    extract( $sidebar );
 
-		/* Make sure empty callbacks aren't passed for custom functions. */
-		$args['topic_count_text_callback'] = !empty( $args['topic_count_text_callback'] ) ? $args['topic_count_text_callback'] : 'default_topic_count_text';
-		$args['topic_count_scale_callback'] = !empty( $args['topic_count_scale_callback'] ) ? $args['topic_count_scale_callback'] : 'default_topic_count_scale';
+    /* Set the $args for wp_tag_cloud() to the $instance array. */
+    $args = $instance;
 
-		/* If the separator is empty, set it to the default new line. */
-		$args['separator'] = !empty( $args['separator'] ) ? $args['separator'] : "\n";
+    /* Make sure empty callbacks aren't passed for custom functions. */
+    $args['topic_count_text_callback'] = !empty( $args['topic_count_text_callback'] ) ? $args['topic_count_text_callback'] : 'default_topic_count_text';
+    $args['topic_count_scale_callback'] = !empty( $args['topic_count_scale_callback'] ) ? $args['topic_count_scale_callback'] : 'default_topic_count_scale';
 
-		/* Overwrite the echo argument. */
-		$args['echo'] = false;
+    /* If the separator is empty, set it to the default new line. */
+    $args['separator'] = !empty( $args['separator'] ) ? $args['separator'] : "\n";
 
-		/* Output the theme's $before_widget wrapper. */
-		echo $before_widget;
+    /* Overwrite the echo argument. */
+    $args['echo'] = false;
 
-		/* If a title was input by the user, display it. */
-		if ( !empty( $instance['title'] ) )
-			echo $before_title . apply_filters( 'widget_title',  $instance['title'], $instance, $this->id_base ) . $after_title;
+    /* Output the theme's $before_widget wrapper. */
+    echo $before_widget;
 
-		/* Get the tag cloud. */
-		$tags = str_replace( array( "\r", "\n", "\t" ), ' ', wp_tag_cloud( $args ) );
+    /* If a title was input by the user, display it. */
+    if ( !empty( $instance['title'] ) )
+      echo $before_title . apply_filters( 'widget_title',  $instance['title'], $instance, $this->id_base ) . $after_title;
 
-		/* If $format should be flat, wrap it in the <p> element. */
-		if ( 'flat' == $instance['format'] ) {
-			$classes = array( 'term-cloud' );
+    /* Get the tag cloud. */
+    $tags = str_replace( array( "\r", "\n", "\t" ), ' ', wp_tag_cloud( $args ) );
 
-			foreach ( $instance['taxonomy'] as $tax )
-				$classes[] = sanitize_html_class( "{$tax}-cloud" );
+    /* If $format should be flat, wrap it in the <p> element. */
+    if ( 'flat' == $instance['format'] ) {
+      $classes = array( 'term-cloud' );
 
-			$tags = '<p class="' . join( $classes, ' ' ) . '">' . $tags . '</p>';
-		}
+      foreach ( $instance['taxonomy'] as $tax )
+        $classes[] = sanitize_html_class( "{$tax}-cloud" );
 
-		/* Output the tag cloud. */
-		echo $tags;
+      $tags = '<p class="' . join( $classes, ' ' ) . '">' . $tags . '</p>';
+    }
 
-		/* Close the theme's widget wrapper. */
-		echo $after_widget;
-	}
+    /* Output the tag cloud. */
+    echo $tags;
 
-	/**
-	 * Updates the widget control options for the particular instance of the widget.
-	 *
-	 * @since 0.6.0
-	 */
-	function update( $new_instance, $old_instance ) {
-		$instance = $old_instance;
+    /* Close the theme's widget wrapper. */
+    echo $after_widget;
 
-		/* Set the instance to the new instance. */
-		$instance = $new_instance;
+  } // end function widget()
 
-		$instance['title']                      = strip_tags( $new_instance['title'] );
-		$instance['smallest']                   = strip_tags( $new_instance['smallest'] );
-		$instance['largest']                    = strip_tags( $new_instance['largest'] );
-		$instance['number']                     = strip_tags( $new_instance['number'] );
-		$instance['separator']                  = strip_tags( $new_instance['separator'] );
-		$instance['name__like']                 = strip_tags( $new_instance['name__like'] );
-		$instance['search']                     = strip_tags( $new_instance['search'] );
-		$instance['child_of']                   = strip_tags( $new_instance['child_of'] );
-		$instance['parent']                     = strip_tags( $new_instance['parent'] );
-		$instance['topic_count_text_callback']  = strip_tags( $new_instance['topic_count_text_callback'] );
-		$instance['topic_count_scale_callback'] = strip_tags( $new_instance['topic_count_scale_callback'] );
+  /**
+   * Update Widget
+   *
+   * Updates the widget control options for the particular instance of the widget.
+   *
+   * @since 2.7.0
+   * @access public
+   *
+   * @param  array $new_instance The new instance of values to be generated via the update.
+   * @param  array $old_instance The previous instance of values before the update.
+   * @return array               The instance values.
+   */
+  function update( $new_instance, $old_instance ) {
+    $instance = $old_instance;
 
-		$instance['include'] = preg_replace( '/[^0-9,]/', '', $new_instance['include'] );
-		$instance['exclude'] = preg_replace( '/[^0-9,]/', '', $new_instance['exclude'] );
+    /* Set the instance to the new instance. */
+    $instance = $new_instance;
 
-		$instance['unit']     = $new_instance['unit'];
-		$instance['format']   = $new_instance['format'];
-		$instance['orderby']  = $new_instance['orderby'];
-		$instance['order']    = $new_instance['order'];
-		$instance['taxonomy'] = $new_instance['taxonomy'];
-		$instance['link']     = $new_instance['link'];
+    $instance['title']                      = strip_tags( $new_instance['title'] );
+    $instance['smallest']                   = strip_tags( $new_instance['smallest'] );
+    $instance['largest']                    = strip_tags( $new_instance['largest'] );
+    $instance['number']                     = strip_tags( $new_instance['number'] );
+    $instance['separator']                  = strip_tags( $new_instance['separator'] );
+    $instance['name__like']                 = strip_tags( $new_instance['name__like'] );
+    $instance['search']                     = strip_tags( $new_instance['search'] );
+    $instance['child_of']                   = strip_tags( $new_instance['child_of'] );
+    $instance['parent']                     = strip_tags( $new_instance['parent'] );
+    $instance['topic_count_text_callback']  = strip_tags( $new_instance['topic_count_text_callback'] );
+    $instance['topic_count_scale_callback'] = strip_tags( $new_instance['topic_count_scale_callback'] );
 
-		$instance['pad_counts'] = ( isset( $new_instance['pad_counts'] ) ? 1 : 0 );
-		$instance['hide_empty'] = ( isset( $new_instance['hide_empty'] ) ? 1 : 0 );
+    $instance['include'] = preg_replace( '/[^0-9,]/', '', $new_instance['include'] );
+    $instance['exclude'] = preg_replace( '/[^0-9,]/', '', $new_instance['exclude'] );
 
-		return $instance;
-	}
+    $instance['unit']     = $new_instance['unit'];
+    $instance['format']   = $new_instance['format'];
+    $instance['orderby']  = $new_instance['orderby'];
+    $instance['order']    = $new_instance['order'];
+    $instance['taxonomy'] = $new_instance['taxonomy'];
+    $instance['link']     = $new_instance['link'];
 
-	/**
-	 * Displays the widget control options in the Widgets admin screen.
-	 *
-	 * @since 0.6.0
-	 */
-	function form( $instance ) {
+    $instance['pad_counts'] = ( isset( $new_instance['pad_counts'] ) ? 1 : 0 );
+    $instance['hide_empty'] = ( isset( $new_instance['hide_empty'] ) ? 1 : 0 );
 
-		/* Set up the default form values. */
-		$defaults = array(
-			'title'                      => esc_attr__( 'Tags', 'exmachina-core' ),
-			'order'                      => 'ASC',
-			'orderby'                    => 'name',
-			'format'                     => 'flat',
-			'include'                    => '',
-			'exclude'                    => '',
-			'unit'                       => 'pt',
-			'smallest'                   => 8,
-			'largest'                    => 22,
-			'link'                       => 'view',
-			'number'                     => 25,
-			'separator'                  => ' ',
-			'child_of'                   => '',
-			'parent'                     => '',
-			'taxonomy'                   => array( 'post_tag' ),
-			'hide_empty'                 => 1,
-			'pad_counts'                 => false,
-			'search'                     => '',
-			'name__like'                 => '',
-			'topic_count_text_callback'  => 'default_topic_count_text',
-			'topic_count_scale_callback' => 'default_topic_count_scale',
-		);
+    return $instance;
 
-		/* Merge the user-selected arguments with the defaults. */
-		$instance = wp_parse_args( (array) $instance, $defaults );
+  } // end function update()
 
-		/* <select> element options. */
-		$taxonomies = get_taxonomies( array( 'show_tagcloud' => true ), 'objects' );
+  /**
+   * Widget Form
+   *
+   * Generates the administration form for the widget.
+   *
+   * @since 2.7.0
+   * @access public
+   *
+   * @param  array $instance The array of keys and values for the widget.
+   * @return void
+   */
+  function form( $instance ) {
 
-		$link = array( 
-			'view' => esc_attr__( 'View', 'exmachina-core' ), 
-			'edit' => esc_attr__( 'Edit', 'exmachina-core' ) 
-		);
+    /* Set up the default form values. */
+    $defaults = array(
+      'title'                      => esc_attr__( 'Tags', 'exmachina-core' ),
+      'order'                      => 'ASC',
+      'orderby'                    => 'name',
+      'format'                     => 'flat',
+      'include'                    => '',
+      'exclude'                    => '',
+      'unit'                       => 'pt',
+      'smallest'                   => 8,
+      'largest'                    => 22,
+      'link'                       => 'view',
+      'number'                     => 25,
+      'separator'                  => ' ',
+      'child_of'                   => '',
+      'parent'                     => '',
+      'taxonomy'                   => array( 'post_tag' ),
+      'hide_empty'                 => 1,
+      'pad_counts'                 => false,
+      'search'                     => '',
+      'name__like'                 => '',
+      'topic_count_text_callback'  => 'default_topic_count_text',
+      'topic_count_scale_callback' => 'default_topic_count_scale',
+    );
 
-		$format = array( 
-			'flat' => esc_attr__( 'Flat', 'exmachina-core' ), 
-			'list' => esc_attr__( 'List', 'exmachina-core' ) 
-		);
+    /* Merge the user-selected arguments with the defaults. */
+    $instance = wp_parse_args( (array) $instance, $defaults );
 
-		$order = array( 
-			'ASC'  => esc_attr__( 'Ascending', 'exmachina-core' ), 
-			'DESC' => esc_attr__( 'Descending', 'exmachina-core' ), 
-			'RAND' => esc_attr__( 'Random', 'exmachina-core' ) 
-		);
+    /* <select> element options. */
+    $taxonomies = get_taxonomies( array( 'show_tagcloud' => true ), 'objects' );
 
-		$orderby = array( 
-			'count' => esc_attr__( 'Count', 'exmachina-core' ), 
-			'name'  => esc_attr__( 'Name', 'exmachina-core' ) 
-		);
+    $link = array(
+      'view' => esc_attr__( 'View', 'exmachina-core' ),
+      'edit' => esc_attr__( 'Edit', 'exmachina-core' )
+    );
 
-		$unit = array( 
-			'pt' => 'pt', 
-			'px' => 'px', 
-			'em' => 'em', 
-			'%'  => '%' 
-		);
+    $format = array(
+      'flat' => esc_attr__( 'Flat', 'exmachina-core' ),
+      'list' => esc_attr__( 'List', 'exmachina-core' )
+    );
 
-		?>
+    $order = array(
+      'ASC'  => esc_attr__( 'Ascending', 'exmachina-core' ),
+      'DESC' => esc_attr__( 'Descending', 'exmachina-core' ),
+      'RAND' => esc_attr__( 'Random', 'exmachina-core' )
+    );
 
-		<div class="exmachina-widget-controls columns-3">
-		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'exmachina-core' ); ?></label>
-			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'taxonomy' ); ?>"><code>taxonomy</code></label> 
-			<select class="widefat" id="<?php echo $this->get_field_id( 'taxonomy' ); ?>" name="<?php echo $this->get_field_name( 'taxonomy' ); ?>[]" size="4" multiple="multiple">
-				<?php foreach ( $taxonomies as $taxonomy ) { ?>
-					<option value="<?php echo $taxonomy->name; ?>" <?php selected( in_array( $taxonomy->name, (array)$instance['taxonomy'] ) ); ?>><?php echo $taxonomy->labels->singular_name; ?></option>
-				<?php } ?>
-			</select>
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'format' ); ?>"><code>format</code></label> 
-			<select class="widefat" id="<?php echo $this->get_field_id( 'format' ); ?>" name="<?php echo $this->get_field_name( 'format' ); ?>">
-				<?php foreach ( $format as $option_value => $option_label ) { ?>
-					<option value="<?php echo $option_value; ?>" <?php selected( $instance['format'], $option_value ); ?>><?php echo $option_label; ?></option>
-				<?php } ?>
-			</select>
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'order' ); ?>"><code>order</code></label> 
-			<select class="widefat" id="<?php echo $this->get_field_id( 'order' ); ?>" name="<?php echo $this->get_field_name( 'order' ); ?>">
-				<?php foreach ( $order as $option_value => $option_label ) { ?>
-					<option value="<?php echo $option_value; ?>" <?php selected( $instance['order'], $option_value ); ?>><?php echo $option_label; ?></option>
-				<?php } ?>
-			</select>
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'orderby' ); ?>"><code>orderby</code></label> 
-			<select class="widefat" id="<?php echo $this->get_field_id( 'orderby' ); ?>" name="<?php echo $this->get_field_name( 'orderby' ); ?>">
-				<?php foreach ( $orderby as $option_value => $option_label ) { ?>
-					<option value="<?php echo $option_value; ?>" <?php selected( $instance['orderby'], $option_value ); ?>><?php echo $option_label; ?></option>
-				<?php } ?>
-			</select>
-		</p>
-		</div>
+    $orderby = array(
+      'count' => esc_attr__( 'Count', 'exmachina-core' ),
+      'name'  => esc_attr__( 'Name', 'exmachina-core' )
+    );
 
-		<div class="exmachina-widget-controls columns-3">
-		<p>
-			<label for="<?php echo $this->get_field_id( 'include' ); ?>"><code>include</code></label>
-			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'include' ); ?>" name="<?php echo $this->get_field_name( 'include' ); ?>" value="<?php echo esc_attr( $instance['include'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'exclude' ); ?>"><code>exclude</code></label>
-			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'exclude' ); ?>" name="<?php echo $this->get_field_name( 'exclude' ); ?>" value="<?php echo esc_attr( $instance['exclude'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'number' ); ?>"><code>number</code></label>
-			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" value="<?php echo esc_attr( $instance['number'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'largest' ); ?>"><code>largest</code></label>
-			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'largest' ); ?>" name="<?php echo $this->get_field_name( 'largest' ); ?>" value="<?php echo esc_attr( $instance['largest'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'smallest' ); ?>"><code>smallest</code></label>
-			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'smallest' ); ?>" name="<?php echo $this->get_field_name( 'smallest' ); ?>" value="<?php echo esc_attr( $instance['smallest'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'unit' ); ?>"><code>unit</code></label> 
-			<select class="smallfat" id="<?php echo $this->get_field_id( 'unit' ); ?>" name="<?php echo $this->get_field_name( 'unit' ); ?>">
-				<?php foreach ( $unit as $option_value => $option_label ) { ?>
-					<option value="<?php echo $option_value; ?>" <?php selected( $instance['unit'], $option_value ); ?>><?php echo $option_label; ?></option>
-				<?php } ?>
-			</select>
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'separator' ); ?>"><code>separator</code></label>
-			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'separator' ); ?>" name="<?php echo $this->get_field_name( 'separator' ); ?>" value="<?php echo esc_attr( $instance['separator'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'child_of' ); ?>"><code>child_of</code></label>
-			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'child_of' ); ?>" name="<?php echo $this->get_field_name( 'child_of' ); ?>" value="<?php echo esc_attr( $instance['child_of'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'parent' ); ?>"><code>parent</code></label>
-			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'parent' ); ?>" name="<?php echo $this->get_field_name( 'parent' ); ?>" value="<?php echo esc_attr( $instance['parent'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'link' ); ?>"><code>link</code></label> 
-			<select class="widefat" id="<?php echo $this->get_field_id( 'link' ); ?>" name="<?php echo $this->get_field_name( 'link' ); ?>">
-				<?php foreach ( $link as $option_value => $option_label ) { ?>
-					<option value="<?php echo $option_value; ?>" <?php selected( $instance['link'], $option_value ); ?>><?php echo $option_label; ?></option>
-				<?php } ?>
-			</select>
-		</p>
-		</div>
+    $unit = array(
+      'pt' => 'pt',
+      'px' => 'px',
+      'em' => 'em',
+      '%'  => '%'
+    );
 
-		<div class="exmachina-widget-controls columns-3 column-last">
-		<p>
-			<label for="<?php echo $this->get_field_id( 'search' ); ?>"><code>search</code></label>
-			<input type="text" class="widefat code" id="<?php echo $this->get_field_id( 'search' ); ?>" name="<?php echo $this->get_field_name( 'search' ); ?>" value="<?php echo esc_attr( $instance['search'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'name__like' ); ?>"><code>name__like</code></label>
-			<input type="text" class="widefat code" id="<?php echo $this->get_field_id( 'name__like' ); ?>" name="<?php echo $this->get_field_name( 'name__like' ); ?>" value="<?php echo esc_attr( $instance['name__like'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'topic_count_text_callback' ); ?>"><code>topic_count_text_callback</code></label>
-			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'topic_count_text_callback' ); ?>" name="<?php echo $this->get_field_name( 'topic_count_text_callback' ); ?>" value="<?php echo esc_attr( $instance['topic_count_text_callback'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'topic_count_scale_callback' ); ?>"><code>topic_count_scale_callback</code></label>
-			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'topic_count_scale_callback' ); ?>" name="<?php echo $this->get_field_name( 'topic_count_scale_callback' ); ?>" value="<?php echo esc_attr( $instance['topic_count_scale_callback'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'pad_counts' ); ?>">
-			<input class="checkbox" type="checkbox" <?php checked( $instance['pad_counts'], true ); ?> id="<?php echo $this->get_field_id( 'pad_counts' ); ?>" name="<?php echo $this->get_field_name( 'pad_counts' ); ?>" /> <?php _e( 'Pad counts?', 'exmachina-core' ); ?> <code>pad_counts</code></label>
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'hide_empty' ); ?>">
-			<input class="checkbox" type="checkbox" <?php checked( $instance['hide_empty'], true ); ?> id="<?php echo $this->get_field_id( 'hide_empty' ); ?>" name="<?php echo $this->get_field_name( 'hide_empty' ); ?>" /> <?php _e( 'Hide empty?', 'exmachina-core' ); ?> <code>hide_empty</code></label>
-		</p>
-		</div>
-		<div style="clear:both;">&nbsp;</div>
-	<?php
-	}
-}
+    ?>
 
-?>
+    <div class="exmachina-widget-controls columns-3">
+    <p>
+      <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'exmachina-core' ); ?></label>
+      <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'taxonomy' ); ?>"><code>taxonomy</code></label>
+      <select class="widefat" id="<?php echo $this->get_field_id( 'taxonomy' ); ?>" name="<?php echo $this->get_field_name( 'taxonomy' ); ?>[]" size="4" multiple="multiple">
+        <?php foreach ( $taxonomies as $taxonomy ) { ?>
+          <option value="<?php echo $taxonomy->name; ?>" <?php selected( in_array( $taxonomy->name, (array)$instance['taxonomy'] ) ); ?>><?php echo $taxonomy->labels->singular_name; ?></option>
+        <?php } ?>
+      </select>
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'format' ); ?>"><code>format</code></label>
+      <select class="widefat" id="<?php echo $this->get_field_id( 'format' ); ?>" name="<?php echo $this->get_field_name( 'format' ); ?>">
+        <?php foreach ( $format as $option_value => $option_label ) { ?>
+          <option value="<?php echo $option_value; ?>" <?php selected( $instance['format'], $option_value ); ?>><?php echo $option_label; ?></option>
+        <?php } ?>
+      </select>
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'order' ); ?>"><code>order</code></label>
+      <select class="widefat" id="<?php echo $this->get_field_id( 'order' ); ?>" name="<?php echo $this->get_field_name( 'order' ); ?>">
+        <?php foreach ( $order as $option_value => $option_label ) { ?>
+          <option value="<?php echo $option_value; ?>" <?php selected( $instance['order'], $option_value ); ?>><?php echo $option_label; ?></option>
+        <?php } ?>
+      </select>
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'orderby' ); ?>"><code>orderby</code></label>
+      <select class="widefat" id="<?php echo $this->get_field_id( 'orderby' ); ?>" name="<?php echo $this->get_field_name( 'orderby' ); ?>">
+        <?php foreach ( $orderby as $option_value => $option_label ) { ?>
+          <option value="<?php echo $option_value; ?>" <?php selected( $instance['orderby'], $option_value ); ?>><?php echo $option_label; ?></option>
+        <?php } ?>
+      </select>
+    </p>
+    </div>
+
+    <div class="exmachina-widget-controls columns-3">
+    <p>
+      <label for="<?php echo $this->get_field_id( 'include' ); ?>"><code>include</code></label>
+      <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'include' ); ?>" name="<?php echo $this->get_field_name( 'include' ); ?>" value="<?php echo esc_attr( $instance['include'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'exclude' ); ?>"><code>exclude</code></label>
+      <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'exclude' ); ?>" name="<?php echo $this->get_field_name( 'exclude' ); ?>" value="<?php echo esc_attr( $instance['exclude'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'number' ); ?>"><code>number</code></label>
+      <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" value="<?php echo esc_attr( $instance['number'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'largest' ); ?>"><code>largest</code></label>
+      <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'largest' ); ?>" name="<?php echo $this->get_field_name( 'largest' ); ?>" value="<?php echo esc_attr( $instance['largest'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'smallest' ); ?>"><code>smallest</code></label>
+      <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'smallest' ); ?>" name="<?php echo $this->get_field_name( 'smallest' ); ?>" value="<?php echo esc_attr( $instance['smallest'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'unit' ); ?>"><code>unit</code></label>
+      <select class="smallfat" id="<?php echo $this->get_field_id( 'unit' ); ?>" name="<?php echo $this->get_field_name( 'unit' ); ?>">
+        <?php foreach ( $unit as $option_value => $option_label ) { ?>
+          <option value="<?php echo $option_value; ?>" <?php selected( $instance['unit'], $option_value ); ?>><?php echo $option_label; ?></option>
+        <?php } ?>
+      </select>
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'separator' ); ?>"><code>separator</code></label>
+      <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'separator' ); ?>" name="<?php echo $this->get_field_name( 'separator' ); ?>" value="<?php echo esc_attr( $instance['separator'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'child_of' ); ?>"><code>child_of</code></label>
+      <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'child_of' ); ?>" name="<?php echo $this->get_field_name( 'child_of' ); ?>" value="<?php echo esc_attr( $instance['child_of'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'parent' ); ?>"><code>parent</code></label>
+      <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'parent' ); ?>" name="<?php echo $this->get_field_name( 'parent' ); ?>" value="<?php echo esc_attr( $instance['parent'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'link' ); ?>"><code>link</code></label>
+      <select class="widefat" id="<?php echo $this->get_field_id( 'link' ); ?>" name="<?php echo $this->get_field_name( 'link' ); ?>">
+        <?php foreach ( $link as $option_value => $option_label ) { ?>
+          <option value="<?php echo $option_value; ?>" <?php selected( $instance['link'], $option_value ); ?>><?php echo $option_label; ?></option>
+        <?php } ?>
+      </select>
+    </p>
+    </div>
+
+    <div class="exmachina-widget-controls columns-3 column-last">
+    <p>
+      <label for="<?php echo $this->get_field_id( 'search' ); ?>"><code>search</code></label>
+      <input type="text" class="widefat code" id="<?php echo $this->get_field_id( 'search' ); ?>" name="<?php echo $this->get_field_name( 'search' ); ?>" value="<?php echo esc_attr( $instance['search'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'name__like' ); ?>"><code>name__like</code></label>
+      <input type="text" class="widefat code" id="<?php echo $this->get_field_id( 'name__like' ); ?>" name="<?php echo $this->get_field_name( 'name__like' ); ?>" value="<?php echo esc_attr( $instance['name__like'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'topic_count_text_callback' ); ?>"><code>topic_count_text_callback</code></label>
+      <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'topic_count_text_callback' ); ?>" name="<?php echo $this->get_field_name( 'topic_count_text_callback' ); ?>" value="<?php echo esc_attr( $instance['topic_count_text_callback'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'topic_count_scale_callback' ); ?>"><code>topic_count_scale_callback</code></label>
+      <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'topic_count_scale_callback' ); ?>" name="<?php echo $this->get_field_name( 'topic_count_scale_callback' ); ?>" value="<?php echo esc_attr( $instance['topic_count_scale_callback'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'pad_counts' ); ?>">
+      <input class="checkbox" type="checkbox" <?php checked( $instance['pad_counts'], true ); ?> id="<?php echo $this->get_field_id( 'pad_counts' ); ?>" name="<?php echo $this->get_field_name( 'pad_counts' ); ?>" /> <?php _e( 'Pad counts?', 'exmachina-core' ); ?> <code>pad_counts</code></label>
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'hide_empty' ); ?>">
+      <input class="checkbox" type="checkbox" <?php checked( $instance['hide_empty'], true ); ?> id="<?php echo $this->get_field_id( 'hide_empty' ); ?>" name="<?php echo $this->get_field_name( 'hide_empty' ); ?>" /> <?php _e( 'Hide empty?', 'exmachina-core' ); ?> <code>hide_empty</code></label>
+    </p>
+    </div>
+    <div style="clear:both;">&nbsp;</div>
+    <?php
+
+  } // end function form()
+
+} // end class ExMachina_Widget_Tags

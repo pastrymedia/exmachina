@@ -1,151 +1,206 @@
 <?php
-/**
- * Attachment image stream widget.
- *
- * @package ExMachina
- * @subpackage Includes
- * @since 0.1.0
- * @author Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2012 - 2013, Justin Tadlock
- * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- */
 
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
+/**
+ * ExMachina WordPress Theme Framework Engine
+ * Image Stream Widget
+ *
+ * widget-image-stream.php
+ *
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
+ *
+ * DESCRIPTION
+ *
+ * @package     ExMachina
+ * @subpackage  Widgets
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
+ */
+###############################################################################
+# Begin widget
+###############################################################################
+
+/**
+ * Image Stream Widget Class
+ *
+ * @since 2.7.0
+ * @access public
+ *
+ * @return void
+ */
 class ExMachina_Widget_Image_Stream extends WP_Widget {
 
-	/**
-	 * Set up the widget's unique name, ID, class, description, and other options.
-	 *
-	 * @since 0.1.0
-	 */
-	function __construct() {
+  /**
+   * Widget Constructor
+   *
+   * Specifies the widget's unique name, ID, classname, description, and other
+   * options.
+   *
+   * @since 2.7.0
+   * @access public
+   *
+   * @return void
+   */
+  function __construct() {
 
-		/* Set up the widget options. */
-		$widget_options = array(
-			'classname' => 'image-stream',
-			'description' => __( 'Displays image thumbnails in a gallery-like format.', 'exmachina-core' )
-		);
+    /* Set up the widget options. */
+    $widget_options = array(
+      'classname' => 'image-stream',
+      'description' => __( 'Displays image thumbnails in a gallery-like format.', 'exmachina-core' )
+    );
 
-		/* Set up the widget control options. */
-		$control_options = array(
-			'width' => 200,
-			'height' => 350,
-			'id_base' => 'image-stream'
-		);
+    /* Set up the widget control options. */
+    $control_options = array(
+      'width' => 200,
+      'height' => 350,
+      'id_base' => 'image-stream'
+    );
 
-		/* Create the widget. */
-		$this->WP_Widget( 'image-stream', __( 'Image Stream', 'exmachina-core' ), $widget_options, $control_options );
-	}
+    /* Create the widget. */
+    $this->WP_Widget( 'image-stream', __( 'Image Stream', 'exmachina-core' ), $widget_options, $control_options );
 
-	/**
-	 * Updates the widget control options for the particular instance of the widget.
-	 *
-	 * @since 0.1.0
-	 */
-	function widget( $sidebar, $instance ) {
-		extract( $sidebar );
+  } // end function __construct()
 
-		/* Output the theme's $before_widget wrapper. */
-		echo $before_widget;
+  /**
+   * Widget API
+   *
+   * Outputs the widget based on the arguments input through the widget controls.
+   *
+   * @since 2.7.0
+   * @access public
+   *
+   * @param  array $args      The array of form elements
+   * @param  array $instance  The current instance of the widget
+   * @return void
+   */
+  function widget( $sidebar, $instance ) {
 
-		/* If a title was input by the user, display it. */
-		if ( !empty( $instance['title'] ) )
-			echo $before_title . apply_filters( 'widget_title',  $instance['title'], $instance, $this->id_base ) . $after_title;
+    extract( $sidebar );
 
-		$loop = new WP_Query(
-			array(
-				'post_type' => 'attachment',
-				'post_mime_type' => 'image',
-				'post_status' => 'inherit',
-				'posts_per_page' => intval( $instance['posts_per_page'] ),
-				'orderby' => 'parent'
-			)
-		);
+    /* Output the theme's $before_widget wrapper. */
+    echo $before_widget;
 
-		if ( $loop->have_posts() ) {
+    /* If a title was input by the user, display it. */
+    if ( !empty( $instance['title'] ) )
+      echo $before_title . apply_filters( 'widget_title',  $instance['title'], $instance, $this->id_base ) . $after_title;
 
-			/* Set up some default variables to use in the gallery. */
-			$gallery_columns = 3;
-			$gallery_iterator = 0;
+    $loop = new WP_Query(
+      array(
+        'post_type' => 'attachment',
+        'post_mime_type' => 'image',
+        'post_status' => 'inherit',
+        'posts_per_page' => intval( $instance['posts_per_page'] ),
+        'orderby' => 'parent'
+      )
+    );
 
-			echo '<div class="gallery">';
+    if ( $loop->have_posts() ) {
 
-			while ( $loop->have_posts() ) {
+      /* Set up some default variables to use in the gallery. */
+      $gallery_columns = 3;
+      $gallery_iterator = 0;
 
-				$loop->the_post();
+      echo '<div class="gallery">';
 
-				if ( $gallery_columns > 0 && $gallery_iterator % $gallery_columns == 0 ) echo '<div class="gallery-row gallery-clear">';  ?>
+      while ( $loop->have_posts() ) {
 
-						<div class="gallery-item col-<?php echo esc_attr( $gallery_columns ); ?>">
-							<div class="gallery-icon">
-								<?php get_the_image( array( 'size' => 'thumbnail', 'meta_key' => false, 'default_image' => trailingslashit( get_template_directory_uri() ) . 'images/thumbnail-default.png' ) ); ?>
-							</div>
-						</div>
+        $loop->the_post();
 
-				<?php if ( $gallery_columns > 0 && ++$gallery_iterator % $gallery_columns == 0 ) echo '</div>';
-			}
+        if ( $gallery_columns > 0 && $gallery_iterator % $gallery_columns == 0 ) echo '<div class="gallery-row gallery-clear">';  ?>
 
-			if ( $gallery_columns > 0 && $gallery_iterator % $gallery_columns !== 0 ) echo '</div>';
+            <div class="gallery-item col-<?php echo esc_attr( $gallery_columns ); ?>">
+              <div class="gallery-icon">
+                <?php get_the_image( array( 'size' => 'thumbnail', 'meta_key' => false, 'default_image' => trailingslashit( get_template_directory_uri() ) . 'images/thumbnail-default.png' ) ); ?>
+              </div>
+            </div>
 
-			echo '</div>';
-		}
+        <?php if ( $gallery_columns > 0 && ++$gallery_iterator % $gallery_columns == 0 ) echo '</div>';
+      }
 
-		else {
-			echo '<p>' . __( 'There are currently no images found.', 'exmachina-core' ) . '</p>';
-		}
+      if ( $gallery_columns > 0 && $gallery_iterator % $gallery_columns !== 0 ) echo '</div>';
 
-		wp_reset_query();
+      echo '</div>';
+    }
 
-		/* Output the theme's $after_widget wrapper. */
-		echo $after_widget;
-	}
+    else {
+      echo '<p>' . __( 'There are currently no images found.', 'exmachina-core' ) . '</p>';
+    }
 
-	/**
-	 * Updates the widget control options for the particular instance of the widget.
-	 *
-	 * @since 0.1.0
-	 */
-	function update( $new_instance, $old_instance ) {
-		$instance = $old_instance;
+    wp_reset_query();
 
-		$instance = $new_instance;
+    /* Output the theme's $after_widget wrapper. */
+    echo $after_widget;
 
-		$instance['title'] = strip_tags( $new_instance['title'] );
-		$instance['posts_per_page'] = intval( $new_instance['posts_per_page'] );
+  } // end function widget()
 
-		return $instance;
-	}
+  /**
+   * Update Widget
+   *
+   * Updates the widget control options for the particular instance of the widget.
+   *
+   * @since 2.7.0
+   * @access public
+   *
+   * @param  array $new_instance The new instance of values to be generated via the update.
+   * @param  array $old_instance The previous instance of values before the update.
+   * @return array               The instance values.
+   */
+  function update( $new_instance, $old_instance ) {
 
-	/**
-	 * Displays the widget control options in the Widgets admin screen.
-	 *
-	 * @since 0.1.0
-	 */
-	function form( $instance ) {
+    $instance = $old_instance;
 
-		/* Set up the default form values. */
-		$defaults = array(
-			'title' => esc_attr__( 'Image Stream', 'exmachina-core' ),
-			'posts_per_page' => 6,
-		);
+    $instance = $new_instance;
 
-		/* Merge the user-selected arguments with the defaults. */
-		$instance = wp_parse_args( (array) $instance, $defaults );
+    $instance['title'] = strip_tags( $new_instance['title'] );
+    $instance['posts_per_page'] = intval( $new_instance['posts_per_page'] );
 
-		?>
+    return $instance;
 
-		<div class="exmachina-widget-controls columns-1">
-		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'exmachina-core' ); ?></label>
-			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"><?php _e( 'Limit:', 'exmachina-core' ); ?></label>
-			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'posts_per_page' ); ?>" name="<?php echo $this->get_field_name( 'posts_per_page' ); ?>" value="<?php echo esc_attr( $instance['posts_per_page'] ); ?>" />
-		</p>
-		</div>
-		<div style="clear:both;">&nbsp;</div>
-	<?php
-	}
-}
+  } // end function update()
 
-?>
+  /**
+   * Widget Form
+   *
+   * Generates the administration form for the widget.
+   *
+   * @since 2.7.0
+   * @access public
+   *
+   * @param  array $instance The array of keys and values for the widget.
+   * @return void
+   */
+  function form( $instance ) {
+
+    /* Set up the default form values. */
+    $defaults = array(
+      'title' => esc_attr__( 'Image Stream', 'exmachina-core' ),
+      'posts_per_page' => 6,
+    );
+
+    /* Merge the user-selected arguments with the defaults. */
+    $instance = wp_parse_args( (array) $instance, $defaults );
+
+    ?>
+
+    <div class="exmachina-widget-controls columns-1">
+    <p>
+      <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'exmachina-core' ); ?></label>
+      <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"><?php _e( 'Limit:', 'exmachina-core' ); ?></label>
+      <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'posts_per_page' ); ?>" name="<?php echo $this->get_field_name( 'posts_per_page' ); ?>" value="<?php echo esc_attr( $instance['posts_per_page'] ); ?>" />
+    </p>
+    </div>
+    <div style="clear:both;">&nbsp;</div>
+    <?php
+
+  } // end function form()
+
+} // end class ExMachina_Widget_Image_Stream

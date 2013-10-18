@@ -1,199 +1,248 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
- * The nav menu widget was created to give users the ability to show nav menus created from the 
- * Menus screen, by the theme, or by plugins using the wp_nav_menu() function.  It replaces the default
- * WordPress navigation menu class.
+ * ExMachina WordPress Theme Framework Engine
+ * Nav Menu Widget
  *
- * @package    ExMachina
- * @subpackage Classes
- * @author     Justin Tadlock <justin@justintadlock.com>
- * @copyright  Copyright (c) 2008 - 2013, Justin Tadlock
- * @link       http://themeexmachina.com/exmachina-core
- * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * widget-nav-menu.php
+ *
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
+ *
+ * The nav menu widget was created to give users the ability to show nav menus
+ * created from the Menus screen, by the theme, or by plugins using the wp_nav_menu()
+ * function. It replaces the default WordPress navigation menu class.
+ *
+ * @package     ExMachina
+ * @subpackage  Widgets
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
  */
+###############################################################################
+# Begin widget
+###############################################################################
 
 /**
  * Nav Menu Widget Class
  *
- * @since 0.8.0
+ * @since 2.7.0
+ * @access public
+ *
+ * @return void
  */
 class ExMachina_Widget_Nav_Menu extends WP_Widget {
 
-	/**
-	 * Set up the widget's unique name, ID, class, description, and other options.
-	 *
-	 * @since 1.2.0
-	 */
-	function __construct() {
+  /**
+   * Widget Constructor
+   *
+   * Specifies the widget's unique name, ID, classname, description, and other
+   * options.
+   *
+   * @since 2.7.0
+   * @access public
+   *
+   * @return void
+   */
+  function __construct() {
 
-		/* Set up the widget options. */
-		$widget_options = array(
-			'classname'   => 'nav-menu',
-			'description' => esc_html__( 'An advanced widget that gives you total control over the output of your menus.', 'exmachina-core' )
-		);
+    /* Set up the widget options. */
+    $widget_options = array(
+      'classname'   => 'nav-menu',
+      'description' => esc_html__( 'An advanced widget that gives you total control over the output of your menus.', 'exmachina-core' )
+    );
 
-		/* Set up the widget control options. */
-		$control_options = array(
-			'width'  => 525,
-			'height' => 350
-		);
+    /* Set up the widget control options. */
+    $control_options = array(
+      'width'  => 525,
+      'height' => 350
+    );
 
-		/* Create the widget. */
-		$this->WP_Widget(
-			'exmachina-nav-menu',                      // $this->id_base
-			__( 'Navigation Menu', 'exmachina-core' ), // $this->name
-			$widget_options,                        // $this->widget_options
-			$control_options                        // $this->control_options
-		);
-	}
+    /* Create the widget. */
+    $this->WP_Widget(
+      'exmachina-nav-menu',                      // $this->id_base
+      __( 'Navigation Menu', 'exmachina-core' ), // $this->name
+      $widget_options,                        // $this->widget_options
+      $control_options                        // $this->control_options
+    );
 
-	/**
-	 * Outputs the widget based on the arguments input through the widget controls.
-	 *
-	 * @since 0.8.0
-	 */
-	function widget( $sidebar, $instance ) {
-		extract( $sidebar );
+  } // end function __construct()
 
-		/* Set the $args for wp_nav_menu() to the $instance array. */
-		$args = $instance;
+  /**
+   * Widget API
+   *
+   * Outputs the widget based on the arguments input through the widget controls.
+   *
+   * @since 2.7.0
+   * @access public
+   *
+   * @param  array $args      The array of form elements
+   * @param  array $instance  The current instance of the widget
+   * @return void
+   */
+  function widget( $sidebar, $instance ) {
+    extract( $sidebar );
 
-		/* Overwrite the $echo argument and set it to false. */
-		$args['echo'] = false;
+    /* Set the $args for wp_nav_menu() to the $instance array. */
+    $args = $instance;
 
-		/* Output the theme's widget wrapper. */
-		echo $before_widget;
+    /* Overwrite the $echo argument and set it to false. */
+    $args['echo'] = false;
 
-		/* If a title was input by the user, display it. */
-		if ( !empty( $instance['title'] ) )
-			echo $before_title . apply_filters( 'widget_title',  $instance['title'], $instance, $this->id_base ) . $after_title;
+    /* Output the theme's widget wrapper. */
+    echo $before_widget;
 
-		/* Output the nav menu. */
-		echo str_replace( array( "\r", "\n", "\t" ), '', wp_nav_menu( $args ) );
+    /* If a title was input by the user, display it. */
+    if ( !empty( $instance['title'] ) )
+      echo $before_title . apply_filters( 'widget_title',  $instance['title'], $instance, $this->id_base ) . $after_title;
 
-		/* Close the theme's widget wrapper. */
-		echo $after_widget;
-	}
+    /* Output the nav menu. */
+    echo str_replace( array( "\r", "\n", "\t" ), '', wp_nav_menu( $args ) );
 
-	/**
-	 * Updates the widget control options for the particular instance of the widget.
-	 *
-	 * @since 0.8.0
-	 */
-	function update( $new_instance, $old_instance ) {
-		$instance = $old_instance;
+    /* Close the theme's widget wrapper. */
+    echo $after_widget;
 
-		$instance = $new_instance;
+  } // end function widget()
 
-		$instance['title']           = strip_tags( $new_instance['title'] );
-		$instance['depth']           = strip_tags( $new_instance['depth'] );
-		$instance['container_id']    = strip_tags( $new_instance['container_id'] );
-		$instance['container_class'] = strip_tags( $new_instance['container_class'] );
-		$instance['menu_id']         = strip_tags( $new_instance['menu_id'] );
-		$instance['menu_class']      = strip_tags( $new_instance['menu_class'] );
-		$instance['fallback_cb']     = strip_tags( $new_instance['fallback_cb'] );
+  /**
+   * Update Widget
+   *
+   * Updates the widget control options for the particular instance of the widget.
+   *
+   * @since 2.7.0
+   * @access public
+   *
+   * @param  array $new_instance The new instance of values to be generated via the update.
+   * @param  array $old_instance The previous instance of values before the update.
+   * @return array               The instance values.
+   */
+  function update( $new_instance, $old_instance ) {
 
-		return $instance;
-	}
+    $instance = $old_instance;
 
-	/**
-	 * Displays the widget control options in the Widgets admin screen.
-	 *
-	 * @since 0.8.0
-	 */
-	function form( $instance ) {
+    $instance = $new_instance;
 
-		/* Set up the default form values. */
-		$defaults = array(
-			'title'           => esc_attr__( 'Navigation', 'exmachina-core' ),
-			'menu'            => '',
-			'container'       => 'div',
-			'container_id'    => '',
-			'container_class' => '',
-			'menu_id'         => '',
-			'menu_class'      => 'nav-menu',
-			'depth'           => 0,
-			'before'          => '',
-			'after'           => '',
-			'link_before'     => '',
-			'link_after'      => '',
-			'fallback_cb'     => 'wp_page_menu'
-		);
+    $instance['title']           = strip_tags( $new_instance['title'] );
+    $instance['depth']           = strip_tags( $new_instance['depth'] );
+    $instance['container_id']    = strip_tags( $new_instance['container_id'] );
+    $instance['container_class'] = strip_tags( $new_instance['container_class'] );
+    $instance['menu_id']         = strip_tags( $new_instance['menu_id'] );
+    $instance['menu_class']      = strip_tags( $new_instance['menu_class'] );
+    $instance['fallback_cb']     = strip_tags( $new_instance['fallback_cb'] );
 
-		/* Merge the user-selected arguments with the defaults. */
-		$instance = wp_parse_args( (array) $instance, $defaults );
+    return $instance;
 
-		$container = apply_filters( 'wp_nav_menu_container_allowedtags', array( 'div', 'nav' ) );
-		?>
+  } // end function update()
 
-		<div class="exmachina-widget-controls columns-2">
-		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'exmachina-core' ); ?></label>
-			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'menu' ); ?>"><code>menu</code></label> 
-			<select class="widefat" id="<?php echo $this->get_field_id( 'menu' ); ?>" name="<?php echo $this->get_field_name( 'menu' ); ?>">
-				<?php foreach ( wp_get_nav_menus() as $menu ) { ?>
-					<option value="<?php echo esc_attr( $menu->term_id ); ?>" <?php selected( $instance['menu'], $menu->term_id ); ?>><?php echo esc_html( $menu->name ); ?></option>
-				<?php } ?>
-			</select>
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'container' ); ?>"><code>container</code></label> 
-			<select class="smallfat" id="<?php echo $this->get_field_id( 'container' ); ?>" name="<?php echo $this->get_field_name( 'container' ); ?>">
-				<?php foreach ( $container as $option ) { ?>
-					<option value="<?php echo esc_attr( $option ); ?>" <?php selected( $instance['container'], $option ); ?>><?php echo esc_html( $option ); ?></option>
-				<?php } ?>
-			</select>
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'container_id' ); ?>"><code>container_id</code></label>
-			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'container_id' ); ?>" name="<?php echo $this->get_field_name( 'container_id' ); ?>" value="<?php echo esc_attr( $instance['container_id'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'container_class' ); ?>"><code>container_class</code></label>
-			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'container_class' ); ?>" name="<?php echo $this->get_field_name( 'container_class' ); ?>" value="<?php echo esc_attr( $instance['container_class'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'menu_id' ); ?>"><code>menu_id</code></label>
-			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'menu_id' ); ?>" name="<?php echo $this->get_field_name( 'menu_id' ); ?>" value="<?php echo esc_attr( $instance['menu_id'] ); ?>" />
-		</p>
-		</div>
+  /**
+   * Widget Form
+   *
+   * Generates the administration form for the widget.
+   *
+   * @since 2.7.0
+   * @access public
+   *
+   * @param  array $instance The array of keys and values for the widget.
+   * @return void
+   */
+  function form( $instance ) {
 
-		<div class="exmachina-widget-controls columns-2 column-last">
-		<p>
-			<label for="<?php echo $this->get_field_id( 'menu_class' ); ?>"><code>menu_class</code></label>
-			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'menu_class' ); ?>" name="<?php echo $this->get_field_name( 'menu_class' ); ?>" value="<?php echo esc_attr( $instance['menu_class'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'depth' ); ?>"><code>depth</code></label>
-			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'depth' ); ?>" name="<?php echo $this->get_field_name( 'depth' ); ?>" value="<?php echo esc_attr( $instance['depth'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'before' ); ?>"><code>before</code></label>
-			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'before' ); ?>" name="<?php echo $this->get_field_name( 'before' ); ?>" value="<?php echo esc_attr( $instance['before'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'after' ); ?>"><code>after</code></label>
-			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'after' ); ?>" name="<?php echo $this->get_field_name( 'after' ); ?>" value="<?php echo esc_attr( $instance['after'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'link_before' ); ?>"><code>link_before</code></label>
-			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'link_before' ); ?>" name="<?php echo $this->get_field_name( 'link_before' ); ?>" value="<?php echo esc_attr( $instance['link_before'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'link_after' ); ?>"><code>link_after</code></label>
-			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'link_after' ); ?>" name="<?php echo $this->get_field_name( 'link_after' ); ?>" value="<?php echo esc_attr( $instance['link_after'] ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'fallback_cb' ); ?>"><code>fallback_cb</code></label>
-			<input type="text" class="widefat code" id="<?php echo $this->get_field_id( 'fallback_cb' ); ?>" name="<?php echo $this->get_field_name( 'fallback_cb' ); ?>" value="<?php echo esc_attr( $instance['fallback_cb'] ); ?>" />
-		</p>
-		</div>
-		<div style="clear:both;">&nbsp;</div>
-	<?php
-	}
-}
+    /* Set up the default form values. */
+    $defaults = array(
+      'title'           => esc_attr__( 'Navigation', 'exmachina-core' ),
+      'menu'            => '',
+      'container'       => 'div',
+      'container_id'    => '',
+      'container_class' => '',
+      'menu_id'         => '',
+      'menu_class'      => 'nav-menu',
+      'depth'           => 0,
+      'before'          => '',
+      'after'           => '',
+      'link_before'     => '',
+      'link_after'      => '',
+      'fallback_cb'     => 'wp_page_menu'
+    );
 
-?>
+    /* Merge the user-selected arguments with the defaults. */
+    $instance = wp_parse_args( (array) $instance, $defaults );
+
+    $container = apply_filters( 'wp_nav_menu_container_allowedtags', array( 'div', 'nav' ) );
+    ?>
+
+    <div class="exmachina-widget-controls columns-2">
+    <p>
+      <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'exmachina-core' ); ?></label>
+      <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'menu' ); ?>"><code>menu</code></label>
+      <select class="widefat" id="<?php echo $this->get_field_id( 'menu' ); ?>" name="<?php echo $this->get_field_name( 'menu' ); ?>">
+        <?php foreach ( wp_get_nav_menus() as $menu ) { ?>
+          <option value="<?php echo esc_attr( $menu->term_id ); ?>" <?php selected( $instance['menu'], $menu->term_id ); ?>><?php echo esc_html( $menu->name ); ?></option>
+        <?php } ?>
+      </select>
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'container' ); ?>"><code>container</code></label>
+      <select class="smallfat" id="<?php echo $this->get_field_id( 'container' ); ?>" name="<?php echo $this->get_field_name( 'container' ); ?>">
+        <?php foreach ( $container as $option ) { ?>
+          <option value="<?php echo esc_attr( $option ); ?>" <?php selected( $instance['container'], $option ); ?>><?php echo esc_html( $option ); ?></option>
+        <?php } ?>
+      </select>
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'container_id' ); ?>"><code>container_id</code></label>
+      <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'container_id' ); ?>" name="<?php echo $this->get_field_name( 'container_id' ); ?>" value="<?php echo esc_attr( $instance['container_id'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'container_class' ); ?>"><code>container_class</code></label>
+      <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'container_class' ); ?>" name="<?php echo $this->get_field_name( 'container_class' ); ?>" value="<?php echo esc_attr( $instance['container_class'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'menu_id' ); ?>"><code>menu_id</code></label>
+      <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'menu_id' ); ?>" name="<?php echo $this->get_field_name( 'menu_id' ); ?>" value="<?php echo esc_attr( $instance['menu_id'] ); ?>" />
+    </p>
+    </div>
+
+    <div class="exmachina-widget-controls columns-2 column-last">
+    <p>
+      <label for="<?php echo $this->get_field_id( 'menu_class' ); ?>"><code>menu_class</code></label>
+      <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'menu_class' ); ?>" name="<?php echo $this->get_field_name( 'menu_class' ); ?>" value="<?php echo esc_attr( $instance['menu_class'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'depth' ); ?>"><code>depth</code></label>
+      <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'depth' ); ?>" name="<?php echo $this->get_field_name( 'depth' ); ?>" value="<?php echo esc_attr( $instance['depth'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'before' ); ?>"><code>before</code></label>
+      <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'before' ); ?>" name="<?php echo $this->get_field_name( 'before' ); ?>" value="<?php echo esc_attr( $instance['before'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'after' ); ?>"><code>after</code></label>
+      <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'after' ); ?>" name="<?php echo $this->get_field_name( 'after' ); ?>" value="<?php echo esc_attr( $instance['after'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'link_before' ); ?>"><code>link_before</code></label>
+      <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'link_before' ); ?>" name="<?php echo $this->get_field_name( 'link_before' ); ?>" value="<?php echo esc_attr( $instance['link_before'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'link_after' ); ?>"><code>link_after</code></label>
+      <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'link_after' ); ?>" name="<?php echo $this->get_field_name( 'link_after' ); ?>" value="<?php echo esc_attr( $instance['link_after'] ); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'fallback_cb' ); ?>"><code>fallback_cb</code></label>
+      <input type="text" class="widefat code" id="<?php echo $this->get_field_id( 'fallback_cb' ); ?>" name="<?php echo $this->get_field_name( 'fallback_cb' ); ?>" value="<?php echo esc_attr( $instance['fallback_cb'] ); ?>" />
+    </p>
+    </div>
+    <div style="clear:both;">&nbsp;</div>
+    <?php
+
+  } // end function form()
+
+} // end class ExMachina_Widget_Nav_Menu

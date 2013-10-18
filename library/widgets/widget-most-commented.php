@@ -1,195 +1,244 @@
 <?php
-/**
- * Most commented posts widget.
- *
- * @package Unique
- * @subpackage Includes
- * @since 0.1.0
- * @author Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2012 - 2013, Justin Tadlock
- * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- */
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
 
 /**
- * Most commented posts widget class.
+ * ExMachina WordPress Theme Framework Engine
+ * Most Commented Widget
  *
- * @since 0.1.0
+ * widget-most-commented.php
+ *
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
+ *
+ * DESCRIPTION
+ *
+ * @package     ExMachina
+ * @subpackage  Widgets
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
+ */
+###############################################################################
+# Begin widget
+###############################################################################
+
+/**
+ * Most Commented Posts Widget Class
+ *
+ * @since 2.7.0
+ * @access public
+ *
+ * @return void
  */
 class ExMachina_Widget_Most_Commented extends WP_Widget {
 
-	/**
-	 * Set up the widget's unique name, ID, class, description, and other options.
-	 *
-	 * @since 0.1.0
-	 */
-	function __construct() {
+  /**
+   * Widget Constructor
+   *
+   * Specifies the widget's unique name, ID, classname, description, and other
+   * options.
+   *
+   * @since 2.7.0
+   * @access public
+   *
+   * @return void
+   */
+  function __construct() {
 
-		/* Set up the widget options. */
-		$widget_options = array(
-			'classname' => 'most-commented',
-			'description' => __( 'Display top commented posts.', 'exmachina-core' )
-		);
+    /* Set up the widget options. */
+    $widget_options = array(
+      'classname' => 'most-commented',
+      'description' => __( 'Display top commented posts.', 'exmachina-core' )
+    );
 
-		/* Set up the widget control options. */
-		$control_options = array(
-			'width' => 250,
-			'height' => 350,
-			'id_base' => 'most-commented'
-		);
+    /* Set up the widget control options. */
+    $control_options = array(
+      'width' => 250,
+      'height' => 350,
+      'id_base' => 'most-commented'
+    );
 
-		/* Create the widget. */
-		$this->WP_Widget( 'most-commented', __( 'Most Commented', 'exmachina-core' ), $widget_options, $control_options );
-	}
+    /* Create the widget. */
+    $this->WP_Widget( 'most-commented', __( 'Most Commented', 'exmachina-core' ), $widget_options, $control_options );
 
-	/**
-	 * Outputs the widget based on the arguments input through the widget controls.
-	 *
-	 * @since 0.1.0
-	 */
-	function widget( $args, $instance ) {
-		extract( $args );
+  } // end function __construct()
 
-		/* Arguments for the query. */
-		$args = array(
-			'orderby' => 'comment_count',
-			'order' => 'DESC',
-			'post_type' => ( isset( $instance['post_type'] ) ? $instance['post_type'] : 'post' ),
-			'posts_per_page' => ( isset( $instance['posts_per_page'] ) ? intval( $instance['posts_per_page'] ) : 10 ),
-			'post_status' => array( 'publish', 'inherit' ),
-			'ignore_sticky_posts' => true
-		);
+  /**
+   * Widget API
+   *
+   * Outputs the widget based on the arguments input through the widget controls.
+   *
+   * @since 2.7.0
+   * @access public
+   *
+   * @param  array $args      The array of form elements
+   * @param  array $instance  The current instance of the widget
+   * @return void
+   */
+  function widget( $args, $instance ) {
+    extract( $args );
 
-		/* Only add arguments if they're set. */
-		if ( !empty( $instance['day'] ) )
-			$args['day'] = absint( $instance['day'] );
-		if ( !empty( $instance['monthnum'] ) )
-			$args['monthnum'] = absint( $instance['monthnum'] );
-		if ( !empty( $instance['year'] ) )
-			$args['year'] = absint( $instance['year'] );
+    /* Arguments for the query. */
+    $args = array(
+      'orderby' => 'comment_count',
+      'order' => 'DESC',
+      'post_type' => ( isset( $instance['post_type'] ) ? $instance['post_type'] : 'post' ),
+      'posts_per_page' => ( isset( $instance['posts_per_page'] ) ? intval( $instance['posts_per_page'] ) : 10 ),
+      'post_status' => array( 'publish', 'inherit' ),
+      'ignore_sticky_posts' => true
+    );
 
-		/* Open the before widget HTML. */
-		echo $before_widget;
+    /* Only add arguments if they're set. */
+    if ( !empty( $instance['day'] ) )
+      $args['day'] = absint( $instance['day'] );
+    if ( !empty( $instance['monthnum'] ) )
+      $args['monthnum'] = absint( $instance['monthnum'] );
+    if ( !empty( $instance['year'] ) )
+      $args['year'] = absint( $instance['year'] );
 
-		/* Output the widget title. */
-		if ( $instance['title'] )
-			echo $before_title . apply_filters( 'widget_title',  $instance['title'], $instance, $this->id_base ) . $after_title;
+    /* Open the before widget HTML. */
+    echo $before_widget;
 
-		/* Query the popular posts. */
-		$loop = new WP_Query( $args );
+    /* Output the widget title. */
+    if ( $instance['title'] )
+      echo $before_title . apply_filters( 'widget_title',  $instance['title'], $instance, $this->id_base ) . $after_title;
 
-		if ( $loop->have_posts() ) {
+    /* Query the popular posts. */
+    $loop = new WP_Query( $args );
 
-			echo '<ul class="xoxo most-commented">';
+    if ( $loop->have_posts() ) {
 
-			while ( $loop->have_posts() ) {
-				$loop->the_post();
+      echo '<ul class="xoxo most-commented">';
 
-				/* Create a list item, add the post title (w/link) and comment count (w/link). */
-				echo '<li>';
-				the_title( '<a class="post-link" href="' . get_permalink() . '" title="' . the_title_attribute( 'echo=0' ) . '">', '</a> ' );
-				echo '<span class="comments-number">';
-				comments_number( __( '(0)', 'exmachina-core' ), __( '(1)', 'exmachina-core' ), __( '(%)', 'exmachina-core' ), 'comments-link', '' );
-				echo '<span>';
-				echo '</li>';
-			}
+      while ( $loop->have_posts() ) {
+        $loop->the_post();
 
-			echo '</ul>';
-		}
+        /* Create a list item, add the post title (w/link) and comment count (w/link). */
+        echo '<li>';
+        the_title( '<a class="post-link" href="' . get_permalink() . '" title="' . the_title_attribute( 'echo=0' ) . '">', '</a> ' );
+        echo '<span class="comments-number">';
+        comments_number( __( '(0)', 'exmachina-core' ), __( '(1)', 'exmachina-core' ), __( '(%)', 'exmachina-core' ), 'comments-link', '' );
+        echo '<span>';
+        echo '</li>';
+      }
 
-		/* Close the after widget HTML. */
-		echo $after_widget;
-	}
+      echo '</ul>';
+    }
 
-	/**
-	 * Updates the widget control options for the particular instance of the widget.
-	 *
-	 * @since 0.1.0
-	 */
-	function update( $new_instance, $old_instance ) {
-		$instance = $old_instance;
+    /* Close the after widget HTML. */
+    echo $after_widget;
 
-		/* Set the instance to the new instance. */
-		$instance = $new_instance;
+  } // end function widget()
 
-		/* Sanitize input elements. */
-		$instance['title'] = strip_tags( $new_instance['title'] );
-		$instance['year'] = strip_tags( $new_instance['year'] );
-		$instance['posts_per_page'] = intval( $new_instance['posts_per_page'] );
+  /**
+   * Update Widget
+   *
+   * Updates the widget control options for the particular instance of the widget.
+   *
+   * @since 2.7.0
+   * @access public
+   *
+   * @param  array $new_instance The new instance of values to be generated via the update.
+   * @param  array $old_instance The previous instance of values before the update.
+   * @return array               The instance values.
+   */
+  function update( $new_instance, $old_instance ) {
 
-		return $instance;
-	}
+    $instance = $old_instance;
 
-	/**
-	 * Displays the widget control options in the Widgets admin screen.
-	 *
-	 * @since 0.1.0
-	 */
-	function form( $instance ) {
+    /* Set the instance to the new instance. */
+    $instance = $new_instance;
 
-		/* Set up the defaults. */
-		$defaults = array(
-			'title' => __( 'Most Commented', 'exmachina-core' ),
-			'post_type' => 'post',
-			'posts_per_page' => 10,
-			'year' => '',
-			'monthnum' => '',
-			'day' => ''
-		);
+    /* Sanitize input elements. */
+    $instance['title'] = strip_tags( $new_instance['title'] );
+    $instance['year'] = strip_tags( $new_instance['year'] );
+    $instance['posts_per_page'] = intval( $new_instance['posts_per_page'] );
 
-		$instance = wp_parse_args( (array) $instance, $defaults );
+    return $instance;
 
-		$months = array( '', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 );
-		$days = array( '', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 );
-		$post_types = get_post_types( array( 'public' => true ), 'objects' );
-		?>
+  } // end function update()
 
-		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'exmachina-core' ); ?></label>
-			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
-		</p>
+  /**
+   * Widget Form
+   *
+   * Generates the administration form for the widget.
+   *
+   * @since 2.7.0
+   * @access public
+   *
+   * @param  array $instance The array of keys and values for the widget.
+   * @return void
+   */
+  function form( $instance ) {
 
-		<p>
-			<label for="<?php echo $this->get_field_id( 'post_type' ); ?>"><?php _e( 'Post Type:', 'exmachina-core' ); ?></label>
-			<select class="widefat" id="<?php echo $this->get_field_id( 'post_type' ); ?>" name="<?php echo $this->get_field_name( 'post_type' ); ?>">
-				<?php foreach ( $post_types as $type ) {
-					if ( post_type_supports( $type->name, 'comments' ) || post_type_supports( $type->name, 'trackbacks' ) ) { ?>
-						<option value="<?php echo esc_attr( $type->name ); ?>" <?php selected( $instance['post_type'], $type->name ); ?>><?php echo esc_html( $type->labels->singular_name ); ?></option>
-					<?php }
-				} ?>
-			</select>
-		</p>
+    /* Set up the defaults. */
+    $defaults = array(
+      'title' => __( 'Most Commented', 'exmachina-core' ),
+      'post_type' => 'post',
+      'posts_per_page' => 10,
+      'year' => '',
+      'monthnum' => '',
+      'day' => ''
+    );
 
-		<p>
-			<label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"><?php _e( 'Limit:', 'exmachina-core' ); ?></label>
-			<input style="float:right;width:66px;" type="text" class="widefat" id="<?php echo $this->get_field_id( 'posts_per_page' ); ?>" name="<?php echo $this->get_field_name( 'posts_per_page' ); ?>" value="<?php echo $instance['posts_per_page']; ?>" />
-		</p>
+    $instance = wp_parse_args( (array) $instance, $defaults );
 
-		<p>
-			<label for="<?php echo $this->get_field_id( 'year' ); ?>"><?php _e( 'Year:', 'exmachina-core' ); ?></label>
-			<input style="float:right;width:66px;" type="text" class="widefat" id="<?php echo $this->get_field_id( 'year' ); ?>" name="<?php echo $this->get_field_name( 'year' ); ?>" value="<?php echo $instance['year']; ?>" />
-		</p>
+    $months = array( '', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 );
+    $days = array( '', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 );
+    $post_types = get_post_types( array( 'public' => true ), 'objects' );
+    ?>
 
-		<p>
-			<label for="<?php echo $this->get_field_id( 'monthnum' ); ?>"><?php _e( 'Month:', 'exmachina-core' ); ?></label>
-			<select style="float:right;max-width:66px;" class="widefat" id="<?php echo $this->get_field_id( 'monthnum' ); ?>" name="<?php echo $this->get_field_name( 'monthnum' ); ?>">
-				<?php foreach ( $months as $month ) { ?>
-					<option value="<?php echo esc_attr( $month ); ?>" <?php selected( $instance['monthnum'], $month ); ?>><?php echo $month; ?></option>
-				<?php } ?>
-			</select>
-		</p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'exmachina-core' ); ?></label>
+      <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
+    </p>
 
-		<p>
-			<label for="<?php echo $this->get_field_id( 'day' ); ?>"><?php _e( 'Day:', 'exmachina-core' ); ?></label>
-			<select style="float:right;max-width:66px;" class="widefat" id="<?php echo $this->get_field_id( 'day' ); ?>" name="<?php echo $this->get_field_name( 'day' ); ?>">
-				<?php foreach ( $days as $day ) { ?>
-					<option value="<?php echo esc_attr( $day ); ?>" <?php selected( $instance['day'], $day ); ?>><?php echo $day; ?></option>
-				<?php } ?>
-			</select>
-		</p>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'post_type' ); ?>"><?php _e( 'Post Type:', 'exmachina-core' ); ?></label>
+      <select class="widefat" id="<?php echo $this->get_field_id( 'post_type' ); ?>" name="<?php echo $this->get_field_name( 'post_type' ); ?>">
+        <?php foreach ( $post_types as $type ) {
+          if ( post_type_supports( $type->name, 'comments' ) || post_type_supports( $type->name, 'trackbacks' ) ) { ?>
+            <option value="<?php echo esc_attr( $type->name ); ?>" <?php selected( $instance['post_type'], $type->name ); ?>><?php echo esc_html( $type->labels->singular_name ); ?></option>
+          <?php }
+        } ?>
+      </select>
+    </p>
 
-		<div style="clear:both;">&nbsp;</div>
-	<?php
-	}
-}
+    <p>
+      <label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"><?php _e( 'Limit:', 'exmachina-core' ); ?></label>
+      <input style="float:right;width:66px;" type="text" class="widefat" id="<?php echo $this->get_field_id( 'posts_per_page' ); ?>" name="<?php echo $this->get_field_name( 'posts_per_page' ); ?>" value="<?php echo $instance['posts_per_page']; ?>" />
+    </p>
 
-?>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'year' ); ?>"><?php _e( 'Year:', 'exmachina-core' ); ?></label>
+      <input style="float:right;width:66px;" type="text" class="widefat" id="<?php echo $this->get_field_id( 'year' ); ?>" name="<?php echo $this->get_field_name( 'year' ); ?>" value="<?php echo $instance['year']; ?>" />
+    </p>
+
+    <p>
+      <label for="<?php echo $this->get_field_id( 'monthnum' ); ?>"><?php _e( 'Month:', 'exmachina-core' ); ?></label>
+      <select style="float:right;max-width:66px;" class="widefat" id="<?php echo $this->get_field_id( 'monthnum' ); ?>" name="<?php echo $this->get_field_name( 'monthnum' ); ?>">
+        <?php foreach ( $months as $month ) { ?>
+          <option value="<?php echo esc_attr( $month ); ?>" <?php selected( $instance['monthnum'], $month ); ?>><?php echo $month; ?></option>
+        <?php } ?>
+      </select>
+    </p>
+
+    <p>
+      <label for="<?php echo $this->get_field_id( 'day' ); ?>"><?php _e( 'Day:', 'exmachina-core' ); ?></label>
+      <select style="float:right;max-width:66px;" class="widefat" id="<?php echo $this->get_field_id( 'day' ); ?>" name="<?php echo $this->get_field_name( 'day' ); ?>">
+        <?php foreach ( $days as $day ) { ?>
+          <option value="<?php echo esc_attr( $day ); ?>" <?php selected( $instance['day'], $day ); ?>><?php echo $day; ?></option>
+        <?php } ?>
+      </select>
+    </p>
+
+    <div style="clear:both;">&nbsp;</div>
+    <?php
+
+  } // end function form()
+
+} // end class ExMachina_Widget_Most_Commented
