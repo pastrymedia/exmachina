@@ -130,23 +130,23 @@ function exmachina_load_settings_page_meta_boxes() {
 
 		/* Load the 'About' meta box if it is supported. */
 		if ( in_array( 'about', $supports[0] ) )
-			require_once( trailingslashit( EXMACHINA_ADMIN ) . 'meta-box-theme-about.php' );
+			require_once( trailingslashit( EXMACHINA_ADMIN_METABOXES ) . 'metabox-theme-about.php' );
 
 		/* Load the 'Comments Settings' meta box if it is supported. */
 		if ( in_array( 'comments', $supports[0] ) )
-			require_once( trailingslashit( EXMACHINA_ADMIN ) . 'meta-box-theme-comments.php' );
+			require_once( trailingslashit( EXMACHINA_ADMIN_METABOXES ) . 'metabox-theme-comments.php' );
 
 		/* Load the 'Content Archives' meta box if it is supported. */
 		if ( in_array( 'archives', $supports[0] ) )
-			require_once( trailingslashit( EXMACHINA_ADMIN ) . 'meta-box-theme-archives.php' );
+			require_once( trailingslashit( EXMACHINA_ADMIN_METABOXES ) . 'metabox-theme-archives.php' );
 
 		/* Load the 'Header & Footer Scripts' meta box if it is supported. */
 		if ( in_array( 'scripts', $supports[0] ) )
-			require_once( trailingslashit( EXMACHINA_ADMIN ) . 'meta-box-theme-scripts.php' );
+			require_once( trailingslashit( EXMACHINA_ADMIN_METABOXES ) . 'metabox-theme-scripts.php' );
 
 		/* Load the 'Footer' meta box if it is supported. */
 		if ( in_array( 'footer', $supports[0] ) )
-			require_once( trailingslashit( EXMACHINA_ADMIN ) . 'meta-box-theme-footer.php' );
+			require_once( trailingslashit( EXMACHINA_ADMIN_METABOXES ) . 'metabox-theme-footer.php' );
 	}
 }
 
@@ -198,7 +198,7 @@ function exmachina_settings_page() {
 
 	do_action( "{$prefix}_before_settings_page" ); ?>
 
-	<div class="wrap">
+	<div class="wrap exmachina-metaboxes">
 
 		<?php screen_icon(); ?>
 		<h2>
@@ -360,8 +360,10 @@ function exmachina_theme_settings_help() {
 function exmachina_settings_page_enqueue_styles( $hook_suffix ) {
 
 	/* Load admin stylesheet if on the theme settings screen. */
-	if ( $hook_suffix == exmachina_get_settings_page_name() )
+	if ( $hook_suffix == exmachina_get_settings_page_name() ) {
+		wp_enqueue_style( 'exmachina-uikit-admin-css' );
 		wp_enqueue_style( 'exmachina-core-admin-css' );
+	}
 }
 
 /**
@@ -378,6 +380,7 @@ function exmachina_settings_page_enqueue_scripts( $hook_suffix ) {
 		wp_enqueue_script( 'common' );
 		wp_enqueue_script( 'wp-lists' );
 		wp_enqueue_script( 'postbox' );
+		wp_enqueue_script( 'exmachina-uikit-admin-js' );
 		wp_enqueue_script( 'exmachina-core-admin-js' );
 
 	}
