@@ -9,8 +9,6 @@
  *
  * @package ExMachina
  * @subpackage Template
- * @link http://themeexmachina.com/themes/exmachina/page-templates/logged-in
- * @deprecated 0.9.0 This template will eventually be moved to the ExMachina page templates pack.
  */
 
 get_header(); // Loads the header.php template. ?>

@@ -1,8 +1,21 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
- * The template for displaying Search Results pages.
+ * Search Result display
+ * search.php
  *
- * @package ExMachina
+ * Template file used to render a Search Results Index page
+ * @link http://codex.wordpress.org/Creating_a_Search_Page
+ *
+ * @package <[THEME NAME]>
+ * @subpackage Templates
+ * @author Machina Themes | @machinathemes
+ * @copyright Copyright (c) 2013, Machina Themes
+ * @license http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link http://www.machinathemes.com/themes/<[theme-name]>
  */
 
 get_header(); ?>

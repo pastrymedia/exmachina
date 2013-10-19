@@ -1,3 +1,24 @@
+<?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
+/**
+ * Header Template
+ * header.php
+ *
+ * Template file used to display the theme header
+ * @link http://codex.wordpress.org/Designing_Headers
+ *
+ * @package <[THEME NAME]>
+ * @subpackage Templates
+ * @author Machina Themes | @machinathemes
+ * @copyright Copyright (c) 2013, Machina Themes
+ * @license http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link http://www.machinathemes.com/themes/<[theme-name]>
+ */
+?>
+
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>

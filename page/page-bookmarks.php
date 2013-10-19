@@ -7,7 +7,6 @@
  *
  * @package ExMachina
  * @subpackage Template
- * @link http://themeexmachina.com/themes/exmachina/page-templates/bookmarks
  * @deprecated 0.9.0 Template will be renamed page-template-bookmarks.php to comply with theme repo guidelines.
  */
 

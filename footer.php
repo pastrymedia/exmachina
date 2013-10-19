@@ -1,10 +1,21 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
- * The template for displaying the footer.
+ * Footer Template
+ * footer.php
  *
- * Contains the closing of the class=site-inner div and all content after
+ * Template file for displaying the theme footer
+ * @link http://codex.wordpress.org/Theme_Development#Footer_.28footer.php.29
  *
- * @package ExMachina
+ * @package <[THEME NAME]>
+ * @subpackage Templates
+ * @author Machina Themes | @machinathemes
+ * @copyright Copyright (c) 2013, Machina Themes
+ * @license http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link http://www.machinathemes.com/themes/<[theme-name]>
  */
 ?>
 		<?php do_atomic( 'after_main' ); // exmachina_after_main ?>

@@ -1,35 +1,33 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
- * ExMachina Core - A WordPress theme development framework.
+ * ExMachina WordPress Theme Framework Engine
+ * ExMachina Engine
  *
- * ExMachina Core is a framework for developing WordPress themes.  The framework allows theme developers
- * to quickly build themes without having to handle all of the "logic" behind the theme or having to code
- * complex functionality for features that are often needed in themes.  The framework does these things
- * for developers to allow them to get back to what matters the most:  developing and designing themes.
- * The framework was built to make it easy for developers to include (or not include) specific, pre-coded
- * features.  Themes handle all the markup, style, and scripts while the framework handles the logic.
+ * engine.php
  *
- * ExMachina Core is a modular system, which means that developers can pick and choose the features they
- * want to include within their themes.  Most files are only loaded if the theme registers support for the
- * feature using the add_theme_support( $feature ) function within their theme.
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
- * General Public License as published by the Free Software Foundation; either version 2 of the License,
- * or (at your option) any later version.
+ * The engine that powers the ExMachina framework. This file controls the load
+ * order, theme features, plugins, and extensions. ExMachina is a modular system,
+ * which means that features, plugins, and extensions are only loaded if they are
+ * specifically included within the theme.
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * You should have received a copy of the GNU General Public License along with this program; if not, write
- * to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- *
- * @package   ExMachinaCore
- * @version   1.6.2-alpha
- * @author    Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2008 - 2013, Justin Tadlock
- * @link      http://themeexmachina.com/exmachina-core
- * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @package     ExMachina
+ * @version     1.0.0
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
  */
+###############################################################################
+# Start your engines...
+###############################################################################
 
 /**
  * The ExMachina class launches the framework.  It's the organizational structure behind the entire framework.

@@ -1,8 +1,21 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
- * The template for displaying 404 pages (Not Found).
+ * 404 (Not Found) display
+ * 404.php
  *
- * @package ExMachina
+ * Template file used to render a Server 404 error page.
+ * @link http://codex.wordpress.org/Creating_an_Error_404_Page
+ *
+ * @package <[THEME NAME]>
+ * @subpackage Templates
+ * @author Machina Themes | @machinathemes
+ * @copyright Copyright (c) 2013, Machina Themes
+ * @license http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link http://www.machinathemes.com/themes/<[theme-name]>
  */
 
 get_header(); ?>
@@ -39,7 +52,7 @@ get_header(); ?>
 					<?php endif; ?>
 
 					<p>
-					<?php _e( "The following is a list of the latest posts from the blog. Maybe it will help you find what you're looking for.", 'unique' ); ?>
+					<?php _e( "The following is a list of the latest posts from the blog. Maybe it will help you find what you're looking for.", 'exmachina-core' ); ?>
 				</p>
 
 					<ul>

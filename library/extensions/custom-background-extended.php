@@ -147,9 +147,8 @@ final class CBE_Custom_Backgrounds {
  *
  * @package   CustomBackgroundExtended
  * @since     0.1.0
- * @author    Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2013, Justin Tadlock
- * @link      http://themeexmachina.com/plugins/custom-background-extended
+ * @author    Machina Themes
+ * @copyright Copyright (c) 2013, Machina Themes
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
@@ -492,10 +491,6 @@ final class CBE_Custom_Backgrounds_Filter {
  *
  * @package   CustomBackgroundExtended
  * @since     0.1.0
- * @author    Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2013, Justin Tadlock
- * @link      http://themeexmachina.com/plugins/custom-background-extended
- * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
 final class CBE_Custom_Backgrounds_Admin {

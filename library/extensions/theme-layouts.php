@@ -617,10 +617,6 @@ function theme_layouts_get_meta_key() {
  * Registers custom sections, settings, and controls for the $wp_customize instance.
  *
  * @since 0.1.0
- * @author Justin Tadlock <justin@justintadlock.com>
- * @author Sami Keijonen <sami.keijonen@foxnet.fi>
- * @copyright Copyright (c) 2012
- * @link http://themeexmachina.com/support/topic/add-theme-layout-in-theme-customize
  * @access public
  * @param object $wp_customize
  */
@@ -690,10 +686,6 @@ function theme_layouts_customize_register( $wp_customize ) {
  *
  * @since 0.1.0
  * @access public
- * @author Justin Tadlock <justin@justintadlock.com>
- * @author Sami Keijonen <sami.keijonen@foxnet.fi>
- * @copyright Copyright (c) 2012
- * @link http://themeexmachina.com/support/topic/add-theme-layout-in-theme-customize
  * @return void
  */
 function theme_layouts_customize_preview_script() { ?>

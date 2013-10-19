@@ -121,7 +121,7 @@ class ExMachina_Widget_Gallery_Posts extends WP_Widget {
 
             <div class="gallery-item col-<?php echo esc_attr( $gallery_columns ); ?>">
               <div class="gallery-icon">
-                <?php get_the_image( array( 'image_scan' => true, 'size' => 'thumbnail', 'meta_key' => false, 'default_image' => trailingslashit( get_template_directory_uri() ) . 'images/thumbnail-default.png' ) ); ?>
+                <?php get_the_image( array( 'image_scan' => true, 'size' => 'thumbnail', 'meta_key' => false, 'default_image' => trailingslashit( EXMACHINA_IMAGES ) . 'thumbnail-default.png' ) ); ?>
               </div>
             </div>
 

@@ -1,13 +1,23 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
- * The template for displaying all pages.
+ * Page display
+ * page.php
  *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site will use a
- * different template.
+ * @todo bring in actual markup
  *
- * @package ExMachina
+ * Template file used to render a static page (page post-type)
+ * @link http://codex.wordpress.org/Page_Templates
+ *
+ * @package <[THEME NAME]>
+ * @subpackage Templates
+ * @author Machina Themes | @machinathemes
+ * @copyright Copyright (c) 2013, Machina Themes
+ * @license http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link http://www.machinathemes.com/themes/<[theme-name]>
  */
 
 get_header(); ?>

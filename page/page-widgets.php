@@ -2,12 +2,11 @@
 /**
  * Template Name: Widgets
  *
- * The Widgets template is a page template that is completely widgetized. It houses the 
+ * The Widgets template is a page template that is completely widgetized. It houses the
  * 'Widgets Template' widget area. Customizations to this page should be done through widgets.
  *
  * @package ExMachina
  * @subpackage Template
- * @link http://themeexmachina.com/themes/exmachina/page-templates/widgets
  * @deprecated 0.9.0 Template will be renamed page-template-widgets.php to comply with theme repo guidelines.
  */
 

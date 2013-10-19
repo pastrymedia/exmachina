@@ -1,15 +1,32 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
- * Functions for loading template parts.  These functions are helper functions or more flexible functions
- * than what core WordPress currently offers with template part loading.
+ * ExMachina WordPress Theme Framework Engine
+ * Template Functions
  *
- * @package    ExMachinaCore
- * @subpackage Functions
- * @author     Justin Tadlock <justin@justintadlock.com>
- * @copyright  Copyright (c) 2008 - 2013, Justin Tadlock
- * @link       http://themeexmachina.com/exmachina-core
- * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * template.php
+ *
+ * WARNING: This file is part of the ExMachina Framework Engine. DO NOT edit
+ * this file under any circumstances. Bad things will happen. Please do all
+ * modifications in the form of a child theme.
+ *
+ * Functions for loading template parts. These functions are helper functions
+ * or more flexible functions than what core WordPress currently offers with
+ * template part loading.
+ *
+ * @package     ExMachina
+ * @subpackage  Functions
+ * @author      Machina Themes | @machinathemes
+ * @copyright   Copyright (c) 2013, Machina Themes
+ * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link        http://www.machinathemes.com
  */
+###############################################################################
+# Begin functions
+###############################################################################
 
 /**
  * Loads a post content template based off the post type and/or the post format.  This functionality is

@@ -1,8 +1,21 @@
 <?php
+
+//* Exit if accessed directly
+if ( !defined('ABSPATH')) exit;
+
 /**
- * The Sidebar containing the main widget areas.
+ * Sidebar Template
+ * sidebar.php
  *
- * @package ExMachina
+ * The sidebar widget area template.
+ * @link http://codex.wordpress.org/Customizing_Your_Sidebar
+ *
+ * @package <[THEME NAME]>
+ * @subpackage Templates
+ * @author Machina Themes | @machinathemes
+ * @copyright Copyright (c) 2013, Machina Themes
+ * @license http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
+ * @link http://www.machinathemes.com/themes/<[theme-name]>
  */
 
 if ( is_active_sidebar( 'primary' ) ) : ?>
