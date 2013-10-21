@@ -485,7 +485,7 @@ function exmachina_get_image_sizes() {
  *
  * @return string Links to various image sizes for the image attachment.
  */
-function unique_get_image_size_links() {
+function exmachina_get_image_size_links() {
 
 	/* If not viewing an image attachment page, return. */
 	if ( !wp_attachment_is_image( get_the_ID() ) )
@@ -512,7 +512,7 @@ function unique_get_image_size_links() {
 	/* Join the links in a string and return. */
 	return join( ' <span class="sep">/</span> ', $links );
 
-} // end function unique_get_image_size_links()
+} // end function exmachina_get_image_size_links()
 
 /**
  * Get Image Info

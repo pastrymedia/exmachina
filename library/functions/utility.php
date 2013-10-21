@@ -1225,7 +1225,7 @@ function exmachina_widget_classes( $params ) {
 }
 
 /* ExMachina Core Context */
-  add_filter( 'exmachina_context', 'shell_exmachina_context' );
+  add_filter( 'exmachina_context', 'exmachina_custom_context' );
 /**
  * Add Current Post template, Post Format, and Attachment Mime Type to ExMachina Core Context
  *
@@ -1233,7 +1233,7 @@ function exmachina_widget_classes( $params ) {
  * @todo add canvas page template context
  * @since 0.1.0
  */
-function shell_exmachina_context( $context ){
+function exmachina_custom_context( $context ){
 
   /* Singular post (post_type) classes. */
   if ( is_singular() ) {
@@ -1266,7 +1266,7 @@ function shell_exmachina_context( $context ){
 }
 
 /* Post format singular template */
-  add_filter( 'single_template', 'shell_post_format_singular_template', 11 );
+  add_filter( 'single_template', 'exmachina_post_format_singular_template', 11 );
 
 /**
  * Add Singular Post Format Template
@@ -1274,7 +1274,7 @@ function shell_exmachina_context( $context ){
  * @link http://themeexmachina.com/support/topic/add-post-format-singular-template-in-template-hierarchy#post-75579
  * @since 0.1.0
  */
-function shell_post_format_singular_template( $template ){
+function exmachina_post_format_singular_template( $template ){
 
   /* get queried object */
   $post = get_queried_object();
