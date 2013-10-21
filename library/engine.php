@@ -19,7 +19,7 @@ if ( !defined('ABSPATH')) exit;
  * specifically included within the theme.
  *
  * @package     ExMachina
- * @version     2.9.0
+ * @version     3.0.0
  * @author      Machina Themes | @machinathemes
  * @copyright   Copyright (c) 2013, Machina Themes
  * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
@@ -128,7 +128,7 @@ class ExMachina {
 
   	/* Sets the framework version numbers. */
 		define( 'EXMACHINA_VERSION', '3.0.0' );
-		define( 'EXMACHINA_RELEASE_DATE', date_i18n( 'F j, Y', '1377061200' ) );
+		define( 'EXMACHINA_RELEASE_DATE', date_i18n( 'F j, Y', '1384214400' ) );
 
 		/* Sets the paths to the parent theme directory. */
 		define( 'THEME_DIR', get_template_directory() );

@@ -48,7 +48,7 @@ function omega_theme_setup() {
   add_theme_support( 'exmachina-core-menus', array( 'primary', 'secondary', 'subsidiary' ) );
   add_theme_support( 'exmachina-core-sidebars', array( 'primary', 'secondary', 'before-content', 'after-content', 'after-singular' ) );
   add_theme_support( 'exmachina-core-scripts', array( 'comment-reply' ) );
-  add_theme_support( 'exmachina-core-styles', array( 'parent', 'style' ) );
+  add_theme_support( 'exmachina-core-styles', array( 'normalize', 'parent', 'style' ) );
   add_theme_support( 'exmachina-vendor-assets', array( 'bootstrap' ) );
   add_theme_support( 'exmachina-core-theme-settings', array( 'about', 'comments', 'archives', 'scripts', 'footer' ) );
   add_theme_support( 'exmachina-core-widgets', array( 'archives', 'user-profile' ) );
