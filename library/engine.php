@@ -19,7 +19,7 @@ if ( !defined('ABSPATH')) exit;
  * specifically included within the theme.
  *
  * @package     ExMachina
- * @version     1.0.0
+ * @version     2.9.0
  * @author      Machina Themes | @machinathemes
  * @copyright   Copyright (c) 2013, Machina Themes
  * @license     http://opensource.org/licenses/gpl-2.0.php GPL-2.0+
@@ -30,92 +30,123 @@ if ( !defined('ABSPATH')) exit;
 ###############################################################################
 
 /**
- * The ExMachina class launches the framework.  It's the organizational structure behind the entire framework.
- * This class should be loaded and initialized before anything else within the theme is called to properly use
+ * ExMachina Class
+ *
+ * The ExMachina class launches the framework. This class should be loaded and
+ * initialized before anything else within the theme is called to properly use
  * the framework.
  *
- * After parent themes call the ExMachina class, they should perform a theme setup function on the
- * 'after_setup_theme' hook with a priority of 10.  Child themes should add their theme setup function on
- * the 'after_setup_theme' hook with a priority of 11.  This allows the class to load theme-supported features
- * at the appropriate time, which is on the 'after_setup_theme' hook with a priority of 12.
- *
- * @since 0.7.0
+ * @since 2.9.0
  */
 class ExMachina {
 
 	/**
-	 * Constructor method for the ExMachina class.  This method adds other methods of the class to
-	 * specific hooks within WordPress.  It controls the load order of the required files for running
-	 * the framework.
-	 *
-	 * @since 1.0.0
-	 */
-	function __construct() {
-		global $exmachina;
+   * ExMachina Constructor
+   *
+   * Constructor method for the ExMachina class. This method adds other methods
+   * of the class to specific hooks within WordPress. It controls the load order
+   * of the required files for running the framework.
+   *
+   * @since 2.9.0
+   */
+  function __construct() {
+  	global $exmachina;
 
-		/* Set up an empty class for the global $exmachina object. */
-		$exmachina = new stdClass;
+    /* Setup an empty class for the global $exmachina object. */
+    $exmachina = new stdClass;
 
-		/* Define framework, parent theme, and child theme constants. */
-		add_action( 'after_setup_theme', array( &$this, 'constants' ), 1 );
+    /* Trigger the 'exmachina_pre' action hook. */
+    add_action( 'after_setup_theme', array( &$this, 'exmachina_pre_hook' ), 1 );
 
-		/* Load the core functions required by the rest of the framework. */
-		add_action( 'after_setup_theme', array( &$this, 'core' ), 2 );
+    /* Define framework, parent theme, and child theme constants. */
+    add_action( 'after_setup_theme', array( &$this, 'exmachina_constants' ), 2 );
 
-		/* Initialize the framework's default actions and filters. */
-		add_action( 'after_setup_theme', array( &$this, 'default_filters' ), 3 );
+    /* Load the core functions required by the rest of the framework. */
+    add_action( 'after_setup_theme', array( &$this, 'exmachina_load_core' ), 3 );
 
-		/* Language functions and translations setup. */
-		add_action( 'after_setup_theme', array( &$this, 'i18n' ), 4 );
+    /* Initialize the framework's default actions and filters. */
+    add_action( 'after_setup_theme', array( &$this, 'exmachina_default_filters' ), 4 );
 
-		/* Handle theme supported features. */
-		add_action( 'after_setup_theme', array( &$this, 'theme_support' ), 12 );
+    /* Language functions and translations setup. */
+    add_action( 'after_setup_theme', array( &$this, 'exmachina_i18n' ), 5 );
 
-		/* Load the framework functions. */
-		add_action( 'after_setup_theme', array( &$this, 'functions' ), 13 );
+    /* Theme setup files load here. */
 
-		/* Load the structure functions. */
-    add_action( 'after_setup_theme', array( &$this, 'structure' ), 14 );
+    /* Trigger the 'exmachina_init' action hook. */
+    add_action( 'after_setup_theme', array( &$this, 'exmachina_init_hook' ), 12 );
 
-		/* Load the framework extensions. */
-		add_action( 'after_setup_theme', array( &$this, 'extensions' ), 15 );
+    /* Handle theme supported features. */
+    add_action( 'after_setup_theme', array( &$this, 'exmachina_theme_support' ), 13 );
 
-		/* Load admin files. */
-		add_action( 'wp_loaded', array( &$this, 'admin' ) );
-	}
+    /* Handle post type supported features. */
+    add_action( 'after_setup_theme', array( &$this, 'exmachina_post_type_support' ), 14 );
 
-	/**
-	 * Defines the constant paths for use within the core framework, parent theme, and child theme.
-	 * Constants prefixed with 'EXMACHINA_' are for use only within the core framework and don't
-	 * reference other areas of the parent or child theme.
-	 *
-	 * @since 0.7.0
-	 */
-	function constants() {
+    /* Load the framework classes. */
+    add_action( 'after_setup_theme', array( &$this, 'exmachina_load_classes' ), 15 );
 
-		/* Sets the framework version number. */
-		define( 'EXMACHINA_VERSION', '1.6.2' );
+    /* Load the framework functions. */
+    add_action( 'after_setup_theme', array( &$this, 'exmachina_load_framework' ), 16 );
 
-		/* Sets the path to the parent theme directory. */
+    /* Load the structure functions. */
+    add_action( 'after_setup_theme', array( &$this, 'exmachina_load_structure' ), 17 );
+
+    /* Load the framework extensions. */
+    add_action( 'after_setup_theme', array( &$this, 'exmachina_load_extensions' ), 18 );
+
+    /* Load the admin files. */
+    add_action( 'after_setup_theme', array( &$this, 'exmachina_load_admin' ), 19 );
+
+    /* Trigger the 'exmachina_setup' action hook. */
+    add_action( 'after_setup_theme', array( &$this, 'exmachina_setup_hook' ), 20 );
+
+  } // end __construct()
+
+  /**
+   * ExMachina Pre Action Hook
+   *
+   * This action hook is triggered before any of the core framework is loaded.
+   *
+   * @since 2.9.0
+   */
+  function exmachina_pre_hook() {
+
+    /* Trigger the 'exmachina_pre' action hook. */
+    do_action( 'exmachina_pre' );
+
+  } // end function exmachina_pre_hook()
+
+  /**
+   * Framework Constants
+   *
+   * Defines the constant paths for use within the core framework, parent theme,
+   * and child theme. Constants prefixed with 'EXMACHINA_' are for use only within
+   * the core framework and don't reference other areas of the parent or child theme.
+   *
+   * @since 2.9.0
+   */
+  function exmachina_constants() {
+
+  	/* Sets the framework version numbers. */
+		define( 'EXMACHINA_VERSION', '3.0.0' );
+		define( 'EXMACHINA_RELEASE_DATE', date_i18n( 'F j, Y', '1377061200' ) );
+
+		/* Sets the paths to the parent theme directory. */
 		define( 'THEME_DIR', get_template_directory() );
-
-		/* Sets the path to the parent theme directory URI. */
 		define( 'THEME_URI', get_template_directory_uri() );
 
-		/* Sets the path to the child theme directory. */
+		/* Sets the paths to the child theme directory. */
 		define( 'CHILD_THEME_DIR', get_stylesheet_directory() );
-
-		/* Sets the path to the child theme directory URI. */
 		define( 'CHILD_THEME_URI', get_stylesheet_directory_uri() );
 
-		/* Sets the path to the core framework directory. */
+		/* Sets the paths to the core framework directory. */
 		define( 'EXMACHINA_DIR', trailingslashit( THEME_DIR ) . basename( dirname( __FILE__ ) ) );
-
-		/* Sets the path to the core framework directory URI. */
 		define( 'EXMACHINA_URI', trailingslashit( THEME_URI ) . basename( dirname( __FILE__ ) ) );
 
 		/* Sets the path to the core framework admin directory. */
 		define( 'EXMACHINA_ADMIN', trailingslashit( EXMACHINA_DIR ) . 'admin' );
+
+		/* Sets the path to the core framework assets directory URI. */
+		define( 'EXMACHINA_ASSETS', trailingslashit( EXMACHINA_URI ) . 'assets' );
 
 		/* Sets the path to the core framework classes directory. */
 		define( 'EXMACHINA_CLASSES', trailingslashit( EXMACHINA_DIR ) . 'classes' );
@@ -129,61 +160,45 @@ class ExMachina {
 		/* Sets the path to the core framework functions directory. */
 		define( 'EXMACHINA_FUNCTIONS', trailingslashit( EXMACHINA_DIR ) . 'functions' );
 
+		/* Sets the path to the core framework languages directory. */
+		define( 'EXMACHINA_LANGUAGES', trailingslashit( EXMACHINA_DIR ) . 'languages' );
+
 		/* Sets the path to the core framework structure directory. */
 		define( 'EXMACHINA_STRUCTURE', trailingslashit( EXMACHINA_DIR ) . 'structure' );
 
 		/* Sets the path to the core framework widgets directory. */
 		define( 'EXMACHINA_WIDGETS', trailingslashit( EXMACHINA_DIR ) . 'widgets' );
 
-		/* Sets the path to the core framework languages directory. */
-		define( 'EXMACHINA_LANGUAGES', trailingslashit( EXMACHINA_DIR ) . 'languages' );
-
-		/* Sets the path to the core framework assets directory URI. */
-		define( 'EXMACHINA_ASSETS', trailingslashit( EXMACHINA_URI ) . 'assets' );
-
-		/* Sets the path to the core framework images directory URI. */
-		define( 'EXMACHINA_IMAGES', trailingslashit( EXMACHINA_ASSETS ) . 'images' );
-
-		/* Sets the path to the core framework CSS directory URI. */
-		define( 'EXMACHINA_CSS', trailingslashit( EXMACHINA_ASSETS ) . 'css' );
-
-		/* Sets the path to the core framework JavaScript directory URI. */
-		define( 'EXMACHINA_JS', trailingslashit( EXMACHINA_ASSETS ) . 'js' );
-
-		/* Sets the path to the core framework vendor directory URI. */
-		define( 'EXMACHINA_VENDOR', trailingslashit( EXMACHINA_ASSETS ) . 'vendor' );
-
-		/* Sets the path to the core framework admin assets directory. */
+		/* Define the paths to the admin directory core folders. */
 		define( 'EXMACHINA_ADMIN_ASSETS', trailingslashit( EXMACHINA_URI ) . 'admin/assets' );
-
-		/* Sets the path to the core framework admin functions directory. */
 		define( 'EXMACHINA_ADMIN_FUNCTIONS', trailingslashit( EXMACHINA_DIR ) . 'admin/functions' );
-
-		/* Sets the path to the core framework admin metaboxes directory. */
 		define( 'EXMACHINA_ADMIN_METABOXES', trailingslashit( EXMACHINA_DIR ) . 'admin/metaboxes' );
 
-		/* Sets the path to the core framework admin assets CSS directory URI. */
+		/* Define the paths to the assets directory URL constants. */
+		define( 'EXMACHINA_CSS', trailingslashit( EXMACHINA_ASSETS ) . 'css' );
+		define( 'EXMACHINA_IMAGES', trailingslashit( EXMACHINA_ASSETS ) . 'images' );
+		define( 'EXMACHINA_JS', trailingslashit( EXMACHINA_ASSETS ) . 'js' );
+		define( 'EXMACHINA_VENDOR', trailingslashit( EXMACHINA_ASSETS ) . 'vendor' );
+
+		/* Define the paths to the admin assets directory URL constants. */
 		define( 'EXMACHINA_ADMIN_CSS', trailingslashit( EXMACHINA_ADMIN_ASSETS ) . 'css' );
-
-		/* Sets the path to the core framework admin assets images directory URI. */
 		define( 'EXMACHINA_ADMIN_IMAGES', trailingslashit( EXMACHINA_ADMIN_ASSETS ) . 'images' );
-
-		/* Sets the path to the core framework admin assets JS directory URI. */
 		define( 'EXMACHINA_ADMIN_JS', trailingslashit( EXMACHINA_ADMIN_ASSETS ) . 'js' );
-
-		/* Sets the path to the core framework admin assets vendor directory URI. */
 		define( 'EXMACHINA_ADMIN_VENDOR', trailingslashit( EXMACHINA_ADMIN_ASSETS ) . 'vendor' );
-	}
 
-	/**
-	 * Loads the core framework functions.  These files are needed before loading anything else in the
-	 * framework because they have required functions for use.
-	 *
-	 * @since 1.0.0
-	 */
-	function core() {
+  } // end function exmachina_constants()
 
-		/* Load the core framework functions. */
+  /**
+   * Load Core Functions
+   *
+   * Loads the core framework functions. These files are needed before loading
+   * anything else in the framework.
+   *
+   * @since 2.9.0
+   */
+  function exmachina_load_core() {
+
+  	/* Load the core framework functions. */
 		require_once( trailingslashit( EXMACHINA_FRAMEWORK ) . 'core.php' );
 
 		/* Load the context-based functions. */
@@ -191,19 +206,59 @@ class ExMachina {
 
 		/* Load the core framework internationalization functions. */
 		require_once( trailingslashit( EXMACHINA_FRAMEWORK ) . 'i18n.php' );
-	}
 
-	/**
-	 * Loads both the parent and child theme translation files.  If a locale-based functions file exists
-	 * in either the parent or child theme (child overrides parent), it will also be loaded.  All translation
-	 * and locale functions files are expected to be within the theme's '/languages' folder, but the
-	 * framework will fall back on the theme root folder if necessary.  Translation files are expected
-	 * to be prefixed with the template or stylesheet path (example: 'templatename-en_US.mo').
-	 *
-	 * @since 1.2.0
-	 */
-	function i18n() {
-		global $exmachina;
+  } // end function exmachina_load_core()
+
+  /**
+   * Default Filters
+   *
+   * Adds the defaults framework actions and filters.
+   *
+   * @since 2.9.0
+   */
+  function exmachina_default_filters() {
+
+  	/* Remove bbPress theme compatibility if current theme supports bbPress. */
+		if ( current_theme_supports( 'bbpress' ) )
+			remove_action( 'bbp_init', 'bbp_setup_theme_compat', 8 );
+
+		/* Move the WordPress generator to a better priority. */
+		remove_action( 'wp_head', 'wp_generator' );
+		add_action( 'wp_head', 'wp_generator', 1 );
+
+		/* Add the theme info to the header (lets theme developers give better support). */
+		add_action( 'wp_head', 'exmachina_meta_template', 1 );
+
+		/* Make text widgets and term descriptions shortcode aware. */
+		add_filter( 'widget_text', 'do_shortcode' );
+		add_filter( 'term_description', 'do_shortcode' );
+
+  } // end function exmachina_default_filters()
+
+  /**
+   * Load Translation Files
+   *
+   * Loads both the parent and theme translation files. If a locale-based
+   * functions file exists in either the parent or child theme (child overrides
+   * parent), it will also be loaded.
+   *
+   * @link http://codex.wordpress.org/WordPress_in_Your_Language
+   * @link http://codex.wordpress.org/Function_Reference/load_theme_textdomain
+   * @link http://codex.wordpress.org/Function_Reference/is_child_theme
+   * @link http://codex.wordpress.org/Function_Reference/load_child_theme_textdomain
+   * @link http://codex.wordpress.org/Function_Reference/get_locale
+   * @link http://codex.wordpress.org/Function_Reference/locate_template
+   *
+   * @uses exmachina_get_parent_textdomain()      Gets the parent textdomain.
+   * @uses exmachina_get_child_textdomain()       Gets the child textdomain.
+   * @uses exmachina_load_framework_textdomain()  Loads the framework textdomain.
+   *
+   * @global object $exmachina  The global ExMachina object.
+   *
+   * @since 2.9.0
+   */
+  function exmachina_i18n() {
+  	global $exmachina;
 
 		/* Get parent and child theme textdomains. */
 		$parent_textdomain = exmachina_get_parent_textdomain();
@@ -227,17 +282,41 @@ class ExMachina {
 		/* If the locale file exists and is readable, load it. */
 		if ( !empty( $locale_functions ) && is_readable( $locale_functions ) )
 			require_once( $locale_functions );
-	}
 
-	/**
-	 * Removes theme supported features from themes in the case that a user has a plugin installed
-	 * that handles the functionality.
-	 *
-	 * @since 1.3.0
-	 */
-	function theme_support() {
+  } // end function exmachina_i18n()
 
-		/* Remove support for the the Breadcrumb Trail extension if the plugin is installed. */
+  /**
+   * ExMachina Init Action Hook
+   *
+   * This action hook is triggered after the core framework is loaded, but
+   * before any of the framework theme support, functions, extensions, or
+   * admin files are loaded.
+   *
+   * @since 2.9.0
+   */
+  function exmachina_init_hook() {
+
+    /* Trigger the 'exmachina_init' action hook. */
+    do_action( 'exmachina_init' );
+
+  } // end function exmachina_init_hook()
+
+  /**
+   * Framework Theme Support
+   *
+   * Activates default theme features and removes theme supported features in
+   * the case that the user has a plugin installed that handles the functionality.
+   *
+   * @link http://codex.wordpress.org/Theme_Features
+   * @link http://codex.wordpress.org/Function_Reference/add_theme_support
+   * @link http://codex.wordpress.org/Function_Reference/remove_theme_support
+   * @link http://codex.wordpress.org/Function_Reference/current_theme_supports
+   *
+   * @since 2.9.0
+   */
+  function exmachina_theme_support() {
+
+  	/* Remove support for the the Breadcrumb Trail extension if the plugin is installed. */
 		if ( function_exists( 'breadcrumb_trail' ) )
 			remove_theme_support( 'breadcrumb-trail' );
 
@@ -256,17 +335,78 @@ class ExMachina {
 		/* Remove support for the Random Custom Background extension if the class exists. */
 		if ( class_exists( 'Random_Custom_Background' ) )
 			remove_theme_support( 'random-custom-background' );
-	}
 
-	/**
-	 * Loads the framework functions.  Many of these functions are needed to properly run the
-	 * framework.  Some components are only loaded if the theme supports them.
-	 *
-	 * @since 0.7.0
-	 */
-	function functions() {
+		/* Maybe add core menu support. */
+  	if ( ! current_theme_supports( 'exmachina-core-menus' ) )
+  		add_theme_support( 'exmachina-core-menus', array( 'primary' ) );
 
-		/* Load the assets functions. */
+  	/* Maybe add core sidebar support. */
+  	if ( ! current_theme_supports( 'exmachina-core-sidebars' ) )
+  		add_theme_support( 'exmachina-core-sidebars', array( 'primary' ) );
+
+
+  } // end function exmachina_theme_support()
+
+  /**
+   * Framework Post Type Support
+   *
+   * Initializes post type support for various post type features.
+   *
+   * @link http://codex.wordpress.org/Function_Reference/add_post_type_support
+   * @link http://codex.wordpress.org/Function_Reference/remove_post_type_support
+   * @link http://codex.wordpress.org/Function_Reference/post_type_supports
+   *
+   * @since 2.9.0
+   */
+  function exmachina_post_type_support() {} // end function exmachina_post_type_support()
+
+  /**
+   * Load Classes
+   *
+   * Loads all the class files and features. The exmachina_pre_classes
+   * action hook is called before any of the files are required.
+   *
+   * If a parent or child theme defines EXMACHINA_LOAD_CLASSES as false before
+   * requiring this engine.php file, then this function will abort before any
+   * other files are loaded.
+   *
+   * @since 2.9.0
+   */
+  function exmachina_load_classes() {
+
+    /* Triggers the 'exmachina_pre_classes' action hook. */
+    do_action( 'exmachina_pre_classes' );
+
+    /* Short circuits the framework if 'EXMACHINA_LOAD_CLASSES' is defined as false. */
+    if ( defined( 'EXMACHINA_LOAD_CLASSES' ) && EXMACHINA_LOAD_CLASSES === false )
+      return;
+
+  } // end function exmachina_load_classes()
+
+  /**
+   * Load Framework
+   *
+   * Loads all the framework files and features. The 'exmachina_pre_framework'
+   * action hook is called before any of the files are required. Many of these
+   * functions are needed to properly run the framework. Some components are
+   * only loaded if the theme supports them.
+   *
+   * If a parent or child theme defines 'EXMACHINA_LOAD_FRAMEWORK' as false
+   * before requring this engine.php file, then this function will abort before
+   * any other files are loaded.
+   *
+   * @since 2.9.0
+   */
+  function exmachina_load_framework() {
+
+    /* Triggers the 'exmachina_pre_framework' action hook. */
+    do_action( 'exmachina_pre_framework' );
+
+    /* Short circuits the framework if 'EXMACHINA_LOAD_FRAMEWORK' is defined as false. */
+    if ( defined( 'EXMACHINA_LOAD_FRAMEWORK' ) && EXMACHINA_LOAD_FRAMEWORK === false )
+      return;
+
+    /* Load the assets functions. */
 		require_once( trailingslashit( EXMACHINA_FUNCTIONS ) . 'assets.php' );
 
 		/* Load the comments functions. */
@@ -306,17 +446,15 @@ class ExMachina {
 		/* Load the template hierarchy if supported. */
 		require_if_theme_supports( 'exmachina-core-template-hierarchy', trailingslashit( EXMACHINA_FUNCTIONS ) . 'template-hierarchy.php' );
 
-		/* Load the media grabber script if supported. */
-		require_if_theme_supports( 'exmachina-core-media-grabber', trailingslashit( EXMACHINA_CLASSES ) . 'media-grabber.php' );
-
 		/* Load the post format functionality if post formats are supported. */
 		require_if_theme_supports( 'post-formats', trailingslashit( EXMACHINA_FUNCTIONS ) . 'post-formats.php' );
 
 		/* Load the deprecated functions if supported. */
 		require_if_theme_supports( 'exmachina-core-deprecated', trailingslashit( EXMACHINA_FUNCTIONS ) . 'deprecated.php' );
-	}
 
-	/**
+  } // end function exmachina_load_framework()
+
+  /**
    * Load Structure
    *
    * Loads the framework markup structure. The 'exmachina_pre_structure' action
@@ -326,9 +464,9 @@ class ExMachina {
    * before requring this engine.php file, then this function will abort before
    * any structure files are loaded.
    *
-   * @since 0.8.1
+   * @since 2.9.0
    */
-  function structure() {
+  function exmachina_load_structure() {
 
     /* Triggers the 'exmachina_pre_structure' action hook. */
     do_action( 'exmachina_pre_structure' );
@@ -373,17 +511,37 @@ class ExMachina {
 
   } // end function exmachina_load_structure()
 
-	/**
-	 * Load extensions (external projects).  Extensions are projects that are included within the
-	 * framework but are not a part of it.  They are external projects developed outside of the
-	 * framework.  Themes must use add_theme_support( $extension ) to use a specific extension
-	 * within the theme.  This should be declared on 'after_setup_theme' no later than a priority of 11.
-	 *
-	 * @since 0.7.0
-	 */
-	function extensions() {
+  /**
+   * Load Extensions
+   *
+   * Loads the framework extensions. The 'exmachina_pre_extensions' action hook
+   * is called before any of the extension files are required.
+   *
+   * Extensions are projects that are included within the framework but are not
+   * neccessarily a part of it. They are external projects developed outside of
+   * the framework. Themes must use 'add_theme_support( $extension )' to use a
+   * specific extenstion within the theme.
+   *
+   * If a parent or child theme defines 'EXMACHINA_LOAD_EXTENSIONS' as false
+   * before requring this engine.php file, then this function will abort before
+   * any extension files are loaded.
+   *
+   * @since 2.9.0
+   */
+  function exmachina_load_extensions() {
 
-		/* Load the Breadcrumb Trail extension if supported. */
+    /* Triggers the 'exmachina_pre_extensions' action hook. */
+    do_action( 'exmachina_pre_extensions' );
+
+    /* Short circuits the framework if 'EXMACHINA_LOAD_FRAMEWORK' is defined as false. */
+    if ( defined( 'EXMACHINA_LOAD_FRAMEWORK' ) && EXMACHINA_LOAD_FRAMEWORK === false )
+      return;
+
+    /* Short circuits the framework if 'EXMACHINA_LOAD_EXTENSIONS' is defined as false. */
+    if ( defined( 'EXMACHINA_LOAD_EXTENSIONS' ) && EXMACHINA_LOAD_EXTENSIONS === false )
+      return;
+
+    /* Load the Breadcrumb Trail extension if supported. */
 		require_if_theme_supports( 'breadcrumb-trail', trailingslashit( EXMACHINA_EXTENSIONS ) . 'breadcrumb-trail.php' );
 
 		/* Load the Cleaner Gallery extension if supported. */
@@ -463,48 +621,63 @@ class ExMachina {
 
     /* Load the Custom Classes extension if supported. */
     require_if_theme_supports( 'custom-classes', trailingslashit( EXMACHINA_EXTENSIONS ) . 'custom-classes.php' );
-	}
 
-	/**
-	 * Load admin files for the framework.
-	 *
-	 * @since 0.7.0
-	 */
-	function admin() {
+    /* Load the media grabber script if supported. */
+		require_if_theme_supports( 'media-grabber', trailingslashit( EXMACHINA_EXTENSIONS ) . 'media-grabber.php' );
 
-		/* Check if in the WordPress admin. */
-		if ( is_admin() ) {
+  } // end function exmachina_load_extensions()
 
-			/* Load the main admin file. */
+  /**
+   * Load Admin
+   *
+   * Loads all the admin files for the framework. The 'exmachina_pre_admin' action
+   * hook is called before any of the files are required.
+   *
+   * If a parent or child theme defines 'EXMACHINA_LOAD_ADMIN' as false before
+   * requiring this engine.php file, then this function will abort before any
+   * other admin files are loaded.
+   *
+   * @since 2.9.0
+   */
+  function exmachina_load_admin() {
+
+    /* Triggers the 'exmachina_pre_admin' action hook. */
+    do_action( 'exmachina_pre_admin' );
+
+    /* Short circuits the framework if 'EXMACHINA_LOAD_FRAMEWORK' is defined as false. */
+    if ( defined( 'EXMACHINA_LOAD_FRAMEWORK' ) && EXMACHINA_LOAD_FRAMEWORK === false )
+      return;
+
+    /* Short circuits the framework if 'EXMACHINA_LOAD_ADMIN' is defined as false. */
+    if ( defined( 'EXMACHINA_LOAD_ADMIN' ) && EXMACHINA_LOAD_ADMIN === false )
+      return;
+
+    /* Check if in the WordPress admin. */
+    if ( is_admin() ) {
+
+    	/* Load the main admin file. */
 			require_once( trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'admin.php' );
 
 			/* Load the theme settings feature if supported. */
 			require_if_theme_supports( 'exmachina-core-theme-settings', trailingslashit( EXMACHINA_ADMIN_FUNCTIONS ) . 'theme-settings.php' );
-		}
-	}
 
-	/**
-	 * Adds the default framework actions and filters.
-	 *
-	 * @since 1.0.0
-	 */
-	function default_filters() {
+    } // end if (is_admin())
 
-		/* Remove bbPress theme compatibility if current theme supports bbPress. */
-		if ( current_theme_supports( 'bbpress' ) )
-			remove_action( 'bbp_init', 'bbp_setup_theme_compat', 8 );
+  } // end function exmachina_load_admin()
 
-		/* Move the WordPress generator to a better priority. */
-		remove_action( 'wp_head', 'wp_generator' );
-		add_action( 'wp_head', 'wp_generator', 1 );
+  /**
+   * Exmachina Setup Action Hook
+   *
+   * This action hook is triggered after all of the core framework is loaded.
+   *
+   * @since 2.9.0
+   */
+  function exmachina_setup_hook() {
 
-		/* Add the theme info to the header (lets theme developers give better support). */
-		add_action( 'wp_head', 'exmachina_meta_template', 1 );
+    /* Trigger the 'exmachina_setup' action hook. */
+    do_action( 'exmachina_setup' );
 
-		/* Make text widgets and term descriptions shortcode aware. */
-		add_filter( 'widget_text', 'do_shortcode' );
-		add_filter( 'term_description', 'do_shortcode' );
-	}
-}
+  } // end function exmachina_setup_hook()
 
-?>
+} // end class ExMachina
+

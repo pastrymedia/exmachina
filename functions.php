@@ -110,6 +110,7 @@ function omega_theme_setup() {
   add_theme_support( 'custom-field-series' );
 
   /* Add theme support for WordPress features. */
+  add_theme_support( 'html5' );
   add_theme_support( 'automatic-feed-links' );
   add_theme_support( 'post-formats', array( 'aside', 'audio', 'chat', 'image', 'gallery', 'link', 'quote', 'status', 'video' ) );
   add_editor_style();
